@@ -1,0 +1,11 @@
+{{- $urls := dict }}
+{{- $sectionToPick := slice "batteries" "notifications" "questionnaires" "session" "tutorial" }}
+{{- $sections := where .Site.Sections "Section" "in" $sectionToPick }}
+{{- range $sections }}
+    {{- $idSlice := split .Params.id "-"  }}
+    {{- $idSlice = apply $idSlice "strings.FirstUpper" .Params.id  }}
+    {{- $id := delimit $idSlice "" }}
+    {{- $urls = merge $urls (dict (printf "url%s" $id) .RelPermalink ) }}
+{{- end }}
+{{- $urls = merge $urls (dict "urlBase" (.Site.GetPage "home").RelPermalink) }}
+{{- $urls | jsonify }}

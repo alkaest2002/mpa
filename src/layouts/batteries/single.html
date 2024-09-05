@@ -1,0 +1,55 @@
+{{- define "main" }}
+<div 
+    x-data="componentKeyboardActions" 
+    class="h-full"
+>
+    <div 
+        x-data="viewBattery" 
+        x-init="initBattery(); initKeyboardActions('questionnaireId');"
+        x-bind="{ ...yArrowsActions, ...enterActions }"
+        class="h-full flex flex-col items-center justify-center p-9 relative"
+    >
+        {{- partialCached "base/burger" (dict "currentPage" . "questionnairesPage" true) .Section }}
+        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex-grow">
+            <h1 class="text-xl font-bold mb-9">{{ .Title | lower | strings.FirstUpper }}</h1>
+            <div class="mb-6">{{ .Content }}</div>
+            <div class="flex flex-col gap-3">
+                {{- range $counter, $questionnaireId := .Params.questionnaires }}
+                    {{- $questionnaire := urls.JoinPath "questionnaires/" $questionnaireId | $.Site.GetPage }} 
+                    {{- with $questionnaire }}
+                        {{- $questionnaireName := .Params.title }}
+                        <div 
+                            x-ref="tab-{{ $questionnaireId }}"
+                            x-bind="selectQuestionnaireButton('{{ $questionnaireId }}')"
+                            class="tab-element w-full p-3 rounded border shadow-md cursor-pointer"
+                        >
+                            <div class="flex justify-between relative">
+                                <div>
+                                    <p class="text-sm text-gray-500">{{ $questionnaireId }}</p>
+                                    <p>{{ $questionnaireName | lower | strings.FirstUpper }}</p>
+                                </div>
+                                <div class="flex gap-2 items-center italic text-sm text-gray-400">
+                                    <span x-cloak
+                                        x-show="$store.session.getQuestionnaireIsRunning('{{ $questionnaireId }}')">
+                                        {{ T "hasStarted" }}</span>
+                                    <span x-cloak
+                                        x-show="$store.session.getQuestionnaireIsComplete('{{ $questionnaireId }}')">
+                                        {{ T "hasEnded" }}</span>
+                                    <span x-cloak x-bind="showDot('{{ $questionnaireId }}')">&#9679;</span>
+                                </div>
+                            </div>
+                        </div>
+                    {{- end }}
+                {{- end }}
+            </div>
+        </div>
+        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center">
+            <a 
+                x-ref="main-button" 
+                x-bind="goToQuestionnaireButton"
+                class="inline-block w-96 px-6 py-3 rounded-full text-white text-center" 
+                href="#">{{ T "next" }}</a>
+        </div>
+    </div>
+</div>
+{{- end }}

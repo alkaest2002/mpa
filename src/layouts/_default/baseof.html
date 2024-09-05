@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="{{ .Site.Language }}" class="h-full">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="generator" content="Hugo {{ hugo.Version }}" />
+        <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+        {{- with site.Params.description }}
+            <meta name="description" content="{{ . }}" />
+        {{- end }} 
+        {{ partialCached "base/head" . }}
+    </head>
+    {{ $urlWorkerScript := (resources.Get "js/worker/worker.js").RelPermalink }}
+    {{ $urlScoringScript := (resources.Get "js/worker/scoring.js").RelPermalink  }}
+    {{ $urlTemplatingScript := (resources.Get "js/worker/templating.js").RelPermalink }}
+    {{ $urls := dict "urlWorkerScript" $urlWorkerScript "urlScoringScript" $urlScoringScript "urlTemplatingScript" $urlTemplatingScript }}
+    <body 
+        hx-boost="true"
+        hx-swap="transition:true"
+        hx-push-url="true"
+        hx-history="true"
+        x-data="viewBase"
+        x-init="initBase({{ $urls | jsonify }})"
+        x-bind="htmxEvents"
+        class="h-full flex flex-col min-w-[600px] w-full mx-auto bg-white"
+    >
+        <div 
+            class="flex-grow"
+        >
+            {{- block "main" . }}
+            {{- end }} 
+        </div>
+    </body>
+    {{ with not hugo.IsDevelopment }}
+        <script>
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function(event) { window.history.go(1) };
+        </script>
+    {{ end }}
+</html>

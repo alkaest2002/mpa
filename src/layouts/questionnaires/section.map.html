@@ -1,0 +1,56 @@
+{{- define "main" }}
+{{- $paginator := .Paginate .RegularPages site.Params.paginateSize.maps }}
+<div 
+    x-data="componentKeyboardActions" 
+    class="h-full"
+>
+    <div 
+        x-data="viewMap" 
+        x-init="initMap(); initKeyboardActions('itemId');" 
+        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions }"
+        class="h-full flex flex-col items-center justify-center p-9 relative"
+    >
+        {{- partialCached "base/burger" (dict "currentPage" . "questionnairesPage" true
+            "questionnairePage" true) .Section }}
+        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex-grow flex flex-col">
+            <p 
+                x-ref="titleWithPagination"
+                data-title="{{ .LinkTitle }}"
+                class="text-sm text-center text-gray-500 mb-6">
+            </p>
+            <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
+            <div class="mb-9">{{ T "mapInfo" }}.</div>
+            <div class="flex-grow flex flex-col">
+                <div class="flex-grow">
+                    <div class="flex flex-col gap-3">
+                        {{- range $paginator.Pages }}
+                            <div
+                                x-ref="tab-{{ .Params.id }}"
+                                x-bind="itemMapButton('{{ .Params.id }}', '{{ .RelPermalink }}')"
+                                class="tab-element w-full p-3 rounded border shadow-md cursor-pointer"
+                                href="{{ .RelPermalink }}">
+                                <div class="relative">
+                                    <span x-cloak x-bind="showDot('{{ .Params.id }}')"
+                                        class="absolute right-1 top-0">&#9679;</span>
+                                    {{- .LinkTitle }}
+                                </div>
+                            </div>
+                        {{- end }}
+                    </div>
+                </div>
+                {{ with gt $paginator.TotalPages 1 }}
+                    {{- partial "base/paginator" $paginator }}
+                {{ end }}
+            </div>
+        </div>
+        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center">
+            <a 
+                x-ref="main-button" 
+                x-bind="goToItemButton"
+                class="inline-flex justify-center w-96 px-6 py-3 gap-2 rounded-full text-white" 
+                href="#">{{ T "selectItem" }}
+            </a>
+        </div>
+    </div>
+</div>
+{{- end }}

@@ -1,0 +1,26 @@
+{{- $specs := partialCached "reports/questionnaire" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
+<table class="w-full apa-table">
+  <thead>
+    <tr>
+      <th>{{ T "reportScaleCode" | strings.FirstUpper }}</td>
+      <th>{{ T "reportScaleName" | strings.FirstUpper }}</td>
+      <th class="text-center">{{ T "reportScaleRawScore" | strings.FirstUpper }}</td>
+      <th class="text-center">{{ T "reportScaleMeanScore" | strings.FirstUpper }}</td>
+      <th class="text-center">{{ T "reportScaleStandardScore" | strings.FirstUpper }}</td>
+      <th class="text-center">{{ T "reportScaleOmissionsScore" | strings.FirstUpper }}</td>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $scale := $specs.questionnaireScales }}
+        <tr>
+          <th>{{ $scale.scaleId | upper }}</td>
+          <td>{{ $scale.scaleName | strings.FirstUpper }}</td>
+          <td class="text-center">{{ $scale.scaleId }}#rawScore</td>
+          <td class="text-center">{{ $scale.scaleId }}#meanScore</td>
+          <td class="text-center">{{ $scale.scaleId }}#standardScore</td>
+          <td class="text-center">{{ $scale.scaleId }}#omissions</td>
+        </tr>
+    {{- end }}
+  </tbody>
+  <caption class="caption">{{ T "reportTableScoresLegend" | strings.FirstUpper }}.</caption>
+</table>

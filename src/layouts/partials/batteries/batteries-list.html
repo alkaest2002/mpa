@@ -1,0 +1,56 @@
+{{ $page := .currentPage }}
+{{ $paginator := .paginator }}
+{{- with $page }}
+{{ if gt (len $paginator.Pages) 0 }}
+  <div class="flex-grow flex flex-col justify-between">
+    <div class="flex-grow flex flex-col gap-3">
+      {{- range $index, $page := $paginator.Pages }}
+      {{- $batteryId := $page.Params.id }}
+      {{- $batteryName := $page.Title }}
+      {{- $urlBattery := $page.RelPermalink }}
+      {{- $urlBatteryJSON := ($page.OutputFormats.Get "json" ).RelPermalink }}
+      {{- $numberOfQuestionnaires := len $page.Params.questionnaires }}
+      <div x-ref="tab-{{ $batteryId }}"
+        x-bind="selectBatteryButton('{{ $batteryId }}', '{{ $batteryName | lower | strings.FirstUpper }}', '{{ $urlBatteryJSON }}')"
+        class="tab-element w-full p-3 rounded border shadow-md cursor-pointer">
+        <div class="flex justify-between relative">
+          <div>
+            <p class="text-sm text-gray-400">
+              <span>{{ .Params.batteryType | upper }}</span>
+              &middot;
+              <span>
+                {{- if eq $numberOfQuestionnaires 1 }}
+                {{ T "singleQuestionnaire" }}
+                {{- else }}
+                {{ $numberOfQuestionnaires }} {{ T "multipleQuestionnaires"}}
+                {{- end }}
+              </span>
+            </p>
+            <p class="font-medium">{{ $batteryName | lower | strings.FirstUpper }}</p>
+            <p>
+              {{ range $page.Params.questionnaires }}
+              <span class="bg-gray-200 text-gray-500 text-xs font-medium px-2.5 py-1 rounded">{{ . }}</span>
+              {{ end }}
+            </p>
+          </div>
+          <div class="flex gap-2 items-center italic text-sm text-gray-400">
+            <span x-cloak x-show="$store.session.getBatteryIsRunning('{{ $batteryId }}')">{{ T
+              "hasStarted" }}</span>
+            <span x-cloak x-show="$store.session.getBatteryIsComplete('{{ $batteryId }}')">{{ T
+              "hasEnded" }}</span>
+            <span x-cloak x-bind="showDot('{{ .Params.id }}')">&#9679;</span>
+          </div>
+        </div>
+      </div>
+      {{- end }}
+    </div>
+    {{ if gt $paginator.TotalPages 1 }}
+      {{- partial "base/paginator" $paginator }}
+    {{ end }}
+  </div>
+{{ else }}
+  <div>
+    <p class="text-gray-700 italic">{{ T "empty" | strings.FirstUpper | safeHTML }}</p>
+  </div>
+{{ end }}
+{{- end }}

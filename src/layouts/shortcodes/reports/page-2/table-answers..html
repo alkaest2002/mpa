@@ -1,0 +1,29 @@
+{{- $specs := partialCached "reports/questionnaire" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
+<table class="w-full apa-table">
+  <thead>
+    <tr>
+      <th>{{ T "reportItemId" | strings.FirstUpper }}</td>
+      <th>{{ T "reportItemText" | strings.FirstUpper }}</td>
+      <th class="text-center">{{ T "reportItemResponse" | strings.FirstUpper }}</td>
+      <th class="text-center">{{ T "reportItemLatency" | strings.FirstUpper }}</td>
+      <th class="text-center">{{ T "reportItemDeltaLatency" | strings.FirstUpper }}</td>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $itemIndex, $item := $specs.questionnaireItems }}
+      {{ $itemId := delimit (slice "0" "0" "0" ((add $itemIndex 1) | string) | last 3)  "" }}
+      <tr>
+        <th>{{ $itemId }}</td>
+        <td>{{ $item }}</td>
+        <td class="text-center">it-{{ $itemId }}#answerValue</td>
+        <td class="text-center">it-{{ $itemId }}#answerLatency</td>
+        <td class="text-center">it-{{ $itemId }}#deltaAnswerLatency</td>
+      </tr>
+    {{- end }}
+  </tbody>
+  <caption class="caption">
+    <span>{{ T "reportItemResponse" | strings.FirstUpper }}: {{ delimit $specs.questionnaireLikert  ", " }}</span>, 
+    <span>{{ T "reportItemLatency" | strings.FirstUpper }}: {{ T "reportItemLatencyExplain" }}</span>, 
+    <span>{{ T "reportItemDeltaLatency" | strings.FirstUpper }}: {{ T "reportItemDeltaLatencyExplain" }}</span>.
+  </caption>
+</table>

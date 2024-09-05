@@ -1,0 +1,41 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+#fade-me-in.htmx-added {
+    opacity: 0;
+}
+
+#fade-me-in {
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+/*********************************************/
+/* ALPINE RELATED  CSS                       */
+/*********************************************/
+
+[x-cloak] {
+    display: none !important;
+}
+
+/*********************************************/
+/* HTMX RELATED                              */
+/*********************************************/
+
+.my-indicator {
+    display: none;
+}
+.htmx-request .my-indicator {
+    display: inline;
+}
+.htmx-request.my-indicator {
+    display: inline;
+}

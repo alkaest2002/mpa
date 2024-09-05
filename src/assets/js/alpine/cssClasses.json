@@ -1,0 +1,28 @@
+{
+  "selected": { 
+    "bg-blue-50": true, 
+    "hover:bg-blue-50": true 
+  },
+  "nonSelected": { 
+    "hover:bg-gray-100": true 
+  },
+  "disabledButton": {
+    "bg-gray-200": true,
+    "cursor-not-allowed": true
+  },
+  "enabledButton": {
+    "bg-blue-500": true,
+    "hover:bg-blue-700": true,
+    "cursor-pointer": true
+  },
+  "grayDot": {
+    "text-gray-200": true
+  },
+  "orangeDot": {
+    "text-orange-300": true
+  },
+  "blueDot": {
+    "text-blue-400": true
+  }
+ 
+}

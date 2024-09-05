@@ -1,0 +1,4 @@
+map:
+  mediaType: "text/html"
+  isHTML: true
+  basename: map

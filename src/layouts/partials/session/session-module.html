@@ -1,0 +1,84 @@
+<fieldset class="mb-6 text-gray-700">
+    <label for="setting" class="block text-sm font-bold text-gray-900">{{ T "chooseSetting" }}</label>
+    <p class="text-sm text-gray-500 mb-3">{{ T "chooseSettingInfo" }}</p>
+    <select 
+        id="setting" 
+        x-model="$store.session.settingId" 
+        :class="{'text-black' : $store.session.settingId }"
+        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    >
+        <option 
+            :selected="!$store.session.settingId" 
+            :class="{ 'hidden': $store.session.settingId }" 
+            value="">{{ T "chooseSettingNullOption" }}
+        </option>
+        <option :selected="$store.session.settingId == 'normal'" value="normal">{{ T "settingNormal" }}
+        </option>
+        <option :selected="$store.session.settingId == 'clinical'" value="clinical">{{ T "settingClinical" }}
+        </option>
+        <option :selected="$store.session.settingId == 'school'" value="school">{{ T "settingSchool" }}
+        </option>
+        <option :selected="$store.session.settingId == 'military'" value="military">{{ T "settingMilitary" }}
+        </option>
+        <option :selected="$store.session.settingId == 'recruitment'" value="recruitment">{{ T "settingRecruitment" }}
+        </option>
+    </select>
+</fieldset>
+<fieldset class="mb-6 text-gray-700">
+    <label for="report" class="block text-sm font-bold text-gray-900">{{ T "chooseReportsLanguage"}}</label>
+    <p class="text-sm text-gray-500 mb-3">{{ T "chooseReportsLanguageInfo" }}</p>
+    <select 
+        id="report" 
+        x-model="$store.urls.urlReports"
+        :class="{ 'text-black' : $store.urls.urlReports }"
+        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    >
+        <option :selected="!$store.urls.urlReports" :class="{ 'hidden': $store.urls.urlReports }" value="">{{ T
+            "chooseReportsLanguageNullOption" }}
+        </option>
+        {{ range .Sites }}
+        <option {{ $urlReports :=(.GetPage "reports" ).RelPermalink }}
+            :selected="$store.urls.urlReports == '{{ $urlReports }}'" value="{{ $urlReports }}">{{
+            .Language.LanguageName | lower }}
+        </option>
+        {{- end }}
+    </select>
+</fieldset>
+<fieldset class="mb-6 text-gray-700">
+    <label for="tutorialSwitch" class="block text-sm font-bold text-gray-900">{{ T "chooseTutorialSwitch" }}</label>
+    <p class="text-sm text-gray-500 mb-3">{{ T "chooseTutorialSwitchInfo" }}</p>
+    <select 
+        id="tutorialSwitch" 
+        x-model="$store.app.tutorialSwitch" 
+        :class="{'text-black' : $store.app.tutorialSwitch }"
+        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    >
+        <option 
+            :selected="!$store.app.tutorialSwitch" 
+            :class="{ 'hidden': $store.app.tutorialSwitch }" 
+            value="">{{ T "tutorialSwitchNullOption" }}
+        </option>
+        <option :selected="$store.app.tutorialSwitch == 'on'" value="on">{{ T "tutorialSwitchOn" }}
+        </option>
+        <option :selected="$store.app.tutorialSwitch == 'off'" value="off">{{ T "tutorialSwitchOff" }}
+    </select>
+</fieldset>
+<fieldset class="mb-6 text-gray-700">
+    <label for="autoPilotSwitch" class="block text-sm font-bold text-gray-900">{{ T "chooseAutoPilotSwitch" }}</label>
+    <p class="text-sm text-gray-500 mb-3">{{ T "chooseAutoPilotSwitchInfo" }}</p>
+    <select 
+        id="autoPilotSwitch" 
+        x-model="$store.app.autoPilotSwitch" 
+        :class="{'text-black' : $store.app.autoPilotSwitch }"
+        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    >
+        <option 
+            :selected="!$store.app.autoPilotSwitch" 
+            :class="{ 'hidden': $store.app.autoPilotSwitch }" 
+            value="">{{ T "autoPilotSwitchNullOption" }}
+        </option>
+        <option :selected="$store.app.autoPilotSwitch == 'on'" value="on">{{ T "autoPilotSwitchOn" }}
+        </option>
+        <option :selected="$store.app.autoPilotSwitch == 'off'" value="off">{{ T "autoPilotSwitchOff" }}
+    </select>
+</fieldset>

@@ -1,0 +1,14 @@
+it:
+  contentDir: content/it
+  disabled: false
+  languageCode: it-IT
+  languageDirection: ltr
+  languageName: Italiano
+  weight: 1
+en:
+  contentDir: content/en
+  disabled: false
+  languageCode: en-US
+  languageDirection: ltr
+  languageName: English
+  weight: 2

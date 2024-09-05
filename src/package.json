@@ -1,0 +1,27 @@
+{
+  "name": "testing-machine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "dev": "hugo server -p 8000 --disableFastRender --ignoreCache --cleanDestinationDir",
+    "dev-stats": "hugo server -p 8000 --disableFastRender --ignoreCache --cleanDestinationDir --templateMetrics --templateMetricsHints --printUnusedTemplates",
+    "build": "hugo --gc --minify --cleanDestinationDir"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "postcss-cli": "^11.0.0",
+    "postcss-import": "^16.1.0",
+    "tailwindcss": "^3.4.10"
+  },
+  "dependencies": {
+    "@alpinejs/persist": "^3.14.1",
+    "alpinejs": "^3.14.1",
+    "banditypes": "^0.2.5",
+    "fflate": "^0.8.2",
+    "htmx.org": "^2.0.1"
+  }
+}

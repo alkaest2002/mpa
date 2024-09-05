@@ -1,0 +1,81 @@
+administer: somministra batteria
+autoPilotSwitchNullOption: seleziona auto-pilota 
+autoPilotSwitchOn: auto-pilota inserito
+autoPilotSwitchOff: auto-pilota disinserito
+batteries: catalogo generale
+battery: batteria
+case: Caso
+chooseAutoPilotSwitch: auto-pilota
+chooseAutoPilotSwitchInfo: quest'opzione consente di automatizzare la somministrazione
+chooseReportsLanguage: lingua dei report
+chooseReportsLanguageInfo: quest'opzione riguarda la lingua con cui saranno generati i report
+chooseReportsLanguageNullOption: seleziona lingua 
+chooseSetting: tipo di contesto
+chooseSettingInfo: quest'opzione determina i dati normativi usati per generare i report
+chooseSettingNullOption: seleziona tipo di contesto
+chooseTutorialSwitch: tutorial
+chooseTutorialSwitchInfo: quest'opzione determina se proporre un tutorial ai nuovi utenti
+clickAndUpload: clicca qui per effettuare l'upload del file
+closeSession: chiudi sessione
+empty: non ci sono elementi corrispondenti al criterio di ricerca.<br/>Premi Esc per tornare al catalogo generale.
+end: fine
+female: femmina
+gender: genere (m per maschio, f per femmina)
+hasEnded: completato
+hasStarted: in corso
+highSchool: scuole superiori
+home: home
+male: maschio
+map: mappa questionario in corso
+mapInfo: Mappa dei quesiti del questionario in corso
+middleSchool: scuole medie
+multipleQuestionnaires: questionari
+name: nome
+next: avanti
+noResponse: non ho intenzione di rispondere
+noResponseWarning: 'attenzione: le risposte omesse possono invalidare il questionario'
+noUploadedFile: nessun file selezionato
+ok: ok
+optionalData: dati opzionali
+page: pag.
+pauseSession: sospendi sessione
+placeOfBirth: luogo di nascita
+questionnaireInstructions: istruzioni questionario in corso
+questionnaires: batteria in corso
+reportDisclaimer: questo report psicologico è stato generato automaticamente da un 
+  software. I risultati devono essere interpretati con cautela e utilizzati sotto
+  la supervisione di uno psicologo qualificato. Gli sviluppatori non si assumono responsabilità
+  per eventuali conseguenze derivanti dall'uso di questo report senza supporto professionale
+reportGraphLegend: grafico dei punteggi standard delle scale
+reportItemId: item
+reportItemText: testo item
+reportItemResponse: ris
+reportItemLatency: lat
+reportItemLatencyExplain: latenza in millisec
+reportItemDeltaLatency: delta lat
+reportItemDeltaLatencyExplain: delta da latenza mediana in millisec
+reportScaleCode: codice
+reportScaleName: scala
+reportScaleRawScore: p. grezzo
+reportScaleMeanScore: p. medio
+reportScaleStandardScore: p. standard
+reportScaleOmissionsScore: omissioni
+reportTableScoresLegend: tabella dei punteggi delle scale
+resumeSession: riprendi sessione
+returnToBatteries: ritorna al catalogo generale
+selectItem: seleziona item
+setting: tipo di valutazione
+settingClinical: contesto clinico
+settingNormal: contesto ordinario
+settingRecruitment: contesto selezione del personale
+settingSchool: contesto scolastico
+settingMilitary: contesto fuori area
+singleQuestionnaire: 1 questionario
+surname: cognome
+testeeId: codice identificativo
+tutorialNullOption: seleziona somministrazione tutorial
+tutorialSwitchOn:  somministra tutorial
+tutorialSwitchOff: salta tutorial
+university: università
+uploadInfo: solo file con estensione JSON (precedentemente esportati)
+yearOfBirth: anno di nascita (es. 2000)

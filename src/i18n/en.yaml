@@ -1,0 +1,77 @@
+administer: administer battery
+autoPilotSwitchNullOption: select auto-pilot 
+autoPilotSwitchOn: auto-pilot on
+autoPilotSwitchOff: auto-pilot off
+batteries: general catalog
+battery: battery
+case: Case
+chooseAutoPilotSwitch: auto-pilot
+chooseAutoPilotSwitchInfo: this option allows the administration to be automated.
+chooseReportsLanguage: select report language
+chooseReportsLanguageInfo: this option concerns the language in which the reports will be generated
+chooseReportsLanguageNullOption: select language
+chooseSetting: context type
+chooseSettingInfo: this option determines the normative data used to generate the reports
+chooseSettingNullOption: select context type
+chooseTutorialSwitch: select tutorial
+chooseTutorialSwitchInfo: this option controls whether a preliminary tutorial is offered to new users
+clickAndUpload: click here to upload the file
+closeSession: close session
+empty: no items match the search criteria.<br/>Press Esc to go back to the entire catalogue.
+end: end
+female: female
+gender: gender identity
+hasEnded: completed
+hasStarted: in progress
+highSchool: high school
+home: home
+male: male
+map: ongoing questionnaire map
+mapInfo: Map of the items in the ongoing questionnaire
+middleSchool: middle school
+multipleQuestionnaires: questionnaires
+name: name
+next: next
+noResponse: I do not wish to respond
+noResponseWarning: 'warning: omitted responses may invalidate the questionnaire'
+noUploadedFile: no file selected
+ok: ok
+optionalData: optional data
+page: page
+pauseSession: pause session
+placeOfBirth: place of birth
+questionnaireInstructions: ongoing questionnaire instructions
+questionnaires: ongoing battery
+reportDisclaimer: this psychological report was generated automatically by software. The results should be interpreted with caution and should not be used without the consultation of a qualified psychologist. The developers do not assume responsibility for any consequences resulting from the use of this report without professional support
+reportGraphLegend: chart of the scales' standard scores
+reportItemId: item
+reportItemText: item text
+reportItemResponse: res
+reportItemLatency: lat
+reportItemLatencyExplain: latency in millisec
+reportItemDeltaLatency: delta lat
+reportItemDeltaLatencyExplain: delta from median latency in millisec
+reportScaleCode: code
+reportScaleName: scale
+reportScaleRawScore: raw score
+reportScaleMeanScore: mean score
+reportScaleStandardScore: standard score
+reportScaleOmissionsScore: omissions
+reportTableScoresLegend: table witn scales' scores
+resumeSession: resume session
+returnToBatteries: return to the general catalog
+selectItem: select item
+settingClinical: clinical context
+settingNormal: ordinary context
+settingRecruitment: recruitment context
+settingSchool: school context
+settingMilitary: out-of-area context
+singleQuestionnaire: 1 questionnaire
+surname: surname
+testeeId: identification code
+tutorialNullOption: choose tutorial administration
+tutorialSwitchOn: administer tutorial
+tutorialSwitchOff: skip tutorial
+university: university
+uploadInfo: only files with JSON extension (previously exported)
+yearOfBirth: year of birth (e.g. 2000)

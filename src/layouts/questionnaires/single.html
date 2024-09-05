@@ -1,0 +1,84 @@
+{{ define "main" }}
+{{- $questionnaire := .Parent }}
+{{- $itemId := .Params.id }}
+{{- $itemOrder := .Params.order }}
+{{- $itemText := chomp .RawContent }}
+{{- $paginateSize := site.Params.paginateSize.maps }}
+{{- $mapPageIndex := div .Params.order $paginateSize | add 1 }}
+<div x-data="componentKeyboardActions" class="h-full">
+    <div 
+        x-data="viewItem" 
+        x-init="initItem('{{ $itemId }}', '{{ .RelPermalink }}'); initKeyboardActions('answerId')"
+        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions }"
+        class="h-full flex flex-col items-center justify-center p-9 relative"
+    >
+        {{- partialCached "base/burger" (dict "currentPage" . "questionnairesPage" true
+            "questionnairePage" true "mapPage" true "mapPageIndex" $mapPageIndex) $questionnaire.Title  $mapPageIndex }}
+        <div 
+            :class="{ 'opacity-20': $store.app.burgerIsOpen }"
+            class="w-full flex-grow flex flex-col" >
+            <div>
+                <p
+                    x-ref="title"
+                    x-bind="itemTitle"
+                    data-title="{{ $questionnaire.LinkTitle }}"
+                    data-item-no="{{ add $itemOrder 1 }}" 
+                    data-items-no="{{ len $questionnaire.Pages  }}"
+                    class="text-sm text-center text-gray-500 mb-6"
+                ></p>
+                <h1 class="text-xl font-bold mb-9">{{ add $itemOrder 1 }}. {{ .RawContent }}</h1>
+                {{- range .Params.options }}
+                    {{- range $optionValue, $optionLabel := . }}
+                    {{- $answerData := dict "order" $itemOrder "itemId" $itemId 
+                        "answerValue" ( $optionValue | int) | jsonify }}
+                    <div 
+                        x-ref="tab-{{ $optionValue }}"
+                        x-bind="itemOption({{ $answerData }})"
+                        class="tab-element p-3 my-3 rounded border shadow-md cursor-pointer"
+                    >
+                        {{ $optionLabel }}
+                    </div>
+                    {{- end }}
+                {{- end }}
+                <div 
+                    x-ref="tab-no-response"
+                    class="mt-12 pt-4 border-t border-slate-300 flex items-center"
+                >
+                    {{- $answerData := dict  "order" $itemOrder "itemId" $itemText
+                        "answerValue" "?" | jsonify }}
+                    <input 
+                        type="checkbox"
+                        x-model="noResponse" 
+                        x-bind="itemOption({{ $answerData }})"
+                        class="tab-element w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded mr-2">
+                    <div class="ms-2 text-sm">
+                        <label for="no-response-checkbox">{{ T "noResponse" }}</label>
+                        <p id="helper-checkbox-text" class="font-normal text-gray-400">{{ T "noResponseWarning" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center" >
+            {{- with .NextInSection }}
+                <a x-ref="page-left" href="{{ .RelPermalink }}" class="hidden"></a>
+            {{- end }}
+            {{- with .PrevInSection }}
+            </div>
+                <a 
+                    x-ref="main-button" 
+                    x-bind="itemNextButton('{{ .RelPermalink }}')"
+                    class="w-96 px-6 py-3 rounded-full text-white text-center"
+                    href="#">{{ T "next" }}
+                </a>
+            {{- else }}
+                <a 
+                    x-ref="main-button" 
+                    x-bind="itemEndButton"
+                    class="w-96 px-6 py-3 rounded-full text-white text-center" 
+                    href="#">{{ T "next" }}
+                </a>
+            {{- end }}
+        </div>
+    </div>
+</div>
+{{- end }}

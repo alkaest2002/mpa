@@ -1,0 +1,95 @@
+{{- $currentPage := .currentPage }}
+{{ $counter := -1 }}
+<div class="absolute top-3 right-3 flex justify-center z-50" x-data>
+    <div x-on:keydown.escape.window="$store.app.burgerIsOpen = false" class="relative">
+        <div @click="$store.app.burgerIsOpen = !$store.app.burgerIsOpen" class="flex items-center gap-2 p-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6 text-gray-500">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+            </svg>
+        </div>
+        <div x-cloak x-show="$store.app.burgerIsOpen" @click.outside="$store.app.burgerIsOpen = false"
+            x-transition.origin.top.left
+            class="absolute right-0 mt-2 w-80">
+            <div class="mb-4 py-2 bg-slate-100 shadow-md shadow-gray-300 rounded-xl">
+                {{ $counter = add $counter 1 }}
+                <a href='{{ ($currentPage.Site.GetPage "home").RelPermalink }}'
+                    :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
+                    class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
+                    {{- T "home" }}
+                </a>
+                {{- with .questionnairesPage }}
+                {{ $counter = add $counter 1 }}
+                <a 
+                    @click.prevent="window.htmx.ajax('GET', $store.urls.urlCurrentBattery, 'body');"
+                    :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
+                    href='#'
+                    class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
+                    {{ T "questionnaires" }}
+                </a>
+                {{- else }}
+                <span
+                    class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm text-gray-400 cursor-not-allowed">{{
+                    T "questionnaires" }}</span>
+                {{- end }}
+                {{- with .questionnairePage }}
+                {{ $counter = add $counter 1 }}
+                <a @click.prevent="window.htmx.ajax('GET', $store.urls.urlCurrentQuestionnaire, 'body');" href='#'
+                    :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
+                    class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
+                    {{ T "questionnaireInstructions" }}
+                </a>
+                {{- else }}
+                <span
+                    class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm text-gray-400 cursor-not-allowed">{{
+                    T "questionnaireInstructions" }}</span>
+                {{- end }}
+                {{- with .mapPage }}
+                    {{- $counter = add $counter 1 }}
+                    {{- $questionnaire := $currentPage.Parent }}
+                    {{- if eq $currentPage.Kind "section" }}
+                        {{ $questionnaire = $currentPage }}
+                    {{- end }}
+                    {{- with $questionnaire.OutputFormats.Get "map" }}
+                        {{ $mapPageUrl := "" }}
+                        {{- if gt $.mapPageIndex 1  }}
+                            {{- $mapPageUrl = urls.JoinPath $questionnaire.RelPermalink "page" $.mapPageIndex "map.html" }}
+                        {{- else }}
+                            {{- $mapPageUrl = .RelPermalink }}
+                        {{- end }}
+                        <a href='{{ $mapPageUrl }}' :data-menu-selected="burgerIndex == 4"
+                            :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
+                            class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
+                            {{ T "map" }}
+                        </a>
+                    {{- end }}
+                {{- else }}
+                <span
+                    class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm text-gray-400 cursor-not-allowed">{{
+                    T "map" }}</span>
+                {{- end}}
+            </div>
+            <div class="py-2 bg-slate-100 shadow-md shadow-gray-300 rounded-xl">
+                {{ $counter = add $counter 1 }}
+                <a href='{{ ($currentPage.Site.GetPage "session/pause-session").RelPermalink }}'
+                    :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
+                    class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
+                    {{- T "pauseSession" }}
+                </a>
+                {{ $counter = add $counter 1 }}
+                <a href='{{ ($currentPage.Site.GetPage "session/resume-session").RelPermalink }}'
+                    :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
+                    class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
+                    {{- T "resumeSession" }}
+                </a>
+                {{ $counter = add $counter 1 }}
+                <a href='{{ ($currentPage.Site.GetPage "session/close-session").RelPermalink }}'
+                    :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
+                    class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
+                    {{- T "closeSession" }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

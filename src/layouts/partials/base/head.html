@@ -1,0 +1,15 @@
+{{- $styles := resources.Get "css/tailwind.css" }}
+{{- if hugo.IsDevelopment }}
+	{{- $styles = $styles | resources.PostCSS | minify }}
+	{{- $styles = $styles | resources.ExecuteAsTemplate (printf "css/tailwind.dev.%v.css" now.UnixMilli) . }}
+	<style>{{- $styles.Content | safeCSS -}}</style>
+{{- else }}
+	{{- $styles = $styles | resources.PostCSS | minify | fingerprint | resources.PostProcess }}
+	<link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" />
+{{- end }}
+{{- $jsOptions := dict "targetPath" "js/bundle.js" "minify" true -}}
+{{- $alpineMain := resources.Get "js/alpine/alpine-main.js" }}
+{{- $htmxMain := resources.Get "js/htmx/htmx-main.js" }}
+{{- $mainBundle := slice $alpineMain $htmxMain | resources.Concat "js/mainBundle.js" }}
+{{- $mainBundle = $mainBundle | js.Build $jsOptions }}
+<script src="{{ $mainBundle.RelPermalink }}" integrity="{{ $mainBundle.Data.Integrity }}" crossorigin="anonymous" defer></script>

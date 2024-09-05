@@ -1,0 +1,30 @@
+{{- define "main" }}
+<div 
+    x-data="componentKeyboardActions" 
+    class="h-full"
+>
+    <div
+        x-data="viewSession"
+        x-init="initSession(); initKeyboardActions('menu');"
+        x-bind="{ ...yArrowsActions, ...enterActions }"
+        class="h-full flex flex-col items-center justify-center p-9 relative"
+    >
+        {{- partialCached "base/burger" (dict "currentPage" .) .Section }}
+        <div
+            :class="{ 'opacity-20': $store.app.burgerIsOpen }"
+            class="flex-grow w-full"
+        >
+            <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
+            <div class="mb-9">{{ .Content }}</div>
+            {{- partialCached "session/testee-module" . }}
+        </div>
+        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center">
+            <a 
+                x-ref="main-button" 
+                x-bind="closeSessionButton"
+                class="inline-block w-96 px-6 py-3 rounded-full text-white text-center"
+                href="#">{{ T "closeSession" }}</a>
+        </div>
+    </div>
+</div>
+{{- end }}
