@@ -15,8 +15,10 @@ export default () => ({
 
   initSession() {
     this.$store.app.currentView = "session";
-    this.dataToExport = getDataToExport.bind(this)();
-    this.exportFileName = getExportFileName.bind(this)();
+    Alpine.effect(() => {
+      this.dataToExport = getDataToExport.bind(this)();
+      this.exportFileName = getExportFileName.bind(this)();
+    });
   },
 
   get uploadedFilename() {

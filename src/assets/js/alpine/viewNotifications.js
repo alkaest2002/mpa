@@ -10,8 +10,10 @@ export default () => ({
 
   initNotifications() {
     this.$store.app.currentView = "notifications";
-    this.dataToExport = getDataToExport.bind(this)();
-    this.exportFileName = getExportFileName.bind(this)();
+    Alpine.effect(() => {
+      this.dataToExport = getDataToExport.bind(this)();
+      this.exportFileName = getExportFileName.bind(this)();
+    });
   },
 
   questionnaireIsCompleteButton(questionnaireId) {
