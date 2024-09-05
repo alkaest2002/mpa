@@ -16,7 +16,7 @@
             "questionnairePage" true "mapPage" true "mapPageIndex" $mapPageIndex) $questionnaire.Title  $mapPageIndex }}
         <div 
             :class="{ 'opacity-20': $store.app.burgerIsOpen }"
-            class="w-full flex-grow flex flex-col" >
+            class="w-full flex-grow grid grid-cols-1" >
             <div>
                 <p
                     x-ref="title"
