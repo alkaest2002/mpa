@@ -15,7 +15,7 @@ export default () => ({
     this.$store.session.questionnaireId = 
       Object.values(this.$store.session.questionnaires)
         .sort((a,b) => a.order - b.order)
-        .filter((el) => !this.$store.session.completedQuestionnaires.includes(el))
+        .filter(({ questionnaireId }) => !this.$store.session.completedQuestionnaires.includes(questionnaireId))
         [0]?.questionnaireId;
   },
 

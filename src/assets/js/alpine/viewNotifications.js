@@ -1,3 +1,4 @@
+import css from "./cssClasses.json";
 import useNavigation from "./useNavigation";
 import useData from "./useData";
 
@@ -16,14 +17,14 @@ export default () => ({
     });
   },
 
-  questionnaireIsCompleteButton(questionnaireId) {
+  questionnaireIsCompleteButton() {
     return {
       ["@click.prevent"]() {
-        this.$store.completedQuestionnaires.includes(questionnaireId) 
+        this.$store.session.completedQuestionnaires.includes(this.$store.session.questionnaireId) 
           && goToCurrentBattery.bind(this)();
       },
       [":class"]() {
-        return this.$store.completedQuestionnaires.includes(questionnaireId)
+        return this.$store.session.completedQuestionnaires.includes(this.$store.session.questionnaireId)
           ? css.selected
           : css.nonSelected;
       },

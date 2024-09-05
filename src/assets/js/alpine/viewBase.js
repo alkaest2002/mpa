@@ -1,5 +1,4 @@
 
-
 export default () => ({
   
   async initBase({ urlWorkerScript, urlScoringScript, urlTemplatingScript }) {
