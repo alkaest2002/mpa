@@ -3,7 +3,7 @@
 {{- with $page }}
 {{ if gt (len $paginator.Pages) 0 }}
   <div class="flex-grow flex flex-col justify-between">
-    <div class="flex-grow flex flex-col gap-3">
+    <div class="grid grid-cols-1 gap-4">
       {{- range $index, $page := $paginator.Pages }}
       {{- $batteryId := $page.Params.id }}
       {{- $batteryName := $page.Title }}
