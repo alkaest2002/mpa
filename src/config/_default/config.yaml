@@ -3,4 +3,3 @@ description: Testing Machine
 languageCode: it
 defaultContentLanguage: it
 defaultContentLanguageInSubdir: true
-publishDir: ../electron-mpa/public
