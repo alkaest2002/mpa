@@ -13,10 +13,10 @@ export default () => ({
     };
     this.$store.session.data.batteries[this.$store.session.batteryId] = currentBattery;
     this.$store.session.questionnaireId = 
-      Object.keys(this.$store.session.questionnaires)
-        .sort((el) => el.order)
-        .filter((el) => !this.$store.session.completedQuestionnaires.includes(el))
-        [0]
+      Object.values(this.$store.session.questionnaires)
+      .sort((a,b) => a.order - b.order)
+      .filter((el) => !this.$store.session.completedQuestionnaires.includes(el))
+      [0]?.questionnaireId;
   },
 
   showDot(questionnaireId) {
