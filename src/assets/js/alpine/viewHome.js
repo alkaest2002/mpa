@@ -29,6 +29,7 @@ export default () => ({
   goNextButton: {
     ["@click.prevent"]() {
       if (!this.$store.session.batteryId) return;
+      if (this.$store.session.completedBatteries.includes(this.$store.session.batteryId)) return;
       if (this.$store.app.tutorialSwitch == "off") return goToUrl.bind(this)([ "session", "open-session" ]);
       if (this.$store.app.tutorialSwitch == "on") return goToUrl.bind(this)([ "tutorial" ]);
     },
