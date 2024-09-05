@@ -22,7 +22,7 @@
             <div class="mb-9">{{ T "mapInfo" }}.</div>
             <div class="flex-grow flex flex-col">
                 <div class="flex-grow">
-                    <div class="flex flex-col gap-3">
+                    <div class="grid grid-cols-1 gap-4">
                         {{- range $paginator.Pages }}
                             <div
                                 x-ref="tab-{{ .Params.id }}"
