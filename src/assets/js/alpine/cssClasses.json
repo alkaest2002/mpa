@@ -8,7 +8,8 @@
   },
   "disabledButton": {
     "bg-gray-200": true,
-    "cursor-not-allowed": true
+    "cursor-not-allowed": true,
+    "outline-none": true
   },
   "enabledButton": {
     "bg-blue-500": true,

@@ -7,7 +7,6 @@ module.exports = {
     "bg-blue-500",
     "text-blue-400",
     "text-gray-200",
-    "text-orange-300",
     "hover:bg-blue-50",
     "hover:bg-blue-500",
     "bg-gray-200",
@@ -16,6 +15,7 @@ module.exports = {
     "hover:bg-gray-500",
     "cursor-not-allowed",
     "opacity-20",
+    "outline-none"
   ],
   theme: {
     extend: {},
