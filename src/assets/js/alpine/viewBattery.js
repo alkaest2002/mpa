@@ -14,7 +14,8 @@ export default () => ({
     this.$store.session.data.batteries[this.$store.session.batteryId] = currentBattery;
     this.$store.session.questionnaireId = 
       Object.values(this.$store.session.questionnaires)
-        .sort((a,b) => a.order - b.order)
+        .map((el, order) => ({ order, ...el }))
+        .sort((a,b) => Number(a.order) - Number(b.order))
         .filter(({ questionnaireId }) => !this.$store.session.completedQuestionnaires.includes(questionnaireId))
         [0]?.questionnaireId;
   },
