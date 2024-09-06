@@ -7,11 +7,7 @@ export default () => ({
   
   initBattery() {
     this.$store.app.currentView = "battery";
-    const currentBattery = {
-      order: this.$store.session.completedBatteries.length,
-      ...this.$store.session.currentBattery 
-    };
-    this.$store.session.data.batteries[this.$store.session.batteryId] = currentBattery;
+    this.$store.session.data.batteries[this.$store.session.batteryId] = this.$store.session.battery;
     this.$store.session.questionnaireId = 
       Object.values(this.$store.session.questionnaires)
         .map((el, order) => ({ order, ...el }))

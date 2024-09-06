@@ -15,13 +15,13 @@ export default () => ({
       async ["@click"]() {
         const { questionnaires } = await fetch(urlBatteryJSON).then((res) => res.json());
         this.$store.session.batteryId = batteryId;
-        this.$store.session.battery = { batteryId, batteryName, questionnaires };
+        this.$store.session.battery = {
+          order: this.$store.session.completedBatteries.length,
+          batteryId, 
+          batteryName, 
+          questionnaires 
+        };
         this.$store.session.questionnaires = questionnaires;
-        for (const [ questionnaireId, { order } ] of Object.entries(questionnaires)) {
-          if (order==0) {
-            this.$store.session.questionnaireId = questionnaireId;
-          }
-        }
       },
       [":class"]() {
         return batteryId == this.$store.session.batteryId
