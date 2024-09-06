@@ -23,6 +23,6 @@ src/assets/static/js/bundle
 src/node_modules
 src/resources
 src-dev
-electron-app/node_modules
+electron-forge/node_modules
 electron-app/public
 electron-app-prebuilt/*
