@@ -9,12 +9,12 @@
         {{- with site.Params.description }}
             <meta name="description" content="{{ . }}" />
         {{- end }} 
-        {{ partialCached "base/head" . }}
+        {{- partialCached "base/head" . }}
     </head>
-    {{ $urlWorkerScript := (resources.Get "js/worker/worker.js").RelPermalink }}
-    {{ $urlScoringScript := (resources.Get "js/worker/scoring.js").RelPermalink  }}
-    {{ $urlTemplatingScript := (resources.Get "js/worker/templating.js").RelPermalink }}
-    {{ $urls := dict "urlWorkerScript" $urlWorkerScript "urlScoringScript" $urlScoringScript "urlTemplatingScript" $urlTemplatingScript }}
+    {{- $urlWorkerScript := (resources.Get "js/worker/worker.js").RelPermalink }}
+    {{- $urlScoringScript := (resources.Get "js/worker/scoring.js").RelPermalink  }}
+    {{- $urlTemplatingScript := (resources.Get "js/worker/templating.js").RelPermalink }}
+    {{- $urls := dict "urlWorkerScript" $urlWorkerScript "urlScoringScript" $urlScoringScript "urlTemplatingScript" $urlTemplatingScript }}
     <body 
         hx-boost="true"
         hx-swap="transition:true"
@@ -32,10 +32,10 @@
             {{- end }} 
         </div>
     </body>
-    {{ with not hugo.IsDevelopment }}
+    {{- with not hugo.IsDevelopment }}
         <script>
             window.history.pushState(null, null, window.location.href);
             window.onpopstate = function(event) { window.history.go(1) };
         </script>
-    {{ end }}
+    {{- end }}
 </html>
