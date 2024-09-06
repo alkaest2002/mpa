@@ -1,4 +1,4 @@
 baseURL: http://localhost:9000
 enableRobotsTXT: true
 minify: true
-publishDir: ../electron-app/Electron.app/Contents/Resources/app/public
+publishDir: ../electron-app/public

@@ -20,6 +20,6 @@ const createWindow = () => {
 
 app.whenReady().then(() => createWindow()) 
 app.on('window-all-closed', () => {
-	app.quit();
 	ps.kill();
+	app.quit();
 });
