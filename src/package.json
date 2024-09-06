@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "hugo server -p 8000 --disableFastRender --ignoreCache --cleanDestinationDir",
     "dev-stats": "hugo server -p 8000 --disableFastRender --ignoreCache --cleanDestinationDir --templateMetrics --templateMetricsHints --printUnusedTemplates",
-    "build": "hugo --gc --minify --cleanDestinationDir"
+    "build-hugo": "hugo --gc --minify --cleanDestinationDir",
+    "cp": "cp -r '../electron-forge/public' '../electron-prebuilt/app/public'",
+    "build": "npm run build-hugo && npm run cp"
   },
   "author": "",
   "license": "ISC",
