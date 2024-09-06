@@ -3,7 +3,7 @@ export default () => ({
   
   async initBase({ urlWorkerScript, urlScoringScript, urlTemplatingScript }) {
     this.$watch("$store.session.completedQuestionnaires", (val) => {
-      const questionnaireId = val.slice(-1)[0];
+      const questionnaireId = val.at(-1);
       if (!questionnaireId)
         return;
       if (!(this.$store.session.questionnaires[questionnaireId]?.questionnaireShouldBeScored))
