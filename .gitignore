@@ -25,3 +25,4 @@ src/resources
 src-dev
 electron-forge/node_modules
 electron-forge/out
+electron-prebuilt
