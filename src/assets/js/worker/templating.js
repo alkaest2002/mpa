@@ -29,7 +29,5 @@ const generateReport = ({
     return renderedTemplate;
   }
   
-  return { 
-    renderedReport: generateQuestionnaireReport(testee, data, scores, template)
-  }
+  return generateQuestionnaireReport(testee, data, scores, template);
 }

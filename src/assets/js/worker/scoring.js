@@ -1,5 +1,4 @@
 const computeScores = ({
-  settingId,
   testeeData: testee, 
   questionnaireData: data, 
   questionnaireSpecs: specs 
@@ -33,15 +32,16 @@ const computeScores = ({
     return { reversedItemsRawScore, reverseItemsdOmissions };
   }
 
-  const computeStandardScore = (settingId, scaleId, rawScore, specs, testee) => {
+  const computeStandardScore = (scaleId, rawScore, specs, testee) => {
     const getNormsFunction = specs.norms.getNorms;
-    const currentNormsId = eval?.(`"use strict";${getNormsFunction};fn(${JSON.stringify(testee)},"${settingId}","${scaleId}")`);
+    console.log(getNormsFunction)
+    const currentNormsId = eval?.(`"use strict";${getNormsFunction};fn(${JSON.stringify(testee)},"${scaleId}")`);
     const currentNorms = specs.norms[currentNormsId];
     const standardScore =  eval?.(`"use strict";${currentNorms};fn(${rawScore})`);
     return Math.round(standardScore, 0);
   }
   
-  const computeScores = (settingId, testee, data, specs) => {
+  const computeScores = (testee, data, specs) => {
     const answersValues = getAnswersProp(data, "answerValue");
     let scores = {};
     for (const [scaleId, { name, straightItems, reversedItems }] of Object.entries(specs.scales)) {
@@ -50,11 +50,11 @@ const computeScores = ({
       const omissions = straightItemsOmissions + reverseItemsdOmissions;
       const rawScore = straightItemsRawScore + reversedItemsRawScore;
       const meanScore = rawScore / (straightItems.length + reversedItems.length - omissions);
-      const standardScore = computeStandardScore(settingId, scaleId, rawScore, specs, testee);
+      const standardScore = computeStandardScore(scaleId, rawScore, specs, testee);
       scores = { ...scores, [scaleId] : { scaleId, name, rawScore, meanScore, standardScore, omissions }};
     };
     return scores;
   }
 
-  return computeScores(settingId, testee, data, specs);
+  return computeScores(testee, data, specs);
 };
