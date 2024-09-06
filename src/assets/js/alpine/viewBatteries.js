@@ -16,10 +16,10 @@ export default () => ({
         const { questionnaires } = await fetch(urlBatteryJSON).then((res) => res.json());
         this.$store.session.batteryId = batteryId;
         this.$store.session.battery = {
-          order: this.$store.session.completedBatteries.length,
           batteryId, 
           batteryName, 
-          questionnaires 
+          questionnaires,
+          order: this.$store.session.completedBatteries.length,
         };
         this.$store.session.questionnaires = questionnaires;
       },

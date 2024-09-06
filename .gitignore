@@ -19,9 +19,8 @@
 
 **/.DS_Store
 go.work
-electron-mpa/node_modules
-electron-mpa/out
 src/assets/static/js/bundle
 src/node_modules
 src/resources
 src-dev
+electron-app
