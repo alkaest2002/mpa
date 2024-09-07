@@ -34,7 +34,6 @@ const computeScores = ({
 
   const computeStandardScore = (scaleId, rawScore, specs, testee) => {
     const getNormsFunction = specs.norms.getNorms;
-    console.log(getNormsFunction)
     const currentNormsId = eval?.(`"use strict";${getNormsFunction};fn(${JSON.stringify(testee)},"${scaleId}")`);
     const currentNorms = specs.norms[currentNormsId];
     const standardScore =  eval?.(`"use strict";${currentNorms};fn(${rawScore})`);

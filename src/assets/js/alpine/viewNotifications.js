@@ -39,7 +39,6 @@ export default () => ({
 
   batteryIsCompleteButton: {
     ["@click.prevent"]() {
-      console.log(this.$store.app.autoPilotSwitch, this.dataToExport);
       if (this.$store.app.autoPilotSwitch == "on" && this.dataToExport) {
         downloadZip(this.dataToExport, this.exportFileName);
         this.$store.testee.wipeOut();
