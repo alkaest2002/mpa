@@ -13,16 +13,23 @@
     {{- range $itemIndex, $item := $specs.questionnaireItems }}
       {{ $itemId := delimit (slice "0" "0" "0" ((add $itemIndex 1) | string) | last 3)  "" }}
       <tr>
-        <th>{{ $itemId }}</td>
-        <td>{{ $item }}</td>
-        <td class="text-center">it-{{ $itemId }}#answerValue</td>
-        <td class="text-center">it-{{ $itemId }}#answerLatency</td>
-        <td class="text-center">it-{{ $itemId }}#deltaAnswerLatency</td>
+        <th style="width:50px">{{ $itemId }}</td>
+        <td style="width:calc(75% - 150px)">{{ $item }}</td>
+        <td style="width:calc(25% - 150px)">
+          {{- $options := index $specs.questionnaireOptions $itemIndex }}
+          {{- range $options }}
+            {{- range $optionValue, $optionText := . }}
+              <span class="option option-{{ $optionValue }}-it-{{ $itemId }}#answerValue">{{ $optionText }}</span>
+            {{- end }}
+          {{- end }}
+          <span class="option option-it-{{ $itemId }}#answerValue">?</span>
+        </td>
+        <td style="width:50px" class="text-center">it-{{ $itemId }}#answerLatency</td>
+        <td style="width:50px" class="text-center">it-{{ $itemId }}#deltaAnswerLatency</td>
       </tr>
     {{- end }}
   </tbody>
   <caption class="caption">
-    <span>{{ T "reportItemResponse" | strings.FirstUpper }}: {{ delimit $specs.questionnaireLikert  ", " }}</span>, 
     <span>{{ T "reportItemLatency" | strings.FirstUpper }}: {{ T "reportItemLatencyExplain" }}</span>, 
     <span>{{ T "reportItemDeltaLatency" | strings.FirstUpper }}: {{ T "reportItemDeltaLatencyExplain" }}</span>.
   </caption>

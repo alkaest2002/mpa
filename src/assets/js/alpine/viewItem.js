@@ -12,7 +12,7 @@ export default () => ({
     this.$store.app.currentView = "item";
     this.$store.session.itemId = itemId;
     this.$store.urls.urlItem = urlItem;
-    this.noResponse = this.$store.session.currentAnswerValue == "?";
+    this.noResponse = this.$store.session.currentAnswerValue == "";
   },
 
   itemTitle: {
@@ -34,8 +34,8 @@ export default () => ({
           : (currentAnswerLatency || 0) + elapsedTime;
         this.setAnswerData({ ...answerData, answerLatency });
         this.$nextTick(() => {
-          !this.noResponse && this.$store.session.currentAnswerValue == "?" && this.deleteAnswer();
-          this.noResponse = this.$store.session.currentAnswerValue == "?";
+          !this.noResponse && this.$store.session.currentAnswerValue == "" && this.deleteAnswer();
+          this.noResponse = this.$store.session.currentAnswerValue == "";
         })
       },
       [":class"]() {

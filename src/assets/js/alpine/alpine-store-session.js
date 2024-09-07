@@ -41,7 +41,7 @@ export default (Alpine) => ({
   },
 
   get answerId() {
-    return this.currentAnswerValue == "?" 
+    return this.currentAnswerValue == "" 
       ? "no-response"
       : this.currentAnswerValue;
   },

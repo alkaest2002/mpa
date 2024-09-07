@@ -4,11 +4,7 @@ export default () => ({
   async initBase({ urlWorkerScript, urlScoringScript, urlTemplatingScript }) {
     this.$watch("$store.session.completedQuestionnaires", (val) => {
       const questionnaireId = val.at(-1);
-      if (
-          !questionnaireId 
-          || !this.$store.session.questionnaires[questionnaireId]?.questionnaireShouldBeScored
-      )
-        return;
+      if (!questionnaireId) return;
       const settingId = this.$store.session.settingId;
       const languageId = this.$store.session.languageId;
       const testeeData = JSON.parse(JSON.stringify({ ...this.$store.testee.bio, settingId, languageId }));

@@ -1,29 +1,27 @@
 {{- $questionnairesSection := site.GetPage "questionnaires" }}
 {{- $questionnaire := $questionnairesSection.GetPage .questionnaireId }}
-{{- $questionnaireSpecs := $questionnaire.Resources.Get "specs.json" | unmarshal }}
-
 {{- $scales := slice }}
-{{- range $scaleId, $scale := $questionnaireSpecs.scales }}
-  {{- $scales = $scales | append (dict "scaleId" $scaleId "scaleName" $scale.name "order" $scale.order ) }}
-{{- end }}
-
 {{- $items := slice }}
-{{- range $questionnaire.Pages }}
-  {{- $items = $items | append .RawContent}}
-{{- end }}
+{{- $options := slice }}
 
-{{- $likert := slice }}
-{{- with index  $questionnaire.Pages 0 }}
-  {{- range .Params.options }}
-    {{- range $likertKey, $likertValue := . }}
-      {{- $likert = $likert | append (printf "%s = %s" $likertKey $likertValue) }}
-    {{- end }}
+{{- range $pageIndex, $page := $questionnaire.Pages }}
+  {{- $items = $items | append $page.RawContent}}
+  {{- if eq $pageIndex 0 }}
+    {{- $options = $options | append (slice .Params.options) }}
+  {{- else }}
+    {{- $options = $options | append .Params.options }}
   {{- end }}
 {{- end }}
 
+{{ with $questionnaire.Resources.Get "specs.json" }}
+  {{- $questionnaireSpecs := . | unmarshal }}
+  {{- range $scaleId, $scale := $questionnaireSpecs.scales }}
+    {{- $scales = $scales | append (dict "scaleId" $scaleId "scaleName" $scale.name "order" $scale.order ) }}
+  {{- end }}
+{{ end }}
 
 {{ return dict 
     "questionnaireScales" (sort $scales "order" "asc")
     "questionnaireItems" $items
-    "questionnaireLikert" $likert
+    "questionnaireOptions" $options
 }}

@@ -9,5 +9,7 @@ id: poms
   {{< reports/page-1/graph >}}
 {{< /reports/base/page-container >}}
 {{< reports/base/page-container >}}
+  {{< reports/base/page-header >}}
+  {{< reports/base/case-info >}}
   {{< reports/page-2/table-answers >}}
 {{< /reports/base/page-container >}}
