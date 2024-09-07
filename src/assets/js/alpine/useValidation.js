@@ -26,7 +26,6 @@ const validateQuestionnaire = object({
   questionnaireId: string(),
   questionnaireName: string(),
   questionnaireLength: number(),
-  questionnaireShouldBeScored: boolean()
 });
 
 const validateItem = object({
