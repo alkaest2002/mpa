@@ -7,15 +7,13 @@ const ps = fork(path.resolve(__dirname, "server.js"));
 const createWindow = () => {
 
   const mainWindow = new BrowserWindow({
-    width: 750,
     minWidth: 750,
-    height: 850,
     minHeight: 850,
     webPreferences: { webSecurity: false }
   });
   
   mainWindow.loadFile(path.resolve(__dirname, "public", "index.html"));
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 app.whenReady().then(() => createWindow());
