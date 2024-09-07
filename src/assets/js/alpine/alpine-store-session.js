@@ -57,7 +57,6 @@ export default (Alpine) => ({
   },
 
   getBatteryIsRunning(batteryId) {
-    if (!this.data.batteries[batteryId]) return false;
     const batteryQuestionnaires = Object.keys(this.data.batteries[batteryId]?.questionnaires ?? {});
     return !this.getBatteryIsComplete(batteryId) 
       && Object.keys(this.data.batteries).includes(batteryId)
