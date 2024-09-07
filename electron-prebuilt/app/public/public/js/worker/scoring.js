@@ -13,9 +13,9 @@ const computeScores = ({
   const computeRawScoreStraight = (_, items, answers) => {
     const answerIndices = items.map((el) => el -1);
     const answersToKeep = answers.filter((_, index) => answerIndices.includes(index));
-    const straightItemsOmissions = answersToKeep.filter((el) => el.answerValue == "?")?.length || 0;
+    const straightItemsOmissions = answersToKeep.filter((el) => el.answerValue == "")?.length || 0;
     const straightItemsRawScore = answersToKeep
-      .filter((el) => el.answerValue != "?")
+      .filter((el) => el.answerValue != "")
       .reduce((acc, itr) => acc + Number(itr), 0);
     return { straightItemsRawScore, straightItemsOmissions };
   }
@@ -24,9 +24,9 @@ const computeScores = ({
     const reversedValue = max + min;
     const answerIndices = items.map((el) => el -1);
     const answersToKeep = answers.filter((_, index) => answerIndices.includes(index));
-    const reverseItemsdOmissions = answersToKeep.filter((el) => el.answerValue == "?")?.length || 0;
+    const reverseItemsdOmissions = answersToKeep.filter((el) => el.answerValue == "")?.length || 0;
     const reversedItemsRawScore = answersToKeep
-      .filter((el) => el.answerValue != "?")
+      .filter((el) => el.answerValue != "")
       .map((el) => reversedValue - el )
       .reduce((acc, itr) => acc + Number(itr), 0);
     return { reversedItemsRawScore, reverseItemsdOmissions };

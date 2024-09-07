@@ -14,8 +14,8 @@
       {{ $itemId := delimit (slice "0" "0" "0" ((add $itemIndex 1) | string) | last 3)  "" }}
       <tr>
         <th style="width:50px">{{ $itemId }}</td>
-        <td style="width:calc(75% - 150px)">{{ $item }}</td>
-        <td style="width:calc(25% - 150px)">
+        <td style="min-width:calc(75% - 150px)">{{ $item }}</td>
+        <td style="max-width:calc(25% - 150px)">
           {{- $options := index $specs.questionnaireOptions $itemIndex }}
           {{- range $options }}
             {{- range $optionValue, $optionText := . }}
