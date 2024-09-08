@@ -1,5 +1,13 @@
-title: Testing
+title: MPA
 description: Testing Machine
+
+baseURL: http://localhost:8000
+minify: false
+publishDir: ../src-dev
+
 languageCode: it
 defaultContentLanguage: it
 defaultContentLanguageInSubdir: true
+
+disableKinds:
+  - sitemap

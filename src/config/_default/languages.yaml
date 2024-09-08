@@ -5,6 +5,7 @@ it:
   languageDirection: ltr
   languageName: Italiano
   weight: 1
+
 en:
   contentDir: content/en
   disabled: false
