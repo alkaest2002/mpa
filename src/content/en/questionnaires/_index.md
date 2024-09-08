@@ -4,11 +4,9 @@ id: questionnaires
 
 cascade:
   - _target:
-    
       kind: section
-
-      outputs:
-        - html
-        - json
-        - map
+    outputs:
+      - html
+      - json
+      - map
 ---
