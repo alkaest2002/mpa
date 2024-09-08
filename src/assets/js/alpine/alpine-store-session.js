@@ -1,17 +1,23 @@
-import { median } from "./useUtils";
+import { stateInit, dataToExport, importData, wipeOut } from "./useUtilsAlpine";
+import { median } from "./useUtilsMath";
+
+const stateFn = () => [
+  [ "languageId", "it" ], 
+  [ "settingId", "normal"], 
+  [ "batteryId", ""],
+  [ "questionnaireId", ""],
+  [ "itemId", ""],
+  [ "battery", {}],
+  [ "questionnaires", {}],
+  [ "completedBatteries", []], 
+  [ "completedQuestionnaires", []],
+  [ "data", { "batteries": {}, "questionnaires": {}, "scores": {}}], 
+  [ "reports", {}]
+];
 
 export default (Alpine) => ({
-  languageId: Alpine.$persist("it").using(sessionStorage),
-  settingId: Alpine.$persist("normal").using(sessionStorage),
-  batteryId: Alpine.$persist("").using(sessionStorage),
-  questionnaireId: Alpine.$persist("").using(sessionStorage),
-  itemId: Alpine.$persist("").using(sessionStorage),
-  battery: Alpine.$persist({}).using(sessionStorage),
-  questionnaires: Alpine.$persist({}).using(sessionStorage),
-  completedBatteries: Alpine.$persist([]).using(sessionStorage),
-  completedQuestionnaires: Alpine.$persist([]).using(sessionStorage),
-  data: Alpine.$persist({ "batteries": {}, "questionnaires": {}, "scores": {}}).using(sessionStorage),
-  reports: Alpine.$persist({}).using(sessionStorage),
+
+  ...stateInit(Alpine, stateFn),
 
   get currentBattery() {
     return this.battery;
@@ -47,9 +53,9 @@ export default (Alpine) => ({
   },
 
   get dataToExport() {
-    return ["languageId", "settingId", "batteryId","questionnaireId", "itemId", "battery",
-      "questionnaires", "completedBatteries", "completedQuestionnaires", "data", "reports"
-    ].reduce((acc, itr) => ({ ...acc, ...{ [itr]: this[itr]}}), {});
+    return stateFn()
+      .map(([key, _]) => key)
+      .reduce((acc, itr) => ({ ...acc, ...{ [itr]: this[itr] }}), {});
   },
 
   getBatteryIsComplete(batteryId) {
@@ -105,22 +111,14 @@ export default (Alpine) => ({
 
   importData(dataJSON) {
     this.wipeOut();
-    for (const [key, val] of Object.entries(dataJSON)) {
-      if (key in this) this[key] = val;
+    for (const [key, value] of Object.entries(dataJSON)) {
+      this[key] && (this[key] = value);
     }
   },
 
-  wipeOut(omit = []) {
-    this.languageId = omit.includes("languageId") ? this.languageId : "it";
-    this.settingId = omit.includes("settingId") ? this.settingId : "normal";
-    this.batteryId = omit.includes("batteryId") ? this.batteryId : "";
-    this.questionnaireId = omit.includes("questionnaireId") ? this.questionnaireId : "";
-    this.itemId = omit.includes("itemId") ? this.itemId : "";
-    this.battery = omit.includes("battery") ? this.battery : {};
-    this.questionnaires = omit.includes("questionnaires") ? this.questionnaires : {};
-    this.completedBatteries = omit.includes("completedBatteries") ? this.completedBatteries : [];
-    this.completedQuestionnaires = omit.includes("completedQuestionnaires") ? this.completedQuestionnaires : [];
-    this.data = omit.includes("data") ? this.data : { "batteries": {}, "questionnaires": {}, "scores": {} };
-    this.reports = omit.includes("reports") ? this.reports : {};
-  },
-});
+  wipeOut(omit = []){
+    stateFn().forEach(([key, defaultValue]) => {
+      this[key] = omit.includes(key) ? this[key] : defaultValue;
+    })
+  }
+})

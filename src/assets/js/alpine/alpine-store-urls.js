@@ -1,12 +1,19 @@
+import { stateInit, dataToExport, importData, wipeOut } from "./useUtilsAlpine";
+
+const stateFn = () => [
+  [ "urlBase", "" ],
+  [ "urlSession", "" ],
+  [ "urlBatteries", "" ],
+  [ "urlQuestionnaires", "" ],
+  [ "urlItem", "" ],
+  [ "urlReports", "" ],
+  [ "urlNotifications", "" ],
+  [ "urlTutorial", "" ],
+]
+
 export default (Alpine) => ({
-  urlBase: Alpine.$persist("").using(sessionStorage),
-  urlSession: Alpine.$persist("").using(sessionStorage),
-  urlBatteries: Alpine.$persist("").using(sessionStorage),
-  urlQuestionnaires: Alpine.$persist("").using(sessionStorage),
-  urlItem: Alpine.$persist("").using(sessionStorage),
-  urlReports: Alpine.$persist("").using(sessionStorage),
-  urlNotifications: Alpine.$persist("").using(sessionStorage),
-  urlTutorial: Alpine.$persist("").using(sessionStorage),
+  
+  ...stateInit(Alpine, stateFn),
     
   get urlCurrentBattery() {
     const batteryId = Alpine.store("session").batteryId;
@@ -19,17 +26,9 @@ export default (Alpine) => ({
   },
 
   get dataToExport() {
-    return [
-      "urlBase", "urlSession", "urlBatteries","urlQuestionnaires",
-      "urlItem","urlReports","urlNotifications","urlTutorial"
-    ].reduce((acc, itr) => ({ ...acc, ...{ [itr]: this[itr]}}), {});
-  },
-
-  importData(dataJSON) {
-    this.wipeOut();
-    for (const [key, val] of Object.entries(dataJSON)) {
-      if (key in this) this[key] = val;
-    }
+    return stateFn()
+      .map(([key, _]) => key)
+      .reduce((acc, itr) => ({ ...acc, ...{ [itr]: this[itr] }}), {});
   },
 
   getUrl(sections) {
@@ -37,13 +36,16 @@ export default (Alpine) => ({
     return sections.slice(1).reduce((acc, itr, index) => `${acc}${ index == 0 ? '' : '/'}${itr}`, this[`url${rootSection}`]);
   },
 
-  wipeOut(omit = []) {
-    this.urlBase = omit.includes("urlBase") ? this.urlBase : "";
-    this.urlSession = omit.includes("urlSession") ? this.urlSession : "";
-    this.urlBatteries = omit.includes("urlBatteries") ? this.urlBatteries : "";
-    this.urlQuestionnaires = omit.includes("urlQuestionnaires") ? this.urlQuestionnaires : "";
-    this.urlItem = omit.includes("urlItem") ? this.urlItem : "";
-    this.urlNotifications = omit.includes("urlNotifications") ? this.urlNotifications : "";
-    this.urlTutorial = omit.includes("urlTutorial") ? this.urlTutorial : "";
+  importData(dataJSON) {
+    this.wipeOut();
+    for (const [key, value] of Object.entries(dataJSON)) {
+      this[key] && (this[key] = value);
+    }
+  },
+
+  wipeOut(omit = []){
+    stateFn().forEach(([key, defaultValue]) => {
+      this[key] = omit.includes(key) ? this[key] : defaultValue;
+    })
   }
 });

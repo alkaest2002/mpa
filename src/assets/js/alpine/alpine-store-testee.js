@@ -1,13 +1,16 @@
+import { stateInit } from "./useUtilsAlpine";
+
+const stateFn = () => [
+  [ "surname", "Doe" ],
+  [ "name", "John" ],
+  [ "placeOfBirth", "New York" ],
+  [ "yearOfBirth", 1971 ],
+  [ "gender", "m"]
+]
 
 export default (Alpine) => ({
   
-  bio: Alpine.$persist({
-    surname: "Doe",
-    name: "Joe",
-    placeOfBirth: "New York",
-    yearOfBirth: 1971,
-    gender: "m",
-  }).using(sessionStorage),
+  bio: stateInit(Alpine, stateFn),
 
   get testeeDataIsSet() {
     return Object.values({ ... this.bio }).every(Boolean);
@@ -24,12 +27,8 @@ export default (Alpine) => ({
   },
 
   wipeOut(omit = []) {
-    this.bio = {
-      gender: omit.includes("gender") ? "m" : "",
-      name: omit.includes("name") ? "John" : "",
-      surname: omit.includes("surname") ? "Doe" : "",
-      yearOfBirth: omit.includes("yearOfBirth") ? 1971 : "",
-      placeOfBirth: omit.includes("placeOfBirth") ? "New York" : "",
-    };
-  }
+    stateFn().forEach(([key, defaultValue]) => {
+      this.bio[key] = omit.includes(key) ? this.bio[key] : defaultValue;
+    });
+  },
 });

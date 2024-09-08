@@ -1,7 +1,6 @@
 import {
   object,
   objectLoose,
-  boolean,
   string,
   number,
   array,

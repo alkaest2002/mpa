@@ -1,14 +1,19 @@
+import { stateInit, wipeOut } from "./useUtilsAlpine";
+
+const stateFn = () => [
+  [ "currentView", "" ],
+  [ "tutorialSwitch", "on" ],
+  [ "autoPilotSwitch", "on" ],
+  [ "burgerIsOpen", false ]
+]
+
 export default (Alpine) => ({
   
-  currentView: Alpine.$persist("").using(sessionStorage),
-  tutorialSwitch: Alpine.$persist("on").using(sessionStorage),
-  autoPilotSwitch: Alpine.$persist("on").using(sessionStorage),
-  burgerIsOpen: Alpine.$persist(false).using(sessionStorage),
+  ...stateInit(Alpine, stateFn),
 
-  wipeOut() {
-    this.currentView = "";
-    this.tutorialSwitch = "on";
-    this.autoPilotSwitch = "on";
-    this.burgerIsOpen = false;
-  }
+  wipeOut(omit = []){
+    stateFn().forEach(([key, defaultValue]) => {
+      this[key] = omit.includes(key) ? this[key] : defaultValue;
+    })
+  } 
 });
