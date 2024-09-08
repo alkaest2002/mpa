@@ -29,22 +29,6 @@ export default () => ({
     }
   },
 
-  nextRight() {
-    return {
-      ["@click.prevent"]() {
-        this.fakeItemId = Math.min(4, this.fakeItemId +1);
-      },
-    }
-  },
-
-  previousLeft() {
-    return {
-      ["@click.prevent"]() {
-        this.fakeItemId = Math.max(0, this.fakeItemId -1);
-      },
-    }
-  },
-
   goToNextTutorialButton(url) {
     return {
       ["@click.prevent"]() {
