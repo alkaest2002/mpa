@@ -38,10 +38,10 @@ export default () => ({
   },
 
   resetSession() {
-    this.$store.app.wipeOut();
-    this.$store.testee.wipeOut();
-    this.$store.session.wipeOut([ "settingId" ]);
-    this.$store.urls.wipeOut([ "urlReports" ]);
+    this.$store.app.wipeState();
+    this.$store.testee.wipeState();
+    this.$store.session.wipeState([ "settingId" ]);
+    this.$store.urls.wipeState([ "urlReports" ]);
     goToUrl.bind(this)([ "base" ]);
   },
 
@@ -80,9 +80,9 @@ export default () => ({
     ["@click.prevent"]() {
         const dataJSON = validateData(this.fileAsText);
         if (!dataJSON) return goToUrl.bind(this)([ "notifications", "errors", "error-resuming-session" ]);
-        this.$store.session.importData(dataJSON);
-        this.$store.testee.importData(dataJSON);
-        this.$store.urls.importData(dataJSON);
+        this.$store.session.importState(dataJSON);
+        this.$store.testee.importState(dataJSON);
+        this.$store.urls.importState(dataJSON);
         goToUrl.bind(this)([ "session", "open-session" ]);
     },
     [":class"]() {

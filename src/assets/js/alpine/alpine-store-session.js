@@ -1,4 +1,4 @@
-import { stateInit, dataToExport, importData, wipeOut } from "./useUtilsAlpine";
+import { initState, exportState, importState, wipeState } from "./useUtilsAlpine";
 import { median } from "./useUtilsMath";
 
 const stateFn = () => [
@@ -17,7 +17,7 @@ const stateFn = () => [
 
 export default (Alpine) => ({
 
-  ...stateInit(Alpine, stateFn),
+  ...initState(Alpine, stateFn),
 
   get currentBattery() {
     return this.battery;
@@ -52,10 +52,8 @@ export default (Alpine) => ({
       : this.currentAnswerValue;
   },
 
-  get dataToExport() {
-    return stateFn()
-      .map(([key, _]) => key)
-      .reduce((acc, itr) => ({ ...acc, ...{ [itr]: this[itr] }}), {});
+  get exportState() {
+    return exportState.call(this, stateFn);
   },
 
   getBatteryIsComplete(batteryId) {
@@ -109,16 +107,11 @@ export default (Alpine) => ({
     delete this.data.questionnaires?.[this.questionnaireId]?.[itemId];
   },
 
-  importData(dataJSON) {
-    this.wipeOut();
-    for (const [key, value] of Object.entries(dataJSON)) {
-      this[key] && (this[key] = value);
-    }
+  importState(dataJSON) {
+    importState.call(this, dataJSON);
   },
 
-  wipeOut(omit = []){
-    stateFn().forEach(([key, defaultValue]) => {
-      this[key] = omit.includes(key) ? this[key] : defaultValue;
-    })
+  wipeState(omit = []) {
+    wipeState.call(this, omit, stateFn) ;
   }
 })

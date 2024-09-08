@@ -12,8 +12,8 @@ export default () => ({
   initNotifications() {
     this.$store.app.currentView = "notifications";
     Alpine.effect(() => {
-      this.dataToExport = getDataToExport.bind(this)();
-      this.exportFileName = getExportFileName.bind(this)();
+      this.dataToExport = getDataToExport.call(this);
+      this.exportFileName = getExportFileName.call(this);
     });
   },
 
@@ -41,9 +41,9 @@ export default () => ({
     ["@click.prevent"]() {
       if (this.$store.app.autoPilotSwitch == "on" && this.dataToExport) {
         downloadZip(this.dataToExport, this.exportFileName);
-        this.$store.testee.wipeOut();
-        this.$store.session.wipeOut([ "settingId", "batteryId", "battery", "questionnaires", "languageId" ]);
-        this.$store.app.wipeOut();
+        this.$store.testee.wipeState();
+        this.$store.session.wipeState([ "settingId", "batteryId", "battery", "questionnaires", "languageId" ]);
+        this.$store.app.wipeState();
       }
       goToUrl.bind(this)([ "base" ]);
     },

@@ -3,9 +3,9 @@ import { zipSync, strToU8 } from "fflate";
 export default () => ({
 
   getDataToExport() {
-    const testeeData = this.$store.testee.dataToExport;
-    const sessionData = this.$store.session.dataToExport;
-    const urlsData = this.$store.urls.dataToExport;
+    const testeeData = this.$store.testee.exportState;
+    const sessionData = this.$store.session.exportState;
+    const urlsData = this.$store.urls.exportState;
     const dataToExport = { ...testeeData, ...sessionData, ...urlsData };
     const condition1 = !this.$store.testee.testeeDataIsSet;
     const condition2 = Object.values(sessionData.data.batteries)

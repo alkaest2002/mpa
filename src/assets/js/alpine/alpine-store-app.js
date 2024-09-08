@@ -1,4 +1,4 @@
-import { stateInit, wipeOut } from "./useUtilsAlpine";
+import { initState, wipeState } from "./useUtilsAlpine";
 
 const stateFn = () => [
   [ "currentView", "" ],
@@ -9,11 +9,9 @@ const stateFn = () => [
 
 export default (Alpine) => ({
   
-  ...stateInit(Alpine, stateFn),
+  ...initState(Alpine, stateFn),
 
-  wipeOut(omit = []){
-    stateFn().forEach(([key, defaultValue]) => {
-      this[key] = omit.includes(key) ? this[key] : defaultValue;
-    })
-  } 
+  wipeState(omit = []) {
+    wipeState.call(this, omit, stateFn) ;
+  }
 });

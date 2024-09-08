@@ -1,4 +1,4 @@
-import { stateInit } from "./useUtilsAlpine";
+import { initState } from "./useUtilsAlpine";
 
 const stateFn = () => [
   [ "surname", "Doe" ],
@@ -10,23 +10,23 @@ const stateFn = () => [
 
 export default (Alpine) => ({
   
-  bio: stateInit(Alpine, stateFn),
+  bio: initState(Alpine, stateFn),
 
   get testeeDataIsSet() {
     return Object.values({ ... this.bio }).every(Boolean);
   },
 
-  get dataToExport() {
-    return { testee: this.bio };
+  get exportState() {
+    return { testee: { ...this.bio }};
   },
 
-  importData(dataJSON) {
-    this.wipeOut();
+  importState(dataJSON) {
+    this.wipeState();
     const { testee: bio } = dataJSON;
     this.bio = bio;
   },
 
-  wipeOut(omit = []) {
+  wipeState(omit = []) {
     stateFn().forEach(([key, defaultValue]) => {
       this.bio[key] = omit.includes(key) ? this.bio[key] : defaultValue;
     });
