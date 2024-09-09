@@ -22,7 +22,6 @@ export function importState(dataJSON) {
 };
 
 export function wipeState(omit, stateFn) {
-  console.log(this)
   stateFn().forEach(([key, defaultValue]) => {
     this[key] = omit.includes(key) ? this[key] : defaultValue;
   });

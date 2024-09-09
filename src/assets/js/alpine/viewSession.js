@@ -3,8 +3,8 @@ import useNagigation from "./useNavigation";
 import useValidation from "./useValidation";
 import useData from "./useData";
 
-const { goToUrl, goToCurrentBattery } = useNagigation();
 const { validateData } = useValidation();
+const { goToUrl, goToCurrentBattery } = useNagigation();
 const { getDataToExport, getExportFileName, downloadJSON, downloadZip } = useData();
 
 export default () => ({

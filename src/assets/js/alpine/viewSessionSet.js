@@ -7,8 +7,11 @@ export default () => ({
   initSessionSet(urlReports) {
     this.$store.app.currentView = "session";
     this.$store.urls.urlReports = urlReports;
+    // force report regeneration under following circumstaces
     this.$watch("$store.session.settingId", () => {
-      // force report regeneration
+      this.$store.session.completedQuestionnaires = [ ...this.$store.session.completedQuestionnaires ];
+    });
+    this.$watch("$store.urls.urlReports", () => {
       this.$store.session.completedQuestionnaires = [ ...this.$store.session.completedQuestionnaires ];
     });
   },
