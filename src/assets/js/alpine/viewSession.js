@@ -41,7 +41,7 @@ export default () => ({
     this.$store.app.wipeState();
     this.$store.testee.wipeState();
     this.$store.session.wipeState([ "settingId" ]);
-    this.$store.urls.wipeState([ "urlReports" ]);
+    this.$store.urls.wipeState([ "urlBase", "urlReports" ]);
     goToUrl.call(this, [ "base" ]);
   },
 
