@@ -32,7 +32,7 @@ export default () => ({
   goToNextTutorialButton(url) {
     return {
       ["@click.prevent"]() {
-        this.shouldGoNext && goToUrlRaw.bind(this)(url);
+        this.shouldGoNext && goToUrlRaw.call(this, url);
       },
       [":class"]() {
         return this.shouldGoNext

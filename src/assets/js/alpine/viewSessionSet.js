@@ -15,7 +15,7 @@ export default () => ({
   
   setSessionButton: {
     ["@click.prevent"]() {
-      this.$store.urls.urlReports && this.$store.session.settingId && goToUrl.bind(this)([ "batteries" ]);
+      this.$store.urls.urlReports && this.$store.session.settingId && goToUrl.call(this, [ "batteries" ]);
     },
     [":class"]() {
       return this.$store.urls.urlReports && this.$store.session.settingId

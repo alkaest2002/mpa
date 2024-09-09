@@ -32,7 +32,7 @@ export default () => ({
           this.file = file;
           reader.readAsText(file);
           reader.onload = () => { this.fileAsText = reader.result };
-          reader.onerror = () => { goToUrl.bind(this)([ "notifications", "io-error" ]) };
+          reader.onerror = () => { goToUrl.call(this, [ "notifications", "io-error" ]) };
         }
     },
   },
@@ -42,12 +42,12 @@ export default () => ({
     this.$store.testee.wipeState();
     this.$store.session.wipeState([ "settingId" ]);
     this.$store.urls.wipeState([ "urlReports" ]);
-    goToUrl.bind(this)([ "base" ]);
+    goToUrl.call(this, [ "base" ]);
   },
 
   openSessionButton: {
     ["@click.prevent"]() {
-      this.$store.testee.testeeDataIsSet && goToCurrentBattery.bind(this)();
+      this.$store.testee.testeeDataIsSet && goToCurrentBattery.call(this);
     },
     [":class"]() {
       return this.$store.testee.testeeDataIsSet ? css.enabledButton : css.disabledButton;
@@ -79,11 +79,11 @@ export default () => ({
   resumeSessionButton: {
     ["@click.prevent"]() {
         const dataJSON = validateData(this.fileAsText);
-        if (!dataJSON) return goToUrl.bind(this)([ "notifications", "errors", "error-resuming-session" ]);
+        if (!dataJSON) return goToUrl.call(this, [ "notifications", "errors", "error-resuming-session" ]);
         this.$store.session.importState(dataJSON);
         this.$store.testee.importState(dataJSON);
         this.$store.urls.importState(dataJSON);
-        goToUrl.bind(this)([ "session", "open-session" ]);
+        goToUrl.call(this, [ "session", "open-session" ]);
     },
     [":class"]() {
       return this.file ? css.enabledButton : css.disabledButton;

@@ -4,7 +4,7 @@ import useNavigation from "./useNavigation";
 const { goToCurrentQuestionnaire } = useNavigation();
 
 export default () => ({
-  
+
   initBattery() {
     this.$store.app.currentView = "battery";
     this.$store.session.data.batteries[this.$store.session.batteryId] = this.$store.session.battery;
@@ -45,7 +45,7 @@ export default () => ({
 
   goToQuestionnaireButton: {
     ["@click.prevent"]() {
-      this.$store.session.questionnaireId && goToCurrentQuestionnaire.bind(this)();
+      this.$store.session.questionnaireId && goToCurrentQuestionnaire.call(this);
     },
     [":class"]() {
       return this.$store.session.questionnaireId

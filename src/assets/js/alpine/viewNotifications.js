@@ -21,7 +21,7 @@ export default () => ({
     return {
       ["@click.prevent"]() {
         this.$store.session.completedQuestionnaires.includes(this.$store.session.questionnaireId) 
-          && goToCurrentBattery.bind(this)();
+          && goToCurrentBattery.call(this);
       },
       [":class"]() {
         return this.$store.session.completedQuestionnaires.includes(this.$store.session.questionnaireId)
@@ -33,7 +33,7 @@ export default () => ({
 
   questionnaireIsIncompleteButton: {
     ["@click.prevent"]() {
-      goToCurrentQuestionnaire.bind(this)();
+      goToCurrentQuestionnaire.call(this);
     },
   },
 
@@ -45,7 +45,7 @@ export default () => ({
         this.$store.session.wipeState([ "settingId", "batteryId", "battery", "questionnaires", "languageId" ]);
         this.$store.app.wipeState();
       }
-      goToUrl.bind(this)([ "base" ]);
+      goToUrl.call(this, [ "base" ]);
     },
   },
 })

@@ -4,7 +4,6 @@ import useNavigation from "./useNavigation";
 const { goToUrl } = useNavigation();
 
 export default () => ({
-
   
   initBatteries() {
     this.$store.app.currentView = "batteries";
@@ -47,7 +46,7 @@ export default () => ({
 
   goHomeButton: {
     ["@click"]() {
-      this.$store.session.batteryId && goToUrl.bind(this)([ "base" ]);
+      this.$store.session.batteryId && goToUrl.call(this, [ "base" ]);
     },
     [":class"]() {
       return this.$store.session.batteryId

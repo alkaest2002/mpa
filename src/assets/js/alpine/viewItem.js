@@ -49,7 +49,7 @@ export default () => ({
   itemNextButton: (url) => {
     return {
       ["@click"]() {
-        this.shouldGoNext && goToUrlRaw.bind(this)(url);
+        this.shouldGoNext && goToUrlRaw.call(this, url);
       },
       [":class"]() {
         return this.shouldGoNext ? css.enabledButton : css.disabledButton;
@@ -61,14 +61,14 @@ export default () => ({
     ["@click"]() {
       if (!this.shouldGoNext) return
       if (!this.$store.session.currentQuestionnaireIsComplete) {
-        return goToUrl.bind(this)([ "notifications", "questionnaire-incomplete" ]);
+        return goToUrl.call(this, [ "notifications", "questionnaire-incomplete" ]);
       }
       this.$store.session.addCurrentQuestionnaireToCompletedList();
       if (this.$store.session.currentBatteryIsComplete) {
         this.$store.session.addCurrentBatteryToCompletedList();
-        return goToUrl.bind(this)([ "notifications", "battery-complete" ]);
+        return goToUrl.call(this, [ "notifications", "battery-complete" ]);
       }
-      goToUrl.bind(this)([ "notifications", "questionnaire-complete" ]);
+      goToUrl.call(this, [ "notifications", "questionnaire-complete" ]);
       
     },
     [":class"]() {

@@ -4,7 +4,7 @@ import useNagigation from "./useNavigation";
 const { goToUrlRaw } = useNagigation();
 
 export default () => ({
-  
+
   initMap() {
     this.$store.app.currentView = "map";
     const el = this.$refs["titleWithPagination"];
@@ -37,7 +37,7 @@ export default () => ({
 
   goToItemButton: {
     ["@click"]() {
-      goToUrlRaw(this.$store.urls.urlItem);
+      goToUrlRaw.call(thia, this.$store.urls.urlItem);
     },
     [":class"]() {
       return css.enabledButton
