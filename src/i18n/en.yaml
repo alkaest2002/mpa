@@ -61,6 +61,7 @@ reportTableScoresLegend: table witn scales' scores
 resumeSession: resume session
 returnToBatteries: return to the general catalog
 selectItem: select item
+setting: type of setting
 settingClinical: clinical context
 settingNormal: ordinary context
 settingRecruitment: recruitment context
