@@ -17,7 +17,7 @@ export function exportState(stateFn) {
 export function importState(dataJSON) {
   this.wipeState();
   for (const [key, value] of Object.entries(dataJSON)) {
-    this[key] && (this[key] = value);
+    this[key] !== undefined && (this[key] = value);
   }
 };
 
