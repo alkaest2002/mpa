@@ -9,7 +9,8 @@ const generateReport = ({
     let placeHolders = [];
     for (const [key, val] of Object.entries(obj)) {
       if (typeof val === 'object' && !Array.isArray(val)) {
-        placeHolders = [...placeHolders, ...converObjectToPlaceholders(val, key)];
+        const newKey = rootKey && `${rootKey}#${key}` || key;
+        placeHolders = [...placeHolders, ...converObjectToPlaceholders(val, newKey)];
       } else {
         placeHolders.push([`${rootKey}#${key}`, val]);
       }
