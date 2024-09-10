@@ -83,28 +83,32 @@ export default (Alpine) => ({
 
   addCurrentQuestionnaireToCompletedList() {
     const completedQuestionnaire = this.data.questionnaires[this.questionnaireId];
-    const answerIds = Object.keys(completedQuestionnaire);
-    const answersLatencies = answerIds.map((answerId) => completedQuestionnaire[answerId].answerLatency);
+    const itemIds = Object.keys(completedQuestionnaire);
+    const answersLatencies = itemIds.map((itemId) => completedQuestionnaire[itemId].answerLatency);
     const medianLatency = median(answersLatencies);
-    answerIds
-      .forEach((answerId) => {
-        completedQuestionnaire[answerId]["deltaAnswerLatency"] = 
-        completedQuestionnaire[answerId].answerLatency - medianLatency
+    itemIds
+      .forEach((itemId) => {
+        completedQuestionnaire[itemId]["deltaAnswerLatency"] = 
+        completedQuestionnaire[itemId].answerLatency - medianLatency
       });
     this.completedQuestionnaires = [... new Set([...this.completedQuestionnaires, this.questionnaireId ])];
   },
 
-  setAnswerData(answerData) {
+  getAnswer(itemId) {
+    return this.data.questionnaires?.[this.questionnaireId]?.[itemId];
+  },
+
+  setAnswer(answerData) {
     this.data.questionnaires[this.questionnaireId] ??= {};
     this.data.questionnaires[this.questionnaireId][this.itemId] = answerData;
   },
 
-  getAnswer(itemId) {
-    return this.data.questionnaires?.[this.questionnaireId]?.[itemId]?.answerValue;
-  },
-
   deleteAnswer(itemId) {
     delete this.data.questionnaires?.[this.questionnaireId]?.[itemId];
+  },
+
+  getAnswerValue(itemId) {
+    return this.getAnswer(itemId)?.answerValue;
   },
 
   importState(dataJSON) {

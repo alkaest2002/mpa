@@ -32,7 +32,7 @@ export default () => ({
         const answerLatency = this.$store.session.currentAnswerValue == answerData.answerValue
           ? currentAnswerLatency
           : (currentAnswerLatency || 0) + elapsedTime;
-        this.setAnswerData({ ...answerData, answerLatency });
+        this.setAnswer({ ...answerData, answerLatency });
         this.$nextTick(() => {
           !this.noResponse && this.$store.session.currentAnswerValue == "" && this.deleteAnswer();
           this.noResponse = this.$store.session.currentAnswerValue == "";
@@ -76,8 +76,8 @@ export default () => ({
     },
   },
 
-  setAnswerData(answerData) {
-    this.$store.session.setAnswerData(answerData);
+  setAnswer(answerData) {
+    this.$store.session.setAnswer(answerData);
   },
 
   deleteAnswer() {
