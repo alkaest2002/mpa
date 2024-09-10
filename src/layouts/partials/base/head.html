@@ -7,9 +7,9 @@
 	{{- $styles = $styles | resources.PostCSS | minify | fingerprint | resources.PostProcess }}
 	<link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" />
 {{- end }}
-{{- $jsOptions := dict "targetPath" "js/bundle.js" "minify" true -}}
-{{- $alpineMain := resources.Get "js/alpine/alpine-main.js" }}
-{{- $htmxMain := resources.Get "js/htmx/htmx-main.js" }}
-{{- $mainBundle := slice $alpineMain $htmxMain | resources.Concat "js/mainBundle.js" }}
-{{- $mainBundle = $mainBundle | js.Build $jsOptions }}
-<script src="{{ $mainBundle.RelPermalink }}" integrity="{{ $mainBundle.Data.Integrity }}" crossorigin="anonymous" defer></script>
+{{- $alpine := resources.Get "js/alpine/alpine-main.js" }}
+{{- $alpine = $alpine | js.Build (dict "targetPath" "js/alpine.js" "minify" true) }}
+{{- $htmx := resources.Get "js/htmx/htmx-main.js" }}
+{{- $htmx = $htmx | js.Build (dict "targetPath" "js/htmx.js" "minify" true) }}
+<script src="{{ $htmx.RelPermalink }}" integrity="{{ $htmx.Data.Integrity }}" crossorigin="anonymous" defer></script>
+<script src="{{ $alpine.RelPermalink }}" integrity="{{ $alpine.Data.Integrity }}" crossorigin="anonymous" defer></script>

@@ -1,4 +1,4 @@
-const computeScores = ({
+export default computeScores = ({
   testeeData: testee, 
   questionnaireData: data, 
   questionnaireSpecs: specs 

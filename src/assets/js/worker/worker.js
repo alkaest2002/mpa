@@ -1,4 +1,4 @@
-onmessage = async (e) => {
+export default onmessage = async (e) => {
   importScripts(e.data.urlScoringScript, e.data.urlTemplatingScript);
   const { questionnaireId, questionnaireData, testeeData, urlQuestionnaireSpecs, urlReportTemplate } = e.data;
   const questionnaireReportTemplate = await fetch(urlReportTemplate).then((res) => res.text());
