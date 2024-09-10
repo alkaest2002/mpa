@@ -15,11 +15,10 @@ export function exportState(stateFn, rootKey) {
   return  { [rootKey]: data }
 };
 
-export function importState(dataJSON, rootKey = null) {
+export function importState(dataJSON) {
   this.wipeState();
   for (const [key, value] of Object.entries(dataJSON)) {
-    rootKey && this[rootKey][key] !== undefined && (this[rootKey][key] = value);
-    !rootKey && this[key] !== undefined && (this[key] = value);
+    this[key] !== undefined && (this[key] = value);
   }
 };
 

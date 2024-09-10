@@ -14,9 +14,9 @@ export default () => ({
       const urlReportTemplate = this.$store.urls.getUrl([ "reports", questionnaireId ]);
       const myWorker = new Worker(urlWorkerScript);
       myWorker.postMessage({ 
+        testeeData,
         questionnaireId, 
         questionnaireData, 
-        testeeData,
         urlQuestionnaireSpecs, 
         urlReportTemplate,
         urlScoringScript,

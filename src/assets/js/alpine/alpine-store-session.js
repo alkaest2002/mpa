@@ -89,7 +89,7 @@ export default (Alpine) => ({
     itemIds
       .forEach((itemId) => {
         completedQuestionnaire[itemId]["deltaAnswerLatency"] = 
-        completedQuestionnaire[itemId].answerLatency - medianLatency
+          completedQuestionnaire[itemId].answerLatency - medianLatency;
       });
     this.completedQuestionnaires = [... new Set([...this.completedQuestionnaires, this.questionnaireId ])];
   },

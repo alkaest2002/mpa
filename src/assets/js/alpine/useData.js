@@ -38,17 +38,13 @@ export default () => ({
   },
 
   downloadJSON(dataToExport, filename) {
-    const dataBlob = new Blob([JSON.stringify(dataToExport)], {
-      type: "application/json",
-    });
+    const dataBlob = new Blob([JSON.stringify(dataToExport)], { type: "application/json" });
     const link = document.createElement("a");
     const url = window.URL.createObjectURL(dataBlob);
     const baseFileName = `${filename}-${Date.now()}`;
     link.href = url;
     link.download = `${baseFileName}.json`;
-    link.dataset.downloadurl = ["text/json", link.download, link.href].join(
-      ":"
-    );
+    link.dataset.downloadurl = ["text/json", link.download, link.href].join(":");
     link.click();
     window.URL.revokeObjectURL(url);
   },
@@ -62,9 +58,7 @@ export default () => ({
         ...processReports(reports, baseFileName)
       },{ level: 9 }
     );
-    const dataBlob = new Blob([zippedData], {
-      type: "application/octet-stream",
-    });
+    const dataBlob = new Blob([zippedData], { type: "application/octet-stream" });
     const url = window.URL.createObjectURL(dataBlob);
     const link = document.createElement("a");
     link.href = url;
