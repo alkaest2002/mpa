@@ -39,7 +39,7 @@
     }
   },
   "norms": {
-    "getNorms": "const fn = ({ gender }, scaleId) => `${gender}.${scaleId}`",
+    "getNorms": "const fn = ({ bio: { gender }, settingId, languageId }, scaleId) => `${gender}.${scaleId}`",
     "m.wbg": "const fn = (raw) => raw + 10",
     "m.pro": "const fn = (raw) => raw + 10",
     "m.fun": "const fn = (raw) => raw + 10",
