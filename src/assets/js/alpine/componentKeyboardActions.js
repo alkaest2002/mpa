@@ -27,6 +27,7 @@ export default () => ({
   },
 
   getNextElementIndex(index, elements, direction) {
+    if (this.$store.app.lockUI) return;
     if (direction == "next") {
       return (index + 1) % elements.length;
     } else {
@@ -38,6 +39,7 @@ export default () => ({
 
   alphabetActions: {
     ["@keyup.window"]({ key }) {
+      if (this.$store.app.lockUI) return;
       if (key == 0) {
         goToUrl.bind(this)([ "session", "set-session" ]);
       }
@@ -57,9 +59,11 @@ export default () => ({
 
   xArrowsActions: {
     ["@keyup.left.window"]() {
+      if (this.$store.app.lockUI) return;
       this.$refs["page-left"]?.click();
     },
     ["@keyup.right.window"]() {
+      if (this.$store.app.lockUI) return;
       this.$refs["page-right"] && this.$refs["page-right"].click();
       !this.$refs["page-right"] && this.$refs["main-button"].click();
     }
@@ -67,6 +71,7 @@ export default () => ({
 
   yArrowsActions: {
     ["@keyup.down.window"]({ shiftKey }) {
+      if (this.$store.app.lockUI) return;
       if (shiftKey) {
         return (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
       }
@@ -80,6 +85,7 @@ export default () => ({
       }
     },
     ["@keyup.up.window"]() {
+      if (this.$store.app.lockUI) return;
       if (this.$store.app.burgerIsOpen) {
         this.burgerIndex = this.getNextElementIndex(this.burgerIndex, this.burgerElements, "prev");
       } else {
@@ -93,6 +99,7 @@ export default () => ({
 
   enterActions: {
     ["@keyup.enter.window"]() {
+      if (this.$store.app.lockUI) return;
       this.$store.app.burgerIsOpen && this.burgerElements[this.burgerIndex]?.click();
       !this.$store.app.burgerIsOpen && this.$refs["main-button"]?.click();
     },

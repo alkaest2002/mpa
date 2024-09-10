@@ -29,8 +29,9 @@
         x-data="viewBase"
         x-init="initBase({{ $urls | jsonify }})"
         x-bind="htmxEvents"
-        class="h-full flex flex-col min-w-[600px] w-full mx-auto bg-white"
+        class="h-full flex flex-col min-w-[600px] w-full mx-auto bg-white relative"
     >
+        <div x-show="$store.app.lockUI" class="absolute w-full h-full top-0 bottom-0 left-0 right-0 opacity-40 bg-gray-500 z-50"></div>
         <div 
             class="flex-grow"
         >

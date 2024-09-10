@@ -2,7 +2,7 @@
 {{ $counter := -1 }}
 <div class="absolute top-3 right-3 flex justify-center z-50" x-data>
     <div x-on:keydown.escape.window="$store.app.burgerIsOpen = false" class="relative">
-        <div @click="$store.app.burgerIsOpen = !$store.app.burgerIsOpen" class="flex items-center gap-2 p-2.5">
+        <div @click="!$store.app.lockUI && ($store.app.burgerIsOpen = !$store.app.burgerIsOpen)" class="flex items-center gap-2 p-2.5">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6 text-gray-500">
                 <path stroke-linecap="round" stroke-linejoin="round"

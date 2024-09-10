@@ -4,7 +4,8 @@ const stateFn = () => [
   [ "currentView", "" ],
   [ "tutorialSwitch", "on" ],
   [ "autoPilotSwitch", "on" ],
-  [ "burgerIsOpen", false ]
+  [ "burgerIsOpen", false ],
+  [ "lockUI", false ]
 ]
 
 export default (Alpine) => ({
