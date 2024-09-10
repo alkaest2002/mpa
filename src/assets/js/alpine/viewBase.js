@@ -7,7 +7,7 @@ export default () => ({
       if (!questionnaireId) return;
       const settingId = this.$store.session.settingId;
       const languageId = this.$store.session.languageId;
-      const testeeData = JSON.parse(JSON.stringify({ ...this.$store.testee.bio, settingId, languageId }));
+      const testeeData = JSON.parse(JSON.stringify({ ...{ bio: this.$store.testee.bio }, settingId, languageId }));
       const questionnaireData = JSON.parse(JSON.stringify(this.$store.session.data.questionnaires[questionnaireId]));
       const urlQuestionnaire = this.$store.urls.getUrl([ "questionnaires", questionnaireId ]);
       const urlQuestionnaireSpecs = `${urlQuestionnaire}/index.json`;

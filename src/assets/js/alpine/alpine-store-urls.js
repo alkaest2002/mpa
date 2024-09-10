@@ -13,7 +13,7 @@ const stateFn = () => [
 
 export default (Alpine) => ({
   
-  ...initState(Alpine, stateFn),
+  ...initState(stateFn, Alpine),
     
   get urlCurrentBattery() {
     const batteryId = Alpine.store("session").batteryId;
@@ -26,7 +26,7 @@ export default (Alpine) => ({
   },
 
   get exportState() {
-    return exportState.call(this, stateFn);
+    return exportState.call(this, stateFn, "urls");
   },
 
   getUrl(sections) {
@@ -35,10 +35,10 @@ export default (Alpine) => ({
   },
 
   importState(dataJSON) {
-    importState.call(this, dataJSON);
+    importState.call(this, dataJSON?.urls);
   },
 
   wipeState(omit = []) {
-    wipeState.call(this, omit, stateFn) ;
+    wipeState.call(this, stateFn, omit) ;
   }
 });

@@ -1,4 +1,4 @@
-export const initState = (Alpine, stateFn) => {
+export const initState = (stateFn, Alpine) => {
   return stateFn().reduce(
     (acc, [key, defaultValue]) => ({
       ...acc,
@@ -8,20 +8,22 @@ export const initState = (Alpine, stateFn) => {
   );
 };
 
-export function exportState(stateFn) {
-  return stateFn()
+export function exportState(stateFn, rootKey) {
+  const data = stateFn()
     .map(([key, _]) => key)
     .reduce((acc, itr) => ({ ...acc, ...{ [itr]: this[itr] }}), {});
+  return  { [rootKey]: data }
 };
 
-export function importState(dataJSON) {
+export function importState(dataJSON, rootKey = null) {
   this.wipeState();
   for (const [key, value] of Object.entries(dataJSON)) {
-    this[key] !== undefined && (this[key] = value);
+    rootKey && this[rootKey][key] !== undefined && (this[rootKey][key] = value);
+    !rootKey && this[key] !== undefined && (this[key] = value);
   }
 };
 
-export function wipeState(omit, stateFn) {
+export function wipeState(stateFn, omit) {
   stateFn().forEach(([key, defaultValue]) => {
     this[key] = omit.includes(key) ? this[key] : defaultValue;
   });

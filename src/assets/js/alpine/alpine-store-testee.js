@@ -1,34 +1,32 @@
-import { initState } from "./useUtilsAlpine";
+import { initState, exportState, importState, wipeState } from "./useUtilsAlpine";
 
 const stateFn = () => [
-  [ "surname", "Doe" ],
-  [ "name", "John" ],
-  [ "placeOfBirth", "New York" ],
-  [ "yearOfBirth", 1971 ],
-  [ "gender", "m"]
-]
+  [ "bio", {
+    surname: "Doe",
+    name: "John",
+    placeOfBirth: "New York",
+    yearOfBirth: 1971,
+    gender: "m"
+  }]
+];
 
 export default (Alpine) => ({
   
-  bio: initState(Alpine, stateFn),
+  ...initState(stateFn, Alpine),
 
   get testeeDataIsSet() {
     return Object.values({ ... this.bio }).every(Boolean);
   },
 
   get exportState() {
-    return { testee: { ...this.bio }};
+    return exportState.call(this, stateFn, "testee");
   },
 
   importState(dataJSON) {
-    this.wipeState();
-    const { testee: bio } = dataJSON;
-    this.bio = bio;
+    importState.call(this, dataJSON?.testee);
   },
 
   wipeState(omit = []) {
-    stateFn().forEach(([key, defaultValue]) => {
-      this.bio[key] = omit.includes(key) ? this.bio[key] : defaultValue;
-    });
-  },
+    wipeState.call(this, stateFn, omit) ;
+  }
 });

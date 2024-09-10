@@ -17,7 +17,7 @@ const stateFn = () => [
 
 export default (Alpine) => ({
 
-  ...initState(Alpine, stateFn),
+  ...initState(stateFn, Alpine),
 
   get currentBattery() {
     return this.battery;
@@ -53,7 +53,7 @@ export default (Alpine) => ({
   },
 
   get exportState() {
-    return exportState.call(this, stateFn);
+    return exportState.call(this, stateFn, "session");
   },
 
   getBatteryIsComplete(batteryId) {
@@ -108,10 +108,10 @@ export default (Alpine) => ({
   },
 
   importState(dataJSON) {
-    importState.call(this, dataJSON);
+    importState.call(this, dataJSON?.session);
   },
 
   wipeState(omit = []) {
-    wipeState.call(this, omit, stateFn) ;
+    wipeState.call(this, stateFn, omit) ;
   }
 })

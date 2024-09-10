@@ -1,40 +1,29 @@
 import { zipSync, strToU8 } from "fflate";
 
-function createIframeFromHtml(htmlString, id, docFragment) {
-  const iframe = document.createElement("iframe");
-  iframe.id = id;
-  iframe.style.height = "100%";
-  iframe.style.width = "100%";
-  iframe.style.border = "none";
-  iframe.src = "data:text/html;charset=utf-8," + encodeURIComponent(htmlString);
-  docFragment.appendChild(iframe);
-}
-
-function mergeHtmlPagesUsingIframes(pages) {
-  const docFragment = document.createDocumentFragment();
-  pages.forEach((page, index) => {
-    createIframeFromHtml(page, `iframe-${index + 1}`, docFragment);
-  });
-  return new XMLSerializer().serializeToString(docFragment);
+function processReports(reportsToProcess, baseFileName) {
+  let mergedReports = "";
+  let reports = {};
+  for (const [ reportId, report ] of Object.entries(reportsToProcess)) {
+    reports[`${baseFileName}-report-${reportId}.html`] = strToU8(report);
+    const reportContent = report.match(/<body[^>]*>((.|[\n\r])*)<\/body>/i)[1].trim();
+    const closingBodyTagIndex = mergedReports.lastIndexOf("</body>");
+    mergedReports = closingBodyTagIndex == -1 
+      ? report
+      : mergedReports.slice(0, closingBodyTagIndex) + reportContent + mergedReports.slice(closingBodyTagIndex);
+  };
+  return {
+    [`${baseFileName}-merged-reports.html`]: strToU8(mergedReports),
+    reports
+  }
 }
 
 export default () => ({
   
   getDataToExport() {
-    const testeeData = this.$store.testee.exportState;
-    const sessionData = this.$store.session.exportState;
-    const urlsData = this.$store.urls.exportState;
-    const dataToExport = { ...testeeData, ...sessionData, ...urlsData };
-    const condition1 = !this.$store.testee.testeeDataIsSet;
-    const condition2 = Object.values(sessionData.data.batteries)
-      .map((battery) =>
-        Object.keys(battery.questionnaires).some(
-          (questionnaireId) =>
-            !Object.keys(sessionData.reports).includes(questionnaireId)
-        )
-      )
-      .some(Boolean);
-    return [condition1, condition2].some(Boolean) ? null : dataToExport;
+    const testeeExport = this.$store.testee.exportState;
+    const sessionExport = this.$store.session.exportState;
+    const urlsExport = this.$store.urls.exportState;
+    return { ...testeeExport, ...sessionExport, ...urlsExport };
   },
 
   getExportFileName() {
@@ -65,21 +54,13 @@ export default () => ({
   },
 
   downloadZip(dataToExport, filename) {
+    const { session: { reports }} = dataToExport;
     const baseFileName = `${filename}-${Date.now()}`;
-    const u8Data = strToU8(JSON.stringify(dataToExport));
-    const { reports: reportsToProcess } = dataToExport;
-    let reports = {};
-    for (const [ reportId, report ] of Object.entries(reportsToProcess)) {
-      reports[`${baseFileName}-report-${reportId}.html`] = strToU8(report);
-    }
-    const mergedReports = strToU8(mergeHtmlPagesUsingIframes(Object.values(reportsToProcess)));
     const zippedData = zipSync(
       {
-        data: { [`${baseFileName}-session-data.json`]: u8Data },
-        mergedReports: { [`${baseFileName}-merged-reports.html`]: mergedReports }, 
-        reports,
-      },
-      { level: 9 }
+        data: { [`${baseFileName}-session-data.json`]: strToU8(JSON.stringify(dataToExport)) },
+        ...processReports(reports, baseFileName)
+      },{ level: 9 }
     );
     const dataBlob = new Blob([zippedData], {
       type: "application/octet-stream",

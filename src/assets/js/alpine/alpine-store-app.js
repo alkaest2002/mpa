@@ -9,9 +9,9 @@ const stateFn = () => [
 
 export default (Alpine) => ({
   
-  ...initState(Alpine, stateFn),
+  ...initState(stateFn, Alpine),
 
   wipeState(omit = []) {
-    wipeState.call(this, omit, stateFn) ;
+    wipeState.call(this, stateFn, omit) ;
   }
 });

@@ -5,14 +5,17 @@ import {
   number,
   array,
   fail,
+  optional
 } from "banditypes";
 
 const validateTestee = object({
-  gender: string().map((val) => (/[mf]{1,1}$/.test(val) ? val : fail())),
-  surname: string(),
-  name: string(),
-  placeOfBirth: string(),
-  yearOfBirth: string().or(number()).map((val) => (/^\d{4,4}$/.test(val) ? val : fail())),
+  bio: object({
+    gender: string().map((val) => (/[mf]{1,1}$/.test(val) ? val : fail())),
+    surname: string(),
+    name: string(),
+    placeOfBirth: string(),
+    yearOfBirth: string().or(number()).map((val) => (/^\d{4,4}$/.test(val) ? val : fail())),
+  })
 });
 
 const validateBattery = object({
@@ -31,30 +34,34 @@ const validateItem = object({
   order: number(),
   itemId: string(),
   answerLatency: number(),
-  deltaAnswerLatency: number(),
+  deltaAnswerLatency: number().or(optional()),
 });
 
 const validateJSON = object({
   testee: validateTestee,
-  languageId: string(),
-  settingId: string(),
-  batteryId: string(),
-  questionnaireId: string(),
-  itemId: string(),
-  battery: validateBattery,
-  questionnaires: objectLoose(),
-  completedBatteries: array(string()),
-  completedQuestionnaires: array(string()),
-  data: object({ batteries: objectLoose(), questionnaires: objectLoose(), scores: objectLoose() }),
-  reports: objectLoose(),
-  urlBase: string(),
-  urlSession: string(),
-  urlBatteries: string(),
-  urlQuestionnaires: string(),
-  urlItem: string(),
-  urlReports: string(),
-  urlNotifications: string(),
-  urlTutorial: string(),
+  session: object({
+    languageId: string(),
+    settingId: string(),
+    batteryId: string(),
+    questionnaireId: string(),
+    itemId: string(),
+    battery: validateBattery,
+    questionnaires: objectLoose(),
+    completedBatteries: array(string()),
+    completedQuestionnaires: array(string()),
+    data: object({ batteries: objectLoose(), questionnaires: objectLoose(), scores: objectLoose() }),
+    reports: objectLoose(),
+  }),
+  urls: object({
+    urlBase: string(),
+    urlSession: string(),
+    urlBatteries: string(),
+    urlQuestionnaires: string(),
+    urlItem: string(),
+    urlReports: string(),
+    urlNotifications: string(),
+    urlTutorial: string(),
+  })
 });
 
 const parseDataToValidate = (JSONToValidate) => {
@@ -64,7 +71,7 @@ const parseDataToValidate = (JSONToValidate) => {
     } catch (err) {
       throw new Error("JSON has missing or improper elements");
     }
-    for (const [batteryId, battery] of Object.entries(JSONToValidate.data.batteries)) {
+    for (const [batteryId, battery] of Object.entries(JSONToValidate.session.data.batteries)) {
       try {
         validateBattery(battery);
       } catch (err) {
@@ -73,7 +80,7 @@ const parseDataToValidate = (JSONToValidate) => {
         );
       }
     }
-    for (const [questionnaireId, questionnaire] of Object.entries(JSONToValidate.questionnaires)) {
+    for (const [questionnaireId, questionnaire] of Object.entries(JSONToValidate.session.questionnaires)) {
       try {
         validateQuestionnaire(questionnaire);
       } catch (err) {
@@ -83,7 +90,7 @@ const parseDataToValidate = (JSONToValidate) => {
       }
     }
     for (const [questionnaireId, questionnaire] of Object.entries(
-      JSONToValidate.data.questionnaires
+      JSONToValidate.session.data.questionnaires
     )) {
       Object.values(questionnaire).forEach((item) => {
         try {
