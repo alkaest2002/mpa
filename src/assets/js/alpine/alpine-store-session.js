@@ -12,7 +12,6 @@ const stateFn = () => [
   [ "completedBatteries", []], 
   [ "completedQuestionnaires", []],
   [ "data", { "batteries": {}, "questionnaires": {}, "scores": {}}], 
-  [ "reports", {}]
 ];
 
 export default (Alpine) => ({

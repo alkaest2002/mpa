@@ -1,10 +1,22 @@
-{{- $workerScript := resources.Get "js/worker/worker.js" }}
-{{- $workerScript = $workerScript | js.Build (dict "targetPath" "js/worker.js" "minify" true) }}
-{{- $urlWorkerScript := $workerScript.RelPermalink }}
+{{- $workerMergeReportsScript := resources.Get "js/worker/worker-merge-reports.js" }}
+{{- $workerMergeReportsScript = $workerMergeReportsScript | js.Build (dict "targetPath" "js/worker-merge-reports.js" "minify" true) }}
+{{- $urlWorkerMergeReportsScript := $workerMergeReportsScript.RelPermalink }}
+
+{{- $workerReportScript := resources.Get "js/worker/worker-report.js" }}
+{{- $workerReportScript = $workerReportScript | js.Build (dict "targetPath" "js/worker-report.js" "minify" true) }}
+{{- $urlWorkerReportScript := $workerReportScript.RelPermalink }}
+
 {{- $scoringScript := resources.Get "js/worker/scoring.js"  }}
 {{- $scoringScript = $scoringScript | js.Build (dict "targetPath" "js/scoring.js" "minify" true) }}
 {{- $urlScoringScript := $scoringScript.RelPermalink  }}
+
 {{- $templatingScript := resources.Get "js/worker/templating.js" }}
 {{- $templatingScript = $templatingScript | js.Build (dict "targetPath" "js/templating.js" "minify" true) }}
 {{- $urlTemplatingScript := $templatingScript.RelPermalink }}
-{{- return dict "urlWorkerScript" $urlWorkerScript "urlScoringScript" $urlScoringScript "urlTemplatingScript" $urlTemplatingScript }}
+
+{{- return dict
+    "urlWorkerMergeReportsScript" $urlWorkerMergeReportsScript
+    "urlWorkerReportScript" $urlWorkerReportScript 
+    "urlScoringScript" $urlScoringScript 
+    "urlTemplatingScript" $urlTemplatingScript 
+}}

@@ -2,6 +2,7 @@ import Alpine from "alpinejs";
 import persist from "@alpinejs/persist";
 import storeApp from "./alpine-store-app";
 import storeTestee from "./alpine-store-testee";
+import storeReports from "./alpine-store-reports";
 import storeSession from "./alpine-store-session";
 import storeUrls from "./alpine-store-urls";
 import componentKeyboardActions from "./componentKeyboardActions";
@@ -20,6 +21,7 @@ import viewNotifications from "./viewNotifications";
 Alpine.plugin(persist);
 Alpine.store("app", storeApp(Alpine));
 Alpine.store("testee", storeTestee(Alpine));
+Alpine.store("reports", storeReports(Alpine));
 Alpine.store("session", storeSession(Alpine));
 Alpine.store("urls", storeUrls(Alpine));
 Alpine.data("componentKeyboardActions", componentKeyboardActions)

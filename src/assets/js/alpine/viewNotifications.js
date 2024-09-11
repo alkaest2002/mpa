@@ -3,18 +3,12 @@ import useNavigation from "./useNavigation";
 import useData from "./useData";
 
 const { goToCurrentBattery, goToCurrentQuestionnaire, goToUrl } = useNavigation();
-const { getDataToExport, getExportFileName, downloadZip } = useData();
+const { downloadZip } = useData();
 
 export default () => ({
-  dataToExport: null,
-  exportFileName: null,
 
   initNotifications() {
     this.$store.app.currentView = "notifications";
-    Alpine.effect(() => {
-      this.dataToExport = getDataToExport.call(this);
-      this.exportFileName = getExportFileName.call(this);
-    });
   },
 
   questionnaireIsCompleteButton() {
@@ -39,10 +33,11 @@ export default () => ({
 
   batteryIsCompleteButton: {
     ["@click.prevent"]() {
-      if (this.$store.app.autoPilotSwitch == "on" && this.dataToExport) {
-        downloadZip(this.dataToExport, this.exportFileName);
+      if (this.$store.app.autoPilotSwitch == "on") {
+        downloadZip.call(this);
         this.$store.testee.wipeState();
         this.$store.session.wipeState([ "settingId", "batteryId", "battery", "questionnaires", "languageId" ]);
+        this.$store.reports.wipeState();
         this.$store.app.wipeState();
       }
       goToUrl.call(this, [ "base" ]);

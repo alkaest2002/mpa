@@ -5,18 +5,14 @@ import useData from "./useData";
 
 const { validateData } = useValidation();
 const { goToUrl, goToCurrentBattery } = useNagigation();
-const { getDataToExport, getExportFileName, downloadJSON, downloadZip } = useData();
+const { downloadJSON, downloadZip } = useData();
 
 export default () => ({
   file: null,
   fileAsText: null,
-  dataToExport: null,
-  exportFileName: null,
 
   initSession() {
     this.$store.app.currentView = "session";
-    this.dataToExport = getDataToExport.call(this);
-    this.exportFileName = getExportFileName.call(this);
   },
 
   get uploadedFilename() {
@@ -56,19 +52,17 @@ export default () => ({
 
   closeSessionButton: {
     ["@click.prevent"]() {
-      if (this.dataToExport) {
-        downloadZip(this.dataToExport, this.exportFileName);
-        this.resetSession();
-      }
+      downloadZip.call(this);
+      this.resetSession();
     },
     [":class"]() {
-      return this.dataToExport ? css.enabledButton : css.disabledButton;
+      return this.$store.testee.testeeDataIsSet ? css.enabledButton : css.disabledButton;
     },
   },
 
   pauseSessionButton: {
     ["@click.prevent"]() {
-      downloadJSON(this.dataToExport, this.exportFileName);
+      downloadJSON.call(this);
       this.resetSession();
     },
     [":class"]() {

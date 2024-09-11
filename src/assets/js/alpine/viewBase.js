@@ -1,10 +1,11 @@
 
 export default () => ({
   
-  async initBase({ urlWorkerScript, urlScoringScript, urlTemplatingScript }) {
+  async initBase({ urlWorkerReportScript, urlWorkerMergeReportsScript, urlScoringScript, urlTemplatingScript }) {
     this.$watch("$store.session.completedQuestionnaires", (val) => {
+      
       if (val.length == 0) return;
-      const myWorker = new Worker(urlWorkerScript);
+      
       const questionnaireId = val.at(-1);
       const { bio } = this.$store.testee;
       const { settingId, languageId } = this.$store.session;
@@ -18,12 +19,31 @@ export default () => ({
         questionnaire: { questionnaireId, answers }, 
         urls: { urlQuestionnaireSpecs, urlReportTemplate, urlScoringScript, urlTemplatingScript }
       }));
-      myWorker.postMessage(workerData);
       
-      myWorker.onmessage = ({ data }) => {
+      // worker to compute and render single report
+      const workerReport = new Worker(urlWorkerReportScript);
+      workerReport.postMessage(workerData);
+      workerReport.onmessage = ({ data }) => {
         const { questionnaireId, questionnaireScores, questionnaireReport } = data;
         this.$store.session.data.scores[questionnaireId] = questionnaireScores;
-        this.$store.session.reports[questionnaireId] = questionnaireReport;
+        this.$store.reports.singleReports[questionnaireId] = questionnaireReport;
+      };
+    });
+
+    // worker to merge reports together
+    this.$watch("$store.reports.singleReports", (val) => {
+      
+      if (Object.values(val).length == 0) return;
+
+      const workerData = JSON.parse(JSON.stringify({ 
+        singleReports: this.$store.reports.singleReports,
+      }));
+
+      const workerMergedReports = new Worker(urlWorkerMergeReportsScript);
+      workerMergedReports.postMessage(workerData);
+      workerMergedReports.onmessage = ({ data }) => {
+        const { mergedReports } = data;
+        this.$store.reports.mergedReports = mergedReports;
       };
     });
   },
