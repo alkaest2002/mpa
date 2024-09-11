@@ -27,7 +27,7 @@
         hx-push-url="true"
         hx-history="true"
         x-data="viewBase"
-        x-init="initBase({{ $urls | jsonify }})"
+        x-init="initBase({{ $urls | jsonify }}); "
         x-bind="htmxEvents"
         class="h-full flex flex-col min-w-[600px] w-full mx-auto bg-white relative"
     >

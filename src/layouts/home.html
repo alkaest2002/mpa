@@ -5,7 +5,7 @@
     <div 
         x-data="viewHome" 
         x-init="initHome('{{ $languageId }}','{{ $urlsJSON }}'); initKeyboardActions('languageId');"
-        x-bind="{ ...yArrowsActions, ...alphabetActions, ...enterActions }"
+        x-bind="{ ...yArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
         {{- partialCached "base/burger" (dict "currentPage" .) .Section }}

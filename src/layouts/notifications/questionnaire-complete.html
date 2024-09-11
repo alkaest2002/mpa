@@ -6,7 +6,7 @@
     <div 
         x-data="viewNotifications"
         x-init="initNotifications(); initKeyboardActions('menu');"
-        x-bind="{ ...yArrowsActions, ...enterActions }"
+        x-bind="{ ...yArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
         {{- partialCached "base/burger" (dict "currentPage" . "questionnairesPage" true) .Section }}

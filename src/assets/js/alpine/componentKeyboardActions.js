@@ -40,19 +40,14 @@ export default () => ({
   alphabetActions: {
     ["@keyup.window"]({ key }) {
       if (this.$store.app.lockUI) return;
-      if (key == 0) {
-        goToUrl.bind(this)([ "session", "set-session" ]);
-      }
-      if (key == "Escape" &&
-        this.$store.app.currentView == "batteries") {
-        goToUrl.bind(this)([ "batteries"]);
-      }
-      if (
-        this.alphabetLowerCase.includes(key) &&
-        this.$store.app.currentView == "batteries"
-      ) {
-        const url = `${this.$store.urls.urlBatteries}/${key.toLowerCase()}`;
-        goToUrlRaw.bind(this)(url);
+      const lowercaseKey = key.toLowerCase();
+      lowercaseKey == "escape" && this.$store.app.currentView != "home" && history.back();
+      if (this.$store.app.currentView == "batteries") {
+        this.alphabetLowerCase.includes(lowercaseKey) 
+          && goToUrlRaw.call(this, `${this.$store.urls.urlBatteries}/${lowercaseKey}`)
+      } else {
+        lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
+        lowercaseKey == "h" && goToUrl.call(this, [ "base"] );
       }
     },
   },

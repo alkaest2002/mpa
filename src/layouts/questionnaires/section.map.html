@@ -7,7 +7,7 @@
     <div 
         x-data="viewMap" 
         x-init="initMap(); initKeyboardActions('itemId');" 
-        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions }"
+        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
         {{- partialCached "base/burger" (dict "currentPage" . "questionnairesPage" true

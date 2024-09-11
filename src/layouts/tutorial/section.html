@@ -1,7 +1,7 @@
 {{- define "main" }}
 <div x-data="componentKeyboardActions" class="h-full">
     <div x-data="viewTutorial" x-init="initTutorial(); initKeyboardActions('tutorialId');"
-        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions }"
+        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative">
         {{- partialCached "base/burger" (dict "currentPage" . ) .Section }}
         <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex-grow">

@@ -8,7 +8,7 @@
     <div
         x-data="viewIntro"
         x-init="initIntro(); initKeyboardActions('menu');"
-        x-bind="{ ...yArrowsActions, ...enterActions }"
+        x-bind="{ ...yArrowsActions, ...enterActions, ...alphabetActions }"
         :class="{ 'opacity-20': $store.app.burgerIsOpen }"
         class="w-full flex-grow"
     >

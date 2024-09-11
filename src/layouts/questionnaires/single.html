@@ -9,7 +9,7 @@
     <div 
         x-data="viewItem" 
         x-init="initItem('{{ $itemId }}', '{{ .RelPermalink }}'); initKeyboardActions('answerId')"
-        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions }"
+        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
         {{- partialCached "base/burger" (dict "currentPage" . "questionnairesPage" true

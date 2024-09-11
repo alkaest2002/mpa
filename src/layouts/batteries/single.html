@@ -6,7 +6,7 @@
     <div 
         x-data="viewBattery" 
         x-init="initBattery(); initKeyboardActions('questionnaireId');"
-        x-bind="{ ...yArrowsActions, ...enterActions }"
+        x-bind="{ ...yArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
         {{- partialCached "base/burger" (dict "currentPage" . "questionnairesPage" true) .Section }}
