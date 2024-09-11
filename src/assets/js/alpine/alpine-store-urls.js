@@ -17,12 +17,20 @@ export default (Alpine) => ({
     
   get urlCurrentBattery() {
     const batteryId = Alpine.store("session").batteryId;
-    return this.getUrl([ "batteries", batteryId.charAt(0), batteryId ]);
+    return batteryId
+     ? this.getUrl([ "batteries", batteryId.charAt(0), batteryId ])
+     : null;
   },
 
   get urlCurrentQuestionnaire() {
     const questionnaireId = Alpine.store("session").questionnaireId;
-    return this.getUrl([ "questionnaires", questionnaireId ]);
+    return questionnaireId
+      ? this.getUrl([ "questionnaires", questionnaireId ])
+      : null;
+  },
+
+  get urlCurrentItem() {
+    return this.urlItem;
   },
 
   get exportState() {

@@ -1,6 +1,6 @@
 import useNavigation from "./useNavigation";
 
-const { goToUrl, goToUrlRaw } = useNavigation();
+const { goToUrl, goToUrlRaw, goToCurrentBattery, goToCurrentQuestionnaire, goToCurrentItem } = useNavigation();
 
 export default () => ({
   tabElements: null,
@@ -27,7 +27,6 @@ export default () => ({
   },
 
   getNextElementIndex(index, elements, direction) {
-    if (this.$store.app.lockUI) return;
     if (direction == "next") {
       return (index + 1) % elements.length;
     } else {
@@ -47,7 +46,10 @@ export default () => ({
           && goToUrlRaw.call(this, `${this.$store.urls.urlBatteries}/${lowercaseKey}`)
       } else {
         lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
-        lowercaseKey == "h" && goToUrl.call(this, [ "base"] );
+        lowercaseKey == "h" && goToUrl.call(this, [ "base"]);
+        lowercaseKey == "b" && goToCurrentBattery.call(this);
+        lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
+        lowercaseKey == "i" && goToCurrentItem.call(this);
       }
     },
   },

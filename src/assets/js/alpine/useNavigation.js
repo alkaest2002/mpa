@@ -9,24 +9,28 @@ export default () => ({
   },
 
   goToCurrentBattery() {
-    window.htmx.ajax("GET", this.$store.urls.urlCurrentBattery, "body");
+    this.$store.urls.urlCurrentBattery && window.htmx.ajax("GET", this.$store.urls.urlCurrentBattery, "body");
   },
 
   goToCurrentQuestionnaire() {
-    window.htmx.ajax("GET", this.$store.urls.urlCurrentQuestionnaire, "body");
+    this.$store.urls.urlCurrentQuestionnaire && window.htmx.ajax("GET", this.$store.urls.urlCurrentQuestionnaire, "body");
+  },
+
+  goToCurrentItem() {
+    this.$store.urls.urlCurrentItem && window.htmx.ajax("GET", this.$store.urls.urlCurrentItem, "body");
   },
 
   goToQuestionnaire(questionnaireId) {
     const questionnaireUrl = this.$store.urls.getUrl([ "questionnaires", questionnaireId ]);
-    window.htmx.ajax("GET", questionnaireUrl, "body");
+    questionnaireUrl && window.htmx.ajax("GET", questionnaireUrl, "body");
   },
 
   goToUrl(sections = []) {
     const urlToGo = this.$store.urls.getUrl(sections);
-    window.htmx.ajax("GET", urlToGo, "body");
+    urlToGo && window.htmx.ajax("GET", urlToGo, "body");
   },
 
   goToUrlRaw(url) {
-    window.htmx.ajax("GET", url, "body");
+    url && window.htmx.ajax("GET", url, "body");
   },
 });
