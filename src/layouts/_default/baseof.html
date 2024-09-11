@@ -11,16 +11,7 @@
         {{- end }} 
         {{- partialCached "base/head" . }}
     </head>
-    {{- $workerScript := resources.Get "js/worker/worker.js" }}
-    {{- $workerScript = $workerScript | js.Build (dict "targetPath" "js/worker.js" "minify" true) }}
-    {{- $urlWorkerScript := $workerScript.RelPermalink }}
-    {{- $scoringScript := resources.Get "js/worker/scoring.js"  }}
-    {{- $scoringScript = $scoringScript | js.Build (dict "targetPath" "js/scoring.js" "minify" true) }}
-    {{- $urlScoringScript := $scoringScript.RelPermalink  }}
-    {{- $templatingScript := resources.Get "js/worker/templating.js" }}
-    {{- $templatingScript = $templatingScript | js.Build (dict "targetPath" "js/templating.js" "minify" true) }}
-    {{- $urlTemplatingScript := $templatingScript.RelPermalink }}
-    {{- $urls := dict "urlWorkerScript" $urlWorkerScript "urlScoringScript" $urlScoringScript "urlTemplatingScript" $urlTemplatingScript }}
+    {{- $urls := partialCached "base/worker-related" . }}
     <body 
         hx-boost="true"
         hx-swap="transition:true"
