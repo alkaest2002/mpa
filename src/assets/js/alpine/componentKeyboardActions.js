@@ -37,7 +37,7 @@ export default () => ({
   },
 
   alphabetActions: {
-    ["@keyup.window"]({ key, altKey }) {
+    ["@keyup.window"]({ key, ctrlKey }) {
       if (this.$store.app.lockUI) return;
       const lowercaseKey = key.toLowerCase();
       const urlFilteredCatalogue = `${this.$store.urls.urlBatteries}/${lowercaseKey}`;
@@ -47,12 +47,12 @@ export default () => ({
       this.$store.app.currentView == "batteries" 
         && this.alphabetLowerCase.includes(lowercaseKey) 
         && goToUrlRaw.call(this, urlFilteredCatalogue);
-      altKey && lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
-      altKey && lowercaseKey == "h" && goToUrl.call(this, [ "base"]);
-      altKey && lowercaseKey == "b" && goToCurrentBattery.call(this);
-      altKey && lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
-      altKey && lowercaseKey == "i" && goToCurrentItem.call(this);
-      
+      ctrlKey && lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
+      ctrlKey && lowercaseKey == "b" && goToCurrentBattery.call(this);
+      ctrlKey && lowercaseKey == "i" && goToCurrentItem.call(this);
+      ctrlKey && lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
+      ctrlKey && lowercaseKey == "m" && (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
+      ctrlKey && lowercaseKey == "h" && goToUrl.call(this, [ "base"]);
     },
   },
 
@@ -69,11 +69,8 @@ export default () => ({
   },
 
   yArrowsActions: {
-    ["@keyup.down.window"]({ altKey }) {
+    ["@keyup.down.window"]() {
       if (this.$store.app.lockUI) return;
-      if (altKey) {
-        return (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
-      }
       if (this.$store.app.burgerIsOpen) {
         this.burgerIndex = this.getNextElementIndex(this.burgerIndex, this.burgerElements, "next");
       } else {
