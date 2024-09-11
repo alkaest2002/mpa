@@ -1,8 +1,4 @@
-export default computeScores = ({
-  testeeData: testee, 
-  questionnaireData: data, 
-  questionnaireSpecs: specs 
-}) => {
+export default computeScores = ({ testee, session, answers, specs }) => {
 
   const getAnswersProp = (data, prop = "answerValue") => {
     return Object.values(data)
@@ -32,16 +28,16 @@ export default computeScores = ({
     return { reversedItemsRawScore, reverseItemsdOmissions };
   }
 
-  const computeStandardScore = (scaleId, rawScore, specs, testee) => {
+  const computeStandardScore = (scaleId, rawScore, specs, testee, session) => {
     const getNormsFunction = specs.norms.getNorms;
-    const currentNormsId = eval?.(`"use strict";${getNormsFunction};fn(${JSON.stringify(testee)},"${scaleId}")`);
+    const currentNormsId = eval?.(`"use strict";${getNormsFunction};fn(${JSON.stringify({ ...testee, ...session })},"${scaleId}")`);
     const currentNorms = specs.norms[currentNormsId];
     const standardScore =  eval?.(`"use strict";${currentNorms};fn(${rawScore})`);
     return Math.round(standardScore, 0);
   }
   
-  const computeScores = (testee, data, specs) => {
-    const answersValues = getAnswersProp(data, "answerValue");
+  const computeScores = (testee, session, answers, specs) => {
+    const answersValues = getAnswersProp(answers, "answerValue");
     let scores = {};
     for (const [scaleId, { name, straightItems, reversedItems }] of Object.entries(specs.scales)) {
       const { straightItemsRawScore, straightItemsOmissions } = computeRawScoreStraight(specs, straightItems, answersValues);
@@ -49,11 +45,11 @@ export default computeScores = ({
       const omissions = straightItemsOmissions + reverseItemsdOmissions;
       const rawScore = straightItemsRawScore + reversedItemsRawScore;
       const meanScore = rawScore / (straightItems.length + reversedItems.length - omissions);
-      const standardScore = computeStandardScore(scaleId, rawScore, specs, testee);
+      const standardScore = computeStandardScore(scaleId, rawScore, specs, testee, session);
       scores = { ...scores, [scaleId] : { scaleId, name, rawScore, meanScore, standardScore, omissions }};
     };
     return scores;
   }
 
-  return computeScores(testee, data, specs);
+  return computeScores(testee, session, answers, specs);
 };

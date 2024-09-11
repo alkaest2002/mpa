@@ -1,9 +1,5 @@
-export default generateReport = ({
-  testeeData: testee,
-  questionnaireData: data,
-  questionnaireScores: scores,
-  questionnaireReportTemplate: template,
-}) => {
+export default generateReport = ({ testee, session, answers, scores, template }) => {
+  
   const converObjectToPlaceholders = (obj, rootKey = null) => {
     let placeHolders = [];
     for (const [key, val] of Object.entries(obj)) {
@@ -20,23 +16,11 @@ export default generateReport = ({
     return [...placeHolders];
   };
 
-  const generateQuestionnaireReport = (testee, data, scores, template) => {
-    let renderedTemplate = template;
-    let placeHolders = [];
-    placeHolders = [
-      ...placeHolders,
-      ...converObjectToPlaceholders(testee, "testee"),
-    ];
-    placeHolders = [...placeHolders, ...converObjectToPlaceholders(data, null)];
-    placeHolders = [
-      ...placeHolders,
-      ...converObjectToPlaceholders(scores, null),
-    ];
-    placeHolders.forEach(([key, val]) => {
-      renderedTemplate = renderedTemplate.replaceAll(key, val);
-    });
-    return renderedTemplate;
-  };
-
-  return generateQuestionnaireReport(testee, data, scores, template);
+  let placeHolders = [...[], ...converObjectToPlaceholders(testee, "testee")];
+  placeHolders = [...placeHolders, ...converObjectToPlaceholders(session, "testee")];
+  placeHolders = [...placeHolders, ...converObjectToPlaceholders(answers, null)];
+  placeHolders = [...placeHolders, ...converObjectToPlaceholders(scores, null)];
+  placeHolders.forEach(([key, val]) => template = template.replaceAll(key, val));
+  
+  return template;
 };
