@@ -37,20 +37,22 @@ export default () => ({
   },
 
   alphabetActions: {
-    ["@keyup.window"]({ key }) {
+    ["@keyup.window"]({ key, altKey }) {
       if (this.$store.app.lockUI) return;
       const lowercaseKey = key.toLowerCase();
-      lowercaseKey == "escape" && this.$store.app.currentView != "home" && history.back();
-      if (this.$store.app.currentView == "batteries") {
-        this.alphabetLowerCase.includes(lowercaseKey) 
-          && goToUrlRaw.call(this, `${this.$store.urls.urlBatteries}/${lowercaseKey}`)
-      } else {
-        lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
-        lowercaseKey == "h" && goToUrl.call(this, [ "base"]);
-        lowercaseKey == "b" && goToCurrentBattery.call(this);
-        lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
-        lowercaseKey == "i" && goToCurrentItem.call(this);
-      }
+      const urlFilteredCatalogue = `${this.$store.urls.urlBatteries}/${lowercaseKey}`;
+      lowercaseKey == "backspace" 
+        && this.$store.app.currentView != "home"
+        && history.back();
+      this.$store.app.currentView == "batteries" 
+        && this.alphabetLowerCase.includes(lowercaseKey) 
+        && goToUrlRaw.call(this, urlFilteredCatalogue);
+      altKey && lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
+      altKey && lowercaseKey == "h" && goToUrl.call(this, [ "base"]);
+      altKey && lowercaseKey == "b" && goToCurrentBattery.call(this);
+      altKey && lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
+      altKey && lowercaseKey == "i" && goToCurrentItem.call(this);
+      
     },
   },
 
@@ -67,9 +69,9 @@ export default () => ({
   },
 
   yArrowsActions: {
-    ["@keyup.down.window"]({ shiftKey }) {
+    ["@keyup.down.window"]({ altKey }) {
       if (this.$store.app.lockUI) return;
-      if (shiftKey) {
+      if (altKey) {
         return (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
       }
       if (this.$store.app.burgerIsOpen) {
