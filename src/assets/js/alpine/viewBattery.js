@@ -32,7 +32,7 @@ export default () => ({
 
   selectQuestionnaireButton(questionnaireId) {
     return {
-      ["@click"]() {
+      ["@click.prevent"]() {
         this.$store.session.questionnaireId = questionnaireId;
       },
       [":class"]() {

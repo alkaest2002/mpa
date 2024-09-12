@@ -23,7 +23,7 @@ export default () => ({
 
   itemMapButton(itemId, urlItem) {
     return {
-      ["@click"]() {
+      ["@click.prevent"]() {
         this.$store.session.itemId = itemId;
         this.$store.urls.urlItem = urlItem;
       },
@@ -36,7 +36,7 @@ export default () => ({
   },
 
   goToItemButton: {
-    ["@click"]() {
+    ["@click.prevent"]() {
       goToUrlRaw.call(thia, this.$store.urls.urlItem);
     },
     [":class"]() {

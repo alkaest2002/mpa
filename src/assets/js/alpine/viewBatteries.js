@@ -11,7 +11,7 @@ export default () => ({
 
   selectBatteryButton(batteryId, batteryName, urlBatteryJSON) {
     return {
-      async ["@click"]() {
+      async ["@click.prevent"]() {
         const { questionnaires } = await fetch(urlBatteryJSON).then((res) => res.json());
         this.$store.session.batteryId = batteryId;
         this.$store.session.battery = {
@@ -45,7 +45,7 @@ export default () => ({
   },
 
   goHomeButton: {
-    ["@click"]() {
+    ["@click.prevent"]() {
       this.$store.session.batteryId && goToUrl.call(this, [ "base" ]);
     },
     [":class"]() {

@@ -26,7 +26,7 @@ export default () => ({
 
   itemOption: (answerData) => {
     return {
-      ["@click"]() {
+      ["@click.prevent"]() {
         const elapsedTime = (Date.now() - this.epochIn);
         const currentAnswerLatency = this.$store.session.currentAnswer?.answerLatency;
         const answerLatency = this.$store.session.currentAnswerValue == answerData.answerValue
@@ -48,7 +48,7 @@ export default () => ({
 
   itemNextButton: (url) => {
     return {
-      ["@click"]() {
+      ["@click.prevent"]() {
         this.shouldGoNext && goToUrlRaw.call(this, url);
       },
       [":class"]() {
@@ -58,7 +58,7 @@ export default () => ({
   },
 
   itemEndButton: {
-    ["@click"]() {
+    ["@click.prevent"]() {
       if (!this.shouldGoNext) return
       if (!this.$store.session.currentQuestionnaireIsComplete) {
         return goToUrl.call(this, [ "notifications", "questionnaire-incomplete" ]);
