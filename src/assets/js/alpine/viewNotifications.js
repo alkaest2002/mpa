@@ -44,8 +44,8 @@ export default () => ({
     },
     [":class"]() {
       return this.$store.reports.generatingReports
-        ? css.nonSelected
-        : css.selected;
+        ? css.disabledButton
+        : css.enabledButton;
     },
   },
 })
