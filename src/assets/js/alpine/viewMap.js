@@ -14,7 +14,7 @@ export default () => ({
   showDot(itemId) {
     return {
       [":class"]() {
-        return this.$store.session.getAnswerValue(itemId)
+        return this.$store.session.getAnswer(itemId)
           ? css.blueDot
           : css.grayDot;
       }
