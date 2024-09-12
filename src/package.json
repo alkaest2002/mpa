@@ -7,11 +7,12 @@
     "dev": "hugo server -p 8000 --disableFastRender --ignoreCache --cleanDestinationDir",
     "dev-stats": "hugo server -p 8000 --disableFastRender --ignoreCache --cleanDestinationDir --templateMetrics --templateMetricsHints --printUnusedTemplates",
     "build-hugo": "hugo --gc --minify --cleanDestinationDir",
-    "rm1": "rm -r '../electron-prebuilt/mac/Electron.app/Contents/Resources/app'",
-    "cp1": "cp -r '../electron-prebuilt/app' '../electron-prebuilt/mac/Electron.app/Contents/Resources'",
-    "rm2": "rm -r '../electron-prebuilt/win/electron/resources/app'",
-    "cp2": "cp -r '../electron-prebuilt/app' '../electron-prebuilt/win/electron/resources/'",
-    "build": "npm run build-hugo && npm run rm1 && npm run cp1 && npm run rm2 && npm run cp2"
+    "rm-app": "rm -r '../electron-prebuilt/app/public/'",
+    "rm-mac": "rm -r '../electron-prebuilt/binaries/mac/Electron.app/Contents/Resources/app/'",
+    "cp-mac": "cp -r '../electron-prebuilt/app' '../electron-prebuilt/binaries/mac/Electron.app/Contents/Resources'",
+    "rm-win": "rm -r '../electron-prebuilt/binaries/win/electron/resources/app/'",
+    "cp-win": "cp -r '../electron-prebuilt/app' '../electron-prebuilt/binaries/win/electron/resources'",
+    "build": "npm run rm-app && npm run build-hugo && npm run rm-mac && npm run cp-mac && npm run rm-win && npm run cp-win"
   },
   "author": "",
   "license": "ISC",
