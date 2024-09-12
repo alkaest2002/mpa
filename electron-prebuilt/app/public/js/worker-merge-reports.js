@@ -1,0 +1,1 @@
+(()=>{var d=onmessage=async({data:t})=>{let{singleReports:r}=t,e="";for(let[c,s]of Object.entries(r)){let n=s.match(/<body[^>]*>((.|[\n\r])*)<\/body>/i)[1].trim(),o=e.lastIndexOf("</body>");e=o==-1?s:e.slice(0,o)+n+e.slice(o)}postMessage({mergedReports:e})};})();
