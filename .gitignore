@@ -23,7 +23,5 @@ src/assets/static/js/bundle
 src/node_modules
 src/resources
 src-dev
-electron-forge/node_modules
-electron-forge/out
-electron-prebuilt/mac
-electron-prebuilt/win
+electron-prebuilt/binaries/mac
+electron-prebuilt/binaries/win
