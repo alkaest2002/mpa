@@ -2,11 +2,13 @@ import { zipSync, strToU8 } from "fflate";
 
 function processReports({ singleReports, mergedReports }, baseFileName) {
   let reports = {};
-  const mergedRerportsfilename = `${baseFileName}-merged-reports.html`;
   for (const [ reportId, report ] of Object.entries(singleReports)) {
     reports[`${baseFileName}-report-${reportId}.html`] = strToU8(report);
   };
-  return { [mergedRerportsfilename]: strToU8(mergedReports), reports }
+  return { 
+    [`${baseFileName}-merged-reports.html`]: strToU8(mergedReports), 
+    reports
+  }
 }
 
 function dataToExport() {

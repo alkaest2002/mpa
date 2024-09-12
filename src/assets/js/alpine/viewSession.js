@@ -62,8 +62,10 @@ export default () => ({
 
   pauseSessionButton: {
     ["@click.prevent"]() {
-      downloadJSON.call(this);
-      this.resetSession();
+      if (this.$store.testee.testeeDataIsSet) {
+        downloadJSON.call(this);
+        this.resetSession()
+      };
     },
     [":class"]() {
       return this.$store.testee.testeeDataIsSet ? css.enabledButton : css.disabledButton;
