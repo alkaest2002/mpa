@@ -32,9 +32,12 @@ export default () => ({
         const answerLatency = this.$store.session.currentAnswerValue == answerData.answerValue
           ? currentAnswerLatency
           : (currentAnswerLatency || 0) + elapsedTime;
-        this.setAnswer({ ...answerData, answerLatency });
+        if (this.$store.session.currentAnswerValue == "" && answerData.answerValue == "") {
+          this.deleteAnswer();
+        } else {
+          this.setAnswer({ ...answerData, answerLatency });
+        }
         this.$nextTick(() => {
-          !this.noResponse && this.$store.session.currentAnswerValue == "" && this.deleteAnswer();
           this.noResponse = this.$store.session.currentAnswerValue == "";
         })
       },
