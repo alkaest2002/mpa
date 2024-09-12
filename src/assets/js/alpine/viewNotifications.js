@@ -33,7 +33,7 @@ export default () => ({
 
   batteryIsCompleteButton: {
     ["@click.prevent"]() {
-      if (this.$store.app.autoPilotSwitch == "on") {
+      if (this.$store.app.autoPilotSwitch == "on" && !this.$store.reports.generatingReports) {
         downloadZip.call(this);
         this.$store.testee.wipeState();
         this.$store.session.wipeState([ "settingId", "batteryId", "battery", "questionnaires", "languageId" ]);
@@ -41,6 +41,11 @@ export default () => ({
         this.$store.app.wipeState();
       }
       goToUrl.call(this, [ "base" ]);
+    },
+    [":class"]() {
+      return this.$store.reports.generatingReports
+        ? css.nonSelected
+        : css.selected;
     },
   },
 })

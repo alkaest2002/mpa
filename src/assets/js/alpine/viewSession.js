@@ -52,11 +52,14 @@ export default () => ({
 
   closeSessionButton: {
     ["@click.prevent"]() {
-      downloadZip.call(this);
-      this.resetSession();
+      if (!this.$store.reports.generatingReports) {
+        downloadZip.call(this);
+        this.resetSession();
+      }
     },
     [":class"]() {
-      return this.$store.testee.testeeDataIsSet ? css.enabledButton : css.disabledButton;
+      return !this.$store.reports.generatingReports
+        ? css.enabledButton : css.disabledButton;
     },
   },
 
@@ -68,7 +71,8 @@ export default () => ({
       };
     },
     [":class"]() {
-      return this.$store.testee.testeeDataIsSet ? css.enabledButton : css.disabledButton;
+      return this.$store.testee.testeeDataIsSet 
+        ? css.enabledButton : css.disabledButton;
     },
   },
 

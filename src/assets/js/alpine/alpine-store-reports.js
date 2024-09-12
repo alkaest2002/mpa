@@ -3,6 +3,7 @@ import { initState, exportState, importState, wipeState } from "./useUtilsAlpine
 const stateFn = () => [
   [ "singleReports", {} ],
   [ "mergedReports", "" ],
+  [ "generatingReports", false ],
 ]
 
 export default (Alpine) => ({

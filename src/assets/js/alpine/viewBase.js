@@ -21,6 +21,7 @@ export default () => ({
       }));
       
       // worker to compute and render single report
+      this.$store.reports.generatingReports = true;
       const workerReport = new Worker(urlWorkerReportScript);
       workerReport.postMessage(workerData);
       workerReport.onmessage = ({ data }) => {
@@ -44,6 +45,7 @@ export default () => ({
       workerMergedReports.onmessage = ({ data }) => {
         const { mergedReports } = data;
         this.$store.reports.mergedReports = mergedReports;
+        this.$store.reports.generatingReports = false;
       };
     });
   },
