@@ -1,14 +1,6 @@
 <!doctype html>
 <html lang="{{ .Site.Language }}" class="h-full">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="generator" content="Hugo {{ hugo.Version }}" />
-        <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-        {{- with site.Params.description }}
-            <meta name="description" content="{{ . }}" />
-        {{- end }} 
         {{- partialCached "base/head" . }}
     </head>
     {{- $urls := partialCached "base/worker-related" . }}

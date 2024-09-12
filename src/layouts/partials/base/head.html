@@ -1,7 +1,16 @@
-{{- $styles := resources.Get "css/tailwind.css" }}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="generator" content="Hugo {{ hugo.Version }}" />
+<title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+{{- with site.Params.description }}
+	<meta name="description" content="{{ . }}" />
+{{- end }} 
+
+{{- $styles := resources.Get "css/main.css" }}
 {{- if hugo.IsDevelopment }}
 	{{- $styles = $styles | resources.PostCSS | minify }}
-	{{- $styles = $styles | resources.ExecuteAsTemplate (printf "css/tailwind.dev.%v.css" now.UnixMilli) . }}
+	{{- $styles = $styles | resources.ExecuteAsTemplate (printf "css/main.dev.%v.css" now.UnixMilli) . }}
 	<style>{{- $styles.Content | safeCSS -}}</style>
 {{- else }}
 	{{- $styles = $styles | resources.PostCSS | minify | fingerprint | resources.PostProcess }}
