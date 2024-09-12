@@ -7,9 +7,9 @@ const ps = fork(path.resolve(__dirname, "server.js"));
 const createWindow = () => {
 
   const mainWindow = new BrowserWindow({
-    minWidth: 700,
+    minWidth: 1000,
     minHeight: 900,
-    width: 700,
+    width: 1000,
     height: 900,
     webPreferences: { webSecurity: false }
   });
