@@ -49,10 +49,10 @@ export default () => ({
         && goToUrlRaw.call(this, urlFilteredCatalogue);
       ctrlKey && lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
       ctrlKey && lowercaseKey == "b" && goToCurrentBattery.call(this);
-      ctrlKey && lowercaseKey == "i" && goToCurrentItem.call(this);
-      ctrlKey && lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
-      ctrlKey && lowercaseKey == "m" && (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
       ctrlKey && lowercaseKey == "h" && goToUrl.call(this, [ "base"]);
+      ctrlKey && lowercaseKey == "i" && goToCurrentItem.call(this);
+      ctrlKey && lowercaseKey == "m" && (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
+      ctrlKey && lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
     },
   },
 

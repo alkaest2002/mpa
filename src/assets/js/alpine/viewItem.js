@@ -62,13 +62,16 @@ export default () => ({
       if (!this.shouldGoNext) return
       if (!this.$store.session.currentQuestionnaireIsComplete) {
         return goToUrl.call(this, [ "notifications", "questionnaire-incomplete" ]);
+      } else {
+        this.$store.session.addCurrentQuestionnaireToCompletedList();
+        this.$store.session.itemId = "";
+        this.$store.urls.urlItem = "";
+        if (this.$store.session.currentBatteryIsComplete) {
+          this.$store.session.addCurrentBatteryToCompletedList();
+          return goToUrl.call(this, [ "notifications", "battery-complete" ]);
+        }
+        goToUrl.call(this, [ "notifications", "questionnaire-complete" ]);
       }
-      this.$store.session.addCurrentQuestionnaireToCompletedList();
-      if (this.$store.session.currentBatteryIsComplete) {
-        this.$store.session.addCurrentBatteryToCompletedList();
-        return goToUrl.call(this, [ "notifications", "battery-complete" ]);
-      }
-      goToUrl.call(this, [ "notifications", "questionnaire-complete" ]);
       
     },
     [":class"]() {

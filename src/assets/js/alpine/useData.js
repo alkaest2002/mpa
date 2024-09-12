@@ -19,14 +19,11 @@ function dataToExport() {
 };
 
 function exportFileName() {
-  if (this.$store.testee.testeeDataIsSet) {
-    const { surname, name, yearOfBirth } = this.$store.testee.bio;
-    return `${surname} ${name} ${yearOfBirth}`
-      .toLowerCase()
-      .match(/\b\w+\b/g)
-      .join("-");
-  }
-  return "anonymous";
+  const { surname, name, yearOfBirth } = this.$store.testee.bio;
+  return `${surname} ${name} ${yearOfBirth}`
+    .toLowerCase()
+    .match(/\b\w+\b/g)
+    .join("-");
 };
 
 export default () => ({
