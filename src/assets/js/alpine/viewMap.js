@@ -37,7 +37,7 @@ export default () => ({
 
   goToItemButton: {
     ["@click.prevent"]() {
-      goToUrlRaw.call(thia, this.$store.urls.urlItem);
+      goToUrlRaw.call(this, this.$store.urls.urlItem);
     },
     [":class"]() {
       return css.enabledButton
