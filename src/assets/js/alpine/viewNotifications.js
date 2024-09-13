@@ -1,9 +1,9 @@
 import css from "./cssClasses.json";
 import useNavigation from "./useNavigation";
-import useData from "./useData";
+import useSessionData from "./useSessionData";
 
 const { goToCurrentBattery, goToCurrentQuestionnaire, goToUrl } = useNavigation();
-const { downloadZip } = useData();
+const { downloadZip } = useSessionData();
 
 export default () => ({
 

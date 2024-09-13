@@ -1,5 +1,4 @@
-import { initState, exportState, importState, wipeState } from "./useUtilsAlpine";
-import { median } from "./useUtilsMath";
+import { initState, exportState, importState, wipeState } from "./useAlpine";
 
 const stateFn = () => [
   [ "languageId", "it" ], 
@@ -81,15 +80,6 @@ export default (Alpine) => ({
   },
 
   addCurrentQuestionnaireToCompletedList() {
-    const completedQuestionnaire = this.data.questionnaires[this.questionnaireId];
-    const itemIds = Object.keys(completedQuestionnaire);
-    const answersLatencies = itemIds.map((itemId) => completedQuestionnaire[itemId].answerLatency);
-    const medianLatency = median(answersLatencies);
-    itemIds
-      .forEach((itemId) => {
-        completedQuestionnaire[itemId]["deltaAnswerLatency"] = 
-          completedQuestionnaire[itemId].answerLatency - medianLatency;
-      });
     this.completedQuestionnaires = [... new Set([...this.completedQuestionnaires, this.questionnaireId ])];
   },
 

@@ -1,11 +1,11 @@
 import css from "./cssClasses.json";
 import useNagigation from "./useNavigation";
 import useValidation from "./useValidation";
-import useData from "./useData";
+import useSessionData from "./useSessionData";
 
 const { validateData } = useValidation();
 const { goToUrl, goToCurrentBattery } = useNagigation();
-const { downloadJSON, downloadZip } = useData();
+const { downloadJSON, downloadZip } = useSessionData();
 
 export default () => ({
   file: null,
