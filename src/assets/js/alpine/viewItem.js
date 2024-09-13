@@ -5,6 +5,7 @@ const { goToUrl, goToUrlRaw } = useNavigation();
 
 export default () => ({
   epoch: Date.now(),
+  cumulatedEpoch: 0,
   noResponse: false,
 
   initItem(itemId, urlItem) {
@@ -12,6 +13,7 @@ export default () => ({
     this.$store.session.itemId = itemId;
     this.$store.urls.urlItem = urlItem;
     this.noResponse = this.$store.session.currentAnswerValue == "";
+    this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
   },
 
   itemTitle: {
@@ -28,7 +30,7 @@ export default () => ({
         } else {
           this.setAnswer({ 
             ...answerData, 
-            answerLatency: Date.now() - this.epoch
+            answerLatency: this.cumulatedEpoch + (Date.now() - this.epoch),
           });
         }
         this.$nextTick(() => {
