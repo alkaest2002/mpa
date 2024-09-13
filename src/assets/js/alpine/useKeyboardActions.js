@@ -39,6 +39,7 @@ export default () => ({
   alphabetActions: {
     ["@keyup.window"]({ key, ctrlKey }) {
       const lowercaseKey = key.toLowerCase();
+      const urlItemsMap = `${this.$store.urls.urlQuestionnaires}/${this.$store.session.questionnaireId}/map.html`;
       const urlFilteredCatalogue = `${this.$store.urls.urlBatteries}/${lowercaseKey}`;
       lowercaseKey == "backspace" 
         && this.$store.app.currentView != "home"
@@ -48,9 +49,10 @@ export default () => ({
         && goToUrlRaw.call(this, urlFilteredCatalogue);
       ctrlKey && lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
       ctrlKey && lowercaseKey == "b" && goToCurrentBattery.call(this);
+      ctrlKey && lowercaseKey == "d" && (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
       ctrlKey && lowercaseKey == "h" && goToUrl.call(this, [ "base"]);
       ctrlKey && lowercaseKey == "i" && goToCurrentItem.call(this);
-      ctrlKey && lowercaseKey == "m" && (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
+      ctrlKey && lowercaseKey == "m" && goToUrlRaw.call(this, urlItemsMap);
       ctrlKey && lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
     },
   },
