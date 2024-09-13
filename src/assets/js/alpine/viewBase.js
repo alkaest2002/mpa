@@ -2,6 +2,7 @@
 export default () => ({
   
   async initBase({ urlWorkerReportScript, urlWorkerMergeReportsScript, urlScoringScript, urlTemplatingScript }) {
+    
     this.$watch("$store.session.completedQuestionnaires", (val) => {
       
       if (val.length == 0) return;
