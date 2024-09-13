@@ -23,5 +23,5 @@ src/assets/static/js/bundle
 src/node_modules
 src/resources
 src-dev
-electron-prebuilt/binaries/mac
-electron-prebuilt/binaries/win
+app-electron/binaries/mac
+app-electron/binaries/win
