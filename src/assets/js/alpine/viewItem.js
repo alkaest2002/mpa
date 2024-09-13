@@ -26,14 +26,13 @@ export default () => ({
   itemOption: (answerData) => {
     return {
       ["@click.prevent"]() {
-        const elapsedTime = (Date.now() - this.epoch);
-        const currentAnswerLatency = this.$store.session.currentAnswer?.answerLatency || 0;
-        const answerLatency = currentAnswerLatency + elapsedTime;
         if (this.$store.session.currentAnswerValue == "" && answerData.answerValue == "") {
           this.deleteAnswer();
         } else {
-          this.setAnswer({ ...answerData, answerLatency });
-          this.epoch = Date.now();
+          this.setAnswer({ 
+            ...answerData, 
+            answerLatency: Date.now() - this.epoch
+          });
         }
         this.$nextTick(() => {
           this.noResponse = this.$store.session.currentAnswerValue == "";
