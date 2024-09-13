@@ -19,7 +19,6 @@
 
 **/.DS_Store
 go.work
-src/assets/static/js/bundle
 src/node_modules
 src/resources
 src-dev
