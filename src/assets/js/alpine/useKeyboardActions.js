@@ -26,7 +26,7 @@ export default () => ({
     return [...element.parentNode.children].indexOf(element);
   },
 
-  getNextElementIndex(index, elements, direction) {
+  getNewElementIndex(index, elements, direction) {
     if (direction == "next") {
       return (index + 1) % elements.length;
     } else {
@@ -70,20 +70,20 @@ export default () => ({
   yArrowsActions: {
     ["@keyup.down.window"]() {
       if (this.$store.app.burgerIsOpen) {
-        this.burgerIndex = this.getNextElementIndex(this.burgerIndex, this.burgerElements, "next");
+        this.burgerIndex = this.getNewElementIndex(this.burgerIndex, this.burgerElements, "next");
       } else {
         if (this.hasTabElements) {
-          this.tabIndex = this.getNextElementIndex(this.tabIndex, this.tabElements, "next");
+          this.tabIndex = this.getNewElementIndex(this.tabIndex, this.tabElements, "next");
           this.tabElements[this.tabIndex]?.click();
         }
       }
     },
     ["@keyup.up.window"]() {
       if (this.$store.app.burgerIsOpen) {
-        this.burgerIndex = this.getNextElementIndex(this.burgerIndex, this.burgerElements, "prev");
+        this.burgerIndex = this.getNewElementIndex(this.burgerIndex, this.burgerElements, "prev");
       } else {
         if (this.hasTabElements) {
-          this.tabIndex = this.getNextElementIndex(this.tabIndex, this.tabElements, "prev");
+          this.tabIndex = this.getNewElementIndex(this.tabIndex, this.tabElements, "prev");
           this.tabElements[this.tabIndex]?.click();
         }
       }
