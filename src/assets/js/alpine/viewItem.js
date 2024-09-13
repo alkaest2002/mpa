@@ -4,11 +4,10 @@ import useNavigation from "./useNavigation";
 const { goToUrl, goToUrlRaw } = useNavigation();
 
 export default () => ({
-  epochIn: 0,
+  epoch: Date.now(),
   noResponse: false,
 
   initItem(itemId, urlItem) {
-    this.epochIn = Date.now();
     this.$store.app.currentView = "item";
     this.$store.session.itemId = itemId;
     this.$store.urls.urlItem = urlItem;
@@ -27,15 +26,14 @@ export default () => ({
   itemOption: (answerData) => {
     return {
       ["@click.prevent"]() {
-        const elapsedTime = (Date.now() - this.epochIn);
-        const currentAnswerLatency = this.$store.session.currentAnswer?.answerLatency;
-        const answerLatency = this.$store.session.currentAnswerValue == answerData.answerValue
-          ? currentAnswerLatency
-          : (currentAnswerLatency || 0) + elapsedTime;
+        const elapsedTime = (Date.now() - this.epoch);
+        const currentAnswerLatency = this.$store.session.currentAnswer?.answerLatency || 0;
+        const answerLatency = currentAnswerLatency + elapsedTime;
         if (this.$store.session.currentAnswerValue == "" && answerData.answerValue == "") {
           this.deleteAnswer();
         } else {
           this.setAnswer({ ...answerData, answerLatency });
+          this.epoch = Date.now();
         }
         this.$nextTick(() => {
           this.noResponse = this.$store.session.currentAnswerValue == "";
