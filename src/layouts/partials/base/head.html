@@ -9,11 +9,11 @@
 
 {{- $styles := resources.Get "css/main.css" }}
 {{- if hugo.IsDevelopment }}
-	{{- $styles = $styles | resources.PostCSS | minify }}
+	{{- $styles = $styles | css.PostCSS | minify }}
 	{{- $styles = $styles | resources.ExecuteAsTemplate (printf "css/main.dev.%v.css" now.UnixMilli) . }}
 	<style>{{- $styles.Content | safeCSS -}}</style>
 {{- else }}
-	{{- $styles = $styles | resources.PostCSS | minify | fingerprint | resources.PostProcess }}
+	{{- $styles = $styles | css.PostCSS | minify | fingerprint | resources.PostProcess }}
 	<link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" />
 {{- end }}
 {{- $alpine := resources.Get "js/alpine/alpine-main.js" }}

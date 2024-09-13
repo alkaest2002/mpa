@@ -4,6 +4,6 @@
 <meta name="generator" content="Hugo {{ hugo.Version }}" />
 <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
 {{- $styles := resources.Get "css/reports.css" }}
-{{- $styles = $styles | resources.PostCSS | minify }}
+{{- $styles = $styles | css.PostCSS | minify }}
 {{- $styles = $styles | resources.ExecuteAsTemplate (printf "css/reports.dev.%v.css" now.UnixMilli) . }}
 <style>{{- $styles.Content | safeCSS -}}</style>
