@@ -62,8 +62,7 @@ export default () => ({
       this.$refs["page-left"]?.click();
     },
     ["@keyup.right.window"]() {
-      this.$refs["page-right"] && this.$refs["page-right"].click();
-      !this.$refs["page-right"] && this.$refs["main-button"].click();
+      this.$refs["page-right"]?.click();
     }
   },
 
