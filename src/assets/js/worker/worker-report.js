@@ -40,5 +40,6 @@ export default onmessage = async ({ data }) => {
     questionnaireId,
     questionnaireScores: scores, 
     questionnaireReport,
+    answers,
   });
 };

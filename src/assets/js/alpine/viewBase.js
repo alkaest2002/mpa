@@ -25,7 +25,8 @@ export default () => ({
       const workerReport = new Worker(urlWorkerReportScript);
       workerReport.postMessage(workerData);
       workerReport.onmessage = ({ data }) => {
-        const { questionnaireId, questionnaireScores, questionnaireReport } = data;
+        const { questionnaireId, questionnaireScores, questionnaireReport, answers } = data;
+        this.$store.session.data.questionnaires[questionnaireId] = answers;
         this.$store.session.data.scores[questionnaireId] = questionnaireScores;
         this.$store.reports.singleReports[questionnaireId] = questionnaireReport;
       };
