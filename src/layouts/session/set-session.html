@@ -1,9 +1,6 @@
 {{- define "main" }}
 {{- $urlReports := (.Site.GetPage "reports").RelPermalink  }}
-<div 
-    x-data="useKeyboardActions" 
-    class="h-full"
->
+<div x-data="useKeyboardActions" class="h-full">
     <div 
         x-data="viewSessionSet"
         x-init="initSessionSet('{{ $urlReports }}'); initKeyboardActions('menu');"

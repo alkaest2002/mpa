@@ -1,8 +1,5 @@
 {{- define "main" }}
-<div 
-    x-data="useKeyboardActions" 
-    class="h-full"
->
+<div x-data="useKeyboardActions" class="h-full">
     <div 
         x-init="initKeyboardActions" 
         x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"

@@ -1,9 +1,6 @@
 {{- define "main" }}
 {{- $paginator := .Paginate .RegularPages site.Params.paginateSize.maps }}
-<div 
-    x-data="useKeyboardActions" 
-    class="h-full"
->
+<div x-data="useKeyboardActions" class="h-full">
     <div 
         x-data="viewMap" 
         x-init="initMap(); initKeyboardActions('itemId');" 

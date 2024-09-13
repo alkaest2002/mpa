@@ -1,9 +1,6 @@
 {{- define "main" }}
 {{- $paginator := .Paginate .RegularPages site.Params.paginateSize.batteries }}
-<div 
-    x-data="useKeyboardActions" 
-    class="h-full"
->
+<div x-data="useKeyboardActions" class="h-full">
     <div 
         x-data="viewBatteries" 
         x-init="initBatteries(); initKeyboardActions('batteryId');" 
