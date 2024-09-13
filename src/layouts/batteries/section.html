@@ -1,7 +1,7 @@
 {{- define "main" }}
 {{- $paginator := .Paginate .RegularPagesRecursive site.Params.paginateSize.batteries }}
 <div 
-    x-data="componentKeyboardActions" 
+    x-data="useKeyboardActions" 
     class="h-full"
 >
     <div 

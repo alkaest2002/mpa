@@ -5,7 +5,7 @@
 {{- $itemText := chomp .RawContent }}
 {{- $paginateSize := site.Params.paginateSize.maps }}
 {{- $mapPageIndex := div .Params.order $paginateSize | add 1 }}
-<div x-data="componentKeyboardActions" class="h-full">
+<div x-data="useKeyboardActions" class="h-full">
     <div 
         x-data="viewItem" 
         x-init="initItem('{{ $itemId }}', '{{ .RelPermalink }}'); initKeyboardActions('answerId')"

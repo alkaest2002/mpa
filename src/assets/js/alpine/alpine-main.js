@@ -5,7 +5,7 @@ import storeTestee from "./alpine-store-testee";
 import storeReports from "./alpine-store-reports";
 import storeSession from "./alpine-store-session";
 import storeUrls from "./alpine-store-urls";
-import componentKeyboardActions from "./componentKeyboardActions";
+import useKeyboardActions from "./useKeyboardActions";
 import viewBase from "./viewBase";
 import viewHome from "./viewHome";
 import viewTutorial from "./viewTutorial";
@@ -24,7 +24,7 @@ Alpine.store("testee", storeTestee(Alpine));
 Alpine.store("reports", storeReports(Alpine));
 Alpine.store("session", storeSession(Alpine));
 Alpine.store("urls", storeUrls(Alpine));
-Alpine.data("componentKeyboardActions", componentKeyboardActions)
+Alpine.data("useKeyboardActions", useKeyboardActions)
 Alpine.data("viewBase", viewBase);
 Alpine.data("viewHome", viewHome);
 Alpine.data("viewTutorial", viewTutorial);

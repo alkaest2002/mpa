@@ -1,5 +1,5 @@
 {{- define "main" }}
-<div x-data="componentKeyboardActions" x-init="initKeyboardActions('menu')" x-bind="enterActions" class="h-full">
+<div x-data="useKeyboardActions" x-init="initKeyboardActions('menu')" x-bind="enterActions" class="h-full">
     <div class="h-full flex flex-col items-center justify-center p-9 relative">
         <div class="flex-grow w-full">
             <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>

@@ -1,7 +1,7 @@
 {{- define "main" }}
 {{- $questionnaire := . }}
 <div
-    x-data="componentKeyboardActions"
+    x-data="useKeyboardActions"
     class="h-full flex flex-col items-center justify-center p-9 relative" 
 >
     {{- partial "base/burger" (dict "currentPage" . "questionnairesPage" true "questionnairePage" true "mapPage" true "mapPageIndex" 1) .Section }}

@@ -1,7 +1,7 @@
 {{- define "main" }}
 {{- $languageId := .Site.Language}}
 {{- $urlsJSON := (.OutputFormats.Get "json").RelPermalink }}
-<div x-data="componentKeyboardActions" class="h-full">
+<div x-data="useKeyboardActions" class="h-full">
     <div 
         x-data="viewHome" 
         x-init="initHome('{{ $languageId }}','{{ $urlsJSON }}'); initKeyboardActions('languageId');"
