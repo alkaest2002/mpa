@@ -39,7 +39,7 @@ export default onmessage = async ({ data }) => {
   postMessage({ 
     questionnaireId,
     questionnaireScores: scores, 
+    questionnaireAnswers: answers,
     questionnaireReport,
-    answers,
   });
 };

@@ -20,23 +20,24 @@ export default () => ({
         urls: { urlQuestionnaireSpecs, urlReportTemplate, urlScoringScript, urlTemplatingScript }
       }));
       
-      // worker to compute and render single report
       this.$store.reports.generatingReports = true;
+      
+      // worker to compute and render single report
       const workerReport = new Worker(urlWorkerReportScript);
       workerReport.postMessage(workerData);
       workerReport.onmessage = ({ data }) => {
-        const { questionnaireId, questionnaireScores, questionnaireReport, answers } = data;
-        this.$store.session.data.questionnaires[questionnaireId] = answers;
+        const { questionnaireId, questionnaireScores, questionnaireReport, questionnaireAnswers } = data;
+        this.$store.session.data.questionnaires[questionnaireId] = questionnaireAnswers;
         this.$store.session.data.scores[questionnaireId] = questionnaireScores;
         this.$store.reports.singleReports[questionnaireId] = questionnaireReport;
       };
     });
 
-    // worker to merge reports together
     this.$watch("$store.reports.singleReports", (val) => {
       
       if (Object.values(val).length == 0) return;
-
+      
+      // worker to merge reports together
       const workerData = JSON.parse(JSON.stringify({ 
         singleReports: this.$store.reports.singleReports,
       }));
