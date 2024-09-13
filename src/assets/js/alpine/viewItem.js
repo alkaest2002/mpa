@@ -16,10 +16,7 @@ export default () => ({
 
   itemTitle: {
     [":x-text"]() {
-      const $el = this.$refs["title"];
-      const { title, itemNo, itemsNo } = $el.dataset;
-      const pagination = `(${itemNo}/${itemsNo})`; 
-      $el.innerText = `${title} ${pagination}`;
+      this.$refs["title"].innerText = this.$refs["title"].dataset.title;
     }
   },
 

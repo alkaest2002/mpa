@@ -7,8 +7,7 @@ export default () => ({
 
   initMap() {
     this.$store.app.currentView = "map";
-    const el = this.$refs["titleWithPagination"];
-    el.innerText = el.dataset.title;
+    this.$refs["title"].innerText = this.$refs["title"].dataset.title;
   },
 
   showDot(itemId) {
