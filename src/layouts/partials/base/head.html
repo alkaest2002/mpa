@@ -20,5 +20,5 @@
 {{- $alpine = $alpine | js.Build (dict "targetPath" "js/alpine.js" "minify" true) }}
 {{- $htmx := resources.Get "js/htmx/htmx-main.js" }}
 {{- $htmx = $htmx | js.Build (dict "targetPath" "js/htmx.js" "minify" true) }}
-<script src="{{ $htmx.RelPermalink }}" integrity="{{ $htmx.Data.Integrity }}" crossorigin="anonymous" defer></script>
 <script src="{{ $alpine.RelPermalink }}" integrity="{{ $alpine.Data.Integrity }}" crossorigin="anonymous" defer></script>
+<script src="{{ $htmx.RelPermalink }}" integrity="{{ $htmx.Data.Integrity }}" crossorigin="anonymous" defer></script>
