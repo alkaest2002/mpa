@@ -33,7 +33,7 @@ middleSchool: scuole medie
 multipleQuestionnaires: questionari
 name: nome
 next: avanti
-noResponse: non ho intenzione di rispondere
+noResponse: non intendo rispondere
 noResponseWarning: 'attenzione: le risposte omesse possono invalidare il questionario'
 noUploadedFile: nessun file selezionato
 ok: ok

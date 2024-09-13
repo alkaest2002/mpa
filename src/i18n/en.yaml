@@ -33,7 +33,7 @@ middleSchool: middle school
 multipleQuestionnaires: questionnaires
 name: name
 next: next
-noResponse: I do not wish to respond
+noResponse: I do not intend to answer
 noResponseWarning: 'warning: omitted responses may invalidate the questionnaire'
 noUploadedFile: no file selected
 ok: ok
