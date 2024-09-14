@@ -1,21 +1,25 @@
 {{- $specs := partialCached "reports/questionnaire" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
-<table class="w-full apa-table">
+<table id="table-answers" class="w-full apa-table">
+  <caption class="caption">
+    {{ T "reportItemLatency" | strings.FirstUpper }}: {{ T "reportItemLatencyExplain" }},
+    {{ T "reportItemDeltaLatency" | strings.FirstUpper }}: {{ T "reportItemDeltaLatencyExplain" }}.
+  </caption>
   <thead>
     <tr>
-      <th>{{ T "reportItemId" | strings.FirstUpper }}</td>
-      <th>{{ T "reportItemText" | strings.FirstUpper }}</td>
-      <th>{{ T "reportItemResponse" | strings.FirstUpper }}</td>
-      <th class="text-center">{{ T "reportItemLatency" | strings.FirstUpper }}</td>
-      <th class="text-center">{{ T "reportItemDeltaLatency" | strings.FirstUpper }}</td>
+      <th scope="col">{{ T "reportItemId" | strings.FirstUpper }}</th>
+      <th scope="col">{{ T "reportItemText" | strings.FirstUpper }}</th>
+      <th scope="col">{{ T "reportItemResponse" | strings.FirstUpper }}</th>
+      <th scope="col" class="text-center">{{ T "reportItemLatency" | strings.FirstUpper }}</th>
+      <th scope="col" class="text-center">{{ T "reportItemDeltaLatency" | strings.FirstUpper }}</th>
     </tr>
   </thead>
   <tbody>
     {{- range $itemIndex, $item := $specs.questionnaireItems }}
       {{ $itemId := delimit (slice "0" "0" "0" ((add $itemIndex 1) | string) | last 3)  "" }}
       <tr>
-        <th style="width:50px">{{ $itemId }}</td>
-        <td style="min-width:calc(75% - 150px)">{{ $item }}</td>
-        <td style="max-width:calc(25% - 150px)">
+        <th scope="row">{{ $itemId }}</th>
+        <td>{{ $item }}</td>
+        <td>
           {{- $options := index $specs.questionnaireOptions $itemIndex }}
           {{- range $options }}
             {{- range $optionValue, $optionText := . }}
@@ -24,13 +28,9 @@
           {{- end }}
           <span class="option option-it-{{ $itemId }}#answerValue italic">{{ T "noResponse" }}</span>
         </td>
-        <td style="width:50px" class="text-center">it-{{ $itemId }}#answerLatency</td>
-        <td style="width:50px" class="text-center">it-{{ $itemId }}#deltaAnswerLatency</td>
+        <td class="text-center">it-{{ $itemId }}#answerLatency</td>
+        <td class="text-center">it-{{ $itemId }}#deltaAnswerLatency</td>
       </tr>
     {{- end }}
   </tbody>
-  <caption class="caption">
-    <span>{{ T "reportItemLatency" | strings.FirstUpper }}: {{ T "reportItemLatencyExplain" }}</span>, 
-    <span>{{ T "reportItemDeltaLatency" | strings.FirstUpper }}: {{ T "reportItemDeltaLatencyExplain" }}</span>.
-  </caption>
 </table>

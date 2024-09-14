@@ -24,7 +24,7 @@
                 <a 
                     @click.prevent="window.htmx.ajax('GET', $store.urls.urlCurrentBattery, 'body');"
                     :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
-                    href='#'
+                    href="#"
                     class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
                     {{ T "questionnaires" }}
                 </a>
@@ -35,7 +35,7 @@
                 {{- end }}
                 {{- with .questionnairePage }}
                 {{ $counter = add $counter 1 }}
-                <a @click.prevent="window.htmx.ajax('GET', $store.urls.urlCurrentQuestionnaire, 'body');" href='#'
+                <a @click.prevent="window.htmx.ajax('GET', $store.urls.urlCurrentQuestionnaire, 'body');" href="#"
                     :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
                     class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
                     {{ T "questionnaireInstructions" }}
@@ -58,7 +58,7 @@
                         {{- else }}
                             {{- $mapPageUrl = .RelPermalink }}
                         {{- end }}
-                        <a href='{{ $mapPageUrl }}' :data-menu-selected="burgerIndex == 4"
+                        <a href="{{ $mapPageUrl }}" :data-menu-selected="burgerIndex == 4"
                             :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
                             class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
                             {{ T "map" }}

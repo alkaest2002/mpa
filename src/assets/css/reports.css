@@ -676,3 +676,19 @@ tbody tr {
 .option-10-10 {
   display: inline;
 }
+
+#table-answers tbody tr th {
+  width:50px;
+}
+
+#table-answers tbody tr td:nth-child(1) {
+  min-width:calc(75% - 150px);
+}
+
+#table-answers tbody tr td:nth-child(2) {
+  max-width:calc(25% - 150px)
+}
+
+#table-answers tbody tr td:nth-child(3), #table-answers tbody tr td:nth-child(4) {
+  width: 50px;
+}

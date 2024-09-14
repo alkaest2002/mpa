@@ -20,7 +20,7 @@
   {{- end }}
 {{ end }}
 
-{{ return dict 
+{{ return dict
     "questionnaireScales" (sort $scales "order" "asc")
     "questionnaireItems" $items
     "questionnaireOptions" $options

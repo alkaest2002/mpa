@@ -28,8 +28,7 @@
             <div class="grid grid-cols-1 gap-4">
                 {{- range .Params.options }}
                     {{- range $optionValue, $optionLabel := . }}
-                    {{- $answerData := dict "order" $itemOrder "itemId" $itemId 
-                        "answerValue" ( $optionValue | int) | jsonify }}
+                    {{- $answerData := dict "order" $itemOrder "itemId" $itemId "answerValue" ( $optionValue | int) | jsonify }}
                     <div 
                         x-ref="tab-{{ $optionValue }}"
                         x-bind="itemOption({{ $answerData }})"

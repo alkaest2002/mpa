@@ -1,19 +1,20 @@
 {{- $specs := partialCached "reports/questionnaire" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
-<table class="w-full apa-table">
+<table id="table-scores" class="w-full apa-table">
+  <caption class="caption">{{ T "reportTableScoresLegend" | strings.FirstUpper }}.</caption>
   <thead>
     <tr>
-      <th>{{ T "reportScaleCode" | strings.FirstUpper }}</td>
-      <th>{{ T "reportScaleName" | strings.FirstUpper }}</td>
-      <th class="text-center">{{ T "reportScaleRawScore" | strings.FirstUpper }}</td>
-      <th class="text-center">{{ T "reportScaleMeanScore" | strings.FirstUpper }}</td>
-      <th class="text-center">{{ T "reportScaleStandardScore" | strings.FirstUpper }}</td>
-      <th class="text-center">{{ T "reportScaleOmissionsScore" | strings.FirstUpper }}</td>
+      <th scope="col">{{ T "reportScaleCode" | strings.FirstUpper }}</th>
+      <th scope="col">{{ T "reportScaleName" | strings.FirstUpper }}</th>
+      <th scope="col" class="text-center">{{ T "reportScaleRawScore" | strings.FirstUpper }}</th>
+      <th scope="col" class="text-center">{{ T "reportScaleMeanScore" | strings.FirstUpper }}</th>
+      <th scope="col" class="text-center">{{ T "reportScaleStandardScore" | strings.FirstUpper }}</th>
+      <th scope="col" class="text-center">{{ T "reportScaleOmissionsScore" | strings.FirstUpper }}</th>
     </tr>
   </thead>
   <tbody>
     {{- range $scale := $specs.questionnaireScales }}
         <tr>
-          <th>{{ $scale.scaleId | upper }}</td>
+          <th scope="row">{{ $scale.scaleId | upper }}</th>
           <td>{{ $scale.scaleName | strings.FirstUpper }}</td>
           <td class="text-center">{{ $scale.scaleId }}#rawScore</td>
           <td class="text-center">{{ $scale.scaleId }}#meanScore</td>
@@ -22,5 +23,4 @@
         </tr>
     {{- end }}
   </tbody>
-  <caption class="caption">{{ T "reportTableScoresLegend" | strings.FirstUpper }}.</caption>
 </table>

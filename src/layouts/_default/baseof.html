@@ -1,6 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ .Site.Language }}" class="h-full">
     <head>
+        <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
         {{- partialCached "base/head" . }}
     </head>
     {{- $urls := partialCached "base/worker-related" . }}
@@ -18,7 +19,7 @@
             class="flex-grow select-none"
         >
             {{- block "main" . }}
-            {{- end }} 
+            {{- end }}
         </div>
     </body>
 </html>

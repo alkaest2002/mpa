@@ -12,7 +12,7 @@
             <div class="mb-6">{{ .Content }}</div>
             <div class="grid grid-cols-1 gap-4">
                 {{- range $counter, $questionnaireId := .Params.questionnaires }}
-                    {{- $questionnaire := urls.JoinPath "questionnaires/" $questionnaireId | $.Site.GetPage }} 
+                    {{- $questionnaire := urls.JoinPath "questionnaires/" $questionnaireId | $.Site.GetPage }}
                     {{- with $questionnaire }}
                         {{- $questionnaireName := .Params.title }}
                         <div 

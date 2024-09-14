@@ -1,12 +1,10 @@
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="generator" content="Hugo {{ hugo.Version }}" />
-<title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo {{ hugo.Version }}">
 {{- with site.Params.description }}
-	<meta name="description" content="{{ . }}" />
-{{- end }} 
-
+	<meta name="description" content="{{ . }}">
+{{- end }}
 {{- $styles := resources.Get "css/main.css" }}
 {{- if hugo.IsDevelopment }}
 	{{- $styles = $styles | css.PostCSS | minify }}
@@ -14,7 +12,7 @@
 	<style>{{- $styles.Content | safeCSS -}}</style>
 {{- else }}
 	{{- $styles = $styles | css.PostCSS | minify | fingerprint | resources.PostProcess }}
-	<link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" />
+	<link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
 {{- end }}
 {{- $alpine := resources.Get "js/alpine/alpine-main.js" }}
 {{- $alpine = $alpine | js.Build (dict "targetPath" "js/alpine.js" "minify" true) }}
