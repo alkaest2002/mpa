@@ -10,10 +10,12 @@
         {{- partialCached "base/burger" (dict "currentPage" .) .Section }}
         <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex-grow flex flex-col">
             <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
-            {{ if gt $paginator.TotalPages 0 }}
+            {{- if gt $paginator.TotalPages 0 }}
                 <div class="mb-6">{{ .Content }}</div>
-            {{ end }}
-            {{ partial "batteries/batteries-list" (dict "currentPage" . "paginator" $paginator) }}
+                {{- partial "batteries/batteries-list" (dict "currentPage" . "paginator" $paginator) }}
+            {{- else }}
+                <p class="text-gray-700 italic">{{ T "empty" | strings.FirstUpper | safeHTML }}</p>
+            {{- end }}
         </div>
         <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center">
             <a

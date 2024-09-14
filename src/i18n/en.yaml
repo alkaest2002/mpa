@@ -17,7 +17,7 @@ chooseTutorialSwitch: select tutorial
 chooseTutorialSwitchInfo: this option controls whether a preliminary tutorial is offered to new users
 clickAndUpload: click here to upload the file
 closeSession: close session
-empty: no items match the search criteria.<br/>Press Esc to go back to the entire catalogue.
+empty: no items match the search criteria.<br>Press Esc to go back to the entire catalogue.
 end: end
 female: female
 gender: gender identity
