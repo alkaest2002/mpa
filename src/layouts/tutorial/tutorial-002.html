@@ -11,13 +11,13 @@
             </div>
         </div>
         <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center" >
-            {{ with .Site.GetPage "session/open-session" }}
+            {{- with .Site.GetPage "session/open-session" }}
                 <a 
                     x-ref="main-button" 
                     class="inline-flex justify-center w-96 px-6 py-3 gap-2 bg-blue-500 hover:bg-blue-700 cursor-pointer text-white rounded-full"
                     href="{{ .RelPermalink }}">{{ T "next" }}
                 </a>
-            {{ end }}
+            {{- end }}
         </div>
     </div>
 </div>

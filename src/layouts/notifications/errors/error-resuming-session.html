@@ -12,13 +12,13 @@
             <div class="mb-9">{{ .Content }}</div>
         </div>
         <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center">
-            {{ with .Site.GetPage "session/resume-session" }}
+            {{- with .Site.GetPage "session/resume-session" }}
                 <a
                     x-ref="main-button"
                     class="flex justify-center w-96 px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-700 text-white"
                     href="{{ .RelPermalink }}">{{ T "ok" }}
                 </a>
-            {{ end }}
+            {{- end }}
         </div>
     </div>
 </div>

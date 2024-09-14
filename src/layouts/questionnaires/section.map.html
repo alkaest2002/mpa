@@ -35,9 +35,9 @@
                         {{- end }}
                     </div>
                 </div>
-                {{ with gt $paginator.TotalPages 1 }}
+                {{- with gt $paginator.TotalPages 1 }}
                     {{- partial "base/paginator" $paginator }}
-                {{ end }}
+                {{- end }}
             </div>
         </div>
         <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center">

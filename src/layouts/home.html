@@ -23,14 +23,14 @@
                     >
                         <div class="flex justify-between relative">
                             <div class="flex items-center gap-2">
-                                {{ with (.GetPage "home").Resources.Get "flag.svg" }}
+                                {{- with (.GetPage "home").Resources.Get "flag.svg" }}
                                     <div>
                                         {{ .Content | safeHTML }}
                                     </div>
                                     <div>
                                         {{ $languageId.LanguageName | lower }}
                                     </div>
-                                {{ end }}
+                                {{- end }}
                             </div>
                         </div>
                     </div>
