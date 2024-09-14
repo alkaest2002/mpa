@@ -17,7 +17,7 @@ chooseTutorialSwitch: tutorial
 chooseTutorialSwitchInfo: quest'opzione determina se proporre un tutorial ai nuovi utenti
 clickAndUpload: clicca qui per effettuare l'upload del file
 closeSession: chiudi sessione
-empty: non ci sono elementi corrispondenti al criterio di ricerca.<br/>Premi Esc per tornare al catalogo generale.
+empty: non ci sono elementi corrispondenti al criterio di ricerca.<br>Premi Esc per tornare al catalogo generale.
 end: fine
 female: femmina
 gender: genere (m per maschio, f per femmina)
