@@ -41,7 +41,7 @@ export default () => ({
       const lowercaseKey = key.toLowerCase();
       const urlItemsMap = `${this.$store.urls.urlQuestionnaires}/${this.$store.session.questionnaireId}/map.html`;
       const urlFilteredCatalogue = `${this.$store.urls.urlBatteries}/${lowercaseKey}`;
-      lowercaseKey == "backspace" 
+      lowercaseKey == "escape" 
         && this.$store.app.currentView != "home"
         && history.back();
       this.$store.app.currentView == "batteries" 
