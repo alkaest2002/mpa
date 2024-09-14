@@ -3,7 +3,7 @@
 {{- $sections := where .Site.Sections "Section" "in" $sectionToPick }}
 {{- range $sections }}
     {{- $idSlice := split .Params.id "-"  }}
-    {{- $idSlice = apply $idSlice "strings.FirstUpper" .Params.id  }}
+    {{- $idSlice = apply $idSlice "strings.FirstUpper" "."  }}
     {{- $id := delimit $idSlice "" }}
     {{- $urls = merge $urls (dict (printf "url%s" $id) .RelPermalink ) }}
 {{- end }}
