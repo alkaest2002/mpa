@@ -11,3 +11,5 @@ defaultContentLanguageInSubdir: true
 
 disableKinds:
   - sitemap
+  - robotsTXT
+  - RSS
