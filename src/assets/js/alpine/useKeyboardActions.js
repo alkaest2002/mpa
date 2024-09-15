@@ -42,10 +42,10 @@ export default () => ({
       const urlItemsMap = `${this.$store.urls.urlQuestionnaires}/${this.$store.session.questionnaireId}/map.html`;
       const urlFilteredCatalogue = `${this.$store.urls.urlBatteries}/${lowercaseKey}`;
       if (lowercaseKey == "escape" ) {
-        // when in map view go back to last item
+        // when map view go back to last item
         this.$store.app.currentView == "map"
           && goToUrlRaw.call(this, this.$store.urls.urlItem);
-        // in all other case (except home), use app history object to figure out where to go back
+        // in all other case (except home and map), use app history object to figure out where to go back
         !["home", "map"].includes(this.$store.app.currentView)
           && goToUrlRaw.call(this, this.$store.app.history[window.location.href]);
       } else {
