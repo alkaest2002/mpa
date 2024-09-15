@@ -58,7 +58,7 @@ export default () => ({
   htmxEvents: {
     ["@htmx:before-swap.camel"]({ detail: { xhr: { responseURL }}}) {
       !Object.keys(this.$store.app.history).includes(responseURL)
-        && (this.$store.app.history[responseURL] =  window.location.href);
+        && (this.$store.app.history[responseURL] = window.location.href);
     },
     ["@htmx:after-swap.camel"]() {
       this.$store.app.burgerIsOpen = false; 

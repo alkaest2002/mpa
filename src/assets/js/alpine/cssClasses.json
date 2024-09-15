@@ -6,6 +6,10 @@
   "nonSelected": { 
     "hover:bg-gray-100": true 
   },
+  "nonSelectable": {
+    "opacity-50": true,
+    "cursor-not-allowed": true
+  },
   "disabledButton": {
     "bg-gray-200": true,
     "cursor-not-allowed": true,

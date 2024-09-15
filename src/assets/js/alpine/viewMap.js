@@ -23,20 +23,26 @@ export default () => ({
   itemMapButton(itemId, urlItem) {
     return {
       ["@click.prevent"]() {
-        this.$store.session.itemId = itemId;
-        this.$store.urls.urlItem = urlItem;
+        if (this.$store.session.getAnswer(itemId)) {
+          this.$store.session.itemId = itemId;
+          this.$store.urls.urlItem = urlItem;
+        }
       },
       [":class"]() {
-        return this.$store.session.itemId == itemId
-          ? css.selected
-          : css.nonSelected
+        if (this.$store.session.getAnswer(itemId)) {
+          return this.$store.session.itemId == itemId
+            ? css.selected
+            : css.nonSelected;
+        } else {
+          return css.nonSelectable
+        }
       }
     };
   },
 
   goToItemButton: {
     ["@click.prevent"]() {
-      goToUrlRaw.call(this, this.$store.urls.urlItem);
+      this.$store.urls.urlItem && goToUrlRaw.call(this, this.$store.urls.urlItem);
     },
     [":class"]() {
       return css.enabledButton

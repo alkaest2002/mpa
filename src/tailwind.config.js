@@ -16,6 +16,7 @@ module.exports = {
     "hover:bg-gray-500",
     "cursor-not-allowed",
     "opacity-20",
+    "opacity-50",
     "outline-none"
   ],
   theme: {

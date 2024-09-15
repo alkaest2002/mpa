@@ -41,19 +41,25 @@ export default () => ({
       const lowercaseKey = key.toLowerCase();
       const urlItemsMap = `${this.$store.urls.urlQuestionnaires}/${this.$store.session.questionnaireId}/map.html`;
       const urlFilteredCatalogue = `${this.$store.urls.urlBatteries}/${lowercaseKey}`;
-      lowercaseKey == "escape" 
-        && !["home", "questionnaire-complete", "battery-complete"].includes(this.$store.app.currentView)
-        && goToUrlRaw.call(this, this.$store.app.history[window.location.href]);
-      this.$store.app.currentView == "batteries" 
-        && this.alphabetLowerCase.includes(lowercaseKey) 
-        && goToUrlRaw.call(this, urlFilteredCatalogue);
-      ctrlKey && lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
-      ctrlKey && lowercaseKey == "b" && goToCurrentBattery.call(this);
-      ctrlKey && lowercaseKey == "d" && (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
-      ctrlKey && lowercaseKey == "h" && goToUrl.call(this, [ "base"]);
-      ctrlKey && lowercaseKey == "i" && goToCurrentItem.call(this);
-      ctrlKey && lowercaseKey == "m" && goToUrlRaw.call(this, urlItemsMap);
-      ctrlKey && lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
+      if (lowercaseKey == "escape" ) {
+        // when in map view go back to last item
+        this.$store.app.currentView == "map"
+          && goToUrlRaw.call(this, this.$store.urls.urlItem);
+        // in all other case (except home), use app history object to figure out where to go back
+        !["home", "map"].includes(this.$store.app.currentView)
+          && goToUrlRaw.call(this, this.$store.app.history[window.location.href]);
+      } else {
+        this.$store.app.currentView == "batteries" 
+          && this.alphabetLowerCase.includes(lowercaseKey) 
+          && goToUrlRaw.call(this, urlFilteredCatalogue);
+        ctrlKey && lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
+        ctrlKey && lowercaseKey == "b" && goToCurrentBattery.call(this);
+        ctrlKey && lowercaseKey == "d" && (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
+        ctrlKey && lowercaseKey == "h" && goToUrl.call(this, [ "base"]);
+        ctrlKey && lowercaseKey == "i" && goToCurrentItem.call(this);
+        ctrlKey && lowercaseKey == "m" && goToUrlRaw.call(this, urlItemsMap);
+        ctrlKey && lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
+      }
     },
   },
 
