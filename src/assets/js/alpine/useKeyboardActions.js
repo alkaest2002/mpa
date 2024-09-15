@@ -52,12 +52,27 @@ export default () => ({
         this.$store.app.currentView == "batteries" 
           && this.alphabetLowerCase.includes(lowercaseKey) 
           && goToUrlRaw.call(this, urlFilteredCatalogue);
-        ctrlKey && lowercaseKey == "a" && goToUrl.call(this, [ "session", "set-session" ]);
-        ctrlKey && lowercaseKey == "b" && goToCurrentBattery.call(this);
-        ctrlKey && lowercaseKey == "d" && (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
-        ctrlKey && lowercaseKey == "h" && goToUrl.call(this, [ "base"]);
-        ctrlKey && lowercaseKey == "i" && goToCurrentItem.call(this);
-        ctrlKey && lowercaseKey == "m" && goToUrlRaw.call(this, urlItemsMap);
+        ctrlKey 
+          && lowercaseKey == "a"
+          && goToUrl.call(this, [ "session", "set-session" ]);
+        ctrlKey 
+          && lowercaseKey == "b"
+          && this.$store.session.batteryId
+          && goToCurrentBattery.call(this);
+        ctrlKey 
+          && lowercaseKey == "d" 
+          && (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
+        ctrlKey 
+          && lowercaseKey == "h" 
+          && goToUrl.call(this, [ "base"]);
+        ctrlKey 
+          && lowercaseKey == "i"
+          && this.$store.session.itemId
+          && goToCurrentItem.call(this);
+        ctrlKey 
+          && lowercaseKey == "m"
+          && this.$store.session.itemId
+          && goToUrlRaw.call(this, urlItemsMap);
         ctrlKey && lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
       }
     },
