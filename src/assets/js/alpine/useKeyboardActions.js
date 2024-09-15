@@ -43,7 +43,7 @@ export default () => ({
       const urlFilteredCatalogue = `${this.$store.urls.urlBatteries}/${lowercaseKey}`;
       lowercaseKey == "escape" 
         && this.$store.app.currentView != "home"
-        && history.back();
+        && goToUrlRaw.call(this, this.$store.app.history[window.location.href]);
       this.$store.app.currentView == "batteries" 
         && this.alphabetLowerCase.includes(lowercaseKey) 
         && goToUrlRaw.call(this, urlFilteredCatalogue);

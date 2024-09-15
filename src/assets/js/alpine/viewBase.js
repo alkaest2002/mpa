@@ -2,6 +2,8 @@
 export default () => ({
   
   async initBase({ urlWorkerReportScript, urlWorkerMergeReportsScript, urlScoringScript, urlTemplatingScript }) {
+
+    this.$watch("$store.app.currentView", (val) => val == "home" && (this.$store.app.history = {}));
     
     this.$watch("$store.session.completedQuestionnaires", (val) => {
       
@@ -54,6 +56,10 @@ export default () => ({
   },
 
   htmxEvents: {
+    ["@htmx:before-swap.camel"]({ detail: { xhr: { responseURL }}}) {
+      !Object.keys(this.$store.app.history).includes(responseURL)
+        && (this.$store.app.history[responseURL] =  window.location.href);
+    },
     ["@htmx:after-swap.camel"]() {
       this.$store.app.burgerIsOpen = false; 
     },
