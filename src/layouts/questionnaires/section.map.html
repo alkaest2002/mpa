@@ -24,12 +24,26 @@
                             <div
                                 x-ref="tab-{{ .Params.id }}"
                                 x-bind="itemMapButton('{{ .Params.id }}', '{{ .RelPermalink }}')"
-                                class="tab-element w-full p-3 rounded border shadow-md"
-                                href="{{ .RelPermalink }}">
-                                <div class="relative">
-                                    <span x-cloak x-bind="showDot('{{ .Params.id }}')"
-                                        class="absolute right-1 top-0">&#9679;</span>
-                                    {{- .LinkTitle }}
+                                class="tab-element w-full flex justify-between p-3 rounded border shadow-md"
+                                href="{{ .RelPermalink }}"
+                            >
+                                <div>
+                                    <p>{{- .LinkTitle }}</p>
+                                </div>
+                                <div x-cloak class="flex gap-2 items-center italic text-sm text-gray-400">
+                                    <span 
+                                        x-show="$store.session.getAnswer('{{ .Params.id }}')
+                                            && $store.session.getAnswerValue('{{ .Params.id }}') !== ''"
+                                    >
+                                        {{ T "answerWasGiven" }}
+                                    </span>
+                                    <span 
+                                        x-show="$store.session.getAnswer('{{ .Params.id }}') 
+                                            && $store.session.getAnswerValue('{{ .Params.id }}') === ''"
+                                    >
+                                        {{ T "answerWasOmitted" }}
+                                    </span>
+                                    <span x-bind="showDot('{{ .Params.id }}')">&#9679;</span>
                                 </div>
                             </div>
                         {{- end }}

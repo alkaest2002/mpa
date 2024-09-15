@@ -13,9 +13,10 @@ export default () => ({
   showDot(itemId) {
     return {
       [":class"]() {
-        return this.$store.session.getAnswer(itemId)
+        if (!this.$store.session.getAnswer(itemId)) return css.grayDot;
+        return this.$store.session.getAnswerValue(itemId) != ""
           ? css.blueDot
-          : css.grayDot;
+          : css.orangeDot;
       }
     }
   },

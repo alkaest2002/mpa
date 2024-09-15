@@ -1,4 +1,6 @@
 administer: administer battery
+answerWasGiven: answer was given
+answerWasOmitted: answer was omitted
 autoPilotSwitchNullOption: select auto-pilot 
 autoPilotSwitchOn: auto-pilot on
 autoPilotSwitchOff: auto-pilot off

@@ -1,4 +1,6 @@
 administer: somministra batteria
+answerWasGiven: risposta data
+answerWasOmitted: risposta omessa
 autoPilotSwitchNullOption: seleziona auto-pilota 
 autoPilotSwitchOn: auto-pilota inserito
 autoPilotSwitchOff: auto-pilota disinserito
