@@ -5,7 +5,7 @@ const { goToUrl } = useNagigation();
 
 export default () => ({
   initSessionSet(urlReports) {
-    this.$store.app.currentView = "session";
+    this.$store.app.currentView = "session-set";
     this.$store.urls.urlReports = urlReports;
     // force report regeneration under following circumstaces
     this.$watch("$store.session.settingId", () => {

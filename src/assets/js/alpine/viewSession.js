@@ -11,8 +11,8 @@ export default () => ({
   file: null,
   fileAsText: null,
 
-  initSession() {
-    this.$store.app.currentView = "session";
+  initSession(viewName) {
+    this.$store.app.currentView = viewName;
   },
 
   get uploadedFilename() {

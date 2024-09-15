@@ -7,8 +7,8 @@ const { downloadZip } = useSessionData();
 
 export default () => ({
 
-  initNotifications() {
-    this.$store.app.currentView = "notifications";
+  initNotifications(viewName) {
+    this.$store.app.currentView = viewName;
   },
 
   questionnaireIsCompleteButton() {

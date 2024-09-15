@@ -42,7 +42,7 @@ export default () => ({
       const urlItemsMap = `${this.$store.urls.urlQuestionnaires}/${this.$store.session.questionnaireId}/map.html`;
       const urlFilteredCatalogue = `${this.$store.urls.urlBatteries}/${lowercaseKey}`;
       lowercaseKey == "escape" 
-        && this.$store.app.currentView != "home"
+        && !["home", "questionnaire-complete", "battery-complete"].includes(this.$store.app.currentView)
         && goToUrlRaw.call(this, this.$store.app.history[window.location.href]);
       this.$store.app.currentView == "batteries" 
         && this.alphabetLowerCase.includes(lowercaseKey) 

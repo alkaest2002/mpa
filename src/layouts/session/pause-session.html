@@ -2,7 +2,7 @@
 <div x-data="useKeyboardActions" class="h-full">
     <div 
         x-data="viewSession"
-        x-init="initSession(); initKeyboardActions('menu');"
+        x-init="initSession('pause-session'); initKeyboardActions('menu');"
         x-bind="{ ...yArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
