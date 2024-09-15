@@ -34,7 +34,10 @@ export default () => ({
         const { questionnaireId, questionnaireScores, questionnaireReport, questionnaireAnswers } = data;
         this.$store.session.data.questionnaires[questionnaireId] = questionnaireAnswers;
         this.$store.session.data.scores[questionnaireId] = questionnaireScores;
-        this.$store.reports.singleReports[questionnaireId] = questionnaireReport;
+        this.$store.reports.singleReports = {
+          ...this.$store.reports.singleReports,
+          [questionnaireId]: questionnaireReport
+        };
       };
     });
 
