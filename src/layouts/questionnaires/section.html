@@ -5,7 +5,7 @@
     <div
         x-data="viewIntro"
         x-init="initIntro(); initKeyboardActions('menu');"
-        x-bind="{ ...yArrowsActions, ...enterActions, ...alphabetActions }"
+        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         :class="{ 'opacity-20': $store.app.burgerIsOpen }"
         class="w-full flex-grow"
     >
@@ -17,6 +17,9 @@
     </div>
     <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center">
         {{- range (.Pages.ByParam "order").Limit 1 }}
+            {{- with .PrevInSection }}
+                <a x-ref="page-right" href="{{ .RelPermalink }}" class="hidden">{{ T "next" }}</a>
+            {{- end }}
             <a 
                 x-ref="main-button"
                 class="inline-block w-96 px-6 py-3 bg-blue-500 hover:bg-blue-700 rounded-full text-white text-center"

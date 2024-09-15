@@ -57,8 +57,12 @@
             </div>
         </div>
         <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center" >
+            {{- with .NextInSection }}
+                <a x-ref="page-left"  href="{{ .RelPermalink }}" class="hidden">{{ T "next" }}</a>
+            {{- end }}
             {{- with .PrevInSection }}
-+                <a 
+                <a x-ref="page-right" href="{{ .RelPermalink }}" class="hidden">{{ T "next" }}</a>
+                <a 
                     x-ref="main-button" 
                     x-bind="itemNextButton('{{ .RelPermalink }}')"
                     class="w-96 px-6 py-3 rounded-full text-white text-center"
