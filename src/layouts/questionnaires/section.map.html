@@ -19,7 +19,7 @@
             <div class="mb-9">{{ T "mapInfo" }}.</div>
             <div class="flex-grow flex flex-col">
                 <div class="flex-grow">
-                    <div class="grid grid-cols-1 gap-4">
+                    <div class="grid gap-4">
                         {{- range $paginator.Pages }}
                             <div
                                 x-ref="tab-{{ .Params.id }}"
@@ -32,15 +32,17 @@
                                 </div>
                                 <div x-cloak class="flex gap-2 items-center italic text-sm text-gray-400">
                                     <template x-if="$store.session.getAnswer('{{ .Params.id }}')">
-                                        <span 
-                                            x-show="$store.session.getAnswerValue('{{ .Params.id }}') !== ''"
-                                        >
-                                            {{ T "answerWasGiven" }}
-                                        </span>
-                                        <span 
-                                            x-show="$store.session.getAnswerValue('{{ .Params.id }}') === ''"
-                                        >
-                                            {{ T "answerWasOmitted" }}
+                                        <span>
+                                            <span 
+                                                x-show="$store.session.getAnswerValue('{{ .Params.id }}') == ''"
+                                            >
+                                                {{ T "answerWasOmitted" }}
+                                            </span>
+                                            <span 
+                                                x-show="$store.session.getAnswerValue('{{ .Params.id }}') !== ''"
+                                            >
+                                                {{ T "answerWasGiven" }}
+                                            </span>
                                         </span>
                                     </template>
                                     <span x-bind="showDot('{{ .Params.id }}')">&#9679;</span>
