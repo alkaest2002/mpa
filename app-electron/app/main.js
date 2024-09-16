@@ -8,9 +8,9 @@ const createWindow = () => {
 
   const mainWindow = new BrowserWindow({
     minWidth: 1200,
-    minHeight: 900,
+    minHeight: 1000,
     width: 1200,
-    height: 900,
+    height: 1000,
     webPreferences: { webSecurity: false }
   });
   
