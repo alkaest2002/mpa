@@ -19,6 +19,7 @@ export default () => ({
       
       // worker to compute and render single report
       const workerReport = new Worker(urlWorkerReportScript);
+      
       // data to pass to worker
       const workerData = JSON.parse(JSON.stringify({ 
         testee: { bio },
@@ -47,6 +48,7 @@ export default () => ({
       
       // worker to merge reports together
       const workerMergedReports = new Worker(urlWorkerMergeReportsScript);
+      
       // data to pass to the work
       const workerData = JSON.parse(JSON.stringify({ 
         singleReports: this.$store.reports.singleReports,
@@ -64,9 +66,9 @@ export default () => ({
     ["@htmx:before-swap.camel"]({ detail: { xhr: { responseURL }}}) {
         // excelude url with map.html
         [responseURL, window.location.href].every(el => el.search("map.html") === -1)
-          // exclude urls visited twice
+          // exclude urls visited more than once
           && !Object.keys(this.$store.app.history).includes(responseURL)
-          // store relationship as chils --> parent
+          // store relationship as child --> parent
           && (this.$store.app.history[responseURL] = window.location.href);
     },
     ["@htmx:after-swap.camel"]() {
