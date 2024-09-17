@@ -9,15 +9,23 @@ export default () => ({
   },
 
   goToCurrentBattery() {
-    this.$store.urls.urlCurrentBattery && window.htmx.ajax("GET", this.$store.urls.urlCurrentBattery, "body");
+    this.$store.urls.urlCurrentBattery 
+      && window.htmx.ajax("GET", this.$store.urls.urlCurrentBattery, "body");
   },
 
   goToCurrentQuestionnaire() {
-    this.$store.urls.urlCurrentQuestionnaire && window.htmx.ajax("GET", this.$store.urls.urlCurrentQuestionnaire, "body");
+    this.$store.urls.urlCurrentQuestionnaire
+      && window.htmx.ajax("GET", this.$store.urls.urlCurrentQuestionnaire, "body");
+  },
+
+  goToCurrentQuestionnaireMap() {
+    this.$store.urls.urlCurrentQuestionnaireMap 
+      && window.htmx.ajax("GET",  this.$store.urls.urlCurrentQuestionnaireMap, "body");
   },
 
   goToCurrentItem() {
-    this.$store.urls.urlCurrentItem && window.htmx.ajax("GET", this.$store.urls.urlCurrentItem, "body");
+    this.$store.urls.urlCurrentItem 
+      && window.htmx.ajax("GET", this.$store.urls.urlCurrentItem, "body");
   },
 
   goToQuestionnaire(questionnaireId) {

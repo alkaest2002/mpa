@@ -1,80 +1,84 @@
 import useNavigation from "./useNavigation";
 
-const { goToUrl, goToUrlRaw, goToCurrentBattery, goToCurrentQuestionnaire, goToCurrentItem } = useNavigation();
+const { 
+  goToUrl, 
+  goToUrlRaw, 
+  goToCurrentBattery, 
+  goToCurrentQuestionnaire,
+  goToCurrentQuestionnaireMap, 
+  goToCurrentItem 
+} = useNavigation();
 
 export default () => ({
-  tabElements: null,
   burgerElements: null,
+  tabElements: null,
   tabIndex: -1,
   burgerIndex: -1,
   alphabetLowerCase: "abcdefghijklmnopqrstuvwxyz",
 
   initKeyboardActions(typeOfId = null) {
-    this.burgerElements = [ ...document.getElementsByClassName("burger-element") ];
-    this.tabElements = [ ...document.getElementsByClassName("tab-element") ];
+    this.burgerElements = [...document.getElementsByClassName("burger-element")];
+    this.tabElements = [...document.getElementsByClassName("tab-element")];
     this.tabIndex = typeOfId 
-      ? this.getElementIndex(this.$refs[`tab-${this.$store.session[typeOfId]}`])
+      ? this.getElementIndex(this.$refs[`tab-${this.$store.session[typeOfId]}`]) 
       : -1;
   },
 
   get hasTabElements() {
-    return this.tabElements?.length > 0;
+    return !!this.tabElements?.length;
   },
 
   getElementIndex(element) {
-    if (!element) return -1;
-    return [...element.parentNode.children].indexOf(element);
+    return element 
+      ? [...element.parentNode.children].indexOf(element) 
+      : -1;
   },
 
   getNewElementIndex(index, elements, direction) {
-    if (direction == "next") {
-      return (index + 1) % elements.length;
-    } else {
-      return (index <= 0) 
-        ? elements.length -1
-        : index -1;
-    }
+    return direction == "next" 
+      ? (index + 1) % elements.length 
+      : (index <= 0 
+          ? elements.length - 1 
+          : index - 1
+        );
+  },
+
+  handleKeyAction({ lowercaseKey, ctrlKey, escKey, appView }) {
+    ctrlKey && this.handleCtrlActions(lowercaseKey);
+    escKey && this.handleEscapeKeyActions(appView);
+    this.handleAppViewActions(appView, lowercaseKey);
+  },
+
+  handleCtrlActions(lowercaseKey) {
+    return {
+      a: () => goToUrl.call(this, ["session", "set-session"]),
+      b: () => this.$store.session.batteryId && goToCurrentBattery.call(this),
+      d: () => this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen,
+      h: () => goToUrl.call(this, ["base"]),
+      i: () => this.$store.session.itemId && goToCurrentItem.call(this),
+      m: () => this.$store.session.itemId && goToCurrentQuestionnaireMap.call(this),
+      q: () => goToCurrentQuestionnaire.call(this),
+    }[lowercaseKey]?.();
+  },
+
+  handleEscapeKeyActions(appView) {
+    return (!["home", "map"].includes(appView)) 
+      ? goToUrlRaw.call(this, this.$store.app.history[window.location.href])
+      : appView == "map" && goToUrlRaw.call(this, this.$store.urls.urlItem);
+  },
+
+  handleAppViewActions(appView, lowercaseKey) {
+    return appView == "batteries" 
+      && this.alphabetLowerCase.includes(lowercaseKey) 
+      && goToUrl.call(this, [ appView, lowercaseKey ]);
   },
 
   alphabetActions: {
     ["@keyup.window"]({ key, ctrlKey }) {
       const lowercaseKey = key.toLowerCase();
-      const urlItemsMap = `${this.$store.urls.urlQuestionnaires}/${this.$store.session.questionnaireId}/map.html`;
-      const urlFilteredCatalogue = `${this.$store.urls.urlBatteries}/${lowercaseKey}`;
-      if (lowercaseKey == "escape" ) {
-        // when map view go back to last item
-        this.$store.app.currentView == "map"
-          && goToUrlRaw.call(this, this.$store.urls.urlItem);
-        // in all other case (except home and map), use app history object to figure out where to go back
-        !["home", "map"].includes(this.$store.app.currentView)
-          && goToUrlRaw.call(this, this.$store.app.history[window.location.href]);
-      } else {
-        this.$store.app.currentView == "batteries" 
-          && this.alphabetLowerCase.includes(lowercaseKey) 
-          && goToUrlRaw.call(this, urlFilteredCatalogue);
-        ctrlKey 
-          && lowercaseKey == "a"
-          && goToUrl.call(this, [ "session", "set-session" ]);
-        ctrlKey 
-          && lowercaseKey == "b"
-          && this.$store.session.batteryId
-          && goToCurrentBattery.call(this);
-        ctrlKey 
-          && lowercaseKey == "d" 
-          && (this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen);
-        ctrlKey 
-          && lowercaseKey == "h" 
-          && goToUrl.call(this, [ "base"]);
-        ctrlKey 
-          && lowercaseKey == "i"
-          && this.$store.session.itemId
-          && goToCurrentItem.call(this);
-        ctrlKey 
-          && lowercaseKey == "m"
-          && this.$store.session.itemId
-          && goToUrlRaw.call(this, urlItemsMap);
-        ctrlKey && lowercaseKey == "q" && goToCurrentQuestionnaire.call(this);
-      }
+      const escKey = lowercaseKey == "escape";
+      const appView = this.$store.app.currentView;
+      this.handleKeyAction({ lowercaseKey, ctrlKey, escKey, appView });
     },
   },
 
@@ -84,36 +88,28 @@ export default () => ({
     },
     ["@keyup.right.window"]() {
       this.$refs["page-right"]?.click();
-    }
+    },
   },
 
   yArrowsActions: {
     ["@keyup.down.window"]() {
-      if (this.$store.app.burgerIsOpen) {
-        this.burgerIndex = this.getNewElementIndex(this.burgerIndex, this.burgerElements, "next");
-      } else {
-        if (this.hasTabElements) {
-          this.tabIndex = this.getNewElementIndex(this.tabIndex, this.tabElements, "next");
-          this.tabElements[this.tabIndex]?.click();
-        }
-      }
+      const elements = this.$store.app.burgerIsOpen ? this.burgerElements : this.tabElements;
+      const index = this.$store.app.burgerIsOpen ? "burgerIndex" : "tabIndex";
+      this[index] = this.getNewElementIndex(this[index], elements, "next");
+      elements[this[index]]?.click();
     },
     ["@keyup.up.window"]() {
-      if (this.$store.app.burgerIsOpen) {
-        this.burgerIndex = this.getNewElementIndex(this.burgerIndex, this.burgerElements, "prev");
-      } else {
-        if (this.hasTabElements) {
-          this.tabIndex = this.getNewElementIndex(this.tabIndex, this.tabElements, "prev");
-          this.tabElements[this.tabIndex]?.click();
-        }
-      }
+      const elements = this.$store.app.burgerIsOpen ? this.burgerElements : this.tabElements;
+      const index = this.$store.app.burgerIsOpen ? "burgerIndex" : "tabIndex";
+      this[index] = this.getNewElementIndex(this[index], elements, "prev");
+      elements[this[index]]?.click();
     },
   },
 
   enterActions: {
     ["@keyup.enter.window"]() {
-      this.$store.app.burgerIsOpen && this.burgerElements[this.burgerIndex]?.click();
-      !this.$store.app.burgerIsOpen && this.$refs["main-button"]?.click();
+      const elements = this.$store.app.burgerIsOpen ? this.burgerElements : [this.$refs["main-button"]];
+      elements[(this.burgerIndex !== -1 ? this.burgerIndex : 0)]?.click();
     },
   },
 });

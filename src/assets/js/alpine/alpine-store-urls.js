@@ -29,6 +29,12 @@ export default (Alpine) => ({
       : null;
   },
 
+  get urlCurrentQuestionnaireMap() {
+    return this.urlCurrentQuestionnaire 
+      ? `${this.urlCurrentQuestionnaire}/map.html`
+      : null;
+  },
+
   get urlCurrentItem() {
     return this.urlItem;
   },
