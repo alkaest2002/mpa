@@ -36,6 +36,7 @@ function createDownloadLink(blob, filename) {
 }
 
 export default () => ({
+  
   downloadJSON() {
     const baseFileName = getBaseFileName.call(this);
     const dataBlob = new Blob([JSON.stringify(getExportData.call(this))], { type: "application/json" });

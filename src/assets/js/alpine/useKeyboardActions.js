@@ -62,9 +62,12 @@ export default () => ({
   },
 
   handleEscapeKeyActions(appView) {
-    return (!["home", "map"].includes(appView)) 
+    return (!["home", "map", "batteries-letter"].includes(appView)) 
       ? goToUrlRaw.call(this, this.$store.app.history[window.location.href])
-      : appView == "map" && goToUrlRaw.call(this, this.$store.urls.urlItem);
+      : (() => {
+          appView == "map" && goToUrlRaw.call(this, this.$store.urls.urlItem);
+          appView == "batteries-letter" && goToUrl.call(this, [ "batteries" ]);
+        })();
   },
 
   handleAppViewActions(appView, lowercaseKey) {

@@ -11,7 +11,7 @@ export default () => ({
   file: null,
   fileAsText: null,
 
-  initSession(viewName) {
+  initSession(viewName = "session") {
     this.$store.app.currentView = viewName;
   },
 

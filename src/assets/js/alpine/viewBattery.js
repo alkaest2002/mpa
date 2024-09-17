@@ -5,8 +5,8 @@ const { goToCurrentQuestionnaire } = useNavigation();
 
 export default () => ({
 
-  initBattery() {
-    this.$store.app.currentView = "battery";
+  initBattery(viewName = "battery") {
+    this.$store.app.currentView = viewName;
     this.$store.session.data.batteries[this.$store.session.batteryId] = this.$store.session.battery;
     this.$store.session.questionnaireId = 
       Object.values(this.$store.session.questionnaires)

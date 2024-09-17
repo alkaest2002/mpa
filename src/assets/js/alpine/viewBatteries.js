@@ -5,8 +5,8 @@ const { goToUrl } = useNavigation();
 
 export default () => ({
   
-  initBatteries() {
-    this.$store.app.currentView = "batteries";
+  initBatteries(viewName = "batteries") {
+    this.$store.app.currentView = viewName;
   },
 
   selectBatteryButton(batteryId, batteryName, urlBatteryJSON) {
