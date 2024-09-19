@@ -46,19 +46,19 @@
   },
   "norms": {
     "getNorms": "const fn = ({ bio: { gender }, settingId, languageId }, scaleId) => `${gender}.${scaleId}`",
-    "m.tns": "const fn = (raw) => raw + 10",
-    "m.dpr": "const fn = (raw) => raw + 10",
-    "m.ten": "const fn = (raw) => raw + 10",
-    "m.ang": "const fn = (raw) => raw + 10",
-    "m.vig": "const fn = (raw) => raw + 10",
-    "m.ftg": "const fn = (raw) => raw + 10",
-    "m.cnf": "const fn = (raw) => raw + 10",
-    "f.tns": "const fn = (raw) => raw + 15",
-    "f.dpr": "const fn = (raw) => raw + 15",
-    "f.ten": "const fn = (raw) => raw + 15",
-    "f.ang": "const fn = (raw) => raw + 15",
-    "f.vig": "const fn = (raw) => raw + 15",
-    "f.ftg": "const fn = (raw) => raw + 15",
-    "f.cnf": "const fn = (raw) => raw + 15"
+    "m.tns": "const fn = ({ rawScore }) => rawScore + 10",
+    "m.dpr": "const fn = (rawScore) => rawScore + 10",
+    "m.ten": "const fn = (rawScore) => rawScore + 10",
+    "m.ang": "const fn = (rawScore) => rawScore + 10",
+    "m.vig": "const fn = (rawScore) => rawScore + 10",
+    "m.ftg": "const fn = (rawScore) => rawScore + 10",
+    "m.cnf": "const fn = (rawScore) => rawScore + 10",
+    "f.tns": "const fn = (rawScore) => rawScore + 15",
+    "f.dpr": "const fn = (rawScore) => rawScore + 15",
+    "f.ten": "const fn = (rawScore) => rawScore + 15",
+    "f.ang": "const fn = (rawScore) => rawScore + 15",
+    "f.vig": "const fn = (rawScore) => rawScore + 15",
+    "f.ftg": "const fn = (rawScore) => rawScore + 15",
+    "f.cnf": "const fn = (rawScore) => rawScore + 15"
   }
 }

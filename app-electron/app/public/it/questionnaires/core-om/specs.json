@@ -1,7 +1,7 @@
 {
   "name": "Core OM",
   "id": "core-om",
-  "length": 5,
+  "length": 34,
   "likert": {
     "min": 0,
     "max": 4
@@ -9,46 +9,62 @@
   "scales": {
     "wbg": {
       "order": 0,
+      "code": "W",
       "name": "benessere",
-      "straightItems": [1],
-      "reversedItems": []
+      "straightItems": [14, 17],
+      "reversedItems": [4, 31]
     },
     "pro": {
       "order": 1,
+      "code": "P",
       "name": "problemi",
-      "straightItems": [2],
+      "straightItems": [2, 5, 8, 11, 13, 15, 18, 20, 23, 27, 28, 30],
       "reversedItems": []
     },
     "fun": {
       "order": 2,
+      "code": "F",
       "name": "funzionamento",
-      "straightItems": [3],
-      "reversedItems": []
+      "straightItems": [1, 10, 25, 26, 29, 33],
+      "reversedItems": [3, 7, 12, 19, 21, 32]
     },
     "rsk": {
       "order": 3,
+      "code": "R",
       "name": "comportamenti a rischio",
-      "straightItems": [4],
-      "reversedItems": [5]
+      "straightItems": [6, 9, 16, 22, 24, 34],
+      "reversedItems": []
     },
-    "all": {
+    "to1": {
       "order": 4,
+      "code": "TOT-R",
+      "name": "indice di distress tranne comp. a rischio",
+      "straightItems": [1, 2, 5, 8, 10, 11, 13, 14, 15, 17, 18, 20, 23, 25, 26, 27, 28, 29, 30,
+      32],
+      "reversedItems": [3, 4, 7, 12, 19, 21, 31, 33]
+    },
+    "to2": {
+      "order": 5,
+      "code": "TOT",
       "name": "indice di distress generale",
-      "straightItems": [1,2,3,4],
-      "reversedItems": [5]
+      "straightItems": [ 1, 2, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 20, 22, 23, 24, 25,
+      26, 27, 28, 29, 30, 32, 34],
+      "reversedItems": [3, 4, 7, 12, 19, 21, 31, 33]
     }
   },
   "norms": {
     "getNorms": "const fn = ({ bio: { gender }, settingId, languageId }, scaleId) => `${gender}.${scaleId}`",
-    "m.wbg": "const fn = (raw) => raw + 10",
-    "m.pro": "const fn = (raw) => raw + 10",
-    "m.fun": "const fn = (raw) => raw + 10",
-    "m.rsk": "const fn = (raw) => raw + 10",
-    "m.all": "const fn = (raw) => raw + 10",
-    "f.wbg": "const fn = (raw) => raw + 10",
-    "f.pro": "const fn = (raw) => raw + 10",
-    "f.fun": "const fn = (raw) => raw + 10",
-    "f.rsk": "const fn = (raw) => raw + 10",
-    "f.all": "const fn = (raw) => raw + 10"
+    "m.wbg": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.98)/0.69))).toFixed(0)",
+    "m.to1": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.95)/0.55))).toFixed(0)",
+    "m.fun": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-1.04)/0.56))).toFixed(0)",
+    "m.rsk": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.16)/0.42))).toFixed(0)",
+    "m.pro": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.84)/0.60))).toFixed(0)",
+    "m.to2": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.81)/0.50))).toFixed(0)",
+    "f.wbg": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-1.26)/0.85))).toFixed(0)",
+    "f.pro": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.99)/0.65))).toFixed(0)",
+    "f.fun": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-1.01)/0.51))).toFixed(0)",
+    "f.rsk": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.11)/0.33))).toFixed(0)",
+    "f.to1": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-1.03)/0.56))).toFixed(0)",
+    "f.to2": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.87)/0.49))).toFixed(0)"
   }
 }
