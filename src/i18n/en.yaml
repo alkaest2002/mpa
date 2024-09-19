@@ -52,7 +52,7 @@ reportItemText: item text
 reportItemResponse: res
 reportItemLatency: lat
 reportItemLatencyExplain: latency in millisec
-reportItemDeltaLatency: delta lat
+reportItemDeltaLatency: delta
 reportItemDeltaLatencyExplain: delta from median latency in millisec
 reportScaleCode: code
 reportScaleName: scale

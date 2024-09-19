@@ -1,4 +1,6 @@
 {{- $specs := partialCached "reports/questionnaire" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
+{{- $first := .Get "first" | int }}
+{{- $after := .Get "after" | int }}
 <table id="table-answers" class="w-full apa-table">
   <caption class="caption">
     {{ T "reportItemLatency" | strings.FirstUpper }}: {{ T "reportItemLatencyExplain" }},
@@ -14,10 +16,12 @@
     </tr>
   </thead>
   <tbody>
-    {{- range $itemIndex, $item := $specs.items }}
-      {{- $itemNumber := split (add $itemIndex 1 | string) "" }}
-      {{- $itemId :=  slice "0" "0" "0" }}
-      {{- $itemId = $itemId | append $itemNumber }}
+    {{- $rows := first $first (after $after $specs.items) }}
+    {{- range $itemIndex, $item := $rows }}
+      {{- $itemNumber := add $itemIndex $after 1 }}
+      {{- $splittedItemNumber := split ($itemNumber | string) "" }}
+      {{- $itemId := slice "0" "0" "0" }}
+      {{- $itemId = $itemId | append $splittedItemNumber }}
       {{- $itemId = delimit ($itemId | last 3)  "" }}
       <tr>
         <th scope="row">{{ $itemId }}</th>

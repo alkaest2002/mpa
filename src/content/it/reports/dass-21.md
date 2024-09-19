@@ -5,5 +5,5 @@ id: dass-21
 {{< reports/base/page-container >}}
   {{< reports/base/page-header >}}
   {{< reports/base/case-info >}}
-  {{< reports/page-2/table-answers >}}
+  {{< reports/base/table-answers first=3 after=0 >}}
 {{< /reports/base/page-container >}}

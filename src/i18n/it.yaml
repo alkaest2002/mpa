@@ -55,7 +55,7 @@ reportItemText: testo item
 reportItemResponse: ris
 reportItemLatency: lat
 reportItemLatencyExplain: latenza in millisec
-reportItemDeltaLatency: delta lat
+reportItemDeltaLatency: delta
 reportItemDeltaLatencyExplain: delta da latenza mediana in millisec
 reportScaleCode: codice
 reportScaleName: scala

@@ -6,31 +6,32 @@
   --base-border-color: #555555;
   --base-bg-even-color: #ddd;
   --bar-height: 30px;
+  --label-height: 25px;
   --bar-bg-color: #000;
   --content-padding: 50px;
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-weight: normal;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: normal;
   font-size: var(--base-font-size);
   line-height: var(--base-font-lineheight);
 }
 
 @page {
   size: A4;
-  margin: 0;
+  margin: auto;
   padding: var(--content-padding);
   width: 210mm;
   height: 297mm;
 }
 
-body {
-  margin: auto;
-}
-
 body > div {
+  margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
 }
@@ -68,9 +69,13 @@ table {
   caption-side: bottom;
 }
 
-table th {
+th {
   font-weight: bold;
   text-align: left;
+}
+
+td, th {
+  padding: 3px;
 }
 
 thead {
@@ -185,8 +190,8 @@ tbody tr {
 
 .bar-label {
   position: absolute;
-  width: var(--bar-height);
-  height: var(--bar-height);
+  width: var(--label-height);
+  height: var(--label-height);
   top: 0;
   display: flex;
   align-items: center;
@@ -194,8 +199,8 @@ tbody tr {
   text-align: center;
   background-color: #fff;
   border: 2px solid var(--bar-bg-color);
-  font-size: calc(var(--base-font-size) * .7);
-  border-radius: calc(var(--bar-height)/2);
+  font-size: calc(var(--base-font-size) * .8);
+  border-radius: calc(var(--label-height)/2);
   text-overflow: clip;
 }
 
