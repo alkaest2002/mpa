@@ -5,7 +5,7 @@
 {{- $options := slice }}
 
 {{- range $pageIndex, $page := $questionnaire.Pages }}
-  {{- $items = $items | append $page.RawContent}}
+  {{- $items = $items | append $page.RenderShortcodes}}
   {{- if eq $pageIndex 0 }}
     {{- $options = $options | append (slice .Params.options) }}
   {{- else }}

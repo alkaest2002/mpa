@@ -604,6 +604,18 @@ tbody tr {
   left: max(0px, calc(100% - var(--bar-label-width)));
 }
 
+.gender {
+  display: none;
+}
+
+.gender-m-m {
+  display: inline;
+}
+
+.gender-f-f {
+  display: inline;
+}
+
 .setting {
   display: none;
 }
