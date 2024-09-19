@@ -34,7 +34,7 @@
                                     <template x-if="$store.session.getAnswer('{{ .Params.id }}')">
                                         <span>
                                             <span 
-                                                x-show="$store.session.getAnswerValue('{{ .Params.id }}') == ''"
+                                                x-show="$store.session.getAnswerValue('{{ .Params.id }}') === ''"
                                             >
                                                 {{ T "answerWasOmitted" }}
                                             </span>
