@@ -27,7 +27,7 @@ export default () => ({
         questionnaire: { questionnaireId, answers }, 
         urls: { urlQuestionnaireSpecs, urlReportTemplate, urlScoringScript, urlTemplatingScript }
       }));
-      
+
       this.$store.reports.generatingReports = true;
       workerReport.postMessage(workerData);
       
