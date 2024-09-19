@@ -11,6 +11,21 @@
   --content-padding: 50px;
 }
 
+@media print {
+  * {
+    margin: 0;
+    padding: 0; 
+  }
+}
+
+@page {
+  size: A4;
+  margin: 0;
+  padding: 0;
+  width: 210mm;
+  height: 297mm;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,14 +34,6 @@
   font-weight: normal;
   font-size: var(--base-font-size);
   line-height: var(--base-font-lineheight);
-}
-
-@page {
-  size: A4;
-  margin: auto;
-  padding: var(--content-padding);
-  width: 210mm;
-  height: 297mm;
 }
 
 body > div {
@@ -92,6 +99,13 @@ tbody tr {
 
 .page + .page {
   page-break-before: always;
+}
+
+@supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
+  .page {
+    padding: calc(var(--content-padding) / 3);
+  }
+  
 }
 
 .w-full {
