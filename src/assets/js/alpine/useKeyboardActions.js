@@ -99,13 +99,13 @@ export default () => ({
       const elements = this.$store.app.burgerIsOpen ? this.burgerElements : this.tabElements;
       const index = this.$store.app.burgerIsOpen ? "burgerIndex" : "tabIndex";
       this[index] = this.getNewElementIndex(this[index], elements, "next");
-      elements[this[index]]?.click();
+      !this.$store.app.burgerIsOpen && elements[this[index]]?.click();
     },
     ["@keyup.up.window"]() {
       const elements = this.$store.app.burgerIsOpen ? this.burgerElements : this.tabElements;
       const index = this.$store.app.burgerIsOpen ? "burgerIndex" : "tabIndex";
       this[index] = this.getNewElementIndex(this[index], elements, "prev");
-      elements[this[index]]?.click();
+      !this.$store.app.burgerIsOpen && elements[this[index]]?.click();
     },
   },
 
