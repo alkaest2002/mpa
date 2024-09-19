@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    {{- range $itemIndex, $item := $specs.questionnaireItems }}
+    {{- range $itemIndex, $item := $specs.items }}
       {{- $itemNumber := split (add $itemIndex 1 | string) "" }}
       {{- $itemId :=  slice "0" "0" "0" }}
       {{- $itemId = $itemId | append $itemNumber }}
@@ -23,7 +23,7 @@
         <th scope="row">{{ $itemId }}</th>
         <td>{{- $item | safeHTML }}</td>
         <td>
-          {{- $options := index $specs.questionnaireOptions $itemIndex }}
+          {{- $options := index $specs.options $itemIndex }}
           {{- range $options }}
             {{- range $optionValue, $optionText := . }}
               <span class="option option-{{ $optionValue }}-it-{{ $itemId }}#answerValue">{{ $optionText }}</span>

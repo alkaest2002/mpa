@@ -16,12 +16,12 @@
 {{ with $questionnaire.Resources.Get "specs.json" }}
   {{- $questionnaireSpecs := . | unmarshal }}
   {{- range $scaleId, $scale := $questionnaireSpecs.scales }}
-    {{- $scales = $scales | append (dict "scaleId" $scaleId "scaleCode" $scale.code "scaleName" $scale.name "order" $scale.order ) }}
+    {{- $scales = $scales | append (dict "scaleId" $scaleId "code" $scale.code "name" $scale.name "order" $scale.order ) }}
   {{- end }}
 {{ end }}
 
 {{ return dict
-    "questionnaireScales" (sort $scales "order" "asc")
-    "questionnaireItems" $items
-    "questionnaireOptions" $options
+    "scales" (sort $scales "order" "asc")
+    "items" $items
+    "options" $options
 }}

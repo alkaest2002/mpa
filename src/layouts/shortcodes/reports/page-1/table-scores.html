@@ -12,10 +12,10 @@
     </tr>
   </thead>
   <tbody>
-    {{- range $scale := $specs.questionnaireScales }}
+    {{- range $scale := $specs.scales }}
         <tr>
-          <th scope="row">{{ $scale.scaleCode | upper }}</th>
-          <td>{{ $scale.scaleName | strings.FirstUpper }}</td>
+          <th scope="row">{{ $scale.code | upper }}</th>
+          <td>{{ $scale.name | strings.FirstUpper }}</td>
           <td class="text-center">{{ $scale.scaleId }}#rawScore</td>
           <td class="text-center">{{ $scale.scaleId }}#meanScore</td>
           <td class="text-center">{{ $scale.scaleId }}#standardScore</td>

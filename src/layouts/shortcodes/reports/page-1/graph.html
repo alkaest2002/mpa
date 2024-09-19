@@ -1,12 +1,12 @@
 {{- $specs := partialCached "reports/questionnaire" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
 <div class="bars">
     <div class="scale-code">
-      {{- range $scale := $specs.questionnaireScales }}
-        <div>{{ $scale.scaleCode | upper }}</div>
+      {{- range $scale := $specs.scales }}
+        <div>{{ $scale.code | upper }}</div>
       {{- end }}
     </div>
       <div class="scale-bars">
-        {{- range $scale := $specs.questionnaireScales }}
+        {{- range $scale := $specs.scales }}
             <div class="bar">
               <div class="bar-label percentage-{{ $scale.scaleId }}#standardScore">{{ $scale.scaleId }}#standardScore</div>
               <div class="bar-bar"></div>
@@ -14,8 +14,8 @@
         {{- end }}
       </div>
     <div class="scale-code">
-      {{- range $scale := $specs.questionnaireScales }}
-        <div>{{ $scale.scaleCode | upper }}</div>
+      {{- range $scale := $specs.scales }}
+        <div>{{ $scale.code | upper }}</div>
       {{- end }}
     </div>
 </div>
