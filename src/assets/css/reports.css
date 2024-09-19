@@ -167,7 +167,6 @@ tbody tr {
 }
 
 .bar-group > div:first-child,  .bar-group > div:last-child {
-  width: 40px;
   padding-left: var(--base-padding);
   padding-right: var(--base-padding);
   text-align: left;
@@ -175,7 +174,7 @@ tbody tr {
 
 .bar-bar {
   position: relative;
-  width: 100%;
+  flex-grow: 1;
   height: var(--bar-label-height);
   display: flex;
   align-items: center;
@@ -634,6 +633,10 @@ tbody tr {
 }
 
 .option- {
+  display: inline;
+}
+
+.option-0-0 {
   display: inline;
 }
 

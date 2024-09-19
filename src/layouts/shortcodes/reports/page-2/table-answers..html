@@ -15,10 +15,13 @@
   </thead>
   <tbody>
     {{- range $itemIndex, $item := $specs.questionnaireItems }}
-      {{ $itemId := delimit (slice "0" "0" "0" ((add $itemIndex 1) | string) | last 3)  "" }}
+      {{- $itemNumber := split (add $itemIndex 1 | string) "" }}
+      {{- $itemId :=  slice "0" "0" "0" }}
+      {{- $itemId = $itemId | append $itemNumber }}
+      {{- $itemId = delimit ($itemId | last 3)  "" }}
       <tr>
         <th scope="row">{{ $itemId }}</th>
-        <td>{{ $item }}</td>
+        <td>{{- $item | safeHTML }}</td>
         <td>
           {{- $options := index $specs.questionnaireOptions $itemIndex }}
           {{- range $options }}

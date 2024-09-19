@@ -14,7 +14,7 @@
   <tbody>
     {{- range $scale := $specs.questionnaireScales }}
         <tr>
-          <th scope="row">{{ $scale.scaleId | upper }}</th>
+          <th scope="row">{{ $scale.scaleCode | upper }}</th>
           <td>{{ $scale.scaleName | strings.FirstUpper }}</td>
           <td class="text-center">{{ $scale.scaleId }}#rawScore</td>
           <td class="text-center">{{ $scale.scaleId }}#meanScore</td>

@@ -1,5 +1,5 @@
 {{- define "main" }}
-{{- $paginator := .Paginate .RegularPages site.Params.paginateSize.maps }}
+{{- $paginator := .Paginate (.RegularPages.ByParam "order") site.Params.paginateSize.maps }}
 <div x-data="useKeyboardActions" class="h-full">
     <div 
         x-data="viewMap" 

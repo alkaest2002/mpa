@@ -28,12 +28,12 @@ export default computeScores = ({ testee, session, answers, specs }) => {
     return { reversedScore, reversedOmissions };
   }
 
-  const computeStandardScore = (scaleId, rawScore, specs, testee, session) => {
+  const computeStandardScore = (scaleId, rawScore, meanScore, specs, testee, session) => {
     const getNormsFunction = specs.norms.getNorms;
     const currentNormsId = eval?.(`"use strict";${getNormsFunction};fn(${JSON.stringify({ ...testee, ...session })},"${scaleId}")`);
     const currentNorms = specs.norms[currentNormsId];
-    const standardScore =  eval?.(`"use strict";${currentNorms};fn(${rawScore})`);
-    return Math.round(standardScore, 0);
+    const standardScore =  eval?.(`"use strict";${currentNorms};fn(${JSON.stringify({ rawScore, meanScore })})`);
+    return standardScore;
   }
   
   let scores = {};
@@ -43,8 +43,8 @@ export default computeScores = ({ testee, session, answers, specs }) => {
     const { reversedScore, reversedOmissions } = computeRawScoreReversed(specs, reversedItems, answersValues);
     const omissions = straightOmissions + reversedOmissions;
     const rawScore = straightScore + reversedScore;
-    const meanScore = rawScore / (straightItems.length + reversedItems.length - omissions);
-    const standardScore = computeStandardScore(scaleId, rawScore, specs, testee, session);
+    const meanScore = Number((rawScore / (straightItems.length + reversedItems.length - omissions)).toFixed(2));
+    const standardScore = computeStandardScore(scaleId, rawScore, meanScore, specs, testee, session);
     scores = { ...scores, [scaleId] : { scaleId, name, rawScore, meanScore, standardScore, omissions }};
   };
   

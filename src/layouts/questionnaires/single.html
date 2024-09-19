@@ -24,7 +24,7 @@
                 data-title="{{ $questionnaire.LinkTitle }} ({{ add $itemOrder 1 }}/{{ len $questionnaire.Pages }})"
                 class="text-sm text-center text-gray-500 mb-6"
             ></p>
-            <h1 class="text-xl font-bold mb-9">{{ add $itemOrder 1 }}. {{ .RawContent | safeHTML }}</h1>
+            <h1 class="text-xl font-bold mb-9">{{ add $itemOrder 1 }}. {{ .RenderShortcodes }}</h1>
             <div class="grid grid-cols-1 gap-4">
                 {{- range .Params.options }}
                     {{- range $optionValue, $optionLabel := . }}
