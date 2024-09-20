@@ -6,9 +6,11 @@ letter: D
 
 cascade:
   options:
-    - 0: non mi si addice per niente
-    - 1: mi si addice per pochi aspetti, o a volte
-    - 2: mi si addice per diversi aspetti, o per buona parte delle volte
-    - 3: mi si addice per molti aspetti, o per la maggior parte delle volte
+    - 0: non mi è mai accaduto
+    - 1: mi è capitato qualche volta
+    - 2: mi è capitato con una certa frequenza
+    - 3: mi è capitato quasi sempre
 ---
-Per favore, legga ogni frase e indichi quanto la frase le si addice considerando gli ultimi giorni. Non impieghi troppo tempo per dare le sue risposte.
+<p>Per favore, legga ogni frase e poi indichi con quale frequenza la situazione descritta si è verificata negli ultimi sette (7) giorni. Tenga presente che non esistono risposte giuste o sbagliate.</p>
+<p>Non impieghi troppo tempo per rispondere a ciascuna affermazione; spesso la prima
+risposta è la più accurata.</p>
