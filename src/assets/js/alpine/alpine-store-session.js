@@ -33,7 +33,7 @@ export default (Alpine) => ({
 
   get currentQuestionnaireIsComplete() {
     const { questionnaireLength } = this.currentQuestionnaire;
-    return (Object.keys(this.data.questionnaires[this.questionnaireId]) || []).length == questionnaireLength;
+    return (Object.keys(this.data.questionnaires[this.questionnaireId]) || []).length === questionnaireLength;
   },
 
   get currentAnswer() {
@@ -45,7 +45,7 @@ export default (Alpine) => ({
   },
 
   get answerId() {
-    return this.currentAnswerValue == "" 
+    return this.currentAnswerValue === "" 
       ? "no-response"
       : this.currentAnswerValue;
   },
