@@ -180,7 +180,16 @@ tbody tr {
 .scale-code {
   padding-left: var(--base-padding);
   padding-right: var(--base-padding);
-  text-align: left;
+}
+
+.scale-code:first-child > div {
+  display: flex;
+  justify-content: end;
+}
+
+.scale-code:last-child > div {
+  display: flex;
+  justify-content: start;
 }
 
 .scale-code > div {
