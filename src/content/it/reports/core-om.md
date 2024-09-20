@@ -11,10 +11,10 @@ id: core-om
 {{< reports/base/page-container >}}
   {{< reports/base/page-header >}}
   {{< reports/base/case-info >}}
-  {{< reports/base/table-answers first=17 after=0 >}}
+  {{< reports/base/table-answers first=25 after=0 >}}
 {{< /reports/base/page-container >}}
 {{< reports/base/page-container >}}
   {{< reports/base/page-header >}}
   {{< reports/base/case-info >}}
-  {{< reports/base/table-answers first=17 after=17 >}}
+  {{< reports/base/table-answers first=10 after=25 >}}
 {{< /reports/base/page-container >}}
