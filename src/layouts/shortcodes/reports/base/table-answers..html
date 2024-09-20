@@ -21,8 +21,8 @@
       {{- $itemNumber := add $itemIndex $after 1 }}
       {{- $splittedItemNumber := split ($itemNumber | string) "" }}
       {{- $itemId := slice "0" "0" "0" }}
-      {{- $itemId = $itemId | append $splittedItemNumber }}
-      {{- $itemId = delimit ($itemId | last 3)  "" }}
+      {{- $itemId = $itemId | append $splittedItemNumber | last 3 }}
+      {{- $itemId = delimit $itemId "" }}
       <tr>
         <th scope="row">{{ $itemId }}</th>
         <td>{{- $item | safeHTML }}</td>
