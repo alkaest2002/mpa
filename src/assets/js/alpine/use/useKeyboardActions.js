@@ -44,30 +44,34 @@ export default () => ({
   },
 
   handleKeyAction({ lowercaseKey, ctrlKey, escKey, appView }) {
-    ctrlKey && this.handleCtrlActions(lowercaseKey);
+    ctrlKey && this.handleCtrlActions(appView, lowercaseKey);
     escKey && !this.$store.app.burgerIsOpen && this.handleEscapeKeyActions(appView);
     (!ctrlKey && !escKey) && this.handleAppViewActions(appView, lowercaseKey);
   },
 
-  handleCtrlActions(lowercaseKey) {
+  handleCtrlActions(appView, lowercaseKey) {
     return {
-      a: () => goToUrl.call(this, ["session", "session-set"]),
-      b: () => this.$store.session.batteryId && goToCurrentBattery.call(this),
-      d: () => this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen,
-      h: () => goToUrl.call(this, ["base"]),
-      i: () => this.$store.session.itemId && goToCurrentItem.call(this),
-      m: () => this.$store.session.itemId && goToCurrentQuestionnaireMap.call(this),
-      q: () => goToCurrentQuestionnaire.call(this),
+      "a": () => appView == "home" && goToUrl.call(this, ["session", "session-set"]),
+      "b": () => this.$store.session.batteryId && goToCurrentBattery.call(this),
+      "d": () => this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen,
+      "h": () => goToUrl.call(this, [ "base" ]),
+      "i": () => this.$store.session.itemId && goToCurrentItem.call(this),
+      "m": () => this.$store.session.itemId && goToCurrentQuestionnaireMap.call(this),
+      "q": () => goToCurrentQuestionnaire.call(this),
     }[lowercaseKey]?.();
   },
 
   handleEscapeKeyActions(appView) {
-    return (![ "home", "questionnaire-map", "batteries-letter" ].includes(appView)) 
-      ? goToUrlRaw.call(this, this.$store.app.history[window.location.href])
-      : (() => {
-          appView == "questionnaire-map" && goToUrlRaw.call(this, this.$store.urls.urlItem);
-          appView == "batteries-letter" && goToUrl.call(this, [ "batteries" ]);
-        })();
+    return {
+      "session-set": () => goToUrl.call(this, [ "base" ]),
+      "batteries": () => goToUrl.call(this, [ "session", "session-set" ]),
+      "batteries-letter": () => goToUrl.call(this, [ "batteries" ]),
+      "battery": () =>goToUrl.call(this, [ "session", "session-open" ]),
+      "questionnaire-intro": () => goToCurrentBattery.call(this),
+      "questionnaire-item": () => goToUrlRaw.call(this, this.$store.app.history[window.location.href]),
+      "questionnaire-map": () => goToUrlRaw.call(this, this.$store.urls.urlItem),
+      "session-open": () => goToUrlRaw.call(this, this.$store.app.history[window.location.href]),
+    }[appView]?.();
   },
 
   handleAppViewActions(appView, lowercaseKey) {

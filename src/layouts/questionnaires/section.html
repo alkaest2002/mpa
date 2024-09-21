@@ -8,26 +8,26 @@
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
         {{- partial "base/burger" (dict "currentPage" . "questionnairesPage" true "questionnairePage" true "mapPage" true "mapPageIndex" 1) .Section }}
-        <div x-bind="opacity" class="w-full flex-grow">
+        <div x-bind="opacity" class="w-full flex-grow flex flex-col">
             <p class="text-sm text-center text-gray-500 mb-6">
                 {{ $questionnaire.LinkTitle  }}
             </p>
             <h1 class="text-xl font-bold mb-9">{{ .Title | lower | strings.FirstUpper }}</h1>
-            <div class="mb-9">{{ .RawContent | safeHTML }}</div>
+            <div class="mb-6">{{ .RawContent | safeHTML }}</div>
         </div>
-    </div>
-    <div x-bind="opacity" class="w-full flex justify-center">
-        {{- range (.Pages.ByParam "order").Limit 1 }}
-            {{- with .PrevInSection }}
-                <a x-ref="page-right" href="{{ .RelPermalink }}" class="hidden">{{ T "next" }}</a>
+        <div x-bind="opacity" class="w-full flex justify-center">
+            {{- range (.Pages.ByParam "order").Limit 1 }}
+                {{- with .PrevInSection }}
+                    <a x-ref="page-right" href="{{ .RelPermalink }}" class="hidden">{{ T "next" }}</a>
+                {{- end }}
+                <a 
+                    x-ref="main-button"
+                    class="inline-block w-96 px-6 py-3 bg-blue-500 hover:bg-blue-700 rounded-full text-white text-center"
+                    href="{{ .RelPermalink }}">
+                    {{ T "next" }}
+                </a>
             {{- end }}
-            <a 
-                x-ref="main-button"
-                class="inline-block w-96 px-6 py-3 bg-blue-500 hover:bg-blue-700 rounded-full text-white text-center"
-                href="{{ .RelPermalink }}">
-                {{ T "next" }}
-            </a>
-        {{- end }}
+        </div>
     </div>
 </div>
 {{- end }}
