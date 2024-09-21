@@ -8,7 +8,7 @@
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
         {{- partialCached "base/burger" (dict "currentPage" .) .Section }}
-        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex-grow flex flex-col">
+        <div x-bind="opacity" class="w-full flex-grow flex flex-col">
             <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
             {{- if gt $paginator.TotalPages 0 }}
                 <div class="mb-6">{{ .Content }}</div>
@@ -17,7 +17,7 @@
                 <p class="text-gray-700 italic">{{ T "empty" | strings.FirstUpper | safeHTML }}</p>
             {{- end }}
         </div>
-        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center">
+        <div x-bind="opacity" class="w-full flex justify-center">
             <a
                 x-ref="main-button"
                 x-bind="goHomeButton"

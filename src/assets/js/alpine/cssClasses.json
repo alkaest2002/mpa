@@ -1,4 +1,21 @@
 {
+  "display": {
+    "hidden": {
+      "hidden": true
+    },
+    "inline": {
+      "inline": true
+    },
+    "block": {
+      "block": true
+    },
+    "inline-block": {
+      "inline-block": true
+    },
+    "opacity-20": {
+      "opacity-20": true
+    }
+  },
   "selected": { 
     "bg-blue-50": true, 
     "hover:bg-blue-50": true 

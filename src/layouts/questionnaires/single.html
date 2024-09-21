@@ -15,7 +15,7 @@
         {{- partialCached "base/burger" (dict "currentPage" . "questionnairesPage" true
             "questionnairePage" true "mapPage" true "mapPageIndex" $mapPageIndex) $questionnaire.Title  $mapPageIndex }}
         <div 
-            :class="{ 'opacity-20': $store.app.burgerIsOpen }"
+            x-bind="opacity"
             class="w-full flex-grow"
         >
             <p
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center" >
+        <div x-bind="opacity" class="w-full flex justify-center" >
             {{- with .NextInSection }}
                 <a x-ref="page-left"  href="{{ .RelPermalink }}" class="hidden">{{ T "next" }}</a>
             {{- end }}

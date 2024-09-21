@@ -4,13 +4,11 @@
         x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative">
         {{- partialCached "base/burger" (dict "currentPage" . ) .Section }}
-        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex-grow">
-            <div class="flex-grow">
-                <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
-                <div class="mb-9">{{ .Content }}</div>
-            </div>
+        <div x-bind="opacity" class="w-full flex-grow">
+            <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
+            <div class="mb-9">{{ .Content }}</div>
         </div>
-        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center" >
+        <div x-bind="opacity" class="w-full flex justify-center" >
             {{- with .Site.GetPage "session/session-open" }}
                 <a 
                     x-ref="main-button" 

@@ -10,17 +10,6 @@ export default () => ({
     this.$refs["title"].innerText = this.$refs["title"].dataset.title;
   },
 
-  showDot(itemId) {
-    return {
-      [":class"]() {
-        if (!this.$store.session.getAnswer(itemId)) return css.grayDot;
-        return this.$store.session.getAnswerValue(itemId) !== ""
-          ? css.blueDot
-          : css.orangeDot;
-      }
-    }
-  },
-
   itemMapButton(itemId, urlItem) {
     return {
       ["@click.prevent"]() {
@@ -39,6 +28,37 @@ export default () => ({
         }
       }
     };
+  },
+
+  answerWasOmittedLabel(itemId) {
+    return {
+      [":class"]() {
+        return this.$store.session.getAnswerValue(itemId) === ""
+          ? css.display.inline
+          : css.display.hidden;
+      }
+    }
+  },
+
+  answerWasGivenLabel(itemId) {
+    return {
+      [":class"]() {
+        return this.$store.session.getAnswerValue(itemId) !== ""
+          ? css.display.inline
+          : css.display.hidden;
+      }
+    }
+  },
+
+  showDot(itemId) {
+    return {
+      [":class"]() {
+        if (!this.$store.session.getAnswer(itemId)) return css.grayDot;
+        return this.$store.session.getAnswerValue(itemId) !== ""
+          ? css.blueDot
+          : css.orangeDot;
+      }
+    }
   },
 
   goToItemButton: {

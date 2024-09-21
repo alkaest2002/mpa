@@ -9,7 +9,7 @@
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
         {{- partialCached "base/burger" (dict "currentPage" .) .Section }}
-        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="flex-grow w-full">
+        <div x-bind="opacity" class="flex-grow w-full">
             <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
             <div class="mb-6">{{ .Content }}</div>
             <div class="grid grid-cols-1 gap-4">
@@ -37,7 +37,7 @@
                 {{- end }}
             </div>
         </div>
-        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center">
+        <div x-bind="opacity" class="w-full flex justify-center">
             <a 
                 x-ref="main-button" 
                 x-bind="goNextButton"

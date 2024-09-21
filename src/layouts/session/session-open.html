@@ -8,14 +8,14 @@
     >
         {{- partialCached "base/burger" (dict "currentPage" .) .Section }}
         <div
-            :class="{ 'opacity-20': $store.app.burgerIsOpen }"
+            x-bind="opacity"
             class="flex-grow w-full"
         >
             <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
             <div class="mb-9">{{ .Content }}</div>
             {{- partialCached "session/testee-module" . }}
         </div>
-        <div :class="{ 'opacity-20': $store.app.burgerIsOpen }" class="w-full flex justify-center">
+        <div x-bind="opacity" class="w-full flex justify-center">
             <a 
                 x-ref="main-button" 
                 x-bind="openSessionButton"

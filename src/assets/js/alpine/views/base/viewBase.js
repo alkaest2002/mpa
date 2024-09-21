@@ -1,3 +1,4 @@
+import css from "../../cssClasses.json";
 
 export default () => ({
   
@@ -74,5 +75,13 @@ export default () => ({
     ["@htmx:after-swap.camel"]() {
       this.$store.app.burgerIsOpen = false; 
     },
+  },
+
+  opacity: {
+    [":class"]() {
+      return this.$store.app.burgerIsOpen
+        ? css.display["opacity-20"]
+        : null 
+    }
   }
 });
