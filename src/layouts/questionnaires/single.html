@@ -7,8 +7,8 @@
 {{- $mapPageIndex := div .Params.order $paginateSize | add 1 }}
 <div x-data="useKeyboardActions" class="h-full">
     <div 
-        x-data="viewItem" 
-        x-init="initItem('{{ $itemId }}', '{{ .RelPermalink }}'); initKeyboardActions('answerId')"
+        x-data="viewQuestionnaireItem" 
+        x-init="initQuestionnaireItem('{{ $itemId }}', '{{ .RelPermalink }}'); initKeyboardActions('answerId')"
         x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >

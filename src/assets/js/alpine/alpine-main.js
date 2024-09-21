@@ -1,22 +1,34 @@
 import Alpine from "alpinejs";
 import persist from "@alpinejs/persist";
-import storeApp from "./alpine-store-app";
-import storeTestee from "./alpine-store-testee";
-import storeReports from "./alpine-store-reports";
-import storeSession from "./alpine-store-session";
-import storeUrls from "./alpine-store-urls";
-import useKeyboardActions from "./useKeyboardActions";
-import viewBase from "./viewBase";
-import viewHome from "./viewHome";
-import viewTutorial from "./viewTutorial";
-import viewBatteries from "./viewBatteries";
-import viewBattery from "./viewBattery";
-import viewIntro from "./viewIntro";
-import viewItem from "./viewItem";
-import viewMap from "./viewMap";
-import viewSession from "./viewSession";
-import viewSessionSet from "./viewSessionSet";
-import viewNotifications from "./viewNotifications";
+
+import storeApp from "./stores/alpine-store-app";
+import storeTestee from "./stores/alpine-store-testee";
+import storeReports from "./stores/alpine-store-reports";
+import storeSession from "./stores/alpine-store-session";
+import storeUrls from "./stores/alpine-store-urls";
+
+import useKeyboardActions from "./use/useKeyboardActions";
+
+import viewBase from "./views/base/viewBase";
+import viewHome from "./views/home/viewHome";
+import viewTutorial from "./views/tutorial/viewTutorial";
+
+import viewBatteries from "./views/batteries/viewBatteries";
+import viewBattery from "./views/batteries/viewBattery";
+
+import viewQuestionnaireIntro from "./views/questionnaires/viewQuestionnaireIntro";
+import viewQuestionnaireItem from "./views/questionnaires/viewQuestionnaireItem";
+import viewQuestionnaireMap from "./views/questionnaires/viewQuestionnaireMap";
+
+import viewSessionSet from "./views/session/viewSessionSet";
+import viewSessionOpen from "./views/session/viewSessionOpen";
+import viewSessionClose from "./views/session/viewSessionClose";
+import viewSessionPause from "./views/session/viewSessionPause";
+import viewSessionResume from "./views/session/viewSessionResume";
+
+import viewQuestionnaireComplete from "./views/notifications/viewQuestionnaireComplete";
+import viewQuestionnaireInComplete from "./views/notifications/viewQuestionnaireIncomplete";
+import viewBatteryComplete from "./views/notifications/viewBatteryComplete";
 
 Alpine.plugin(persist);
 Alpine.store("app", storeApp(Alpine));
@@ -28,13 +40,18 @@ Alpine.data("useKeyboardActions", useKeyboardActions)
 Alpine.data("viewBase", viewBase);
 Alpine.data("viewHome", viewHome);
 Alpine.data("viewTutorial", viewTutorial);
+Alpine.data("viewSessionSet", viewSessionSet);
+Alpine.data("viewSessionOpen", viewSessionOpen);
+Alpine.data("viewSessionClose", viewSessionClose);
+Alpine.data("viewSessionPause", viewSessionPause);
+Alpine.data("viewSessionResume", viewSessionResume);
 Alpine.data("viewBatteries", viewBatteries);
 Alpine.data("viewBattery", viewBattery);
-Alpine.data("viewIntro", viewIntro);
-Alpine.data("viewItem", viewItem);
-Alpine.data("viewMap", viewMap);
-Alpine.data("viewSession", viewSession);
-Alpine.data("viewSessionSet", viewSessionSet);
-Alpine.data("viewNotifications", viewNotifications);
+Alpine.data("viewBatteryComplete", viewBatteryComplete);
+Alpine.data("viewQuestionnaireIntro", viewQuestionnaireIntro);
+Alpine.data("viewQuestionnaireItem", viewQuestionnaireItem);
+Alpine.data("viewQuestionnaireMap", viewQuestionnaireMap);
+Alpine.data("viewQuestionnaireComplete", viewQuestionnaireComplete);
+Alpine.data("viewQuestionnaireInComplete", viewQuestionnaireInComplete);
 
 window.Alpine ?? (window.Alpine = Alpine).start();

@@ -3,8 +3,8 @@
 <div x-data="useKeyboardActions" class="h-full flex flex-col items-center justify-center p-9 relative">
     {{- partial "base/burger" (dict "currentPage" . "questionnairesPage" true "questionnairePage" true "mapPage" true "mapPageIndex" 1) .Section }}
     <div
-        x-data="viewIntro"
-        x-init="initIntro(); initKeyboardActions('menu');"
+        x-data="viewQuestionnaireIntro"
+        x-init="initQuestionnaireIntro(); initKeyboardActions('menu');"
         x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         :class="{ 'opacity-20': $store.app.burgerIsOpen }"
         class="w-full flex-grow"

@@ -81,7 +81,7 @@
             </div>
             <div class="py-2 bg-slate-100 shadow-md shadow-gray-300 rounded-xl">
                 {{- $counter = add $counter 1 }}
-                {{- $href := ($currentPage.Site.GetPage "session/pause-session").RelPermalink }}
+                {{- $href := ($currentPage.Site.GetPage "session/session-pause").RelPermalink }}
                 <a 
                     href="{{ $href }}"
                     :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
@@ -89,7 +89,7 @@
                     {{- T "pauseSession" }}
                 </a>
                 {{- $counter = add $counter 1 }}
-                {{- $href := ($currentPage.Site.GetPage "session/resume-session").RelPermalink }}
+                {{- $href := ($currentPage.Site.GetPage "session/session-resume").RelPermalink }}
                 <a 
                     href="{{ $href }}"
                     :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
@@ -97,7 +97,7 @@
                     {{- T "resumeSession" }}
                 </a>
                 {{- $counter = add $counter 1 }}
-                {{- $href := ($currentPage.Site.GetPage "session/close-session").RelPermalink }}
+                {{- $href := ($currentPage.Site.GetPage "session/session-close").RelPermalink }}
                 <a 
                     href="{{ $href }}"
                     :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
