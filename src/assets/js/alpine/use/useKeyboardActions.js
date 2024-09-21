@@ -45,7 +45,7 @@ export default () => ({
 
   handleKeyAction({ lowercaseKey, ctrlKey, escKey, appView }) {
     ctrlKey && this.handleCtrlActions(lowercaseKey);
-    escKey && this.handleEscapeKeyActions(appView);
+    escKey && !this.$store.app.burgerIsOpen && this.handleEscapeKeyActions(appView);
     (!ctrlKey && !escKey) && this.handleAppViewActions(appView, lowercaseKey);
   },
 
