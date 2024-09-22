@@ -6,7 +6,7 @@
         x-bind="{ ...yArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
-        {{- partialCached "base/burger" (dict "currentPage" . "questionnairesPage" true) .Section }}
+        {{- partialCached "base/burger" (dict "currentPage" .) .Section }}
         <div x-bind="opacity" class="w-full flex-grow">
             <div>
                 <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>

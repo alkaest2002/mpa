@@ -6,7 +6,7 @@
         x-bind="{ ...yArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
-        {{- partialCached "base/burger" (dict "currentPage" .) .Section }}
+        {{- partialCached "base/burger" (dict "currentPage" . "homePage" true) .Section }}
         <div 
             x-bind="opacity"
             class="flex-grow w-full"

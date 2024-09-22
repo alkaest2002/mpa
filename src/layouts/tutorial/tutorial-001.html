@@ -1,9 +1,9 @@
 {{- define "main" }}
 <div x-data="useKeyboardActions" class="h-full">
-    <div x-data="viewTutorial" x-init="initTutorial('do'); initKeyboardActions('tutorialId');"
+    <div x-data="viewTutorial" x-init="initTutorial('on'); initKeyboardActions('tutorialId');"
         x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative">
-        {{- partialCached "base/burger" (dict "currentPage" . ) .Section }}
+        {{- partialCached "base/burger" (dict "currentPage" . "homePage" true) .Section }}
         <div x-bind="opacity" class="w-full flex-grow">
             <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
             <div class="mb-9">{{ .Content }}</div>

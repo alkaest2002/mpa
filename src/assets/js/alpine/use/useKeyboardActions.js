@@ -66,11 +66,12 @@ export default () => ({
       "session-set": () => goToUrl.call(this, [ "base" ]),
       "batteries": () => goToUrl.call(this, [ "session", "session-set" ]),
       "batteries-letter": () => goToUrl.call(this, [ "batteries" ]),
-      "battery": () =>goToUrl.call(this, [ "session", "session-open" ]),
+      "battery": () => goToUrl.call(this, [ "session", "session-open" ]),
+      "tutorial": () => goToUrl.call(this, [ "base" ]),
       "questionnaire-intro": () => goToCurrentBattery.call(this),
-      "questionnaire-item": () => goToUrlRaw.call(this, this.$store.app.history[window.location.href]),
+      "questionnaire-item": () => goToCurrentQuestionnaire.call(this),
       "questionnaire-map": () => goToUrlRaw.call(this, this.$store.urls.urlItem),
-      "session-open": () => goToUrlRaw.call(this, this.$store.app.history[window.location.href]),
+      "session-open": () => goToUrl.call(this, [ "base" ]),
     }[appView]?.();
   },
 

@@ -64,14 +64,6 @@ export default () => ({
   },
 
   htmxEvents: {
-    ["@htmx:before-swap.camel"]({ detail: { xhr: { responseURL }}}) {
-        // excelude url with map.html
-        [responseURL, window.location.href].every(el => el.search(/map\.html|batteries\/[a-z]{1}\//) === -1)
-          // exclude urls visited more than once
-          && !Object.keys(this.$store.app.history).includes(responseURL)
-          // store relationship as child --> parent
-          && (this.$store.app.history[responseURL] = window.location.href);
-    },
     ["@htmx:after-swap.camel"]() {
       this.$store.app.burgerIsOpen = false; 
     },

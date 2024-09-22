@@ -1,4 +1,5 @@
 {{- $currentPage := .currentPage }}
+{{- $mapPageIndex := .mapPageIndex }}
 {{- $counter := -1 }}
 <div class="absolute top-3 right-3 flex justify-center z-50" x-data>
     <div class="relative">
@@ -13,14 +14,21 @@
             x-transition.origin.top.left
             class="absolute right-0 mt-2 w-80">
             <div class="mb-4 py-2 bg-slate-100 shadow-md shadow-gray-300 rounded-xl">
-                {{- $counter = add $counter 1 }}
                 {{- $href := ($currentPage.Site.GetPage "home").RelPermalink }}
-                <a 
-                    href="{{ $href }}"
-                    :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
-                    class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
-                    {{- T "home" }}
-                </a>
+                {{- with .homePage }}
+                    {{- $counter = add $counter 1 }}
+                    <a 
+                        href="{{ $href }}"
+                        :class="{ 'bg-blue-100': burgerIndex == {{ $counter }} }"
+                        class="burger-element flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm hover:bg-blue-100">
+                        {{- T "home" }}
+                    </a>
+                {{- else }}
+                    <span
+                        class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-3 py-1.5 text-left text-sm text-gray-400 cursor-not-allowed">
+                        {{ T "home" }}
+                    </span>
+                {{- end }}
                 {{- with .questionnairesPage }}
                     {{- $counter = add $counter 1 }}
                     <a 
@@ -59,8 +67,8 @@
                     {{- end }}
                     {{- with $questionnaire.OutputFormats.Get "map" }}
                         {{- $mapPageUrl := "" }}
-                        {{- if gt $.mapPageIndex 1  }}
-                            {{- $mapPageUrl = urls.JoinPath $questionnaire.RelPermalink "page" $.mapPageIndex "map.html" }}
+                        {{- if gt $mapPageIndex 1  }}
+                            {{- $mapPageUrl = urls.JoinPath $questionnaire.RelPermalink "page" $mapPageIndex "map.html" }}
                         {{- else }}
                             {{- $mapPageUrl = .RelPermalink }}
                         {{- end }}
