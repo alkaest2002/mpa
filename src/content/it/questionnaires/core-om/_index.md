@@ -13,10 +13,10 @@ cascade:
     - 4: molto spesso o sempre
 ---
 {{< reports/base/item-male >}}
-  <p>Il quesitonario CORE-OM contiene 34 affermazioni che possono descrivere come si è sentito nel corso della scorsa settimana.</p>
+  <p class="mb-3">Il quesitonario CORE-OM contiene affermazioni che possono descrivere come si è sentito nel corso della scorsa settimana.</p>
   <p>Legga ogni affermazione e selezioni l'opzione di risposta che meglio corrisponde a quello che ha provato.</p>
 {{< /reports/base/item-male >}}
 {{< reports/base/item-female >}}
-  <p>Il quesitonario CORE-OM contiene 34 affermazioni che possono descrivere come si è sentita nel corso della scorsa settimana.</p>
+  <p class="mb-3">>Il quesitonario CORE-OM contiene 34 affermazioni che possono descrivere come si è sentita nel corso della scorsa settimana.</p>
   <p>Legga ogni affermazione e selezioni l'opzione di risposta che meglio corrisponde a quello che ha provato.</p>
 {{< /reports/base/item-female >}}
