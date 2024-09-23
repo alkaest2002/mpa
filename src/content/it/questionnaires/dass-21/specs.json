@@ -2,6 +2,7 @@
   "name": "DASS 21",
   "id": "dass-21",
   "length": 21,
+  "maxOmitted": 3,
   "likert": {
     "min": 0,
     "max": 3

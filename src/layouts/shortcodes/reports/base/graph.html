@@ -1,4 +1,4 @@
-{{- $specs := partialCached "reports/questionnaire" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
+{{- $specs := partialCached "reports/questionnaire-specs" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
 <div class="bars">
     <div class="scale-code">
       {{- range $scale := $specs.scales }}

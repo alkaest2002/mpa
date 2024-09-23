@@ -4,7 +4,7 @@
 {{- $items := slice }}
 {{- $options := slice }}
 
-{{- range $pageIndex, $page := $questionnaire.Pages }}
+{{- range $pageIndex, $page := $questionnaire.Pages.ByParam "order" }}
   {{- $items = $items | append $page.RenderShortcodes}}
   {{- if eq $pageIndex 0 }}
     {{- $options = $options | append (slice .Params.options) }}
@@ -13,9 +13,9 @@
   {{- end }}
 {{- end }}
 
-{{ with $questionnaire.Resources.Get "specs.json" }}
-  {{- $questionnaireSpecs := . | unmarshal }}
-  {{- range $scaleId, $scale := $questionnaireSpecs.scales }}
+{{- with $questionnaire.Resources.Get "specs.json" }}
+  {{- $questionnaireJson := . | unmarshal }}
+  {{- range $scaleId, $scale := $questionnaireJson.scales }}
     {{- $scales = $scales | append (dict "scaleId" $scaleId "code" $scale.code "name" $scale.name "order" $scale.order ) }}
   {{- end }}
 {{ end }}

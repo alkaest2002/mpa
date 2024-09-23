@@ -1,4 +1,4 @@
-{{- $specs := partialCached "reports/questionnaire" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
+{{- $specs := partialCached "reports/questionnaire-specs" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
 {{- $first := .Get "first" | int }}
 {{- $after := .Get "after" | int }}
 <table id="table-answers" class="w-full apa-table">

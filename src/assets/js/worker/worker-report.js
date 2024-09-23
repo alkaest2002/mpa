@@ -30,11 +30,10 @@ export default onmessage = async ({ data }) => {
     fetch(urlQuestionnaireSpecs).then((res) => res.json())
   ]);
   
-  const scores = Object.keys(specs).length > 0 
+  const scores = Object.keys(specs?.scales || []).length > 0 
     ? computeScores({ testee, session, answers, specs })
     : {};
-  
-  const questionnaireReport = generateReport({ testee, session, answers, scores, template });
+    const questionnaireReport = generateReport({ testee, session, answers, scores, template });
   
   postMessage({ 
     questionnaireId,

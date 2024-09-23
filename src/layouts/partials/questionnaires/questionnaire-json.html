@@ -1,0 +1,4 @@
+{{- $questionnairesSection := site.GetPage "questionnaires" }}
+{{- $questionnaire := $questionnairesSection.GetPage .questionnaireId }}
+{{- $questionnaireJson := $questionnaire.Resources.Get "specs.json" | unmarshal }}
+{{- return $questionnaireJson }}

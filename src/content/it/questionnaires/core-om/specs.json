@@ -2,6 +2,7 @@
   "name": "Core OM",
   "id": "core-om",
   "length": 34,
+  "maxOmitted": 3,
   "likert": {
     "min": 0,
     "max": 4

@@ -1,5 +1,7 @@
 {{ define "main" }}
 {{- $questionnaire := .Parent }}
+{{- $questionnaireId := $questionnaire.Params.id }}
+{{- $questionnaireJson := partialCached "questionnaires/questionnaire-json" (dict "questionnaireId" $questionnaireId) $questionnaireId }}
 {{- $itemId := .Params.id }}
 {{- $itemOrder := .Params.order }}
 {{- $itemText := chomp .RawContent }}
@@ -58,7 +60,13 @@
                         class="tab-element w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded mr-2">
                     <div class="ms-2 text-sm">
                         <label for="no-response-checkbox">{{ T "noResponse" }}</label>
-                        <p id="helper-checkbox-text" class="font-normal text-gray-400">{{ T "noResponseWarning" }}</p>
+                        <p id="helper-checkbox-text" class="font-normal text-gray-400">
+                            {{- if isset $questionnaireJson "maxOmitted" }}
+                                {{ T "noResponseWarningWithCount" (dict "count" $questionnaireJson.maxOmitted) }}
+                            {{- else }}
+                                {{ T "noResponseWarning" }}
+                            {{ end }}
+                            </p>
                     </div>
                 </div>
             </div>

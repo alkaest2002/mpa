@@ -2,63 +2,9 @@
   "name": "Poms",
   "id": "specs",
   "length": 5,
+  "maxOmitted": 1,
   "likert": {
     "min": 0,
     "max": 4
-  },
-  "scales": {
-    "tns": {
-      "order": 0,
-      "name": "tensione",
-      "straightItems": [1],
-      "reversedItems": []
-    },
-    "dpr": {
-      "order": 1,
-      "name": "depressione",
-      "straightItems": [2],
-      "reversedItems": []
-    },
-    "ang": {
-      "order": 2,
-      "name": "rabbia",
-      "straightItems": [],
-      "reversedItems": [4]
-    },
-    "vig": {
-      "order": 3,
-      "name": "vigore",
-      "straightItems": [],
-      "reversedItems": [5]
-    },
-    "ftg": {
-      "order": 4,
-      "name": "affaticamento",
-      "straightItems": [1, 2],
-      "reversedItems": [3,4,5]
-    },
-    "cnf": {
-      "order": 5,
-      "name": "confusione",
-      "straightItems": [1, 2],
-      "reversedItems": []
-    }
-  },
-  "norms": {
-    "getNorms": "const fn = ({ bio: { gender }, settingId, languageId }, scaleId) => `${gender}.${scaleId}`",
-    "m.tns": "const fn = ({ rawScore }) => rawScore + 10",
-    "m.dpr": "const fn = (rawScore) => rawScore + 10",
-    "m.ten": "const fn = (rawScore) => rawScore + 10",
-    "m.ang": "const fn = (rawScore) => rawScore + 10",
-    "m.vig": "const fn = (rawScore) => rawScore + 10",
-    "m.ftg": "const fn = (rawScore) => rawScore + 10",
-    "m.cnf": "const fn = (rawScore) => rawScore + 10",
-    "f.tns": "const fn = (rawScore) => rawScore + 15",
-    "f.dpr": "const fn = (rawScore) => rawScore + 15",
-    "f.ten": "const fn = (rawScore) => rawScore + 15",
-    "f.ang": "const fn = (rawScore) => rawScore + 15",
-    "f.vig": "const fn = (rawScore) => rawScore + 15",
-    "f.ftg": "const fn = (rawScore) => rawScore + 15",
-    "f.cnf": "const fn = (rawScore) => rawScore + 15"
   }
 }
