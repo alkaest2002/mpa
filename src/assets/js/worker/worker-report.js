@@ -17,6 +17,7 @@ export default onmessage = async ({ data }) => {
     urls: { urlReportTemplate, urlQuestionnaireSpecs }
   } = data;
   
+  // add latencies
   const itemIds = Object.keys(answers);
   const answersLatencies = itemIds.map((itemId) => answers[itemId].answerLatency);
   const medianLatency = median(answersLatencies);
@@ -25,17 +26,22 @@ export default onmessage = async ({ data }) => {
       answers[itemId]["deltaAnswerLatency"] = answers[itemId].answerLatency - medianLatency;
     });
 
+  // fetch data
   const [template, specs] = await Promise.all([
     fetch(urlReportTemplate).then((res) => res.text()), 
     fetch(urlQuestionnaireSpecs).then((res) => res.json())
   ]);
+  
   const questionnireHasScales = Object.keys(specs?.scales || []).length > 0;
+  
   const scores = questionnireHasScales 
     ? computeScores({ testee, session, answers, specs })
     : {};
+  
   const normsBiblio = questionnireHasScales
     ? eval?.(`"use strict";${specs.norms.getNormsBiblio};fn(${JSON.stringify({ ...testee, ...session })})`)
     : {}
+  
   const questionnaireReport = generateReport({ testee, session, answers, scores, normsBiblio: { ref: normsBiblio } , template });
   
   postMessage({ 
