@@ -1,4 +1,11 @@
+{{- $items := dict }}
 {{- $questionnairesSection := site.GetPage "questionnaires" }}
 {{- $questionnaire := $questionnairesSection.GetPage .questionnaireId }}
-{{- $questionnaireJson := $questionnaire.Resources.Get "specs.json" | unmarshal }}
-{{- return $questionnaireJson }}
+{{- $questionnaireJsonFromData := index site.Data.questionnaires .questionnaireId }}
+{{- $questionnaireJsonFromPage := $questionnaire.Resources.Get "specs.json" | unmarshal }}
+{{- range $questionnaire.Pages.ByParam "order" }}
+  {{- $currentItem := dict "id" .Params.id "order" .Params.order "text" .RenderShortcodes "options" .Params.options }}
+  {{- $items = $items | merge (dict .Params.id $currentItem ) }}
+{{- end }}
+{{- $merged := merge $questionnaireJsonFromData $questionnaireJsonFromPage (dict "items" $items) }}
+{{- return $merged  }}

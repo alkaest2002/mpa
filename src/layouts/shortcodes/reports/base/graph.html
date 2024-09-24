@@ -1,20 +1,20 @@
-{{- $specs := partialCached "reports/questionnaire-specs" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
+{{- $specs := partialCached "questionnaires/questionnaire-json" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
 <div class="bars">
     <div class="scale-code">
-      {{- range $scale := $specs.scales }}
+      {{- range $scale := (sort $specs.scales "order") }}
         <div>{{ $scale.code | upper }}</div>
       {{- end }}
     </div>
       <div class="scale-bars">
-        {{- range $scale := $specs.scales }}
+        {{- range $scale := (sort $specs.scales "order") }}
             <div class="bar">
-              <div class="bar-label percentage-{{ $scale.scaleId }}#standardScore">{{ $scale.scaleId }}#standardScore</div>
+              <div class="bar-label percentage-{{ $scale.id }}#standardScore">{{ $scale.id }}#standardScore</div>
               <div class="bar-bar"></div>
             </div>
         {{- end }}
       </div>
     <div class="scale-code">
-      {{- range $scale := $specs.scales }}
+       {{- range $scale := (sort $specs.scales "order") }}
         <div>{{ $scale.code | upper }}</div>
       {{- end }}
     </div>

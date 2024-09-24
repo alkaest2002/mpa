@@ -29,8 +29,8 @@ export default computeScores = ({ testee, session, answers, specs }) => {
   }
 
   const computeStandardScore = (scaleId, rawScore, meanScore, specs, testee, session) => {
-    const getNormsFunction = specs.norms.getNorms;
-    const currentNormsId = eval?.(`"use strict";${getNormsFunction};fn(${JSON.stringify({ ...testee, ...session })},"${scaleId}")`);
+    const getNormsFn = specs.norms.getNorms;
+    const currentNormsId = eval?.(`"use strict";${getNormsFn};fn(${JSON.stringify({ ...testee, ...session })},"${scaleId}")`);
     const currentNorms = specs.norms[currentNormsId];
     const standardScore =  eval?.(`"use strict";${currentNorms};fn(${JSON.stringify({ rawScore, meanScore })})`);
     return standardScore;
@@ -47,6 +47,5 @@ export default computeScores = ({ testee, session, answers, specs }) => {
     const standardScore = computeStandardScore(scaleId, rawScore, meanScore, specs, testee, session);
     scores = { ...scores, [scaleId] : { scaleId, name, rawScore, meanScore, standardScore, omissions }};
   };
-  
   return scores;
 };

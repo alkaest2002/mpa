@@ -1,10 +1,3 @@
 {
-  "name": "Panas",
-  "id": "panas",
-  "length": 2,
-  "maxOmitted": 1,
-  "likert": {
-    "min": 0,
-    "max": 4
-  }
+  "name": "Panas"
 }

@@ -1,4 +1,4 @@
-export default generateReport = ({ testee, session, answers, scores, template }) => {
+export default generateReport = ({ testee, session, answers, scores, normsBiblio, template }) => {
   
   const converObjectToPlaceholders = (obj, rootKey = null) => {
     let placeHolders = [];
@@ -20,7 +20,7 @@ export default generateReport = ({ testee, session, answers, scores, template })
   placeHolders = [...placeHolders, ...converObjectToPlaceholders(session, "testee")];
   placeHolders = [...placeHolders, ...converObjectToPlaceholders(answers, null)];
   placeHolders = [...placeHolders, ...converObjectToPlaceholders(scores, null)];
+  placeHolders = [...placeHolders, ...converObjectToPlaceholders(normsBiblio, "biblio")];
   placeHolders.forEach(([key, val]) => template = template.replaceAll(key, val));
-  
   return template;
 };

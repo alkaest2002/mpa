@@ -1,6 +1,2 @@
-{{- $jsonDict := dict }}
-{{ range .Resources.Match "*.json" }}   
-    {{- $data := . | unmarshal }}
-    {{- $jsonDict = merge $jsonDict $data }}
-{{- end }}
-{{- $jsonDict | jsonify }}
+{{- $jsonData := partialCached "questionnaires/questionnaire-json" (dict "questionnaireId" .Params.id) .Params.id }}
+{{- $jsonData | jsonify }}

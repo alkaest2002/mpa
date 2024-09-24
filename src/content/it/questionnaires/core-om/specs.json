@@ -1,59 +1,32 @@
 {
   "name": "Core OM",
-  "id": "core-om",
-  "length": 34,
-  "maxOmitted": 3,
-  "likert": {
-    "min": 0,
-    "max": 4
-  },
   "scales": {
     "wbg": {
-      "order": 0,
       "code": "W",
-      "name": "benessere",
-      "straightItems": [14, 17],
-      "reversedItems": [4, 31]
+      "name": "benessere"
     },
     "pro": {
-      "order": 1,
       "code": "P",
-      "name": "problemi",
-      "straightItems": [2, 5, 8, 11, 13, 15, 18, 20, 23, 27, 28, 30],
-      "reversedItems": []
+      "name": "problemi"
     },
     "fun": {
-      "order": 2,
-      "code": "F",
-      "name": "funzionamento",
-      "straightItems": [1, 10, 25, 26, 29, 33],
-      "reversedItems": [3, 7, 12, 19, 21, 32]
+      "code": "F"
     },
     "rsk": {
-      "order": 3,
       "code": "R",
-      "name": "comportamenti a rischio",
-      "straightItems": [6, 9, 16, 22, 24, 34],
-      "reversedItems": []
+      "name": "comportamenti a rischio"
     },
     "to1": {
-      "order": 4,
       "code": "TOT-R",
-      "name": "indice di distress tranne comp. a rischio",
-      "straightItems": [1, 2, 5, 8, 10, 11, 13, 14, 15, 17, 18, 20, 23, 25, 26, 27, 28, 29, 30,
-      32],
-      "reversedItems": [3, 4, 7, 12, 19, 21, 31, 33]
+      "name": "indice di distress tranne comp. a rischio"
     },
     "to2": {
-      "order": 5,
       "code": "TOT",
-      "name": "indice di distress generale",
-      "straightItems": [ 1, 2, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 20, 22, 23, 24, 25,
-      26, 27, 28, 29, 30, 32, 34],
-      "reversedItems": [3, 4, 7, 12, 19, 21, 31, 33]
+      "name": "indice di distress generale"
     }
   },
   "norms": {
+    "getNormsBiblio": "const fn = () => 'Palmieri G, Evans C, Hansen V, Brancaleoni G, Ferrari S, Porcelli P, Reitano F, Rigatelli M. Validation of the Italian version of the Clinical Outcomes in Routine Evaluation Outcome Measure (CORE-OM). Clin Psychol Psychother. 2009 Sep-Oct;16(5):444-9. doi: 10.1002/cpp.646. PMID: 19701881.'",
     "getNorms": "const fn = ({ bio: { gender }, settingId, languageId }, scaleId) => `${gender}.${scaleId}`",
     "m.wbg": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.98)/0.69))).toFixed(0)",
     "m.to1": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.95)/0.55))).toFixed(0)",

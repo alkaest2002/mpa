@@ -1,4 +1,4 @@
-{{- $specs := partialCached "reports/questionnaire-specs" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
+{{- $specs := partialCached "questionnaires/questionnaire-json" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
 {{- $first := .Get "first" | int }}
 {{- $after := .Get "after" | int }}
 <table id="table-answers" class="w-full apa-table">
@@ -16,27 +16,26 @@
     </tr>
   </thead>
   <tbody>
-    {{- $rows := first $first (after $after $specs.items) }}
+    {{- $rows := first $first (after $after (sort $specs.items "order")) }}
     {{- range $itemIndex, $item := $rows }}
       {{- $itemNumber := add $itemIndex $after 1 }}
       {{- $splittedItemNumber := split ($itemNumber | string) "" }}
-      {{- $itemId := slice "0" "0" "0" }}
+      {{- $itemId := slice "0" "0" "0 " }}
       {{- $itemId = $itemId | append $splittedItemNumber | last 3 }}
       {{- $itemId = delimit $itemId "" }}
       <tr>
         <th scope="row">{{ $itemId }}</th>
-        <td>{{- $item | safeHTML }}</td>
+        <td>{{- $item.text  | safeHTML }}</td>
         <td>
-          {{- $options := index $specs.options $itemIndex }}
-          {{- range $options }}
+          {{- range $item.options }}
             {{- range $optionValue, $optionText := . }}
-              <span class="option option-{{ $optionValue }}-it-{{ $itemId }}#answerValue">{{ $optionText }}</span>
+              <span class="option option-{{ $optionValue }}-{{ $item.id }}#answerValue">{{ $optionText }}</span>
             {{- end }}
           {{- end }}
-          <span class="option option-it-{{ $itemId }}#answerValue italic">{{ T "noResponse" }}</span>
+          <span class="option option-{{ $item.id }}#answerValue italic">{{ T "noResponse" }}</span>
         </td>
-        <td class="text-center">it-{{ $itemId }}#answerLatency</td>
-        <td class="text-center">it-{{ $itemId }}#deltaAnswerLatency</td>
+        <td class="text-center">{{ $item.id }}#answerLatency</td>
+        <td class="text-center">{{ $item.id }}#deltaAnswerLatency</td>
       </tr>
     {{- end }}
   </tbody>

@@ -1,0 +1,33 @@
+{
+  "name": "DASS 21",
+  "scales": {
+    "dep": {
+      "code": "DEP",
+      "name": "depression"
+    },
+    "anx": {
+      "code": "ANX",
+      "name": "anxiety"
+    },
+    "str": {
+      "code": "STR",
+      "name": "stress"
+    },
+    "tot": {
+      "code": "TOT",
+      "name": "total"
+    }
+  },
+  "norms": {
+    "getNormsBiblio": "const fn = ({ settingId }) => ''",
+    "getNorms": "const fn = ({ settingId }, scaleId) => `${settingId === 'clinical' ? 'clinical' : 'normal'}.${scaleId}`",
+    "normal.dep": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-2.4)/2.6))).toFixed(0)",
+    "normal.anx": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-3.5)/3.2))).toFixed(0)",
+    "normal.str": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-6.4)/3.8))).toFixed(0)",
+    "normal.tot": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-12.3)/8.3))).toFixed(0)",
+    "clinical.dep": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-5.5)/4.6))).toFixed(0)",
+    "clinical.anx": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-7.7)/5.6))).toFixed(0)",
+    "clinical.str": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-8.9)/4.2))).toFixed(0)",
+    "clinical.tot": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-22.1)/12.1))).toFixed(0)"
+  }
+}

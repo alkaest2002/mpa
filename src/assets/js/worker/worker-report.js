@@ -29,11 +29,14 @@ export default onmessage = async ({ data }) => {
     fetch(urlReportTemplate).then((res) => res.text()), 
     fetch(urlQuestionnaireSpecs).then((res) => res.json())
   ]);
-  
-  const scores = Object.keys(specs?.scales || []).length > 0 
+  const questionnireHasScales = Object.keys(specs?.scales || []).length > 0;
+  const scores = questionnireHasScales 
     ? computeScores({ testee, session, answers, specs })
     : {};
-    const questionnaireReport = generateReport({ testee, session, answers, scores, template });
+  const normsBiblio = questionnireHasScales
+    ? eval?.(`"use strict";${specs.norms.getNormsBiblio};fn(${JSON.stringify({ ...testee, ...session })})`)
+    : {}
+  const questionnaireReport = generateReport({ testee, session, answers, scores, normsBiblio: { ref: normsBiblio } , template });
   
   postMessage({ 
     questionnaireId,
