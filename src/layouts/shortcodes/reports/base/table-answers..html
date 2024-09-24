@@ -20,7 +20,7 @@
     {{- range $itemIndex, $item := $rows }}
       {{- $itemNumber := add $itemIndex $after 1 }}
       {{- $splittedItemNumber := split ($itemNumber | string) "" }}
-      {{- $itemId := slice "0" "0" "0 " }}
+      {{- $itemId := slice "0" "0" "0" }}
       {{- $itemId = $itemId | append $splittedItemNumber | last 3 }}
       {{- $itemId = delimit $itemId "" }}
       <tr>
