@@ -5,6 +5,7 @@ id: core-om
 letter: C
 
 cascade:
+  itemType: "single"
   options:
     - 0: not at all
     - 1: only occasionally

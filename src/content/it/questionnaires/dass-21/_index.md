@@ -5,6 +5,7 @@ id: dass-21
 letter: D
 
 cascade:
+  itemType: "single"
   options:
     - 0: non mi è mai accaduto
     - 1: mi è capitato qualche volta
