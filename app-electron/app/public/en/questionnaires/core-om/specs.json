@@ -1,54 +1,45 @@
 {
   "name": "Core OM",
-  "id": "core-om",
-  "length": 5,
-  "likert": {
-    "min": 0,
-    "max": 4
-  },
   "scales": {
     "wbg": {
-      "order": 0,
-      "name": "benessere",
-      "straightItems": [1],
-      "reversedItems": []
+      "code": "W",
+      "name": "well-being"
     },
     "pro": {
-      "order": 1,
-      "name": "problemi",
-      "straightItems": [2],
-      "reversedItems": []
+      "code": "P",
+      "name": "problems"
     },
     "fun": {
-      "order": 2,
-      "name": "funzionamento",
-      "straightItems": [3],
-      "reversedItems": []
+      "code": "F",
+      "name": "functioning"
     },
     "rsk": {
-      "order": 3,
-      "name": "comportamenti a rischio",
-      "straightItems": [4],
-      "reversedItems": [5]
+      "code": "R",
+      "name": "risk"
     },
-    "all": {
-      "order": 4,
-      "name": "indice di distress generale",
-      "straightItems": [1,2,3,4],
-      "reversedItems": [5]
+    "to1": {
+      "code": "TOT-R",
+      "name": "all minus risk"
+    },
+    "to2": {
+      "code": "TOT",
+      "name": "all"
     }
   },
   "norms": {
-    "getNorms": "const fn = ({ bio: { gender }, settingId, languageId }, scaleId) => `${gender}.${scaleId}`",
-    "m.wbg": "const fn = (raw) => raw + 10",
-    "m.pro": "const fn = (raw) => raw + 10",
-    "m.fun": "const fn = (raw) => raw + 10",
-    "m.rsk": "const fn = (raw) => raw + 10",
-    "m.all": "const fn = (raw) => raw + 10",
-    "f.wbg": "const fn = (raw) => raw + 10",
-    "f.pro": "const fn = (raw) => raw + 10",
-    "f.fun": "const fn = (raw) => raw + 10",
-    "f.rsk": "const fn = (raw) => raw + 10",
-    "f.all": "const fn = (raw) => raw + 10"
+    "getNormsBiblio": "const fn = () => 'Evans, C., Connell, J., Barkham, M., Margison, F., McGrath, G., Mellor-Clark, J., & Audin, K. (2002). Towards a standardised brief outcome measure: Psychometric properties and utility of the CORE–OM. The British Journal of Psychiatry, 180(1), 51-60.'",
+    "getNorms": "const fn = ({ bio: { gender }, settingId }, scaleId) => `${gender}.${scaleId}`",
+    "m.wbg": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.68)/0.71))).toFixed(0)",
+    "m.pro": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.78)/0.64))).toFixed(0)",
+    "m.fun": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-.83)/0.62))).toFixed(0)",
+    "m.rsk": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.23)/0.47))).toFixed(0)",
+    "m.to1": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.79)/0.59))).toFixed(0)",
+    "m.to2": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.69)/0.53))).toFixed(0)",
+    "f.wbg": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-1.10)/0.87))).toFixed(0)",
+    "f.pro": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-1)/0.76))).toFixed(0)",
+    "f.fun": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-.86)/0.67))).toFixed(0)",
+    "f.rsk": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.15)/0.4))).toFixed(0)",
+    "f.to1": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-.95)/0.7))).toFixed(0)",
+    "f.to2": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-0.81)/0.61))).toFixed(0)"
   }
 }
