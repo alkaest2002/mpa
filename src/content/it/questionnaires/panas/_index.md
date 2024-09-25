@@ -5,7 +5,6 @@ id: panas
 letter: P
 
 cascade:
-  itemType: "multiple"
   options:
     - 1: opzione 1
     - 2: opzione 2
