@@ -9,7 +9,7 @@ export default () => ({
   noResponse: false,
 
   initQuestionnaireItem(itemId, urlItem) {
-    this.$store.app.currentView = "questionnaire-item";
+    this.$store.app.currentView = "questionnaire-item-single";
     this.$store.session.itemId = itemId;
     this.$store.urls.urlItem = urlItem;
     this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
@@ -26,9 +26,9 @@ export default () => ({
     return {
       ["@click.prevent"]() {
         if (this.$store.session.currentAnswerValue?.length == 0 && answerData.answerValue === null) {
-          this.deleteAnswer();
+          this.$store.session.deleteAnswer(this.$store.session.itemId);
         } else {
-          this.setAnswer({ 
+          this.$store.session.setAnswer({ 
             ...answerData, 
             answerLatency: this.cumulatedEpoch + (Date.now() - this.epoch),
           });
@@ -76,14 +76,6 @@ export default () => ({
     [":class"]() {
       return this.shouldGoNext ? css.enabledButton : css.disabledButton;
     },
-  },
-
-  setAnswer(answerData) {
-    this.$store.session.setAnswer(answerData);
-  },
-
-  deleteAnswer() {
-    this.$store.session.deleteAnswer(this.$store.session.itemId);
   },
 
   get shouldGoNext() {
