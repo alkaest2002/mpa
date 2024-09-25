@@ -4,7 +4,7 @@ const { goToCurrentQuestionnaire } = useNavigation();
 
 export default () => ({
 
-  initQuestionnaireIncomplte() {
+  initQuestionnaireIncomplete() {
     this.$store.app.currentView = "questionnaire-incomplete";
   },
 
