@@ -76,7 +76,7 @@ export default () => ({
   },
 
   handleAppViewActions(appView, lowercaseKey) {
-    return [ "batteries", "batteries-letter" ].includes(appView)  
+    [ "batteries", "batteries-letter" ].includes(appView)  
       && this.alphabetLowerCase.includes(lowercaseKey) 
       && goToUrl.call(this, [ "batteries", lowercaseKey ]);
   },
