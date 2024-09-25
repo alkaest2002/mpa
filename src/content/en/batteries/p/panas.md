@@ -5,4 +5,4 @@ batteryType: self
 questionnaires:
 - panas
 ---
-Batteria costituita dal solo questionario PANAS.
+The battery consists of only the PANAS questionnaire.
