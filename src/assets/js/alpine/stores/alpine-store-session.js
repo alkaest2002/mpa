@@ -91,6 +91,7 @@ export default (Alpine) => ({
     const answerValue = singleAnswer
      ? [ answerData.answerValue ]
      : [ ...this.currentAnswerValue, answerData.answerValue ];
+    // filter out null values and duplicate values
     answerData.answerValue = answerValue
       .filter((el) => el !== null && answerValue.join().indexOf(el) == answerValue.join().lastIndexOf(el));
     this.data.questionnaires[this.questionnaireId] ??= {};
