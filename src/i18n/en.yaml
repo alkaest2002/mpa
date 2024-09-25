@@ -36,8 +36,9 @@ multipleQuestionnaires: questionnaires
 name: name
 next: next
 noResponse: I do not intend to answer
-noResponseWarning: 'omitted answers may invalidate the questionnaire' 
-noResponseWarningWithCount: 'the questionnaire is not valid with {{ .count }} or more omitted responses'
+noResponseWarningMild: omitted answers may invalidate the questionnaire 
+noResponseWarningStrong: Attention! Omitted answers will invalidate the questionnaire 
+noResponseWarningWithCount: the questionnaire is not valid with {{ .count }} or more omitted responses
 noUploadedFile: no file selected
 ok: ok
 optionalData: optional data

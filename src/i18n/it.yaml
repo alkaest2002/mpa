@@ -36,7 +36,8 @@ multipleQuestionnaires: questionari
 name: nome
 next: avanti
 noResponse: non intendo rispondere
-noResponseWarning: 'le risposte omesse possono invalidare il questionario' 
+noResponseWarningMild: 'le risposte omesse possono invalidare il questionario' 
+noResponseWarningStrong: 'attenzione! Le risposte omesse invalidano il questionario' 
 noResponseWarningWithCount: 'il questionario non è valido con {{ .count }} o più risposte omesse'
 noUploadedFile: nessun file selezionato
 ok: ok
