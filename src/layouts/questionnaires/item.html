@@ -62,9 +62,13 @@
                         <label for="no-response-checkbox">{{ T "noResponse" }}</label>
                         <p id="helper-checkbox-text" class="font-normal text-gray-400">
                             {{- if isset $questionnaireJson "maxOmitted" }}
-                                {{ T "noResponseWarningWithCount" (dict "count" $questionnaireJson.maxOmitted) }}
+                                {{- if gt $questionnaireJson.maxOmitted 0 }}
+                                    {{ T "noResponseWarningWithCount" (dict "count" $questionnaireJson.maxOmitted) }}
+                                {{- else }}
+                                    {{ T "noResponseWarningStrong" }}
+                                {{- end }}
                             {{- else }}
-                                {{ T "noResponseWarning" }}
+                                {{ T "noResponseWarningMild" }}
                             {{ end }}
                             </p>
                     </div>
