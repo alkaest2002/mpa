@@ -1,9 +1,9 @@
 export default computeScores = ({ testee, session, answers, specs }) => {
 
-  const getAnswersProp = (data, prop = "answerValue") => {
+  const getAnswersValues = (data) => {
     return Object.values(data)
-    .sort((el) => el.order)
-    .map((el) => el[prop]);
+      .sort((el) => el.order)
+      .map((el) => el["answerValue"].reduce((acc, itr) => acc += itr, 0));
   }
   
   const computeRawScoreStraight = (_, items, answers) => {
@@ -37,7 +37,7 @@ export default computeScores = ({ testee, session, answers, specs }) => {
   }
   
   let scores = {};
-  const answersValues = getAnswersProp(answers, "answerValue");
+  const answersValues = getAnswersValues(answers)
   for (const [scaleId, { name, straightItems, reversedItems }] of Object.entries(specs.scales)) {
     const { straightScore, straightOmissions } = computeRawScoreStraight(specs, straightItems, answersValues);
     const { reversedScore, reversedOmissions } = computeRawScoreReversed(specs, reversedItems, answersValues);

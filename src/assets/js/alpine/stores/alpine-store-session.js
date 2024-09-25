@@ -45,7 +45,7 @@ export default (Alpine) => ({
   },
 
   get answerId() {
-    return this.currentAnswerValue === "" 
+    return this.currentAnswerValue && this.currentAnswerValue.length == 0 
       ? "no-response"
       : this.currentAnswerValue;
   },
@@ -87,7 +87,12 @@ export default (Alpine) => ({
     return this.data.questionnaires?.[this.questionnaireId]?.[itemId];
   },
 
-  setAnswer(answerData) {
+  setAnswer(answerData, singleAnswer = true) {
+    const answerValue = singleAnswer
+     ? [ answerData.answerValue ]
+     : [ ...this.currentAnswerValue, answerData.answerValue ];
+    answerData.answerValue = answerValue
+      .filter((el) => el !== null && answerValue.join().indexOf(el) == answerValue.join().lastIndexOf(el));
     this.data.questionnaires[this.questionnaireId] ??= {};
     this.data.questionnaires[this.questionnaireId][this.itemId] = answerData;
   },

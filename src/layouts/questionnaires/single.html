@@ -52,7 +52,7 @@
                     class="mt-12 pt-4 border-t border-slate-300 flex items-center"
                 >
                     {{- $answerData := dict  "order" $itemOrder "itemId" $itemText
-                        "answerValue" "" | jsonify }}
+                        "answerValue" nil | jsonify }}
                     <input 
                         type="checkbox"
                         x-model="noResponse" 

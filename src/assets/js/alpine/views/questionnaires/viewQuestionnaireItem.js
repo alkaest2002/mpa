@@ -12,7 +12,7 @@ export default () => ({
     this.$store.app.currentView = "questionnaire-item";
     this.$store.session.itemId = itemId;
     this.$store.urls.urlItem = urlItem;
-    this.noResponse = this.$store.session.currentAnswerValue === "";
+    this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
   },
 
@@ -25,7 +25,7 @@ export default () => ({
   itemOption: (answerData) => {
     return {
       ["@click.prevent"]() {
-        if (this.$store.session.currentAnswerValue === "" && answerData.answerValue === "") {
+        if (this.$store.session.currentAnswerValue?.length == 0 && answerData.answerValue === null) {
           this.deleteAnswer();
         } else {
           this.setAnswer({ 
@@ -34,11 +34,11 @@ export default () => ({
           });
         }
         this.$nextTick(() => {
-          this.noResponse = this.$store.session.currentAnswerValue === "";
+          this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
         })
       },
       [":class"]() {
-        return this.$store.session.currentAnswerValue === answerData.answerValue
+        return (this.$store.session.currentAnswerValue || []).includes(answerData.answerValue) 
           ? css.selected
           : css.nonSelected;
       },
@@ -87,7 +87,6 @@ export default () => ({
   },
 
   get shouldGoNext() {
-    const val = this.$store.session.currentAnswerValue;
-    return (typeof val === "number" && Number.isFinite(val)) || this.noResponse;
+    return this.$store.session.currentAnswerValue?.length > 0 || this.noResponse;
   },
 });
