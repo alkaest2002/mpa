@@ -27,7 +27,7 @@ import viewSessionPause from "./views/session/viewSessionPause";
 import viewSessionResume from "./views/session/viewSessionResume";
 
 import viewQuestionnaireComplete from "./views/notifications/viewQuestionnaireComplete";
-import viewQuestionnaireInComplete from "./views/notifications/viewQuestionnaireIncomplete";
+import viewQuestionnaireIncomplete from "./views/notifications/viewQuestionnaireIncomplete";
 import viewBatteryComplete from "./views/notifications/viewBatteryComplete";
 
 Alpine.plugin(persist);
@@ -52,6 +52,6 @@ Alpine.data("viewQuestionnaireIntro", viewQuestionnaireIntro);
 Alpine.data("viewQuestionnaireItem", viewQuestionnaireItem);
 Alpine.data("viewQuestionnaireMap", viewQuestionnaireMap);
 Alpine.data("viewQuestionnaireComplete", viewQuestionnaireComplete);
-Alpine.data("viewQuestionnaireInComplete", viewQuestionnaireInComplete);
+Alpine.data("viewQuestionnaireIncomplete", viewQuestionnaireIncomplete);
 
 window.Alpine ?? (window.Alpine = Alpine).start();
