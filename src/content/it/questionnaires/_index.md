@@ -18,8 +18,13 @@ cascade:
 
   - _target:
       kind: section
+    layout: section
     outputs:
       - html
       - json
       - map
+
+  - _target:
+      kind: page
+    layout: item
 ---

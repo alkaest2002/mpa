@@ -5,7 +5,6 @@ id: core-om
 letter: C
 
 cascade:
-  itemType: "single"
   options:
     - 0: mai
     - 1: di rado

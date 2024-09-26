@@ -4,13 +4,12 @@
 {{- $questionnaireJson := partialCached "questionnaires/questionnaire-json" (dict "questionnaireId" $questionnaireId) $questionnaireId }}
 {{- $itemId := .Params.id }}
 {{- $itemOrder := .Params.order }}
-{{- $itemText := chomp .RawContent }}
 {{- $paginateSize := site.Params.paginateSize.maps }}
 {{- $mapPageIndex := div .Params.order $paginateSize | add 1 }}
 <div x-data="useKeyboardActions" class="h-full">
     <div 
-        x-data="viewQuestionnaireItem" 
-        x-init="initQuestionnaireItem('{{ $itemId }}', '{{ .RelPermalink }}'); initKeyboardActions('answerId')"
+        x-data="viewQuestionnaireItemMultiple" 
+        x-init="initQuestionnaireItemMultiple('{{ $itemId }}', '{{ .RelPermalink }}'); initKeyboardActions('answerId')"
         x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
@@ -38,6 +37,7 @@
                 {{- range .Params.options }}
                     {{- range $optionValue, $optionLabel := . }}
                         {{- $answerData := dict "order" $itemOrder "itemId" $itemId "answerValue" ( $optionValue | int) | jsonify }}
+                        <!-- [html-validate-disable attribute-allowed-values] -->
                         <div 
                             x-ref="tab-{{ $optionValue }}"
                             x-bind="itemOption({{ $answerData }})"
@@ -45,19 +45,19 @@
                         >
                             {{ $optionLabel }}
                         </div>
-                        {{- end }}
+                    {{- end }}
                 {{- end }}
                 <div 
                     x-ref="tab-no-response"
                     class="mt-12 pt-4 border-t border-slate-300 flex items-center"
                 >
-                    {{- $answerData := dict  "order" $itemOrder "itemId" $itemText
-                        "answerValue" nil | jsonify }}
+                    {{- $answerData := dict  "order" $itemOrder "itemId" $itemId "answerValue" nil | jsonify }}
                     <input 
                         type="checkbox"
                         x-model="noResponse" 
                         x-bind="itemOption({{ $answerData }})"
-                        class="tab-element w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded mr-2">
+                        class="tab-element w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded mr-2"
+                    >
                     <div class="ms-2 text-sm">
                         <label for="no-response-checkbox">{{ T "noResponse" }}</label>
                         <p id="helper-checkbox-text" class="font-normal text-gray-400">
