@@ -18,10 +18,20 @@
   },
   "selected": { 
     "bg-blue-50": true, 
-    "hover:bg-blue-50": true 
+    "hover:bg-blue-50": true,
+    "border": true,
+    "border-border-transparent": true 
+  },
+  "selectedWithRing": { 
+    "bg-blue-50": true, 
+    "hover:bg-blue-50": true,
+    "border": true,
+    "border-blue-500": true
   },
   "nonSelected": { 
-    "hover:bg-gray-100": true 
+    "hover:bg-gray-100": true,
+    "border": true,
+    "border-border-transparent": true 
   },
   "nonSelectable": {
     "opacity-50": true,

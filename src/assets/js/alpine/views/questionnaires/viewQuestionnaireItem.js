@@ -26,21 +26,17 @@ export default () => ({
   itemOption: (answerData) => {
     return {
       ["@click.prevent"]() {
-        const c1 = this.$store.session.currentAnswerValue?.length === 0 && answerData.answerValue?.length === 0;
+        const answerLatency =  this.cumulatedEpoch + (Date.now() - this.epoch)
+        const c1 = this.$store.session.currentAnswerValue?.length === 0 && answerData.answerValue.length === 0;
         const c2 = JSON.stringify(this.$store.session.currentAnswerValue) === JSON.stringify(answerData.answerValue);
         if (c1 || c2) {
           this.$store.session.deleteAnswer(this.$store.session.itemId);
-          this.actionType === "mouse" && (this.tabIndex = -1);
+          this.tabIndex = -1;
         } else {
-          this.$store.session.setAnswer({ 
-            ...answerData, 
-            answerLatency: this.cumulatedEpoch + (Date.now() - this.epoch),
-          });
-          this.actionType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
+          this.$store.session.setAnswer({ ...answerData, answerLatency });
+          this.actioType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
         }
-        this.$nextTick(() => {
-          this.noResponse = this.$store.session.currentAnswerValue?.length === 0;
-        });
+        this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0);
       },
       [":class"]() {
         return answerData.answerValue.some((el) => (this.$store.session.currentAnswerValue || []).includes(el)) 

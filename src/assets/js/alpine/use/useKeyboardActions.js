@@ -36,12 +36,13 @@ export default () => ({
   },
 
   getNewElementIndex(index, elements, direction) {
-    return direction == "next" 
+    const nextIndex = direction == "next" 
       ? (index + 1) % elements.length 
       : (index <= 0 
           ? elements.length - 1 
           : index - 1
         );
+    return nextIndex;
   },
 
   handleKeyAction({ lowercaseKey, ctrlKey, escKey, appView }) {
