@@ -26,7 +26,7 @@ export default () => ({
   itemOption: (answerData) => {
     return {
       ["@click.prevent"]() {
-        const answerLatency =  this.cumulatedEpoch + (Date.now() - this.epoch)
+        const answerLatency = this.cumulatedEpoch + (Date.now() - this.epoch);
         const c1 = this.$store.session.currentAnswerValue?.length === 0 && answerData.answerValue.length === 0;
         const c2 = JSON.stringify(this.$store.session.currentAnswerValue) === JSON.stringify(answerData.answerValue);
         if (c1 || c2) {
