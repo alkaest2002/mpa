@@ -30,15 +30,15 @@ export default () => ({
     const answerLatency = this.cumulatedEpoch + (Date.now() - this.epoch);
     if (this.answerValues.includes(answerValue)) {
       this.answerValues = this.answerValues.filter((el) => el != answerValue);
-      this.answerValues.length == 0 && this.$store.session.deleteAnswer(this.$store.session.itemId);
+      this.answerValues.length === 0 && this.$store.session.deleteAnswer(this.$store.session.itemId);
       this.currentAnswerValue = null;
     } else {
-      this.answerValues = [ ...this.answerValues, answerValue ]
+      this.answerValues = [ ...this.answerValues, ...answerValue ]
+      this.$store.session.setAnswer({ 
+        ...Object.assign({}, { itemId, order, answerValue: this.answerValues, answerLatency }),
+      }, false);
+      this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0)
     }
-    this.$store.session.setAnswer({ 
-      ...Object.assign({}, { itemId, order, answerValue: this.answerValues, answerLatency }),
-    }, false);
-    this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length == 0)
   },
 
   itemOption: (answerData) => {
@@ -49,12 +49,12 @@ export default () => ({
           && this.setAnswer(answerData);
       },
       ["@click.prevent"]() {
-        if (this.$store.session.currentAnswerValue?.length == 0 && answerData.answerValue === null) {
+        if (this.$store.session.currentAnswerValue?.length === 0 && answerData.answerValue?.length === 0) {
           this.$store.session.deleteAnswer(this.$store.session.itemId);
         } else {
           this.currentAnswerValue = answerData.answerValue;
-          this.actionType == "mouse" && this.setAnswer(answerData);
-          this.actionType == "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
+          this.actionType === "mouse" && this.setAnswer(answerData);
+          this.actionType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
         }
       },
       [":class"]() {

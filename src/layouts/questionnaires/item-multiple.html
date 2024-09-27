@@ -36,7 +36,7 @@
             <div class="grid grid-cols-1 gap-4">
                 {{- range .Params.options }}
                     {{- range $optionValue, $optionLabel := . }}
-                        {{- $answerData := dict "order" $itemOrder "itemId" $itemId "answerValue" ( $optionValue | int) | jsonify }}
+                        {{- $answerData := dict "order" $itemOrder "itemId" $itemId "answerValue" ( slice ($optionValue | int )) | jsonify }}
                         <!-- [html-validate-disable attribute-allowed-values] -->
                         <div 
                             x-ref="tab-{{ $optionValue }}"
@@ -51,7 +51,7 @@
                     x-ref="tab-no-response"
                     class="mt-12 pt-4 border-t border-slate-300 flex items-center"
                 >
-                    {{- $answerData := dict  "order" $itemOrder "itemId" $itemId "answerValue" nil | jsonify }}
+                    {{- $answerData := dict  "order" $itemOrder "itemId" $itemId "answerValue" slice | jsonify }}
                     <input 
                         type="checkbox"
                         x-model="noResponse" 
