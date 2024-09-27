@@ -11,7 +11,7 @@
     <div 
         x-data="viewQuestionnaireItem" 
         x-init="initQuestionnaireItem('{{ $itemId }}', '{{ .RelPermalink }}'); initKeyboardActions('answerId')"
-        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
+        x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions, ...mouseActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative"
     >
         {{- partialCached "base/burger" (dict "currentPage" . "homePage" true "questionnairesPage" true

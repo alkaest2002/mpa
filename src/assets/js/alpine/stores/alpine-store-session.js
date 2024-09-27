@@ -87,15 +87,13 @@ export default (Alpine) => ({
     return this.data.questionnaires?.[this.questionnaireId]?.[itemId];
   },
 
-  setAnswer(answerData, singleAnswer = true) {
-    const answerValue = singleAnswer
-     ? [ answerData.answerValue ]
-     : [ ...this.currentAnswerValue, answerData.answerValue ];
-    // filter out null values and duplicate values
-    answerData.answerValue = answerValue
-      .filter((el) => el !== null && answerValue.join().indexOf(el) == answerValue.join().lastIndexOf(el));
+  setAnswer(answerData) {
+    const { itemId, answerValue: val, answerLatency, order } = answerData;
+    const answerValue = [...new Set([ val ].flat())]
+      .filter(item => typeof item === "number" && (!isNaN(item) || item === 0));
+    const finalAnswerData = { itemId, order, answerValue, answerLatency };
     this.data.questionnaires[this.questionnaireId] ??= {};
-    this.data.questionnaires[this.questionnaireId][this.itemId] = answerData;
+    this.data.questionnaires[this.questionnaireId][this.itemId] = finalAnswerData;
   },
 
   deleteAnswer(itemId) {

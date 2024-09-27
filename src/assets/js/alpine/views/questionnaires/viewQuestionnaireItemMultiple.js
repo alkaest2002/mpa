@@ -8,7 +8,7 @@ export default () => ({
   cumulatedEpoch: 0,
   noResponse: false,
   currentAnswerValue: null,
-  localAnswerValue: [],
+  answerValues: [],
 
   initQuestionnaireItemMultiple(itemId, urlItem) {
     this.$store.app.currentView = "questionnaire-item-multiple";
@@ -16,7 +16,7 @@ export default () => ({
     this.$store.urls.urlItem = urlItem;
     this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
-    this.currentAnswerValue = this.$store.session.currentAnswerValue;
+    this.answerValues = this.$store.session.currentAnswerValue || [];
   },
 
   itemTitle: {
@@ -25,31 +25,40 @@ export default () => ({
     }
   },
 
+  setAnswer(answerData) {
+    const { itemId, answerValue, order } = answerData;
+    const answerLatency = this.cumulatedEpoch + (Date.now() - this.epoch);
+    if (this.answerValues.includes(answerValue)) {
+      this.answerValues = this.answerValues.filter((el) => el != answerValue);
+      this.answerValues.length == 0 && this.$store.session.deleteAnswer(this.$store.session.itemId);
+      this.currentAnswerValue = null;
+    } else {
+      this.answerValues = [ ...this.answerValues, answerValue ]
+    }
+    this.$store.session.setAnswer({ 
+      ...Object.assign({}, { itemId, order, answerValue: this.answerValues, answerLatency }),
+    }, false);
+    this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length == 0)
+  },
+
   itemOption: (answerData) => {
     return {
       ["@keyup.window"]({ keyCode }) {
-        const { answerValue } = answerData;
         keyCode === 32
-          && this.currentAnswerValue === answerData.answerValue
-          && (this.localAnswerValue = [...this.localAnswerValue, answerValue ]);
+          && this.currentAnswerValue === answerData.answerValue 
+          && this.setAnswer(answerData);
       },
       ["@click.prevent"]() {
         if (this.$store.session.currentAnswerValue?.length == 0 && answerData.answerValue === null) {
           this.$store.session.deleteAnswer(this.$store.session.itemId);
         } else {
           this.currentAnswerValue = answerData.answerValue;
-          this.$store.session.setAnswer({ 
-            ...answerData, 
-            answerLatency: this.cumulatedEpoch + (Date.now() - this.epoch),
-          });
+          this.actionType == "mouse" && this.setAnswer(answerData);
+          this.actionType == "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
         }
-        this.$nextTick(() => {
-          this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
-        })
       },
       [":class"]() {
-        const values = [ ...(this.$store.session.currentAnswerValue || []), ...this.localAnswerValue];
-        return (values || []).includes(answerData.answerValue) 
+        return [ ...this.answerValues, this.currentAnswerValue ].includes(answerData.answerValue) 
           ? css.selected
           : css.nonSelected;
       },
@@ -59,7 +68,6 @@ export default () => ({
   itemNextButton: (url) => {
     return {
       ["@click.prevent"]() {
-        this.$store.session.setAnswer(localAnswerData);
         this.shouldGoNext && goToUrlRaw.call(this, url);
       },
       [":class"]() {

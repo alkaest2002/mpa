@@ -15,6 +15,7 @@ export default () => ({
   tabIndex: -1,
   burgerIndex: -1,
   alphabetLowerCase: "abcdefghijklmnopqrstuvwxyz",
+  actionType: null,
 
   initKeyboardActions(typeOfId = null) {
     this.burgerElements = [...document.getElementsByClassName("burger-element")];
@@ -50,6 +51,7 @@ export default () => ({
   },
 
   handleCtrlActions(appView, lowercaseKey) {
+    this.actionType = "keyboard";
     return {
       "a": () => appView == "home" && goToUrl.call(this, ["session", "session-set"]),
       "b": () => this.$store.session.batteryId && goToCurrentBattery.call(this),
@@ -62,6 +64,7 @@ export default () => ({
   },
 
   handleEscapeKeyActions(appView) {
+    this.actionType = "keyboard";
     return {
       "session-set": () => goToUrl.call(this, [ "base" ]),
       "batteries": () => goToUrl.call(this, [ "session", "session-set" ]),
@@ -76,6 +79,7 @@ export default () => ({
   },
 
   handleAppViewActions(appView, lowercaseKey) {
+    this.actionType = "keyboard";
     [ "batteries", "batteries-letter" ].includes(appView)  
       && this.alphabetLowerCase.includes(lowercaseKey) 
       && goToUrl.call(this, [ "batteries", lowercaseKey ]);
@@ -90,23 +94,33 @@ export default () => ({
     },
   },
 
+  mouseActions: {
+    ["@mouseup.window"]() {
+      this.actionType = "mouse";
+    }
+  },
+
   xArrowsActions: {
     ["@keyup.left.window"]() {
+      this.actionType = "keyboard";
       this.$refs["page-left"]?.click();
     },
     ["@keyup.right.window"]() {
+      this.actionType = "keyboard";
       this.$refs["page-right"]?.click();
     },
   },
 
   yArrowsActions: {
     ["@keyup.down.window"]() {
+      this.actionType = "keyboard";
       const elements = this.$store.app.burgerIsOpen ? this.burgerElements : this.tabElements;
       const index = this.$store.app.burgerIsOpen ? "burgerIndex" : "tabIndex";
       this[index] = this.getNewElementIndex(this[index], elements, "next");
       !this.$store.app.burgerIsOpen && elements[this[index]]?.click();
     },
     ["@keyup.up.window"]() {
+      this.actionType = "keyboard";
       const elements = this.$store.app.burgerIsOpen ? this.burgerElements : this.tabElements;
       const index = this.$store.app.burgerIsOpen ? "burgerIndex" : "tabIndex";
       this[index] = this.getNewElementIndex(this[index], elements, "prev");
@@ -116,6 +130,7 @@ export default () => ({
 
   enterActions: {
     ["@keyup.enter.window"]() {
+      this.actionType = "keyboard";
       const elements = this.$store.app.burgerIsOpen ? this.burgerElements : [this.$refs["main-button"]];
       elements[(this.burgerIndex !== -1 ? this.burgerIndex : 0)]?.click();
     },

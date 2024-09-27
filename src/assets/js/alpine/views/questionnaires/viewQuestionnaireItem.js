@@ -4,6 +4,7 @@ import useNavigation from "../../use/useNavigation";
 const { goToUrl, goToUrlRaw } = useNavigation();
 
 export default () => ({
+  
   epoch: Date.now(),
   cumulatedEpoch: 0,
   noResponse: false,
@@ -35,7 +36,8 @@ export default () => ({
         }
         this.$nextTick(() => {
           this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
-        })
+        });
+        this.actionType == "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
       },
       [":class"]() {
         return (this.$store.session.currentAnswerValue || []).includes(answerData.answerValue) 
