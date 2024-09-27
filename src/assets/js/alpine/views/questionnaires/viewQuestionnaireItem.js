@@ -13,7 +13,7 @@ export default () => ({
     this.$store.app.currentView = "questionnaire-item-single";
     this.$store.session.itemId = itemId;
     this.$store.urls.urlItem = urlItem;
-    this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
+    this.noResponse = this.$store.session.currentAnswerValue?.length === 0;
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
   },
 
@@ -26,21 +26,24 @@ export default () => ({
   itemOption: (answerData) => {
     return {
       ["@click.prevent"]() {
-        if (this.$store.session.currentAnswerValue?.length == 0 && answerData.answerValue === null) {
+        const c1 = this.$store.session.currentAnswerValue?.length === 0 && answerData.answerValue?.length === 0;
+        const c2 = JSON.stringify(this.$store.session.currentAnswerValue) === JSON.stringify(answerData.answerValue);
+        if (c1 || c2) {
           this.$store.session.deleteAnswer(this.$store.session.itemId);
+          this.actionType === "mouse" && (this.tabIndex = -1);
         } else {
           this.$store.session.setAnswer({ 
             ...answerData, 
             answerLatency: this.cumulatedEpoch + (Date.now() - this.epoch),
           });
+          this.actionType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
         }
         this.$nextTick(() => {
-          this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
+          this.noResponse = this.$store.session.currentAnswerValue?.length === 0;
         });
-        this.actionType == "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
       },
       [":class"]() {
-        return (this.$store.session.currentAnswerValue || []).includes(answerData.answerValue) 
+        return answerData.answerValue.some((el) => (this.$store.session.currentAnswerValue || []).includes(el)) 
           ? css.selected
           : css.nonSelected;
       },
