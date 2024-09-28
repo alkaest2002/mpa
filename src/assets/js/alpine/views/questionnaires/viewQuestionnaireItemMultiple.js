@@ -27,17 +27,20 @@ export default () => ({
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
     this.$store.app.currentView = "questionnaire-item-multiple";
     this.$watch("noResponse", (val) => {
-      val && this.setAnswer({ answerValue: [] });
-      val && (this.answerValues = []);
-      val && (this.currentAnswerValue = null);
-      !val && this.$store.session.deleteAnswer(this.$store.session.itemId);
+      if (val) {
+        this.setAnswer({ answerValue: [] });
+        this.answerValues = [];
+        this.currentAnswerValue = null;
+      } else {
+        this.$store.session.deleteAnswer(this.$store.session.itemId)
+      }
     });
   },
 
   setAnswer({ answerValue }) {
     const answerLatency = this.cumulatedEpoch + (Date.now() - this.epoch);
     const c1 = this.$store.session.currentAnswerValue?.length === 0 && answerValue.length === 0;
-    const c2 = JSON.stringify(this.answerValues) === JSON.stringify(answerValue);
+    const c2 = this.answerValues.length > 0 && JSON.stringify(this.answerValues) === JSON.stringify(answerValue);
     if (c1 || c2) {
       this.$store.session.deleteAnswer(this.$store.session.itemId);
       this.answerValues = [];
@@ -66,7 +69,7 @@ export default () => ({
       },
       ["@click.prevent"]() {
         this.currentAnswerValue = answerValue;
-        this.noResponse = !answerValue.length > 0
+        this.noResponse = !answerValue.length > 0;
         answerValue.length === 0 && this.actionType === "keyboard" && this.setAnswer({ answerValue });
         this.actionType === "mouse" && this.setAnswer({ answerValue });
       },
@@ -77,8 +80,8 @@ export default () => ({
             : {}
           )(),
           ...(() => answerValue.some((el) => this.answerValues.includes(el))
-          ? css.selected
-          : css.nonSelected
+            ? css.selected
+            : css.nonSelected
           )()
         }
       },
