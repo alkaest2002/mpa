@@ -74,7 +74,6 @@
         <a x-ref="page-left" href="{{ .RelPermalink }}" class="hidden">{{ T "next" }}</a>
       {{- end }}
       {{- with .PrevInSection }}
-        <a x-ref="page-right" href="{{ .RelPermalink }}" class="hidden">{{ T "next" }}</a>
         <a
           x-ref="main-button"
           x-bind="itemNextButton('{{ .RelPermalink }}')"

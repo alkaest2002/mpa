@@ -25,7 +25,15 @@ export default () => ({
     this.$watch("noResponse", (val) => {
       val && (this.answerValues = []);
       val && (this.currentAnswerValue = null);
-      val && this.setAnswer({ answerValue: [] });
+      val && this.$store.session.setAnswer(
+        Object.assign({}, { 
+          itemId: this.itemId, 
+          order: this.order, 
+          answerValue: this.answerValues, 
+          answerLatency: this.cumulatedEpoch + (Date.now() - this.epoch)
+        })
+      );
+      !val && this.$store.session.deleteAnswer(this.$store.session.itemId);
     });
   },
 
@@ -47,7 +55,6 @@ export default () => ({
       );
       this.actionType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
     }
-    this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0);
   },
 
   itemTitle: {
