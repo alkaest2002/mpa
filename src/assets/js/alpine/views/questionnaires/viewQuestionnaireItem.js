@@ -11,13 +11,13 @@ export default () => ({
   cumulatedEpoch: 0,
 
   initQuestionnaireItem({ itemId, urlItem, order }) {
+    this.$store.session.itemId = itemId;
+    this.$store.urls.urlItem = urlItem;
     this.itemId = itemId;
     this.order = order;
     this.noResponse = this.$store.session.currentAnswerValue?.length === 0;
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
     this.$store.app.currentView = "questionnaire-item-single";
-    this.$store.session.itemId = itemId;
-    this.$store.urls.urlItem = urlItem;
     this.$watch("noResponse", (val) => {
       return val && this.setAnswer({ answerValue: [] }) 
     });

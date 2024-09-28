@@ -14,14 +14,14 @@ export default () => ({
   cumulatedEpoch: 0,
 
   initQuestionnaireItemMultiple({ itemId, urlItem, order }) {
+    this.$store.session.itemId = itemId;
+    this.$store.urls.urlItem = urlItem;
     this.itemId = itemId;
     this.order = order;
     this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
     this.answerValues = this.$store.session.currentAnswerValue || [];
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
     this.$store.app.currentView = "questionnaire-item-multiple";
-    this.$store.session.itemId = itemId;
-    this.$store.urls.urlItem = urlItem;
     this.$watch("noResponse", (val) => {
       val && (this.answerValues = []);
       val && (this.currentAnswerValue = null);
