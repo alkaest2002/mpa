@@ -27,9 +27,9 @@ export default () => ({
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
     this.$store.app.currentView = "questionnaire-item-multiple";
     this.$watch("noResponse", (val) => {
+      val && this.setAnswer({ answerValue: [] });
       val && (this.answerValues = []);
       val && (this.currentAnswerValue = null);
-      val && this.$store.session.setAnswer({ answerValue: [] });
       !val && this.$store.session.deleteAnswer(this.$store.session.itemId);
     });
   },
@@ -66,6 +66,7 @@ export default () => ({
       },
       ["@click.prevent"]() {
         this.currentAnswerValue = answerValue;
+        this.noResponse = !answerValue.length > 0
         answerValue.length === 0 && this.actionType === "keyboard" && this.setAnswer({ answerValue });
         this.actionType === "mouse" && this.setAnswer({ answerValue });
       },
