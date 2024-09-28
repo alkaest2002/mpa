@@ -55,9 +55,9 @@ export default () => ({
           itemId: this.itemId, order: this.order, answerValue: this.answerValues, answerLatency 
         })
       );
-      this.actionType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
       this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0);
     }
+    this.tabIndex = this.getElementIndex(this.$el);
   },
 
   itemOption({ answerValue }) {
