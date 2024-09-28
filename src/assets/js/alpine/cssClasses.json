@@ -23,8 +23,6 @@
     "border-border-transparent": true 
   },
   "selectedWithRing": { 
-    "bg-blue-50": true, 
-    "hover:bg-blue-50": true,
     "border": true,
     "border-blue-500": true
   },

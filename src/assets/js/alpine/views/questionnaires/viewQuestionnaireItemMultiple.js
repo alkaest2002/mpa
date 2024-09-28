@@ -4,19 +4,51 @@ import useNavigation from "../../use/useNavigation";
 const { goToUrl, goToUrlRaw } = useNavigation();
 
 export default () => ({
-  epoch: Date.now(),
-  cumulatedEpoch: 0,
+  
+  itemId: null,
+  order: null,
   noResponse: false,
   currentAnswerValue: null,
   answerValues: [],
+  epoch: Date.now(),
+  cumulatedEpoch: 0,
 
-  initQuestionnaireItemMultiple(itemId, urlItem) {
+  initQuestionnaireItemMultiple({ itemId, urlItem, order }) {
+    this.itemId = itemId;
+    this.order = order;
+    this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
+    this.answerValues = this.$store.session.currentAnswerValue || [];
+    this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
     this.$store.app.currentView = "questionnaire-item-multiple";
     this.$store.session.itemId = itemId;
     this.$store.urls.urlItem = urlItem;
-    this.noResponse = this.currentAnswerValue?.length == 0;
-    this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
-    this.answerValues = this.$store.session.currentAnswerValue || [];
+    this.$watch("noResponse", (val) => {
+      val && (this.answerValues = []);
+      val && (this.currentAnswerValue = null);
+      val && this.setAnswer({ answerValue: [] });
+    });
+  },
+
+  setAnswer({ answerValue }) {
+    const answerLatency = this.cumulatedEpoch + (Date.now() - this.epoch);
+    const c1 = this.$store.session.currentAnswerValue?.length === 0 && answerValue.length === 0;
+    const c2 = JSON.stringify(this.answerValues) === JSON.stringify(answerValue);
+    if (c1 || c2) {
+      this.$store.session.deleteAnswer(this.$store.session.itemId);
+      this.answerValues = [];
+      this.tabIndex = -1;
+    } else {
+      this.answerValues = this.answerValues.includes(answerValue[0])
+        ? this.answerValues.filter((el) => el != answerValue[0])
+        : [ ...this.answerValues, ...answerValue ];
+      this.$store.session.setAnswer(
+        Object.assign({}, { 
+          itemId: this.itemId, order: this.order, answerValue: this.answerValues, answerLatency 
+        })
+      );
+      this.actionType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
+    }
+    this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0);
   },
 
   itemTitle: {
@@ -25,46 +57,29 @@ export default () => ({
     }
   },
 
-  setAnswer(answerData) {
-    const { itemId, answerValue, order } = answerData;
-    const answerLatency = this.cumulatedEpoch + (Date.now() - this.epoch);
-    const c1 = this.currentAnswerValue?.length === 0 && answerValue.length === 0;
-    const c2 = JSON.stringify(this.answerValues) === JSON.stringify(answerValue);
-    if (c1 || c2) {
-      this.$store.session.deleteAnswer(this.$store.session.itemId);
-      this.currentAnswerValue = null;
-      this.answerValues = [];
-      this.tabIndex = -1;
-    } else {
-      this.answerValues = this.answerValues.includes(answerValue[0])
-        ? this.answerValues.filter((el) => el != answerValue[0])
-        : [ ...this.answerValues, ...answerValue ];
-      this.$store.session.setAnswer({ 
-        ...Object.assign({}, { itemId, order, answerValue: this.answerValues, answerLatency }),
-      }, false);
-      this.actionType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
-    }
-    this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0);
-  },
-
-  itemOption: (answerData) => {
+  itemOption: ({ answerValue }) => {
     return {
       ["@keyup.window"]({ keyCode }) {
         keyCode === 32
-          && JSON.stringify(this.currentAnswerValue) === JSON.stringify(answerData.answerValue) 
-          && this.setAnswer(answerData);
+          && JSON.stringify(this.currentAnswerValue) === JSON.stringify(answerValue) 
+          && this.setAnswer({ answerValue });
       },
       ["@click.prevent"]() {
-        this.currentAnswerValue = answerData.answerValue;
-        this.noResponse = answerData.answerValue.length === 0;
-        this.actionType === "mouse" && this.setAnswer(answerData);
+        this.currentAnswerValue = answerValue;
+        answerValue.length === 0 && this.actionType === "keyboard" && this.setAnswer({ answerValue });
+        this.actionType === "mouse" && this.setAnswer({ answerValue });
       },
       [":class"]() {
-        return answerData.answerValue.some((el) => (this.currentAnswerValue || []).includes(el)) 
-          ? css.selectedWithRing
-          : answerData.answerValue.some((el) => this.answerValues.includes(el)) 
-              ? css.selected
-              : css.nonSelected;
+        return {
+          ...(() => answerValue.some((el) => (this.currentAnswerValue || []).includes(el))
+            ? css.selectedWithRing
+            : {}
+          )(),
+          ...(() => answerValue.some((el) => this.answerValues.includes(el))
+          ? css.selected
+          : css.nonSelected
+          )()
+        }
       },
     };
   },

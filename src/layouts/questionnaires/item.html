@@ -7,10 +7,11 @@
 {{- $itemText := chomp .RawContent }}
 {{- $paginateSize := site.Params.paginateSize.maps }}
 {{- $mapPageIndex := div .Params.order $paginateSize | add 1 }}
+{{- $itemData := dict "order" $itemOrder "itemId" $itemId "urlItem" .RelPermalink }}
 <div x-data="useKeyboardActions" class="h-full">
   <div
     x-data="viewQuestionnaireItem"
-    x-init="initQuestionnaireItem('{{ $itemId }}', '{{ .RelPermalink }}'); initKeyboardActions('answerId')"
+    x-init="initQuestionnaireItem({{ $itemData | jsonify }}); initKeyboardActions('answerId')"
     x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions, ...mouseActions }"
     class="h-full flex flex-col items-center justify-center p-9 relative">
     {{- partialCached "base/burger" (dict "currentPage" . "homePage" true "questionnairesPage" true
@@ -34,7 +35,7 @@
       <div class="grid grid-cols-1 gap-4">
         {{- range .Params.options }}
           {{- range $optionValue, $optionLabel := . }}
-            {{- $answerData := dict "order" $itemOrder "itemId" $itemId "answerValue" (slice ($optionValue | int)) | jsonify }}
+            {{- $answerData := dict "answerValue" (slice ($optionValue | int)) | jsonify }}
             <div
               x-ref="tab-{{ $optionValue }}"
               x-bind="itemOption({{ $answerData }})"
@@ -43,14 +44,13 @@
             </div>
           {{- end }}
         {{- end }}
-        <div
-          class="mt-12 pt-4 border-t border-slate-300 flex items-center">
-          {{- $answerData := dict "order" $itemOrder "itemId" $itemId "answerValue" slice | jsonify }}
+        <div 
+          x-ref="tab-no-response"
+          class="mt-12 pt-4 border-t border-slate-300 flex items-center"
+        >
           <input
             type="checkbox"
-            x-ref="tab-no-response"
             x-model="noResponse"
-            x-bind="itemOption({{ $answerData }})"
             class="tab-element w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded mr-2">
           <div class="ms-2 text-sm">
             <label for="no-response-checkbox">{{ T "noResponse" }}</label>

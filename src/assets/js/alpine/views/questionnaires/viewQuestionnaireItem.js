@@ -4,17 +4,39 @@ import useNavigation from "../../use/useNavigation";
 const { goToUrl, goToUrlRaw } = useNavigation();
 
 export default () => ({
-  
+  itemId: null,
+  order: null,
+  noResponse: false,
   epoch: Date.now(),
   cumulatedEpoch: 0,
-  noResponse: false,
 
-  initQuestionnaireItem(itemId, urlItem) {
+  initQuestionnaireItem({ itemId, urlItem, order }) {
+    this.itemId = itemId;
+    this.order = order;
+    this.noResponse = this.$store.session.currentAnswerValue?.length === 0;
+    this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
     this.$store.app.currentView = "questionnaire-item-single";
     this.$store.session.itemId = itemId;
     this.$store.urls.urlItem = urlItem;
-    this.noResponse = this.$store.session.currentAnswerValue?.length === 0;
-    this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
+    this.$watch("noResponse", (val) => {
+      return val && this.setAnswer({ answerValue: [] }) 
+    });
+  },
+
+  setAnswer({ answerValue }) {
+    const answerLatency = this.cumulatedEpoch + (Date.now() - this.epoch);
+    const c1 = this.$store.session.currentAnswerValue?.length === 0 && answerValue.length === 0;
+    const c2 = JSON.stringify(this.$store.session.currentAnswerValue) === JSON.stringify(answerValue);
+    if (c1 || c2) {
+      this.$store.session.deleteAnswer(this.$store.session.itemId);
+      this.tabIndex = -1;
+    } else {
+      this.$store.session.setAnswer(
+        Object.assign({}, { itemId: this.itemId, order: this.order, answerValue, answerLatency })
+      );
+    }
+    this.actionType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
+    this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0);
   },
 
   itemTitle: {
@@ -26,17 +48,7 @@ export default () => ({
   itemOption: (answerData) => {
     return {
       ["@click.prevent"]() {
-        const answerLatency = this.cumulatedEpoch + (Date.now() - this.epoch);
-        const c1 = this.$store.session.currentAnswerValue?.length === 0 && answerData.answerValue.length === 0;
-        const c2 = JSON.stringify(this.$store.session.currentAnswerValue) === JSON.stringify(answerData.answerValue);
-        if (c1 || c2) {
-          this.$store.session.deleteAnswer(this.$store.session.itemId);
-          this.tabIndex = -1;
-        } else {
-          this.$store.session.setAnswer({ ...answerData, answerLatency });
-          this.actioType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
-        }
-        this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0);
+        this.setAnswer(answerData);
       },
       [":class"]() {
         return answerData.answerValue.some((el) => (this.$store.session.currentAnswerValue || []).includes(el)) 

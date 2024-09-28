@@ -7,6 +7,7 @@ module.exports = {
     "bg-blue-500",
     "bg-gray-200",
     "bg-gray-500",
+    "bg-transparent",
     "block",
     "border",
     "border-blue-500",
