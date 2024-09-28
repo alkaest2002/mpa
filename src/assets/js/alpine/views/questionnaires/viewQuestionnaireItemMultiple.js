@@ -36,7 +36,6 @@ export default () => ({
     if (c1 || c2) {
       this.$store.session.deleteAnswer(this.$store.session.itemId);
       this.answerValues = [];
-      this.tabIndex = -1;
     } else {
       this.answerValues = this.answerValues.includes(answerValue[0])
         ? this.answerValues.filter((el) => el != answerValue[0])
