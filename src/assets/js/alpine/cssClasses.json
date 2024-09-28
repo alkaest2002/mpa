@@ -27,7 +27,6 @@
     "border-blue-500": true
   },
   "nonSelected": { 
-    "hover:bg-gray-100": true,
     "border": true,
     "border-border-transparent": true 
   },

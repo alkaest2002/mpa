@@ -10,7 +10,11 @@ export default () => ({
   epoch: Date.now(),
   cumulatedEpoch: 0,
 
-  initQuestionnaireItem({ itemId, urlItem, order }) {
+  get shouldGoNext() {
+    return this.$store.session.currentAnswerValue?.length > 0 || this.noResponse;
+  },
+ 
+  initQuestionnaireItemSingle({ itemId, urlItem, order }) {
     this.$store.session.itemId = itemId;
     this.$store.urls.urlItem = urlItem;
     this.itemId = itemId;
@@ -18,9 +22,7 @@ export default () => ({
     this.noResponse = this.$store.session.currentAnswerValue?.length === 0;
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
     this.$store.app.currentView = "questionnaire-item-single";
-    this.$watch("noResponse", (val) => {
-      return val && this.setAnswer({ answerValue: [] }) 
-    });
+    this.$watch("noResponse", (val) => val && this.setAnswer({ answerValue: [] }));
   },
 
   setAnswer({ answerValue }) {
@@ -35,17 +37,11 @@ export default () => ({
         Object.assign({}, { itemId: this.itemId, order: this.order, answerValue, answerLatency })
       );
     }
-    this.actionType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
+    this.tabIndex = this.getElementIndex(this.$el);
     this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0);
   },
 
-  itemTitle: {
-    [":x-text"]() {
-      this.$refs["title"].innerText = this.$refs["title"].dataset.title;
-    }
-  },
-
-  itemOption: (answerData) => {
+  itemOption(answerData) {
     return {
       ["@click.prevent"]() {
         this.setAnswer(answerData);
@@ -58,7 +54,7 @@ export default () => ({
     };
   },
 
-  itemNextButton: (url) => {
+  itemNextButton(url) {
     return {
       ["@click.prevent"]() {
         this.shouldGoNext && goToUrlRaw.call(this, url);
@@ -67,6 +63,12 @@ export default () => ({
         return this.shouldGoNext ? css.enabledButton : css.disabledButton;
       },
     };
+  },
+
+  itemTitle: {
+    [":x-text"]() {
+      this.$refs["title"].innerText = this.$refs["title"].dataset.title;
+    }
   },
 
   itemEndButton: {
@@ -89,9 +91,5 @@ export default () => ({
     [":class"]() {
       return this.shouldGoNext ? css.enabledButton : css.disabledButton;
     },
-  },
-
-  get shouldGoNext() {
-    return this.$store.session.currentAnswerValue?.length > 0 || this.noResponse;
-  },
+  }
 });

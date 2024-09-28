@@ -10,8 +10,8 @@
 {{- $itemData := dict "order" $itemOrder "itemId" $itemId "urlItem" .RelPermalink }}
 <div x-data="useKeyboardActions" class="h-full">
   <div
-    x-data="viewQuestionnaireItem"
-    x-init="initQuestionnaireItem({{ $itemData | jsonify }}); initKeyboardActions('answerId')"
+    x-data="viewQuestionnaireItemSingle"
+    x-init="initQuestionnaireItemSingle({{ $itemData | jsonify }}); initKeyboardActions('answerId')"
     x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions, ...mouseActions }"
     class="h-full flex flex-col items-center justify-center p-9 relative">
     {{- partialCached "base/burger" (dict "currentPage" . "homePage" true "questionnairesPage" true

@@ -17,7 +17,7 @@ import viewBatteries from "./views/batteries/viewBatteries";
 import viewBattery from "./views/batteries/viewBattery";
 
 import viewQuestionnaireIntro from "./views/questionnaires/viewQuestionnaireIntro";
-import viewQuestionnaireItem from "./views/questionnaires/viewQuestionnaireItem";
+import viewQuestionnaireItemSingle from "./views/questionnaires/viewQuestionnaireItemSingle";
 import viewQuestionnaireItemMultiple from "./views/questionnaires/viewQuestionnaireItemMultiple";
 import viewQuestionnaireMap from "./views/questionnaires/viewQuestionnaireMap";
 
@@ -50,7 +50,7 @@ Alpine.data("viewBatteries", viewBatteries);
 Alpine.data("viewBattery", viewBattery);
 Alpine.data("viewBatteryComplete", viewBatteryComplete);
 Alpine.data("viewQuestionnaireIntro", viewQuestionnaireIntro);
-Alpine.data("viewQuestionnaireItem", viewQuestionnaireItem);
+Alpine.data("viewQuestionnaireItemSingle", viewQuestionnaireItemSingle);
 Alpine.data("viewQuestionnaireItemMultiple", viewQuestionnaireItemMultiple);
 Alpine.data("viewQuestionnaireMap", viewQuestionnaireMap);
 Alpine.data("viewQuestionnaireComplete", viewQuestionnaireComplete);

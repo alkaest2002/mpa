@@ -13,6 +13,10 @@ export default () => ({
   epoch: Date.now(),
   cumulatedEpoch: 0,
 
+  get shouldGoNext() {
+    return this.$store.session.currentAnswerValue?.length > 0 || this.noResponse;
+  },
+
   initQuestionnaireItemMultiple({ itemId, urlItem, order }) {
     this.$store.session.itemId = itemId;
     this.$store.urls.urlItem = urlItem;
@@ -25,14 +29,7 @@ export default () => ({
     this.$watch("noResponse", (val) => {
       val && (this.answerValues = []);
       val && (this.currentAnswerValue = null);
-      val && this.$store.session.setAnswer(
-        Object.assign({}, { 
-          itemId: this.itemId, 
-          order: this.order, 
-          answerValue: this.answerValues, 
-          answerLatency: this.cumulatedEpoch + (Date.now() - this.epoch)
-        })
-      );
+      val && this.$store.session.setAnswer({ answerValue: [] });
       !val && this.$store.session.deleteAnswer(this.$store.session.itemId);
     });
   },
@@ -45,25 +42,22 @@ export default () => ({
       this.$store.session.deleteAnswer(this.$store.session.itemId);
       this.answerValues = [];
     } else {
-      this.answerValues = this.answerValues.includes(answerValue[0])
-        ? this.answerValues.filter((el) => el != answerValue[0])
-        : [ ...this.answerValues, ...answerValue ];
+      this.answerValues = answerValue.length === 0
+        ? []
+        : this.answerValues.includes(answerValue[0])
+          ? this.answerValues.filter((el) => el != answerValue[0])
+          : [ ...this.answerValues, ...answerValue ];
       this.$store.session.setAnswer(
         Object.assign({}, { 
           itemId: this.itemId, order: this.order, answerValue: this.answerValues, answerLatency 
         })
       );
       this.actionType === "mouse" && (this.tabIndex = this.getElementIndex(this.$el));
+      this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0);
     }
   },
 
-  itemTitle: {
-    [":x-text"]() {
-      this.$refs["title"].innerText = this.$refs["title"].dataset.title;
-    }
-  },
-
-  itemOption: ({ answerValue }) => {
+  itemOption({ answerValue }) {
     return {
       ["@keyup.window"]({ keyCode }) {
         keyCode === 32
@@ -90,7 +84,7 @@ export default () => ({
     };
   },
 
-  itemNextButton: (url) => {
+  itemNextButton(url) {
     return {
       ["@click.prevent"]() {
         this.shouldGoNext && goToUrlRaw.call(this, url);
@@ -99,6 +93,12 @@ export default () => ({
         return this.shouldGoNext ? css.enabledButton : css.disabledButton;
       },
     };
+  },
+
+  itemTitle: {
+    [":x-text"]() {
+      this.$refs["title"].innerText = this.$refs["title"].dataset.title;
+    }
   },
 
   itemEndButton: {
@@ -121,9 +121,5 @@ export default () => ({
     [":class"]() {
       return this.shouldGoNext ? css.enabledButton : css.disabledButton;
     },
-  },
-
-  get shouldGoNext() {
-    return this.$store.session.currentAnswerValue?.length > 0 || this.noResponse;
-  },
+  }
 });

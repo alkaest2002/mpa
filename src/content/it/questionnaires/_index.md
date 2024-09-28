@@ -26,5 +26,5 @@ cascade:
 
   - _target:
       kind: page
-    layout: item
+    layout: item-single
 ---
