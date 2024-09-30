@@ -13,7 +13,8 @@ export default () => ({
   },
 
   getShouldGoNext() {
-    return JSON.stringify(this.answer) === JSON.stringify([1, 3]);
+    return JSON.stringify(this.answer) === JSON.stringify([1, 3])
+     || JSON.stringify(this.answer) === JSON.stringify([3, 1]);
   },
 
   setAnswer(answer) {
