@@ -60,7 +60,7 @@ export default () => ({
         this.noResponse = !answerValue.length > 0;
         answerValue.length === 0 && this.actionType === "keyboard" && this.setAnswer({ answerValue });
         this.actionType === "mouse" && this.setAnswer({ answerValue });
-        this.tabIndex = this.getElementIndex(this.$el);
+        this.$nextTick(() => this.tabIndex = this.getElementIndex(this.$el));
       },
       [":class"]() {
         return {
