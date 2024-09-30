@@ -12,7 +12,7 @@ export default () => ({
     this.$store.app.tutorialSwitch = tutorialSwitch;
   },
 
-  get shouldGoNext() {
+  getShouldGoNext() {
     return this.fakeItemId == 4;
   },
 
@@ -32,10 +32,10 @@ export default () => ({
   goToNextTutorialButton(url) {
     return {
       ["@click.prevent"]() {
-        this.shouldGoNext && goToUrlRaw.call(this, url);
+        this.getShouldGoNext() && goToUrlRaw.call(this, url);
       },
       [":class"]() {
-        return this.shouldGoNext
+        return this.getShouldGoNext()
           ? css.enabledButton
           : css.disabledButton
       }
