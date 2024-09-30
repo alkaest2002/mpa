@@ -5,8 +5,8 @@
 {{- $itemId := .Params.id }}
 {{- $itemOrder := .Params.order }}
 {{- $paginateSize := site.Params.paginateSize.maps }}
-{{- $mapPageIndex := div .Params.order $paginateSize | add 1 }}
-{{- $itemData := dict "order" $itemOrder "itemId" $itemId "urlItem" .RelPermalink }}
+{{- $mapPageIndex := div $itemOrder $paginateSize | add 1 }}
+{{- $itemData := dict "itemId" $itemId "itemUrl" .RelPermalink }}
 <div x-data="useKeyboardActions" class="h-full">
     <div 
         x-data="viewQuestionnaireItemMultiple" 

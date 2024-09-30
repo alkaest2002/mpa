@@ -2,7 +2,7 @@ export default computeScores = ({ testee, session, answers, specs }) => {
 
   const getAnswersValues = (data) => {
     return Object.values(data)
-      .sort((el) => el.order)
+      .sort((a, b) => a.itemId - b.itemId)
       .map((el) => el["answerValue"].reduce((acc, itr) => acc += itr, 0));
   }
   

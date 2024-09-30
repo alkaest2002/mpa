@@ -5,8 +5,6 @@ const { goToUrl, goToUrlRaw } = useNavigation();
 
 export default () => ({
   
-  itemId: null,
-  order: null,
   noResponse: false,
   currentAnswerValue: null,
   answerValues: [],
@@ -17,11 +15,9 @@ export default () => ({
     return this.$store.session.currentAnswerValue?.length > 0 || this.noResponse;
   },
 
-  initQuestionnaireItemMultiple({ itemId, urlItem, order }) {
+  initQuestionnaireItemMultiple({ itemId, itemUrl }) {
     this.$store.session.itemId = itemId;
-    this.$store.urls.urlItem = urlItem;
-    this.itemId = itemId;
-    this.order = order;
+    this.$store.urls.urlItem = itemUrl;
     this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
     this.answerValues = this.$store.session.currentAnswerValue || [];
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
@@ -52,7 +48,7 @@ export default () => ({
           : [ ...this.answerValues, ...answerValue ];
       this.$store.session.setAnswer(
         Object.assign({}, { 
-          itemId: this.itemId, order: this.order, answerValue: this.answerValues, answerLatency 
+          itemId: this.$store.session.itemId, order: this.order, answerValue: this.answerValues, answerLatency 
         })
       );
       this.$nextTick(() => this.noResponse = this.$store.session.currentAnswerValue?.length === 0);

@@ -4,8 +4,6 @@ import useNavigation from "../../use/useNavigation";
 const { goToUrl, goToUrlRaw } = useNavigation();
 
 export default () => ({
-  itemId: null,
-  order: null,
   noResponse: false,
   epoch: Date.now(),
   cumulatedEpoch: 0,
@@ -14,11 +12,9 @@ export default () => ({
     return this.$store.session.currentAnswerValue?.length > 0 || this.noResponse;
   },
  
-  initQuestionnaireItemSingle({ itemId, urlItem, order }) {
+  initQuestionnaireItemSingle({ itemId, itemUrl }) {
     this.$store.session.itemId = itemId;
-    this.$store.urls.urlItem = urlItem;
-    this.itemId = itemId;
-    this.order = order;
+    this.$store.urls.urlItem = itemUrl;
     this.noResponse = this.$store.session.currentAnswerValue?.length === 0;
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
     this.$store.app.currentView = "questionnaire-item-single";
@@ -34,7 +30,7 @@ export default () => ({
       this.tabIndex = -1;
     } else {
       this.$store.session.setAnswer(
-        Object.assign({}, { itemId: this.itemId, order: this.order, answerValue, answerLatency })
+        Object.assign({}, { itemId: this.$store.session.itemId, order: this.order, answerValue, answerLatency })
       );
     }
     this.tabIndex = this.getElementIndex(this.$el);
