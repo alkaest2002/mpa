@@ -1,6 +1,6 @@
 {{- define "main" }}
 <div x-data="useKeyboardActions" class="h-full">
-    <div x-init="initKeyboardActions('tutorialId');"
+    <div x-init="$store.app.tutorialSwitch = 'off'; initKeyboardActions('tutorialId');"
         x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative">
         {{- partialCached "base/burger" (dict "currentPage" . "homePage" true) .Section }}
@@ -8,14 +8,14 @@
             <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
             <div class="mb-9">{{ .Content }}</div>
         </div>
-        <div x-bind="opacity" class="w-full flex justify-center">
-            {{ with .GetPage "tutorial-001" }}
+        <div x-bind="opacity" class="w-full flex justify-center" >
+            {{- with .Site.GetPage "session/session-open" }}
                 <a 
                     x-ref="main-button" 
-                    class="inline-flex justify-center w-96 px-6 py-3 gap-2 bg-blue-500 hover:bg-blue-700 text-white rounded-full"
+                    class="inline-flex justify-center w-96 px-6 py-3 gap-2 bg-blue-500 hover:bg-blue-700 cursor-pointer text-white rounded-full"
                     href="{{ .RelPermalink }}">{{ T "next" }}
                 </a>
-            {{ end }}
+            {{- end }}
         </div>
     </div>
 </div>

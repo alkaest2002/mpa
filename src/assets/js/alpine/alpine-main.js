@@ -11,7 +11,10 @@ import useKeyboardActions from "./use/useKeyboardActions";
 
 import viewBase from "./views/base/viewBase";
 import viewHome from "./views/home/viewHome";
-import viewTutorial from "./views/tutorial/viewTutorial";
+
+import viewTutorialItemBase from "./views/tutorial/viewTutorialItemBase";
+import viewTutorialItemSingle from "./views/tutorial/viewTutorialItemSingle";
+import viewTutorialItemMultiple from "./views/tutorial/viewTutorialItemMultiple";
 
 import viewBatteries from "./views/batteries/viewBatteries";
 import viewBattery from "./views/batteries/viewBattery";
@@ -40,7 +43,9 @@ Alpine.store("urls", storeUrls(Alpine));
 Alpine.data("useKeyboardActions", useKeyboardActions)
 Alpine.data("viewBase", viewBase);
 Alpine.data("viewHome", viewHome);
-Alpine.data("viewTutorial", viewTutorial);
+Alpine.data("viewTutorialItemBase", viewTutorialItemBase);
+Alpine.data("viewTutorialItemSingle", viewTutorialItemSingle);
+Alpine.data("viewTutorialItemMultiple", viewTutorialItemMultiple);
 Alpine.data("viewSessionSet", viewSessionSet);
 Alpine.data("viewSessionOpen", viewSessionOpen);
 Alpine.data("viewSessionClose", viewSessionClose);
