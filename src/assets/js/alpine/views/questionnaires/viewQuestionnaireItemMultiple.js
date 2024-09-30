@@ -15,8 +15,8 @@ export default () => ({
     this.answerValues = this.$store.session.currentAnswerValue || [];
     this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
     this.$watch("noResponse", (val) => {
-      this.tabIndex = this.tabElements.length -1;
       if (val) {
+        this.tabIndex = this.tabElements.length -1;
         this.setAnswer({ answerValue: [] });
         this.answerValues = [];
         this.currentAnswerValue = null;
@@ -56,11 +56,11 @@ export default () => ({
           && this.setAnswer({ answerValue });
       },
       ["@click.prevent"]() {
+        this.tabIndex = this.getElementIndex(this.$el);
         this.currentAnswerValue = answerValue;
         this.noResponse = !answerValue.length > 0;
         answerValue.length === 0 && this.actionType === "keyboard" && this.setAnswer({ answerValue });
         this.actionType === "mouse" && this.setAnswer({ answerValue });
-        this.$nextTick(() => this.tabIndex = this.getElementIndex(this.$el));
       },
       [":class"]() {
         return {
