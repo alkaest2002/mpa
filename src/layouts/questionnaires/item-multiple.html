@@ -5,7 +5,7 @@
 {{- $itemId := .Params.id }}
 {{- $itemOrder := .Params.order }}
 {{- $paginateSize := site.Params.paginateSize.maps }}
-{{- $mapPageIndex := div $itemOrder $paginateSize | add 1 }}
+{{- $mapPageIndex := div $itemOrder $paginateSize }}
 {{- $itemData := dict "itemId" $itemId "itemUrl" .RelPermalink }}
 <div x-data="useKeyboardActions" class="h-full">
     <div 
@@ -23,12 +23,12 @@
             <p
                 x-ref="title"
                 x-bind="itemTitle"
-                data-title="{{ $questionnaire.LinkTitle }} ({{ add $itemOrder 1 }}/{{ len $questionnaire.Pages }})"
+                data-title="{{ $questionnaire.LinkTitle }} ({{ $itemOrder }}/{{ len $questionnaire.Pages }})"
                 class="text-sm text-center text-gray-500 mb-6"
             ></p>
             <h1 class="flex gap-2 text-xl font-bold mb-9">
                 <span>
-                    {{ add $itemOrder 1 }}.
+                    {{ $itemOrder }}.
                 </span>
                 <span>
                     {{ .RenderShortcodes }}

@@ -59,7 +59,6 @@ export default () => ({
       "d": () => this.$store.app.burgerIsOpen = !this.$store.app.burgerIsOpen,
       "h": () => goToUrl.call(this, [ "base" ]),
       "i": () => this.$store.session.itemId && goToCurrentItem.call(this),
-      "m": () => this.$store.session.itemId && goToCurrentQuestionnaireMap.call(this),
       "q": () => goToCurrentQuestionnaire.call(this),
     }[lowercaseKey]?.();
   },

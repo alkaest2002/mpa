@@ -27,7 +27,7 @@ export default () => ({
       this.tabIndex = -1;
     } else {
       this.$store.session.setAnswer(
-        Object.assign({}, { itemId: this.$store.session.itemId, order: this.order, answerValue, answerLatency })
+        Object.assign({}, { itemId: this.$store.session.itemId, answerValue, answerLatency })
       );
     }
   },

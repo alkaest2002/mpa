@@ -41,7 +41,7 @@ export default () => ({
           : [ ...this.answerValues, ...answerValue ];
       this.$store.session.setAnswer(
         Object.assign({}, { 
-          itemId: this.$store.session.itemId, order: this.order, answerValue: this.answerValues, answerLatency 
+          itemId: this.$store.session.itemId, answerValue: this.answerValues, answerLatency 
         })
       );
     }

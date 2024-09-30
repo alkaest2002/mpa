@@ -11,7 +11,7 @@ export default () => ({
     this.$store.session.questionnaireId = 
       Object.values(this.$store.session.questionnaires)
         .map((el, order) => ({ order, ...el }))
-        .sort((a,b) => Number(a.order) - Number(b.order))
+        .sort((a,b) => Number(a.questionnaireOrder) - Number(b.questionnaireOrder))
         .filter(({ questionnaireId }) => !this.$store.session.completedQuestionnaires.includes(questionnaireId))
         [0]?.questionnaireId;
   },

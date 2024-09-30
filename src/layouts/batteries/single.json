@@ -3,7 +3,7 @@
 {{- $questionnairesData := dict }}
 {{- range $order, $questionnaireId := $questionnaires }}
     {{- $questionnaire := urls.JoinPath "questionnaires/" $questionnaireId | $.Site.GetPage }}
-    {{- $urlQuestionnaires = $urlQuestionnaires | merge  (dict $questionnaireId (dict "questionnaireId" $questionnaireId "questionnaireUrl" $questionnaire.RelPermalink "order" $order )) }}
-    {{- $questionnairesData = $questionnairesData | merge (dict $questionnaireId (dict "questionnaireId" $questionnaireId "questionnaireName" $questionnaire.Title "questionnaireLength" (len $questionnaire.Pages)  "order" $order ))}}
+    {{- $urlQuestionnaires = $urlQuestionnaires | merge  (dict $questionnaireId (dict "questionnaireId" $questionnaireId "questionnaireUrl" $questionnaire.RelPermalink "questionnaireOrder" (add $order 1) )) }}
+    {{- $questionnairesData = $questionnairesData | merge (dict $questionnaireId (dict "questionnaireId" $questionnaireId "questionnaireName" $questionnaire.Title "questionnaireLength" (len $questionnaire.Pages)  "questionnaireOrder" (add $order 1) ))}}
 {{- end }}
 {{- dict "batteryId" .Params.id "batteryName" .Title "questionnaires" $questionnairesData "urlQuestionnaires" $urlQuestionnaires | jsonify }}
