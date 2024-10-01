@@ -28,7 +28,6 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
   placeHolders = [...placeHolders, ...converObjectToPlaceholders(answers, null)];
   placeHolders = [...placeHolders, ...converObjectToPlaceholders(scores, null)];
   placeHolders = [...placeHolders, ...converObjectToPlaceholders(normsBiblio, "biblio")];
-  console.log(placeHolders)
   placeHolders.forEach(([key, val]) => template = template.replaceAll(key, val));
   return template;
 };
