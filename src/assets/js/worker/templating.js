@@ -1,13 +1,13 @@
 export default generateReport = ({ testee, session, answers, scores, normsBiblio, template }) => {
   
-  const converObjectToPlaceholders = (obj, rootKey = null) => {
+  const converToPlaceholders = (obj, rootKey = null) => {
     let placeHolders = [];
     for (const [key, val] of Object.entries(obj)) {
       if (typeof val === "object" && !Array.isArray(val)) {
         const newKey = (rootKey && `${rootKey}#${key}`) || key;
         placeHolders = [
           ...placeHolders,
-          ...converObjectToPlaceholders(val, newKey),
+          ...converToPlaceholders(val, newKey),
         ];
       } else if (Array.isArray(val)) {
         listOfValues = val.length == 0 ? [" "] : val;
@@ -23,11 +23,11 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
     return [...placeHolders];
   };
 
-  let placeHolders = [...[], ...converObjectToPlaceholders(testee, "testee")];
-  placeHolders = [...placeHolders, ...converObjectToPlaceholders(session, "testee")];
-  placeHolders = [...placeHolders, ...converObjectToPlaceholders(answers, null)];
-  placeHolders = [...placeHolders, ...converObjectToPlaceholders(scores, null)];
-  placeHolders = [...placeHolders, ...converObjectToPlaceholders(normsBiblio, "biblio")];
+  let placeHolders = [...[], ...converToPlaceholders(testee, "testee")];
+  placeHolders = [...placeHolders, ...converToPlaceholders(session, "testee")];
+  placeHolders = [...placeHolders, ...converToPlaceholders(answers, null)];
+  placeHolders = [...placeHolders, ...converToPlaceholders(scores, null)];
+  placeHolders = [...placeHolders, ...converToPlaceholders(normsBiblio, "biblio")];
   placeHolders.forEach(([key, val]) => template = template.replaceAll(key, val));
   return template;
 };
