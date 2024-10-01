@@ -29,7 +29,8 @@
         <td>
           {{- range $item.options }}
             {{- range $optionValue, $optionText := . }}
-              <span class="option option-{{ $optionValue }}-{{ $item.id }}#answerValue">{{ $optionText }}</span>
+              <!-- [html-validate-disable-next no-dup-class] -->
+              <p class="option option-{{ $optionValue }}-{{ $item.id }}#answerValue#{{ $optionValue }}">{{ $optionText }}</p>
             {{- end }}
           {{- end }}
           <span class="option option-{{ $item.id }}#answerValue italic">{{ T "noResponse" }}</span>

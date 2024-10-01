@@ -9,7 +9,13 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
           ...placeHolders,
           ...converObjectToPlaceholders(val, newKey),
         ];
-      } else {
+      } else if (Array.isArray(val)) {
+        placeHolders = [
+          ...placeHolders,
+          ...val.map((el) => [`${rootKey}#${key}#${el}`, el])
+        ]
+
+      }  else {
         placeHolders.push([`${rootKey}#${key}`, val]);
       }
     }

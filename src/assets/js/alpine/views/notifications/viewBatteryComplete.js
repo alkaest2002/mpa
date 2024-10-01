@@ -14,7 +14,6 @@ export default () => ({
   batteryIsCompleteButton: {
     ["@click.prevent"]() {
       if (this.$store.app.autoPilotSwitch == "on" && !this.$store.reports.generatingReports) {
-        console.log("here")
         downloadZip.call(this);
         //this.$store.app.wipeState();
         //this.$store.reports.wipeState();
