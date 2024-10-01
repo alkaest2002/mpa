@@ -5,7 +5,6 @@ const {
   goToUrlRaw, 
   goToCurrentBattery, 
   goToCurrentQuestionnaire,
-  goToCurrentQuestionnaireMap, 
   goToCurrentItem 
 } = useNavigation();
 
