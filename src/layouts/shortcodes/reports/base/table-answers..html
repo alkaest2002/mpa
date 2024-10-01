@@ -33,7 +33,7 @@
               <p class="option option-{{ $optionValue }}-{{ $item.id }}#answerValue#{{ $optionValue }}">{{ $optionText }}</p>
             {{- end }}
           {{- end }}
-          <span class="option option-{{ $item.id }}#answerValue italic">{{ T "noResponse" }}</span>
+          <span class="option option-{{ $item.id }}#answerValue# text-italic">{{ T "noResponse" }}</span>
         </td>
         <td class="text-center">{{ $item.id }}#answerLatency</td>
         <td class="text-center">{{ $item.id }}#deltaAnswerLatency</td>

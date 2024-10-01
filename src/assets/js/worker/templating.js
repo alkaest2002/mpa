@@ -10,9 +10,10 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
           ...converObjectToPlaceholders(val, newKey),
         ];
       } else if (Array.isArray(val)) {
+        listOfValues = val.length == 0 ? [" "] : val;
         placeHolders = [
           ...placeHolders,
-          ...val.map((el) => [`${rootKey}#${key}#${el}`, el])
+          ...listOfValues.map((el) => [`${rootKey}#${key}#${el}`, el])
         ]
 
       }  else {
@@ -27,6 +28,7 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
   placeHolders = [...placeHolders, ...converObjectToPlaceholders(answers, null)];
   placeHolders = [...placeHolders, ...converObjectToPlaceholders(scores, null)];
   placeHolders = [...placeHolders, ...converObjectToPlaceholders(normsBiblio, "biblio")];
+  console.log(placeHolders)
   placeHolders.forEach(([key, val]) => template = template.replaceAll(key, val));
   return template;
 };

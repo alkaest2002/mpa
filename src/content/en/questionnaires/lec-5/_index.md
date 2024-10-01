@@ -15,9 +15,5 @@ cascade:
     - 4: witnessed it
     - 5: happened to me
 ---
-<p class="mb-3">Listed in this questionnare are a number of difficult or stressful things that sometimes happen to people. For each
-event check one or more of the response options to indicate that: (a) it happened to you personally; (b) you witnessed
-it happen to someone else; (c) you learned about it happening to a close family member or close friend; (d) you were
-exposed to it as part of your job (for example, paramedic, police, military, or other first responder); (e) you’re not sure if
-it fits; or (f) it doesn’t apply to you.</p>
-<p>Be sure to consider your entire life (growing up as well as adulthood) as you go through the list of events.</p>
+"<p class="mb-3">This questionnaire lists a series of difficult or stressful events that sometimes happen to people. For each event, select one or more of the response options to indicate that: <ul class="ml-5 my-5 list-outside list-disc [&>li]:mb-2"><li>the event does not apply to your case;</li><li>you are unsure if the event applies to your case;</li><li>you were exposed to the event as part of your job (e.g., paramedic, police, military);</li><li>you learned that it happened to a close family member or a close friend;</li><li>you witnessed the event happen to someone else;</li><li>the event happened to you personally.</li></ul></p>
+<p>Be sure to consider your entire life (both childhood and adulthood) as you go through the list of events.</p>"
