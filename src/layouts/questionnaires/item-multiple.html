@@ -34,6 +34,7 @@
                     {{ .RenderShortcodes }}
                 </span>
             </h1>
+            <h2 class="text-gray-400 text-sm mb-3">{{ T "itemWithMultipleAnswers" }}</h2>
             <div class="grid grid-cols-1 gap-4">
                 {{- range .Params.options }}
                     {{- range $optionValue, $optionLabel := . }}
