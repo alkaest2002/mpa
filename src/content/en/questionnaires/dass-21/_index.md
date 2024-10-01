@@ -3,8 +3,10 @@ title: Depression Anxiety Stress Scales Short Version
 linkTitle: DASS-21
 id: dass-21
 letter: D
+layout: section
 
 cascade:
+  layout: item-single
   options:
     - 0: did not apply to me at all
     - 1: applied to me to some degree, or some of the time

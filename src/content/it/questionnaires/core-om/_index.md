@@ -3,8 +3,10 @@ title: Clinical Outcomes in Routine Evaluation – OM
 linkTitle: Core-OM
 id: core-om
 letter: C
+layout: section
 
 cascade:
+  layout: item-single
   options:
     - 0: mai
     - 1: di rado

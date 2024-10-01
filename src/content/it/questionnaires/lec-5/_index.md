@@ -6,7 +6,6 @@ letter: L
 layout: section
 
 cascade:
-  type: questionnaires
   layout: item-multiple
   options:
     - 0: non si applica al mio caso

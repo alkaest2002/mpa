@@ -23,8 +23,4 @@ cascade:
       - html
       - json
       - map
-
-  - _target:
-      kind: page
-    layout: item-single
 ---
