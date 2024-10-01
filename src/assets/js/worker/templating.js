@@ -2,9 +2,10 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
   
   const converToPlaceholders = (obj, rootKey = null) => {
     let placeHolders = [];
+    if (typeof obj !== "object") return [rootKey, obj];
     for (const [key, val] of Object.entries(obj)) {
+      const newKey = (rootKey && `${rootKey}#${key}`) || key;
       if (typeof val === "object" && !Array.isArray(val)) {
-        const newKey = (rootKey && `${rootKey}#${key}`) || key;
         placeHolders = [
           ...placeHolders,
           ...converToPlaceholders(val, newKey),
@@ -13,11 +14,10 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
         listOfValues = val.length == 0 ? [" "] : val;
         placeHolders = [
           ...placeHolders,
-          ...listOfValues.map((el) => [`${rootKey}#${key}#${el}`, el])
+          ...listOfValues.map((el) => converToPlaceholders(el, `${newKey}#${el}`))
         ]
-
       }  else {
-        placeHolders.push([`${rootKey}#${key}`, val]);
+        placeHolders.push([newKey, val]);
       }
     }
     return [...placeHolders];
