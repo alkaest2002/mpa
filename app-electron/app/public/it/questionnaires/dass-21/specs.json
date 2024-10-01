@@ -6,17 +6,14 @@
       "name": "depressione"
     },
     "anx": {
-      "order": 1,
       "code": "ANX",
       "name": "ansia"
     },
     "str": {
-      "order": 2,
       "code": "STR",
       "name": "stress"
     },
     "tot": {
-      "order": 2,
       "code": "TOT",
       "name": "totale"
     }
