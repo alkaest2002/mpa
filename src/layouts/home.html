@@ -14,11 +14,11 @@
             <div class="mb-6">{{ .Content }}</div>
             <div class="grid grid-cols-1 gap-4">
                 {{- range .Sites }}
+                    {{- $language := .Language }}
                     {{- $urlHomePage := (.GetPage "home").RelPermalink }}
-                    {{- $languageId := .Language }}
                     <div
-                        x-ref="tab-{{ $languageId }}"
-                        x-bind="setLanguageIdButton('{{ .Language }}', '{{ $urlHomePage }}')"
+                        x-ref="tab-{{ $language }}"
+                        x-bind="setLanguageIdButton('{{ $language }}', '{{ $urlHomePage }}')"
                         class="tab-element w-full p-3 rounded border shadow-md cursor-pointer"
                     >
                         <div class="flex justify-between relative">
@@ -28,7 +28,7 @@
                                         {{ .Content | safeHTML }}
                                     </div>
                                     <div>
-                                        {{ $languageId.LanguageName | lower }}
+                                        {{ $language.LanguageName | lower }}
                                     </div>
                                 {{- end }}
                             </div>
