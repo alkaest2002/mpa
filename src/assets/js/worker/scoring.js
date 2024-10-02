@@ -7,6 +7,7 @@ export default computeScores = ({ testee, session, answers, specs }) => {
   }
   
   const computeRawScoreStraight = (_, items, answers) => {
+    // answers is a list of lists: example [[1],[2,4],[1],[5]]
     const answerIndices = items.map((el) => el -1);
     if (answerIndices.length === 0)
       return { straightScore: 0, straightOmissions: 0 };
@@ -19,6 +20,7 @@ export default computeScores = ({ testee, session, answers, specs }) => {
   }
 
   const computeRawScoreReversed = ({ likert: { max, min }}, items, answers) => {
+    // answers is a list of lists: example [[1],[2,4],[1],[5]]
     const answerIndices = items.map((el) => el -1);
     if (answerIndices.length === 0)
       return { reversedScore: 0, reversedOmissions: 0 };
