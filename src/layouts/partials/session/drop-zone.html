@@ -10,7 +10,7 @@
       </div>
       <div x-ref="file-upload">
         <input x-ref="dropzone" type="file" class="hidden" x-bind="uploadFile">
-        {{- $defaultMessage := (T "noUploadedFile") }}
+        {{- $defaultMessage := T "noUploadedFile" }}
         <div class="mt-3 text-sm text-gray-500" x-text="uploadedFilename || '{{ $defaultMessage }}'"></div>
       </div>
     </div>

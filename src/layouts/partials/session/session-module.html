@@ -37,11 +37,13 @@
             "chooseReportsLanguageNullOption" }}
         </option>
         {{- range .Sites }}
-        {{- $urlReports := (.GetPage "reports" ).RelPermalink }}
-        <option 
-            :selected="$store.urls.urlReports == '{{ $urlReports }}'" value="{{ $urlReports }}">{{
-            .Language.LanguageName | lower }}
-        </option>
+            {{- $urlReports := (.GetPage "reports" ).RelPermalink }}
+            <option 
+                :selected="$store.urls.urlReports == '{{ $urlReports }}'" 
+                value="{{ $urlReports }}"
+            >
+                {{ .Language.LanguageName | lower }}
+            </option>
         {{- end }}
     </select>
 </div>
