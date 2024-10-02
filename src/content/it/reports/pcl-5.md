@@ -1,6 +1,6 @@
 ---
-title: Report PANAS
-id: panas
+title: Report PCL-5
+id: pcl-5
 ---
 {{< reports/base/page-container >}}
   {{< reports/base/page-header >}}

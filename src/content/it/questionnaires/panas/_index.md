@@ -8,9 +8,11 @@ layout: section
 cascade:
   layout: item-single
   options:
-    - 1: opzione 1
-    - 2: opzione 2
-    - 3: opzione 3
-    - 4: opzione 4
+    - 1: per nulla o quasi
+    - 2: poco
+    - 3: moderatamente
+    - 4: molto
+    - 5: moltissimo
 ---
-Istruzioni del questionario panas
+<p class="mb-3">Nel presente questionario è elencata una serie di emozioni/stati d'animo.</p>
+<p>Indichi in che misura ha provato ogni emozione/stato d'animo nel corso dell'ultima settimana.</p>
