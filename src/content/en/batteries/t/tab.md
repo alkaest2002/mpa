@@ -1,5 +1,5 @@
 ---
-title: Trauma Assessment Battery
+title: TAB Trauma Assessment Battery
 id: tab
 batteryType: self
 questionnaires:

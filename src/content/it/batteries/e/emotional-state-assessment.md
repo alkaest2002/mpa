@@ -1,5 +1,5 @@
 ---
-title: Emotional State Assessment
+title: ESA Emotional State Assessment
 id: emotional-state-assessment
 batteryType: self
 questionnaires:

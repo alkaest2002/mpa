@@ -1,5 +1,5 @@
 ---
-title: Positive and Negative Affect Schedule
+title: PANAS Positive and Negative Affect Schedule
 id: panas
 batteryType: self
 questionnaires:

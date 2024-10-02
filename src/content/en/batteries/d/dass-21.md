@@ -1,5 +1,5 @@
 ---
-title: Depression Anxiety Stress Scales Short Version
+title: DASS-21 Depression Anxiety Stress Scales Short Version
 id: dass-21
 batteryType: self
 questionnaires:

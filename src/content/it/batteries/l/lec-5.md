@@ -1,5 +1,5 @@
 ---
-title: Life Events Checklist for DSM-5
+title: LEC-5 Life Events Checklist for DSM-5
 id: lec-5
 batteryType: self
 questionnaires:

@@ -1,5 +1,5 @@
 ---
-title: Clinical Outcomes in Routine Evaluation – Outcome Measure
+title: CORE-OM Clinical Outcomes in Routine Evaluation – Outcome Measure
 id: core-om
 batteryType: self
 questionnaires:

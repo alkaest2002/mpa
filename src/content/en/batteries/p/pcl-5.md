@@ -1,5 +1,5 @@
 ---
-title: PTSD Checklist for DSM-5 (PCL-5)
+title: PCL-5 PTSD Checklist for DSM-5
 id: pcl-5
 batteryType: self
 questionnaires:
