@@ -24,8 +24,8 @@ export default () => ({
       this.answer = [];
     } else {
       this.answer = this.answer.includes(answer[0])
-          ? this.answer.filter((el) => el != answer[0])
-          : [ ...this.answer, ...answer ];
+        ? this.answer.filter((el) => el != answer[0])
+        : [ ...this.answer, ...answer ];
     }
   },
 

@@ -8,7 +8,7 @@ build:
   render: link
   
 cascade:
- 
+
   - _target:
       path: /questionnaires/**
     build:
@@ -18,7 +18,6 @@ cascade:
 
   - _target:
       kind: section
-    layout: section
     outputs:
       - html
       - json
