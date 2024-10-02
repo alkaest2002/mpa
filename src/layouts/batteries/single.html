@@ -12,9 +12,8 @@
             <div class="mb-6">{{ .Content }}</div>
             <div class="grid grid-cols-1 gap-4">
                 {{- range $counter, $questionnaireId := .Params.questionnaires }}
-                    {{- $questionnaire := urls.JoinPath "questionnaires/" $questionnaireId | $.Site.GetPage }}
+                    {{- $questionnaire := slice "questionnaires" $questionnaireId | urls.JoinPath | $.GetPage }}
                     {{- with $questionnaire }}
-                        {{- $questionnaireName := .Params.title }}
                         <div 
                             x-ref="tab-{{ $questionnaireId }}"
                             x-bind="selectQuestionnaireButton('{{ $questionnaireId }}')"
@@ -23,7 +22,7 @@
                             <div class="flex justify-between relative">
                                 <div>
                                     <p class="text-sm text-gray-500">{{ $questionnaireId }}</p>
-                                    <p>{{ $questionnaireName | lower | strings.FirstUpper }}</p>
+                                    <p>{{ .Params.title }}</p>
                                 </div>
                                 <div class="flex gap-2 items-center italic text-sm text-gray-400">
                                     <span x-cloak
