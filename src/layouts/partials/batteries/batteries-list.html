@@ -5,13 +5,11 @@
         <div class="grid grid-cols-1 gap-4">
             {{- range $index, $page := $paginator.Pages }}
                 {{- $batteryId := $page.Params.id }}
-                {{- $batteryName := $page.Title }}
-                {{- $urlBattery := $page.RelPermalink }}
                 {{- $urlBatteryJSON := ($page.OutputFormats.Get "json" ).RelPermalink }}
                 {{- $numberOfQuestionnaires := len $page.Params.questionnaires }}
                 <div 
                     x-ref="tab-{{ $batteryId }}"
-                    x-bind="selectBatteryButton('{{ $batteryId }}', '{{ $batteryName | lower | strings.FirstUpper }}', '{{ $urlBatteryJSON }}')"
+                    x-bind="selectBatteryButton('{{ $batteryId }}', '{{ $page.Title | lower | strings.FirstUpper }}', '{{ $urlBatteryJSON }}')"
                     class="tab-element w-full p-3 rounded border shadow-md cursor-pointer"
                 >
                     <div class="flex justify-between relative">
@@ -26,7 +24,7 @@
                                 {{- end }}
                                 </span>
                             </p>
-                            <p class="font-medium">{{ $batteryName }}</p>
+                            <p class="font-medium">{{ $page.Title }}</p>
                             <p>
                                 {{ range $page.Params.questionnaires }}
                                     <span class="bg-gray-200 text-gray-500 text-xs font-medium px-2.5 py-1 rounded">{{ . }}</span>
