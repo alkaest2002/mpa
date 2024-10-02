@@ -7,10 +7,7 @@ export default () => ({
   
   initQuestionnaireItemSingle({ itemId, itemUrl }) {
     this.$store.app.currentView = "questionnaire-item-single";
-    this.$store.session.itemId = itemId;
-    this.$store.urls.urlItem = itemUrl;
-    this.noResponse = this.$store.session.currentAnswerValue?.length === 0;
-    this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
+    this.initQuestionnaireItemBase({ itemId, itemUrl });
     this.$watch("noResponse", (val) => {
       val && (this.tabIndex = this.tabElements.length -1);
       val && this.setAnswer({ answerValue: [] });

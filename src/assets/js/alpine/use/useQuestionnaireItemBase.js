@@ -9,6 +9,13 @@ export default () => ({
   cumulatedEpoch: 0,
   noResponse: false,
 
+  initQuestionnaireItemBase({ itemId, itemUrl }) {
+    this.$store.session.itemId = itemId;
+    this.$store.urls.urlItem = itemUrl;
+    this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
+    this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
+  },
+
   getShouldGoNext() {
     return this.$store.session.currentAnswerValue?.length > 0 || this.noResponse;
   },

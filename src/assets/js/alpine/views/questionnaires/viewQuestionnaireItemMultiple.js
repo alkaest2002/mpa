@@ -9,11 +9,8 @@ export default () => ({
   
   initQuestionnaireItemMultiple({ itemId, itemUrl }) {
     this.$store.app.currentView = "questionnaire-item-multiple";
-    this.$store.session.itemId = itemId;
-    this.$store.urls.urlItem = itemUrl;
-    this.noResponse = this.$store.session.currentAnswerValue?.length == 0;
+    this.initQuestionnaireItemBase({ itemId, itemUrl });
     this.answerValues = this.$store.session.currentAnswerValue || [];
-    this.cumulatedEpoch = this.$store.session.currentAnswer?.answerLatency || 0;
     this.$watch("noResponse", (val) => {
       if (val) {
         this.tabIndex = this.tabElements.length -1;
