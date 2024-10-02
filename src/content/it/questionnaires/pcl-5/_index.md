@@ -2,7 +2,6 @@
 title: PTSD Checklist for DSM-5 (PCL-5)
 linkTitle: PCL-5
 id: pcl-5
-letter: P
 layout: section
 
 cascade:

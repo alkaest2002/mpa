@@ -1,8 +1,12 @@
 ---
-title: Catalogo generale
+title: General Catalogue
 id: batteries
   
 cascade:
+
+  - _target:
+      kind: section
+    layout: section-letter
 
   - _target:
       path: /batteries/**
@@ -11,4 +15,4 @@ cascade:
       - html
       - json
 ---
-Seleziona la batteria da somministrare.
+Select which battery to administer.

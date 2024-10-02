@@ -2,7 +2,6 @@
 title: Questionario Demo
 linkTitle: DEMO
 id: demo
-letter: D
 layout: section
 
 cascade:

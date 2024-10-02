@@ -1,7 +1,5 @@
 ---
 title: Catalogo filtrato per lettera H
 id: h
-letter: H
-layout: section-letter
 ---
-Seleziona la batteria e clicca sul pulsante inizia.
+Select the battery and click the start button.

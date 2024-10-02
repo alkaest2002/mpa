@@ -2,7 +2,6 @@
 title: Positive and Negative Affect Schedule
 linkTitle: PANAS
 id: panas
-letter: P
 layout: section
 
 cascade:

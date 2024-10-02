@@ -2,7 +2,6 @@
 title: Clinical Outcomes in Routine Evaluation – OM
 linkTitle: Core-OM
 id: core-om
-letter: C
 layout: section
 
 cascade:

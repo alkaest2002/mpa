@@ -2,7 +2,6 @@
 title: Life Events Checklist for DSM-5
 linkTitle: LEC-5
 id: lec-5
-letter: L
 layout: section
 
 cascade:
