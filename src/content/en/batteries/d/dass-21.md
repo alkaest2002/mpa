@@ -5,4 +5,4 @@ batteryType: self
 questionnaires:
 - dass-21
 ---
-The battery consists of only the DASS-21 questionnaire.
+Battery consisting of the DASS-21 questionnaire only.

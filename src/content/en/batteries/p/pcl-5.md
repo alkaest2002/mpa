@@ -5,4 +5,4 @@ batteryType: self
 questionnaires:
 - pcl-5
 ---
-Batteria costituita dal solo questionario PCL-5.
+Battery consisting of the PCL-5 questionnaire only.

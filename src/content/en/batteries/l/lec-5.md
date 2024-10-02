@@ -5,4 +5,4 @@ batteryType: self
 questionnaires:
 - lec-5
 ---
-The battery consists of only the LEC-5 questionnaire.
+Battery consisting of the LEC-5 questionnaire only.

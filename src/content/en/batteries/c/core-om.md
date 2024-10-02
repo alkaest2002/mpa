@@ -5,4 +5,4 @@ batteryType: self
 questionnaires:
 - core-om
 ---
-The battery consists of only the CORE-OM questionnaire.
+Battery consisting of the CORE-OM questionnaire only.
