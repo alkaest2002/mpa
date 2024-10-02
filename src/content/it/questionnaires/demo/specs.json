@@ -1,0 +1,29 @@
+{
+  "name": "Demo",
+  "scales": {
+    "s1": {
+      "code": "SC1",
+      "name": "scala 1"
+    },
+    "s2": {
+      "code": "SC2",
+      "name": "scala 2"
+    },
+    "s3": {
+      "code": "SC3",
+      "name": "item positivi"
+    },
+    "s4": {
+      "code": "SC4",
+      "name": "item inversi"
+    }
+  },
+  "norms": {
+    "getNormsBiblio": "const fn = () => 'Riferimento bibliogragico delle norma usate'",
+    "getNorms": "const fn = (testee, scaleId) => scaleId",
+    "sc1": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-2.5)/.5))).toFixed(0)",
+    "sc2": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-2.5)/.5))).toFixed(0)",
+    "sc3": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-2.5)/.5))).toFixed(0)",
+    "sc4": "const fn = ({ meanScore }) => Math.max(0, Math.min(100, 50+10*((meanScore-2.5)/.5))).toFixed(0)"
+  }
+}
