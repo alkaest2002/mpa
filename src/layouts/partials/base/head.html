@@ -8,7 +8,7 @@
 {{- $styles := resources.Get "css/main.css" }}
 {{- if hugo.IsDevelopment }}
 	{{- $styles = $styles | css.PostCSS | minify }}
-	{{- $styles = $styles | resources.ExecuteAsTemplate (printf "css/main.dev.%v.css" now.UnixMilli) . }}
+	{{- $styles = $styles | resources.ExecuteAsTemplate "css/main.dev.css" . }}
 	<style>{{- $styles.Content | safeCSS -}}</style>
 {{- else }}
 	{{- $styles = $styles | css.PostCSS | minify | fingerprint | resources.PostProcess }}
