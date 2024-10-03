@@ -1,1 +1,0 @@
-{"id":"panas","items":{"it-001":{"id":"it-001","options":[{"1":"option 1"},{"2":"option 2"},{"3":"option 3"},{"4":"option 4"}],"order":1,"text":"Text of item 1\n"},"it-002":{"id":"it-002","options":[{"1":"option 1"},{"2":"option 2"},{"3":"option 3"},{"4":"option 4"}],"order":2,"text":"Text of item 2\n"}},"length":2,"likert":{"max":4,"min":0},"maxOmitted":1,"name":"Panas"}
