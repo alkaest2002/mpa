@@ -14,9 +14,9 @@
       "reversedItems": []
     },
     "na": {
-      "id": "pa",
+      "id": "na",
       "order": 2,
-      "straightItems": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+      "straightItems": [2, 4, 6, 7, 8, 11, 13, 15, 18, 20],
       "reversedItems": []
     }
   }
