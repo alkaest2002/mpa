@@ -5,7 +5,7 @@ id: dsm5-l1
 {{< reports/base/page-container >}}
   {{< reports/base/page-header >}}
   {{< reports/base/case-info >}}
-  {{< reports/base/table-flags >}}
+  {{< reports/base/table-scores standardScoreLabel = "reportScaleFlag" >}}
 {{< /reports/base/page-container >}}
 {{< reports/base/page-container >}}
   {{< reports/base/page-header >}}
