@@ -12,7 +12,7 @@
   },
   "norms": {
     "getNormsBiblio": "const fn = () => 'Terracciano A, McCrae RR, Costa PT Jr. Factorial and construct validity of the Italian Positive and Negative Affect Schedule (PANAS). Eur J Psychol Assess. 2003;19(2):131-141. doi: 10.1027//1015-5759.19.2.131. PMID: 20467578; PMCID: PMC2868265.'",
-    "getNorms": "const fn = ({ gender }, scaleId) => `${gender}.${scaleId}`",
+    "getNorms": "const fn = ({ bio: { gender }}, scaleId) => `${gender}.${scaleId}`",
     "m.pa": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-27.6)/6.6))).toFixed(0)",
     "m.na": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-15)/5.5))).toFixed(0)",
     "f.pa": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-27.6)/7.3))).toFixed(0)",
