@@ -1,0 +1,29 @@
+{{- $specs := partialCached "questionnaires/questionnaire-json" (dict "questionnaireId" $.Page.Params.id) $.Page.Params.id }}
+{{- $scales := sort $specs.scales "order" }}
+<table id="table-scores" class="w-full apa-table">
+  <caption class="caption">
+    <p>{{ T "reportTableScoresLegend" | strings.FirstUpper }}. biblio#ref</p>
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">{{ T "reportScaleCode" | strings.FirstUpper }}</th>
+      <th scope="col">{{ T "reportScaleName" | strings.FirstUpper }}</th>
+      <th scope="col" class="text-center">{{ T "reportScaleRawScore" | strings.FirstUpper }}</th>
+      <th scope="col" class="text-center">{{ T "reportScaleMeanScore" | strings.FirstUpper }}</th>
+      <th scope="col" class="text-center">{{ T "reportScaleFlag" | strings.FirstUpper }}</th>
+      <th scope="col" class="text-center">{{ T "reportScaleOmissionsScore" | strings.FirstUpper }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $scales }}
+        <tr>
+          <th scope="row">{{ .code | upper }}</th>
+          <td>{{ .name | strings.FirstUpper }}</td>
+          <td class="text-center">{{ .id }}#rawScore</td>
+          <td class="text-center">{{ .id }}#meanScore</td>
+          <td class="text-center">{{ .id }}#standardScore</td>
+          <td class="text-center">{{ .id }}#omissions</td>
+        </tr>
+    {{- end }}
+  </tbody>
+</table>

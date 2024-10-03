@@ -65,6 +65,7 @@ reportScaleName: scala
 reportScaleRawScore: p. grezzo
 reportScaleMeanScore: p. medio
 reportScaleStandardScore: p. standard
+reportScaleFlag: flag
 reportScaleOmissionsScore: omissioni
 reportTableScoresLegend: tabella dei punteggi delle scale
 resumeSession: riprendi sessione

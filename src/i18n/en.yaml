@@ -62,6 +62,7 @@ reportScaleName: scale
 reportScaleRawScore: raw score
 reportScaleMeanScore: mean score
 reportScaleStandardScore: standard score
+reportScaleFlag: flag
 reportScaleOmissionsScore: omissions
 reportTableScoresLegend: table witn scales' scores
 resumeSession: resume session
