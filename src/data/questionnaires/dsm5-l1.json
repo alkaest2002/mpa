@@ -1,0 +1,89 @@
+{
+  "id": "dsm5-l1",
+  "length": 23,
+  "maxOmitted": 0,
+  "likert": {
+    "min": 0,
+    "max": 4
+  },
+  "scales": {
+    "dpr": {
+      "id": "dpr",
+      "order": 1,
+      "straightItems": [1, 2],
+      "reversedItems": []
+    },
+    "ang": {
+      "id": "ang",
+      "order": 2,
+      "straightItems": [3],
+      "reversedItems": []
+    },
+    "man": {
+      "id": "man",
+      "order": 3,
+      "straightItems": [4,5],
+      "reversedItems": []
+    },
+    "anx": {
+      "id": "anx",
+      "order": 4,
+      "straightItems": [6,7,8],
+      "reversedItems": []
+    },
+    "som": {
+      "id": "som",
+      "order": 5,
+      "straightItems": [9,10],
+      "reversedItems": []
+    },
+    "sui": {
+      "id": "sui",
+      "order": 6,
+      "straightItems": [11],
+      "reversedItems": []
+    },
+    "scz": {
+      "id": "scz",
+      "order": 7,
+      "straightItems": [12, 13],
+      "reversedItems": []
+    },
+    "slp": {
+      "id": "slp",
+      "order": 8,
+      "straightItems": [14],
+      "reversedItems": []
+    },
+    "mem": {
+      "id": "mem",
+      "order": 9,
+      "straightItems": [15],
+      "reversedItems": []
+    },
+    "obs": {
+      "id": "obs",
+      "order": 10,
+      "straightItems": [16, 17],
+      "reversedItems": []
+    },
+    "dis": {
+      "id": "dis",
+      "order": 11,
+      "straightItems": [18],
+      "reversedItems": []
+    },
+    "prs": {
+      "id": "prs",
+      "order": 12,
+      "straightItems": [19, 20],
+      "reversedItems": []
+    },
+    "sub": {
+      "id": "sub",
+      "order": 13,
+      "straightItems": [21, 22, 23],
+      "reversedItems": []
+    }
+  }
+}

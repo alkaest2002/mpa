@@ -1,0 +1,74 @@
+{
+  "name": "DSM5-L1",
+  "scales": {
+    "dpr": {
+      "code": "DPR",
+      "name": "Depressione"
+    },
+    "ang": {
+      "code": "ANG",
+      "name": "Rabbia"
+    },
+    "man": {
+      "code": "MAN",
+      "name": "Mania"
+    },
+    "anx": {
+      "code": "ANX",
+      "name": "Ansia"
+    },
+    "som": {
+      "code": "SOM",
+      "name": "Sintomi somatici"
+    },
+    "sui": {
+      "code": "SUI",
+      "name": "Ideazione suicidaria"
+    },
+    "scz": {
+      "code": "SCZ",
+      "name": "Psicosi"
+    },
+    "slp": {
+      "code": "SLP",
+      "name": "Alterazioni del sonno"
+    },
+    "mem": {
+      "code": "MEM",
+      "name": "Memoria"
+    },
+    "obs": {
+      "code": "OBS",
+      "name": "Pensieri e comportamenti ripetitivi"
+    },
+    "dis": {
+      "code": "DIS",
+      "name": "Dissociazione"
+    },
+    "prs": {
+      "code": "PRS",
+      "name": "Funzionamento della personalità"
+    },
+    "sub": {
+      "code": "SUB",
+      "name": "Uso di sostanze"
+    }
+  },
+  "norms": {
+    "getNormsBiblio": "const fn = () => 'DSM-5 Self-Rated Level 1 Cross-Cutting Symptom Measure - Adult © 2013 American Psychiatric Association'",
+    "getNorms": "const fn = (testee, scaleId) => scaleId",
+    "dpr": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "ang": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "man": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "anx": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "som": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "sui": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "scz": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "slp": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "mem": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "obs": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "dis": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "prs": "const fn = ({ maxScore }) => maxScore > 1 ? '*' : ''",
+    "sub": "const fn = ({ maxScore }) => maxScore > 0 ? '*' : ''"
+  }
+}
