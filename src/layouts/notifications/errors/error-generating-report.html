@@ -1,4 +1,4 @@
 {{- define "main" }}
-    {{- $linkTo := (.Site.GetPage "session/session-resume").RelPermalink }}
+    {{- $linkTo := (.Site.GetPage "home").RelPermalink }}
     {{- partial "notifications/error" (dict "currentPage" . "linkTo" $linkTo) }}
 {{- end }}
