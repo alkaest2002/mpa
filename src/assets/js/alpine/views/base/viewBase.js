@@ -5,9 +5,9 @@ const { goToUrl } = useNagigation();
 
 export default () => ({
   
-  async initBase(isDevelopment, { urlWorkerReportScript, urlWorkerMergeReportsScript, urlScoringScript, urlTemplatingScript }) {
+  async initBase(envIsDevelopment, { urlWorkerReportScript, urlWorkerMergeReportsScript, urlScoringScript, urlTemplatingScript }) {
 
-    this.$store.app.isDevelopment = isDevelopment
+    this.$store.app.envIsDevelopment = envIsDevelopment
 
     this.$watch("$store.session.completedQuestionnaires", (val) => {
       // safeguard

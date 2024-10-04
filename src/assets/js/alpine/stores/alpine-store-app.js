@@ -5,7 +5,7 @@ const stateFn = () => [
   [ "tutorialSwitch", "on" ],
   [ "autoPilotSwitch", "on" ],
   [ "burgerIsOpen", false ],
-  [ "isDevelopment", false]
+  [ "envIsDevelopment", false]
 ]
 
 export default (Alpine) => ({

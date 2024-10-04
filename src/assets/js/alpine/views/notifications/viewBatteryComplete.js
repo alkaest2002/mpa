@@ -15,7 +15,7 @@ export default () => ({
     ["@click.prevent"]() {
       if (this.$store.app.autoPilotSwitch == "on" && !this.$store.reports.generatingReports) {
         downloadZip.call(this);
-        if (!this.$store.app.isDevelopment) {
+        if (!this.$store.app.envIsDevelopment) {
           this.$store.app.wipeState();
           this.$store.reports.wipeState();
           this.$store.testee.wipeState();
