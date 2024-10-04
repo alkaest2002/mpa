@@ -1,5 +1,5 @@
 author: "Pierpaolo Calanna"
-description: "Electrong App for administering and Scoring Psychological Questionnaires"
+description: "Electron App for Administering and Scoring Psychological Questionnaires"
 paginateSize:
   batteries: 5
   questionnaires: 5
