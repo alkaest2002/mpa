@@ -16,9 +16,7 @@
                         <div>
                             <p class="text-sm text-gray-400">
                                 <span>{{ .Params.batteryType | upper }}</span> &middot;
-                                <span>
-                                {{ T "numberOfQuestionnaires" (dict "count" $numberOfQuestionnaires) }}
-                                </span>
+                                <span>{{ T "numberOfQuestionnaires" (dict "count" $numberOfQuestionnaires) }}</span>
                             </p>
                             <p class="font-medium">{{ $page.Title }}</p>
                             <p>
