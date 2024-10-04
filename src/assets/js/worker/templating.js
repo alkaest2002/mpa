@@ -1,33 +1,36 @@
 export default generateReport = ({ testee, session, answers, scores, normsBiblio, template }) => {
   
-  const converToPlaceholders = (obj, rootKey = null) => {
+  const convertToPlaceholders = (obj, rootKey = null) => {
     let placeHolders = [];
     if (typeof obj !== "object") return [rootKey, obj];
     for (const [key, val] of Object.entries(obj)) {
       const newKey = (rootKey && `${rootKey}#${key}`) || key;
       if (typeof val === "object" && !Array.isArray(val)) {
-        placeHolders = [
-          ...placeHolders,
-          ...converToPlaceholders(val, newKey),
-        ];
+        placeHolders = placeHolders.concat(convertToPlaceholders(val, newKey));
       } else if (Array.isArray(val)) {
         listOfValues = val.length == 0 ? [" "] : val;
-        placeHolders = [
-          ...placeHolders,
-          ...listOfValues.map((el) => converToPlaceholders(el, `${newKey}#${el}`))
-        ]
+        placeHolders = placeHolders.concat(listOfValues.map((el) => convertToPlaceholders(el, `${newKey}#${el}`)))
       }  else {
         placeHolders.push([newKey, val]);
       }
     }
-    return [...placeHolders];
+    return placeHolders;
   };
 
-  let placeHolders = [...[], ...converToPlaceholders(testee, "testee")];
-  placeHolders = [...placeHolders, ...converToPlaceholders(session, "testee")];
-  placeHolders = [...placeHolders, ...converToPlaceholders(answers, null)];
-  placeHolders = [...placeHolders, ...converToPlaceholders(scores, null)];
-  placeHolders = [...placeHolders, ...converToPlaceholders(normsBiblio, "biblio")];
-  placeHolders.forEach(([key, val]) => template = template.replaceAll(key, val));
-  return template;
+  let placeHolders = [
+    ...convertToPlaceholders(testee, "testee"),
+    ...convertToPlaceholders(session, "session"),
+    ...convertToPlaceholders(answers, null),
+    ...convertToPlaceholders(scores, null),
+    ...convertToPlaceholders(normsBiblio, "biblio")
+  ];
+  
+  let filledTemplate = template;
+  
+  placeHolders.forEach(([key, val]) => {
+    const safeVal = val !== undefined ? val : key;
+    filledTemplate = filledTemplate.replaceAll(key, safeVal);
+  });
+
+  return filledTemplate;
 };

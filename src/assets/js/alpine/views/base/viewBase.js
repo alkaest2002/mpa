@@ -1,4 +1,7 @@
 import css from "../../cssClasses.json";
+import useNagigation from "../../use/useNavigation";
+
+const { goToUrl } = useNagigation();
 
 export default () => ({
   
@@ -7,9 +10,9 @@ export default () => ({
     this.$watch("$store.app.currentView", (val) => val == "home" && (this.$store.app.history = {}));
     
     this.$watch("$store.session.completedQuestionnaires", (val) => {
-      
+      // safeguard
       if (val.length == 0) return;
-      
+      // prepare data to pass to worker
       const questionnaireId = val.at(-1);
       const { bio } = this.$store.testee;
       const { settingId, languageId } = this.$store.session;
@@ -17,44 +20,49 @@ export default () => ({
       const urlReportTemplate = this.$store.urls.getUrl([ "reports", questionnaireId ]);
       const urlQuestionnaire = this.$store.urls.getUrl([ "questionnaires", questionnaireId ]);
       const urlQuestionnaireSpecs = `${urlQuestionnaire}/index.json`;
-      
-      // worker to compute and render single report
-      const workerReport = new Worker(urlWorkerReportScript);
-      
-      // data to pass to worker
+      // assemble data to pass to worker
       const workerData = JSON.parse(JSON.stringify({ 
         testee: { bio },
         session: { settingId, languageId },
         questionnaire: { questionnaireId, answers }, 
         urls: { urlQuestionnaireSpecs, urlReportTemplate, urlScoringScript, urlTemplatingScript }
       }));
-
+      // init worker
+      const workerReport = new Worker(urlWorkerReportScript);
+      // activate worker
       this.$store.reports.generatingReports = true;
       workerReport.postMessage(workerData);
-      
+      // process worker response
       workerReport.onmessage = ({ data }) => {
-        const { questionnaireId, questionnaireScores, questionnaireReport, questionnaireAnswers } = data;
-        this.$store.session.data.questionnaires[questionnaireId] = questionnaireAnswers;
-        this.$store.session.data.scores[questionnaireId] = questionnaireScores;
-        this.$store.reports.singleReports = {
-          ...this.$store.reports.singleReports,
-          [questionnaireId]: questionnaireReport
+        // on error
+        if (data.error ) {
+          console.log(data.error)
+          goToUrl.call(this, [ "notifications", "errors", "error-generating-report" ]);
+        // otherwise
+        } else {
+          const { questionnaireId, questionnaireScores, questionnaireReport, questionnaireAnswers } = data;
+          this.$store.session.data.questionnaires[questionnaireId] = questionnaireAnswers;
+          this.$store.session.data.scores[questionnaireId] = questionnaireScores;
+          this.$store.reports.singleReports = {
+            ...this.$store.reports.singleReports,
+            [questionnaireId]: questionnaireReport
+          };
         };
       };
     });
 
     this.$watch("$store.reports.singleReports", (val) => {
-      
+      // safeguard
       if (Object.values(val).length == 0) return;
-      
-      // worker to merge reports together
-      const workerMergedReports = new Worker(urlWorkerMergeReportsScript);
-      
       // data to pass to the work
       const workerData = JSON.parse(JSON.stringify({ 
         singleReports: this.$store.reports.singleReports,
       }));
+      // init worker
+      const workerMergedReports = new Worker(urlWorkerMergeReportsScript);
+      // activate worker
       workerMergedReports.postMessage(workerData);
+      // process response from worker
       workerMergedReports.onmessage = ({ data }) => {
         const { mergedReports } = data;
         this.$store.reports.mergedReports = mergedReports;
