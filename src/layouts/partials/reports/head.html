@@ -2,6 +2,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo {{ hugo.Version }}">
+<meta name="description" content="{{ . }}">
+<meta name="author" content="{{ . }}">
 {{- $styles := resources.Get "css/reports.css" }}
 {{- $styles = $styles | css.PostCSS | minify }}
 {{- $styles = $styles | resources.ExecuteAsTemplate "css/reports.dev.css" . }}

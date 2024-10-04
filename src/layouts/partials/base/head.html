@@ -2,12 +2,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo {{ hugo.Version }}">
-{{- with site.Params.description }}
-	<meta name="description" content="{{ . }}">
-{{- end }}
-{{- with site.Params.author }}
-	<meta name="author" content="{{ . }}">
-{{- end }}
+<meta name="description" content="{{ . }}">
+<meta name="author" content="{{ . }}">
 {{- $styles := resources.Get "css/main.css" }}
 {{- if hugo.IsDevelopment }}
 	{{- $styles = $styles | css.PostCSS | minify }}
