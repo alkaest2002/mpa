@@ -42,7 +42,7 @@ noResponseWarningWithCount: 'il questionario non è valido con {{ .count }} o pi
 noUploadedFile: nessun file selezionato
 numberOfQuestionnaires:
   one: 1 questionario
-  other: '{{ .count }} questionari'
+  other: "{{ .count }} questionari"
 ok: ok
 optionalData: dati opzionali
 page: pag.
