@@ -17,11 +17,7 @@
                             <p class="text-sm text-gray-400">
                                 <span>{{ .Params.batteryType | upper }}</span> &middot;
                                 <span>
-                                {{- if eq $numberOfQuestionnaires 1 }}
-                                    {{ T "singleQuestionnaire" }}
-                                {{- else }}
-                                    {{ $numberOfQuestionnaires }} {{ T "multipleQuestionnaires" }}
-                                {{- end }}
+                                {{ T "numberOfQuestionnaires" (dict "count" $numberOfQuestionnaires) }}
                                 </span>
                             </p>
                             <p class="font-medium">{{ $page.Title }}</p>

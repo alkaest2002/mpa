@@ -33,7 +33,6 @@ male: maschio
 map: mappa questionario in corso
 mapInfo: Mappa dei quesiti del questionario in corso
 middleSchool: scuole medie
-multipleQuestionnaires: questionari
 name: nome
 next: avanti
 noResponse: non intendo rispondere
@@ -41,6 +40,9 @@ noResponseWarningMild: 'le risposte omesse possono invalidare il questionario'
 noResponseWarningStrong: 'attenzione! Le risposte omesse invalidano il questionario' 
 noResponseWarningWithCount: 'il questionario non è valido con {{ .count }} o più risposte omesse'
 noUploadedFile: nessun file selezionato
+numberOfQuestionnaires:
+  one: 1 questionario
+  other: '{{ .count }} questionari'
 ok: ok
 optionalData: dati opzionali
 page: pag.
@@ -77,7 +79,6 @@ settingNormal: contesto ordinario
 settingRecruitment: contesto selezione del personale
 settingSchool: contesto scolastico
 settingMilitary: contesto fuori area
-singleQuestionnaire: 1 questionario
 surname: cognome
 testeeId: codice identificativo
 tutorialNullOption: seleziona somministrazione tutorial

@@ -33,14 +33,15 @@ male: male
 map: ongoing questionnaire map
 mapInfo: Map of the items in the ongoing questionnaire
 middleSchool: middle school
-multipleQuestionnaires: questionnaires
 name: name
 next: next
 noResponse: I do not intend to answer
 noResponseWarningMild: omitted answers may invalidate the questionnaire 
 noResponseWarningStrong: Attention! Omitted answers will invalidate the questionnaire 
 noResponseWarningWithCount: the questionnaire is not valid with {{ .count }} or more omitted responses
-noUploadedFile: no file selected
+numberOfQuestionnaires:
+  one: 1 questionnaire
+  other: "{{ .count }} questionnaires"
 ok: ok
 optionalData: optional data
 page: page
@@ -74,7 +75,6 @@ settingNormal: ordinary context
 settingRecruitment: recruitment context
 settingSchool: school context
 settingMilitary: out-of-area context
-singleQuestionnaire: 1 questionnaire
 surname: surname
 testeeId: identification code
 tutorialNullOption: choose tutorial administration
