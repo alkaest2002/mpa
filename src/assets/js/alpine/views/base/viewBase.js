@@ -7,8 +7,6 @@ export default () => ({
   
   async initBase({ urlWorkerReportScript, urlWorkerMergeReportsScript, urlScoringScript, urlTemplatingScript }) {
 
-    this.$watch("$store.app.currentView", (val) => val == "home" && (this.$store.app.history = {}));
-    
     this.$watch("$store.session.completedQuestionnaires", (val) => {
       // safeguard
       if (val.length == 0) return;
@@ -29,16 +27,19 @@ export default () => ({
       }));
       // init worker
       const workerReport = new Worker(urlWorkerReportScript);
-      // activate worker
+      // switch on generating report flag
       this.$store.reports.generatingReports = true;
+      // activate worker
       workerReport.postMessage(workerData);
       // process worker response
       workerReport.onmessage = ({ data }) => {
         // on error
         if (data.error ) {
+          // notify developer
           console.log(data.error)
+          // go to error page
           goToUrl.call(this, [ "notifications", "errors", "error-generating-report" ]);
-        // otherwise
+        // on success
         } else {
           const { questionnaireId, questionnaireScores, questionnaireReport, questionnaireAnswers } = data;
           this.$store.session.data.questionnaires[questionnaireId] = questionnaireAnswers;
@@ -66,6 +67,7 @@ export default () => ({
       workerMergedReports.onmessage = ({ data }) => {
         const { mergedReports } = data;
         this.$store.reports.mergedReports = mergedReports;
+        // switch off generating report flag
         this.$store.reports.generatingReports = false;
       };
     });
