@@ -15,12 +15,12 @@ export default () => ({
     ["@click.prevent"]() {
       if (this.$store.app.autoPilotSwitch == "on" && !this.$store.reports.generatingReports) {
         downloadZip.call(this);
-        //this.$store.app.wipeState();
-        //this.$store.reports.wipeState();
-        //this.$store.testee.wipeState();
-        //this.$store.session.wipeState([ 
-        //  "settingId", "batteryId", "battery", "questionnaires", "languageId" 
-        //]);
+        if (!this.$store.app.isDevelopment) {
+          this.$store.app.wipeState();
+          this.$store.reports.wipeState();
+          this.$store.testee.wipeState();
+          this.$store.session.wipeState([ "settingId", "batteryId", "battery", "questionnaires", "languageId" ]);
+        }
       }
       goToUrl.call(this, [ "base" ]);
     },
