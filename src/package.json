@@ -28,6 +28,6 @@
     "alpinejs": "^3.14.1",
     "banditypes": "^0.2.5",
     "fflate": "^0.8.2",
-    "htmx.org": "^2.0.1"
+    "htmx.org": "^2.0.3"
   }
 }
