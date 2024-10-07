@@ -32,7 +32,7 @@ export default () => ({
   answerWasOmittedLabel(itemId) {
     return {
       [":class"]() {
-        return this.$store.session.getAnswerValue(itemId) === ""
+        return this.$store.session.getAnswerValue(itemId)?.length === 0
           ? css.display.inline
           : css.display.hidden;
       }
@@ -42,7 +42,7 @@ export default () => ({
   answerWasGivenLabel(itemId) {
     return {
       [":class"]() {
-        return this.$store.session.getAnswerValue(itemId) !== ""
+        return this.$store.session.getAnswerValue(itemId)?.length > 0
           ? css.display.inline
           : css.display.hidden;
       }
@@ -53,7 +53,7 @@ export default () => ({
     return {
       [":class"]() {
         if (!this.$store.session.getAnswer(itemId)) return css.grayDot;
-        return this.$store.session.getAnswerValue(itemId) !== ""
+        return this.$store.session.getAnswerValue(itemId)?.length > 0
           ? css.blueDot
           : css.orangeDot;
       }
