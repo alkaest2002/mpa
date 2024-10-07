@@ -12,16 +12,13 @@
             :class="{ 'hidden': $store.session.settingId }" 
             value="">{{ T "chooseSettingNullOption" }}
         </option>
-        <option :selected="$store.session.settingId == 'normal'" value="normal">{{ T "settingNormal" }}
-        </option>
-        <option :selected="$store.session.settingId == 'clinical'" value="clinical">{{ T "settingClinical" }}
-        </option>
-        <option :selected="$store.session.settingId == 'school'" value="school">{{ T "settingSchool" }}
-        </option>
-        <option :selected="$store.session.settingId == 'recruitment'" value="recruitment">{{ T "settingRecruitment" }}
-        </option>
-        <option :selected="$store.session.settingId == 'military'" value="military">{{ T "settingMilitary" }}
-        </option>
+        {{- range slice "normal" "clinical" "school" "recruitment" "military" }}
+            <option 
+                :selected="$store.session.settingId === '{{ . }}'" 
+                value="{{ . }}"
+            >{{ T (printf "setting%s" (. | strings.FirstUpper)) }}
+            </option>
+        {{- end }}
     </select>
 </div>
 <div class="mb-6 text-gray-700">
@@ -33,16 +30,16 @@
         :class="{ 'text-black' : $store.urls.urlReports }"
         class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
     >
-        <option :selected="!$store.urls.urlReports" :class="{ 'hidden': $store.urls.urlReports }" value="">{{ T
-            "chooseReportsLanguageNullOption" }}
+        <option 
+            :selected="!$store.urls.urlReports" 
+            :class="{ 'hidden': $store.urls.urlReports }" 
+            value="">{{ T "chooseReportsLanguageNullOption" }}
         </option>
         {{- range .Sites }}
             {{- $urlReports := (.GetPage "reports" ).RelPermalink }}
             <option 
                 :selected="$store.urls.urlReports == '{{ $urlReports }}'" 
-                value="{{ $urlReports }}"
-            >
-                {{ .Language.LanguageName | lower }}
+                value="{{ $urlReports }}">{{ .Language.LanguageName | lower }}
             </option>
         {{- end }}
     </select>
@@ -61,9 +58,9 @@
             :class="{ 'hidden': $store.app.tutorialSwitch }" 
             value="">{{ T "tutorialSwitchNullOption" }}
         </option>
-        <option :selected="$store.app.tutorialSwitch == 'on'" value="on">{{ T "tutorialSwitchOn" }}
+        <option :selected="$store.app.tutorialSwitch === 'on'" value="on">{{ T "tutorialSwitchOn" }}
         </option>
-        <option :selected="$store.app.tutorialSwitch == 'off'" value="off">{{ T "tutorialSwitchOff" }}
+        <option :selected="$store.app.tutorialSwitch === 'off'" value="off">{{ T "tutorialSwitchOff" }}
         </option>
     </select>
 </div>
@@ -81,9 +78,13 @@
             :class="{ 'hidden': $store.app.autoPilotSwitch }" 
             value="">{{ T "autoPilotSwitchNullOption" }}
         </option>
-        <option :selected="$store.app.autoPilotSwitch == 'on'" value="on">{{ T "autoPilotSwitchOn" }}
+        <option 
+            :selected="$store.app.autoPilotSwitch === 'on'" 
+            value="on">{{ T "autoPilotSwitchOn" }}
         </option>
-        <option :selected="$store.app.autoPilotSwitch == 'off'" value="off">{{ T "autoPilotSwitchOff" }}
+        <option 
+            :selected="$store.app.autoPilotSwitch === 'off'" 
+            value="off">{{ T "autoPilotSwitchOff" }}
         </option>
     </select>
 </div>

@@ -20,12 +20,9 @@
             x-bind="opacity"
             class="w-full flex-grow"
         >
-            <p
-                x-ref="title"
-                x-bind="itemTitle"
-                data-title="{{ $questionnaire.LinkTitle }} ({{ $itemOrder }}/{{ len $questionnaire.Pages }})"
-                class="text-sm text-center text-gray-500 mb-6"
-            ></p>
+            <p class="text-sm text-center text-gray-500 mb-6">
+                {{ $questionnaire.LinkTitle }} ({{ $itemOrder }}/{{ len $questionnaire.Pages }})
+            </p>
             <h1 class="flex gap-2 text-xl font-bold mb-9">
                 <span>
                     {{ $itemOrder }}.

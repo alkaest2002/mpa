@@ -7,8 +7,7 @@ export default () => ({
 
   initQuestionnaireMap() {
     this.$store.app.currentView = "questionnaire-map";
-    this.$refs["title"].innerText = this.$refs["title"].dataset.title;
-  },
+2  },
 
   itemMapButton(itemId, urlItem) {
     return {

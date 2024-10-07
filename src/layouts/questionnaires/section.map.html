@@ -10,10 +10,8 @@
         {{- partialCached "base/burger" (dict "currentPage" . "homePage" true "questionnairesPage" true
             "questionnairePage" true) .Section }}
         <div x-bind="opacity" class="w-full flex-grow flex flex-col">
-            <p 
-                x-ref="title"
-                data-title="{{ .LinkTitle }}"
-                class="text-sm text-center text-gray-500 mb-6">
+            <p class="text-sm text-center text-gray-500 mb-6">
+                {{ .LinkTitle }}
             </p>
             <h1 class="text-xl font-bold mb-9">{{ .Title }}</h1>
             <div class="mb-9">{{ T "mapInfo" }}.</div>

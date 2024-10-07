@@ -31,12 +31,6 @@ export default () => ({
     };
   },
 
-  itemTitle: {
-    [":x-text"]() {
-      this.$refs["title"].innerText = this.$refs["title"].dataset.title;
-    }
-  },
-
   itemEndButton: {
     ["@click.prevent"]() {
       if (!this.getShouldGoNext()) return
