@@ -52,10 +52,11 @@ export default () => ({
   showDot(itemId) {
     return {
       [":class"]() {
-        if (!this.$store.session.getAnswer(itemId)) return css.grayDot;
-        return this.$store.session.getAnswerValue(itemId)?.length > 0
-          ? css.blueDot
-          : css.orangeDot;
+        return this.$store.session.getAnswer(itemId)
+          ? this.$store.session.getAnswerValue(itemId).length > 0
+            ? css.blueDot
+            : css.orangeDot
+          : css.grayDot
       }
     }
   },
