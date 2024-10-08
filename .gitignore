@@ -24,3 +24,4 @@ src/resources
 src-dev
 app-electron/binaries/mac
 app-electron/binaries/win
+python
