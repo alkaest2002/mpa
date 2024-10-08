@@ -28,7 +28,7 @@
                                 <div>
                                     <p>{{- .LinkTitle }}</p>
                                 </div>
-                                <div x-cloak class="flex gap-2 items-center italic text-sm text-gray-400">
+                                <div x-cloak class="flex gap-2 items-center text-sm text-gray-400">
                                     <template x-if="$store.session.getAnswer('{{ .Params.id }}')">
                                         <span>
                                             <span x-bind="answerWasOmittedLabel('{{ .Params.id }}')">
