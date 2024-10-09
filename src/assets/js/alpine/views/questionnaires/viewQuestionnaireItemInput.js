@@ -12,7 +12,7 @@ export default () => ({
     this.$refs["text-area"].focus();
     this.currentAnswerValue = this.$store.session.currentAnswerValue;
     this.$watch("currentAnswerValue", val => {
-      this.setAnswer({ answerValue: val });
+      this.setAnswer({ answerValue: val.trim() });
       val.length > 0 && (this.noResponse = false);  
     });
     this.$watch("noResponse", (val) => {

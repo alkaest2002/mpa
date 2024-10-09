@@ -15,7 +15,9 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
             // otherwise (open answer items) use array index as keySuffix 
             const keySuffix = typeof el === 'number' && !Number.isNaN(el) 
               ? el
-              : index;
+              : el === " "
+                ? el
+                : index;
             return convertToPlaceholders(el, `${newKey}#${keySuffix}`)
           }))
       }  else {
