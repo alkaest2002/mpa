@@ -9,7 +9,15 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
         placeHolders = placeHolders.concat(convertToPlaceholders(val, newKey));
       } else if (Array.isArray(val)) {
         listOfValues = val.length == 0 ? [" "] : val;
-        placeHolders = placeHolders.concat(listOfValues.map((el) => convertToPlaceholders(el, `${newKey}#${el}`)))
+        placeHolders = placeHolders
+          .concat(listOfValues.map((el, index) => {
+            // if el is a number (i.e., likert type items) use it keySuffix
+            // otherwise (open answer items) use array index as keySuffix 
+            const keySuffix = typeof el === 'number' && !Number.isNaN(el) 
+              ? el
+              : index;
+            return convertToPlaceholders(el, `${newKey}#${keySuffix}`)
+          }))
       }  else {
         placeHolders.push([newKey, val]);
       }
@@ -24,6 +32,7 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
     ...convertToPlaceholders(scores, null),
     ...convertToPlaceholders(normsBiblio, "biblio")
   ];
+  console.log(placeHolders)
   
   let filledTemplate = template;
   
