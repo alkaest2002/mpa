@@ -6,6 +6,7 @@ layout: section
 
 cascade:
   layout: item-single
+  answerType: likert
   options:
     - 0: assente, per nulla
     - 1: molto lieve, meno di 1 o 2 giorni

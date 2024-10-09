@@ -1,0 +1,89 @@
+{{ define "main" }}
+{{- $questionnaire := .Parent }}
+{{- $questionnaireId := $questionnaire.Params.id }}
+{{- $questionnaireJson := partialCached "questionnaires/questionnaire-json" (dict "questionnaireId" $questionnaireId) $questionnaireId }}
+{{- $itemId := .Params.id }}
+{{- $itemOrder := .Params.order }}
+{{- $paginateSize := site.Params.paginateSize.maps }}
+{{- $mapPageIndex := div $itemOrder $paginateSize }}
+{{- $itemData := dict "itemId" $itemId "itemUrl" .RelPermalink }}
+<div x-data="useKeyboardActions" class="h-full">
+  <div
+    x-data="viewQuestionnaireItemInput"
+    x-init="initQuestionnaireItemInput({{ $itemData | jsonify }}); initKeyboardActions('answerId')"
+    x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions, ...mouseActions }"
+    class="h-full flex flex-col items-center justify-center p-9 relative">
+    {{- partialCached "base/burger" (dict "currentPage" . "homePage" true "questionnairesPage" true
+    "questionnairePage" true "mapPage" true "mapPageIndex" $mapPageIndex) $questionnaire.Title $mapPageIndex }}
+    <div
+      x-bind="opacity"
+      class="w-full flex-grow">
+      <p class="text-sm text-center text-gray-500 mb-6">
+        {{ $questionnaire.LinkTitle }} ({{ $itemOrder }}/{{ len $questionnaire.Pages }})
+      </p>
+      <h1 class="flex gap-2 text-xl font-bold mb-9">
+        <span>
+          {{ $itemOrder }}.
+        </span>
+        <span>
+          {{ .RenderShortcodes }}
+        </span>
+      </h1>
+      <div class="grid grid-cols-1 gap-4">
+        <textarea
+          x-ref="text-area" 
+          x-model="currentAnswerValue" 
+          rows="8"
+          class="border border-gray-400 p-2">
+        </textarea>
+        <div 
+          x-ref="tab-no-response"
+          class="mt-12 pt-4 border-t border-slate-300 flex items-center"
+        >
+          <input
+            type="checkbox"
+            x-model="noResponse"
+            class="tab-element w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded mr-2">
+          <div class="ms-2 text-sm">
+            <label for="no-response-checkbox">{{ T "noResponse" }}</label>
+            <p id="helper-checkbox-text" class="font-normal text-gray-400">
+              {{- if isset $questionnaireJson "maxOmitted" }}
+                {{- if gt $questionnaireJson.maxOmitted 0 }}
+                  {{ T "noResponseWarningWithCount" (dict "count" $questionnaireJson.maxOmitted) }}
+                {{- else }}
+                  {{ T "noResponseWarningStrong" }}
+                {{- end }}
+              {{- else }}
+                {{ T "noResponseWarningMild" }}
+              {{ end }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div x-bind="opacity" class="w-full flex justify-center">
+      {{- with .NextInSection }}
+        <a x-ref="page-left" href="{{ .RelPermalink }}" class="hidden">{{ T "next" }}</a>
+      {{- end }}
+      {{- with .PrevInSection }}
+        <template x-if="getShouldGoNext">
+          <a x-ref="page-right" href="{{ .RelPermalink }}" class="hidden">{{ T "next" }}</a>
+        </template>
+        <a
+          x-ref="main-button"
+          x-bind="itemNextButton('{{ .RelPermalink }}')"
+          class="w-96 px-6 py-3 rounded-full text-white text-center"
+          href="#">{{ T "next" }}
+        </a>
+      {{- else }}
+        <a
+          x-ref="main-button"
+          x-bind="itemEndButton"
+          class="w-96 px-6 py-3 rounded-full text-white text-center"
+          href="#">{{ T "next" }}
+        </a>
+      {{- end }}
+    </div>
+  </div>
+</div>
+{{- end }}

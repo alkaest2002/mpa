@@ -6,6 +6,7 @@ layout: section
 
 cascade:
   layout: item-single
+  answerType: likert
   options:
     - 0: non mi è mai accaduto
     - 1: mi è capitato qualche volta
