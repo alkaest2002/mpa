@@ -9,8 +9,8 @@ export default () => ({
   initQuestionnaireItemInput({ itemId, itemUrl }) {
     this.$store.app.currentView = "questionnaire-item-input";
     this.initQuestionnaireItemBase({ itemId, itemUrl });
-    this.currentAnswerValue = this.$store.session.currentAnswerValue;
     this.$refs["text-area"].focus();
+    this.currentAnswerValue = this.$store.session.currentAnswerValue;
     this.$watch("currentAnswerValue", val => {
       this.setAnswer({ answerValue: val });
       val.length > 0 && (this.noResponse = false);  
@@ -27,6 +27,8 @@ export default () => ({
   },
 
   setAnswer({ answerValue }) {
+    if (answerValue === "")
+      return this.$store.session.deleteAnswer(this.$store.session.itemId);
     const answerLatency = this.cumulatedEpoch + (Date.now() - this.epoch);
     this.$store.session.setAnswer(
       Object.assign({}, { 
