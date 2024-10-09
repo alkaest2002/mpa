@@ -88,11 +88,8 @@ export default (Alpine) => ({
   },
 
   setAnswer(answerData) {
-    const { itemId, answerValue: val, answerLatency, order } = answerData;
-    const answerValue = [...new Set(val)].filter(item => item?.length >= 0);
-    const finalAnswerData = { itemId, order, answerValue, answerLatency };
     this.data.questionnaires[this.questionnaireId] ??= {};
-    this.data.questionnaires[this.questionnaireId][this.itemId] = finalAnswerData;
+    this.data.questionnaires[this.questionnaireId][this.itemId] = answerData;
   },
 
   deleteAnswer(itemId) {

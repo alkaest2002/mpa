@@ -1,12 +1,12 @@
 {{ define "main" }}
 {{- $questionnaire := .Parent }}
 {{- $questionnaireId := $questionnaire.Params.id }}
-{{- $questionnaireJson := partialCached "questionnaires/questionnaire-json" (dict "questionnaireId" $questionnaireId) $questionnaireId }}
 {{- $itemId := .Params.id }}
 {{- $itemOrder := .Params.order }}
 {{- $paginateSize := site.Params.paginateSize.maps }}
 {{- $mapPageIndex := div $itemOrder $paginateSize }}
-{{- $itemData := dict "itemId" $itemId "itemUrl" .RelPermalink }}
+{{- $itemData := dict "itemId" $itemId "itemUrl" .RelPermalink "answerType" .Params.answerType }}
+{{- $questionnaireJson := partialCached "questionnaires/questionnaire-json" (dict "questionnaireId" $questionnaireId) $questionnaireId }}
 <div x-data="useKeyboardActions" class="h-full">
   <div
     x-data="viewQuestionnaireItemInput"
