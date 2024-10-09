@@ -55,7 +55,7 @@
       "straightItems": [6, 8, 14, 28, 39, 57],
       "reversedItems": []
     },
-    "atn": {
+    "att": {
       "id": "att",
       "order": 9,
       "straightItems": [3, 25, 52, 59],
