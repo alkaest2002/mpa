@@ -32,7 +32,6 @@ export default generateReport = ({ testee, session, answers, scores, normsBiblio
     ...convertToPlaceholders(scores, null),
     ...convertToPlaceholders(normsBiblio, "biblio")
   ];
-  console.log(placeHolders)
   
   let filledTemplate = template;
   
