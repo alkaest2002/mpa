@@ -6,7 +6,9 @@ export default onmessage = async ({ data }) => {
     const closingBodyTagIndex = mergedReports.lastIndexOf("</body>");
     mergedReports = closingBodyTagIndex == -1 
       ? report
-      : mergedReports.slice(0, closingBodyTagIndex) + reportContent + mergedReports.slice(closingBodyTagIndex);
+      : mergedReports.slice(0, closingBodyTagIndex) 
+        + reportContent 
+        + mergedReports.slice(closingBodyTagIndex);
   };
   postMessage({ mergedReports });
 };

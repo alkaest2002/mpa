@@ -1,0 +1,74 @@
+{
+  "name": "Panas-X",
+  "scales": {
+    "pa": {
+      "code": "PA",
+      "name": "Positive Affect"
+    },
+    "na": {
+      "code": "NA",
+      "name": "Negative Affect"
+    },
+    "frs": {
+      "code": "FRS",
+      "name": "Fears"
+    },
+    "hos": {
+      "code": "HOS",
+      "name": "Hostility"
+    },
+    "glt": {
+      "code": "GLT",
+      "name": "Guilt"
+    },
+    "sad": {
+      "code": "SAD",
+      "name": "Sadness"
+    },
+    "jov": {
+      "code": "JOV",
+      "name": "Joviality"
+    },
+    "sas": {
+      "code": "SAS",
+      "name": "Self-assurance"
+    },
+    "att": {
+      "code": "ATT",
+      "name": "Attentiveness"
+    },
+    "shy": {
+      "code": "SHY",
+      "name": "Shyness"
+    },
+    "ftg": {
+      "code": "FTG",
+      "name": "Fatigue"
+    },
+    "ser": {
+      "code": "SER",
+      "name": "Serenity"
+    },
+    "sur": {
+      "code": "SUR",
+      "name": "Surprise"
+    }
+  },
+  "norms": {
+    "getNormsBiblio": "const fn = () => 'Watson, D. The PANAS-X: Manual for the positive and negative affect schedule-expanded form. Unpublished manuscript. University of Iowa, Iowa City (1994).'",
+    "getNorms": "const fn = (testee, scaleId) => scaleId",
+    "pa": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-31.1)/7.5))).toFixed(0)",
+    "na": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-18)/7.1))).toFixed(0)",
+    "frs": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-9.6)/4.1))).toFixed(0)",
+    "hos": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-11.1)/4.6))).toFixed(0)",
+    "glt": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-10.1)/4.9))).toFixed(0)",
+    "sad": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-9.5)/4.4))).toFixed(0)",
+    "jov": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-25)/6.8))).toFixed(0)",
+    "sas": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-16.5)/4.6))).toFixed(0)",
+    "att": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-12.7)/3))).toFixed(0)",
+    "shy": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-6.3)/2.7))).toFixed(0)",
+    "ftg": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-9)/3.8))).toFixed(0)",
+    "ser": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-8.7)/2.4))).toFixed(0)",
+    "sur": "const fn = ({ rawScore }) => Math.max(0, Math.min(100, 50+10*((rawScore-5.4)/2.3))).toFixed(0)"
+  }
+}
