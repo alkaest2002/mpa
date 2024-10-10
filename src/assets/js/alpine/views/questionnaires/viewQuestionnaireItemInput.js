@@ -9,7 +9,6 @@ export default () => ({
   initQuestionnaireItemInput({ itemId, itemUrl }) {
     this.$store.app.currentView = "questionnaire-item-input";
     this.initQuestionnaireItemBase({ itemId, itemUrl });
-    this.$refs["text-area"].focus();
     this.currentAnswerValue = this.$store.session.currentAnswerValue;
     this.$watch("currentAnswerValue", val => {
       this.setAnswer({ answerValue: val.trim() });
@@ -24,6 +23,7 @@ export default () => ({
           && this.$store.session.deleteAnswer(this.$store.session.itemId);
       }
     });
+    this.$refs["text-area"].focus();
   },
 
   setAnswer({ answerValue }) {

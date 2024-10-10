@@ -1,5 +1,4 @@
 export default computeScores = ({ testee, session, answers, specs }) => {
-
   const getAnswers = (data) => {
     return Object.values(data)
       .sort((a, b) => a.itemId - b.itemId)
@@ -53,6 +52,7 @@ export default computeScores = ({ testee, session, answers, specs }) => {
       componentMax: straightMax 
     } = computeRawScoreComponent(straightItems, answersValues);
     // compute reversed items component
+    
     const cb = (el) => specs.likert.max + specs.likert.min - el;
     const { 
       componentRawScore: reversedScore, 

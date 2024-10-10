@@ -20,6 +20,7 @@ export default onmessage = async ({ data }) => {
       urls: { urlReportTemplate, urlQuestionnaireSpecs },
     } = data;
 
+    
     // add latencies
     const itemIds = Object.keys(answers);
     const answersLatencies = itemIds.map(
@@ -28,17 +29,18 @@ export default onmessage = async ({ data }) => {
     const medianLatency = median(answersLatencies);
     itemIds.forEach((itemId) => {
       answers[itemId]["deltaAnswerLatency"] =
-        answers[itemId]?.answerLatency - medianLatency;
+      answers[itemId]?.answerLatency - medianLatency;
     });
-
+    console.log(urlReportTemplate, urlQuestionnaireSpecs)
+    
     // fetch report template and questionnaire specs with error handling
     const [ template, specs ] = await Promise.all([
       fetch(urlReportTemplate)
-        .then((res) => res.ok ? res.text() : Promise.reject("Failed to load template")),
+      .then((res) => res.ok ? res.text() : Promise.reject("Failed to load template")),
       fetch(urlQuestionnaireSpecs)
-        .then((res) => res.ok ? res.json() : Promise.reject("Failed to load specs"))
+      .then((res) => res.ok ? res.json() : Promise.reject("Failed to load specs"))
     ]);
-
+    
     const questionnireHasScales = Object.keys(specs?.scales || []).length > 0;
 
     const scores = questionnireHasScales
