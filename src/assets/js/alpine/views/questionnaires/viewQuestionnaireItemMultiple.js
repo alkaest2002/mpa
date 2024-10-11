@@ -25,7 +25,9 @@ export default () => ({
 
   setAnswer({ answerValue }) {
     const answerLatency = this.cumulatedEpoch + (Date.now() - this.epoch);
+    // use clicks no-response while no-response is already true
     const c1 = this.$store.session.currentAnswerValue?.length === 0 && answerValue.length === 0;
+    // use clicks option while option is already true and it is the only previously selected value
     const c2 = this.answerValues.length > 0 && JSON.stringify(this.answerValues) === JSON.stringify(answerValue);
     if (c1 || c2) {
       this.$store.session.deleteAnswer(this.$store.session.itemId);
@@ -48,7 +50,7 @@ export default () => ({
   itemOption({ answerValue }) {
     return {
       ["@keyup.window"]({ keyCode }) {
-        keyCode === 32
+        keyCode === 32 // spacebar
           && JSON.stringify(this.currentAnswerValue) === JSON.stringify(answerValue) 
           && this.setAnswer({ answerValue });
       },

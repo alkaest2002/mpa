@@ -45,13 +45,13 @@ export default () => ({
   },
 
   handleKeyAction({ lowercaseKey, ctrlKey, escKey, appView }) {
+    this.actionType = "keyboard";
     ctrlKey && this.handleCtrlActions(appView, lowercaseKey);
     escKey && !this.$store.app.burgerIsOpen && this.handleEscapeKeyActions(appView);
     (!ctrlKey && !escKey) && this.handleAppViewActions(appView, lowercaseKey);
   },
 
   handleCtrlActions(appView, lowercaseKey) {
-    this.actionType = "keyboard";
     return {
       "a": () => appView == "home" && goToUrl.call(this, ["session", "session-set"]),
       "b": () => this.$store.session.batteryId && goToCurrentBattery.call(this),
@@ -63,7 +63,6 @@ export default () => ({
   },
 
   handleEscapeKeyActions(appView) {
-    this.actionType = "keyboard";
     return {
       "session-set": () => goToUrl.call(this, [ "base" ]),
       "batteries": () => goToUrl.call(this, [ "session", "session-set" ]),
@@ -78,14 +77,13 @@ export default () => ({
   },
 
   handleAppViewActions(appView, lowercaseKey) {
-    this.actionType = "keyboard";
     [ "batteries", "batteries-letter" ].includes(appView)  
       && this.alphabetLowerCase.includes(lowercaseKey) 
       && goToUrl.call(this, [ "batteries", lowercaseKey ]);
   },
 
   alphabetActions: {
-    ["@keyup.window"]({ key, ctrlKey }) {
+    ["@keyup.window.prevent"]({ key, ctrlKey }) {
       const lowercaseKey = key.toLowerCase();
       const escKey = lowercaseKey == "escape";
       const appView = this.$store.app.currentView;
@@ -94,31 +92,31 @@ export default () => ({
   },
 
   mouseActions: {
-    ["@mouseup.window"]() {
+    ["@mouseup.window.prevent"]() {
       this.actionType = "mouse";
     }
   },
 
   xArrowsActions: {
-    ["@keyup.left.window"]() {
+    ["@keyup.left.window.prevent"]() {
       this.actionType = "keyboard";
       this.$refs["page-left"]?.click();
     },
-    ["@keyup.right.window"]() {
+    ["@keyup.right.window.prevent"]() {
       this.actionType = "keyboard";
       this.$refs["page-right"]?.click();
     },
   },
 
   yArrowsActions: {
-    ["@keyup.down.window"]() {
+    ["@keyup.down.window.prevent"]() {
       this.actionType = "keyboard";
       const elements = this.$store.app.burgerIsOpen ? this.burgerElements : this.tabElements;
       const index = this.$store.app.burgerIsOpen ? "burgerIndex" : "tabIndex";
       this[index] = this.getNewElementIndex(this[index], elements, "next");
       !this.$store.app.burgerIsOpen && elements[this[index]]?.click();
     },
-    ["@keyup.up.window"]() {
+    ["@keyup.up.window.prevent"]() {
       this.actionType = "keyboard";
       const elements = this.$store.app.burgerIsOpen ? this.burgerElements : this.tabElements;
       const index = this.$store.app.burgerIsOpen ? "burgerIndex" : "tabIndex";
@@ -128,7 +126,7 @@ export default () => ({
   },
 
   enterActions: {
-    ["@keyup.enter.window"]() {
+    ["@keyup.enter.window.prevent"]() {
       this.actionType = "keyboard";
       const elements = this.$store.app.burgerIsOpen ? this.burgerElements : [this.$refs["main-button"]];
       elements[(this.burgerIndex !== -1 ? this.burgerIndex : 0)]?.click();
