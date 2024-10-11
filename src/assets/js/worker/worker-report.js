@@ -31,7 +31,6 @@ export default onmessage = async ({ data }) => {
       answers[itemId]["deltaAnswerLatency"] =
       answers[itemId]?.answerLatency - medianLatency;
     });
-    console.log(urlReportTemplate, urlQuestionnaireSpecs)
     
     // fetch report template and questionnaire specs with error handling
     const [ template, specs ] = await Promise.all([

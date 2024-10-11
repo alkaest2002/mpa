@@ -33,7 +33,8 @@ export default (Alpine) => ({
 
   get currentQuestionnaireIsComplete() {
     const { questionnaireLength } = this.currentQuestionnaire;
-    return (Object.keys(this.data.questionnaires[this.questionnaireId]) || []).length === questionnaireLength;
+    const answersLength = (Object.keys(this.data.questionnaires[this.questionnaireId]) || []).length;
+    return questionnaireLength.includes(answersLength);
   },
 
   get currentAnswer() {

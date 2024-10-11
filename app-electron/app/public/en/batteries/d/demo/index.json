@@ -1,1 +1,1 @@
-{"batteryId":"demo","batteryName":"DEMO questionnaire","questionnaires":{"demo":{"questionnaireId":"demo","questionnaireLength":0,"questionnaireName":"","questionnaireOrder":1}},"urlQuestionnaires":{"demo":{"questionnaireId":"demo","questionnaireOrder":1,"questionnaireUrl":""}}}
+{"batteryId":"demo","batteryName":"DEMO questionnaire","questionnaires":{"demo":{"questionnaireId":"demo","questionnaireLength":[0],"questionnaireName":"","questionnaireOrder":1}},"urlQuestionnaires":{"demo":{"questionnaireId":"demo","questionnaireOrder":1,"questionnaireUrl":""}}}

@@ -4,6 +4,10 @@ linkTitle: DEMO
 id: demo
 layout: section
 
+questionnaireLength: 
+  - 6
+  - 8
+
 cascade:
   layout: item-single
   answerType: likert
