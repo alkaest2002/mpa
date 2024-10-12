@@ -10,29 +10,31 @@ import {
 
 const validateTestee = object({
   bio: object({
-    gender: string().map((val) => (/[mf]{1,1}$/.test(val) ? val : fail())),
     surname: string(),
     name: string(),
     placeOfBirth: string(),
     yearOfBirth: string().or(number()).map((val) => (/^\d{4,4}$/.test(val) ? val : fail())),
+    gender: string().map((val) => (/[mf]{1,1}$/.test(val) ? val : fail())),
   })
 });
 
 const validateBattery = object({
   batteryId: string(),
-  questionnaires: array(string()),
-  questionnaires: objectLoose()
+  batteryName: string(),
+  questionnaires: objectLoose(),
+  answerTypes: array(string()),
 });
 
 const validateQuestionnaire = object({
   questionnaireId: string(),
   questionnaireName: string(),
-  questionnaireLength: number(),
+  questionnaireLength: array(number()),
+  questionnaireOrder: number(),
 });
 
 const validateItem = object({
-  order: number(),
   itemId: string(),
+  answerValue: array(number().or(string())),
   answerLatency: number(),
   deltaAnswerLatency: number().or(optional()),
 });
