@@ -5,7 +5,7 @@
 {{- $itemOrder := .Params.order }}
 {{- $paginateSize := site.Params.paginateSize.maps }}
 {{- $mapPageIndex := div $itemOrder $paginateSize }}
-{{- $itemData := dict "itemId" $itemId "itemUrl" .RelPermalink "answerType" .Params.answerType }}
+{{- $itemData := dict "itemId" $itemId "itemUrl" .RelPermalink }}
 {{- $questionnaireJson := partialCached "questionnaires/questionnaire-json" (dict "questionnaireId" $questionnaireId) $questionnaireId }}
 <div x-data="useKeyboardActions" class="h-full">
     <div 
