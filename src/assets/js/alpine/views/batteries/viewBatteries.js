@@ -12,12 +12,13 @@ export default () => ({
   selectBatteryButton(batteryId, batteryName, urlBatteryJSON) {
     return {
       async ["@click.prevent"]() {
-        const { questionnaires } = await fetch(urlBatteryJSON).then((res) => res.json());
+        const { questionnaires, answerTypes } = await fetch(urlBatteryJSON).then((res) => res.json());
         this.$store.session.batteryId = batteryId;
         this.$store.session.battery = {
           batteryId, 
           batteryName, 
           questionnaires,
+          answerTypes,
           order: this.$store.session.completedBatteries.length,
         };
         this.$store.session.questionnaires = questionnaires;

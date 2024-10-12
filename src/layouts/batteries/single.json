@@ -1,8 +1,12 @@
 {{- $questionnaires := .Params.questionnaires }}
 {{- $urlQuestionnaires := dict }}
 {{- $questionnairesData := dict }}
+{{- $anwerType := slice }}
 {{- range $order, $questionnaireId := $questionnaires }}
     {{- $questionnaire := urls.JoinPath "questionnaires/" $questionnaireId | $.Site.GetPage }}
+    {{- range $questionnaire.Pages }}
+        {{- $anwerType = $anwerType | append .Params.layout }}
+    {{- end }}
     {{- $questionnaireLength := slice (len $questionnaire.Pages) }}
     {{- with $questionnaire.Params.questionnaireLength }}
         {{- $questionnaireLength = . }}
@@ -10,4 +14,4 @@
     {{- $urlQuestionnaires = $urlQuestionnaires | merge  (dict $questionnaireId (dict "questionnaireId" $questionnaireId "questionnaireUrl" $questionnaire.RelPermalink "questionnaireOrder" (add $order 1) )) }}
     {{- $questionnairesData = $questionnairesData | merge (dict $questionnaireId (dict "questionnaireId" $questionnaireId "questionnaireName" $questionnaire.Title "questionnaireLength" $questionnaireLength "questionnaireOrder" (add $order 1) ))}}
 {{- end }}
-{{- dict "batteryId" .Params.id "batteryName" .Title "questionnaires" $questionnairesData "urlQuestionnaires" $urlQuestionnaires | jsonify }}
+{{- dict "batteryId" .Params.id "batteryName" .Title "questionnaires" $questionnairesData "answerTypes" ($anwerType | uniq) "urlQuestionnaires" $urlQuestionnaires | jsonify }}

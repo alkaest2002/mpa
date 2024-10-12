@@ -6,7 +6,6 @@ layout: section
 
 cascade:
   layout: item-single
-  answerType: likert
   options:
     - 0: did not apply to me at all
     - 1: applied to me to some degree, or some of the time

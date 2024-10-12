@@ -6,7 +6,6 @@ layout: section
 
 cascade:
   layout: item-single
-  answerType: likert
   options:
     - 0: per niente
     - 1: poco

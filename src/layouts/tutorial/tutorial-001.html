@@ -46,14 +46,26 @@
             </div>
         </div>
         <div x-bind="opacity" class="w-full flex justify-center">
-            {{- with .Parent.GetPage "tutorial-002" }}
-                <a 
-                    x-ref="main-button" 
-                    x-bind="goToNextTutorialButton('{{ .RelPermalink }}')" 
-                    class="inline-flex justify-center w-96 px-6 py-3 gap-2 text-white rounded-full"
-                    href="#">{{ T "next" }}
-                </a>
-            {{- end }}
+            <template x-if="$store.session.battery.answerTypes.includes('item-multiple')">
+                {{- with .Parent.GetPage "tutorial-002" }}
+                    <a 
+                        x-ref="main-button" 
+                        x-bind="goToNextTutorialButton('{{ .RelPermalink }}')" 
+                        class="inline-flex justify-center w-96 px-6 py-3 gap-2 text-white rounded-full"
+                        href="#">{{ T "next" }}
+                    </a>
+                {{- end }}
+            </template>
+            <template x-cloak x-if="!$store.session.battery.answerTypes.includes('item-multiple')">
+                {{- with .Parent.GetPage "tutorial-003" }}
+                    <a 
+                        x-ref="main-button" 
+                        x-bind="goToNextTutorialButton('{{ .RelPermalink }}')" 
+                        class="inline-flex justify-center w-96 px-6 py-3 gap-2 text-white rounded-full"
+                        href="#">{{ T "next" }}
+                    </a>
+                {{- end }}
+            </template>
         </div>
     </div>
 </div>

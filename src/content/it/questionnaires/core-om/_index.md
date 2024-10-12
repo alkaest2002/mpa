@@ -6,7 +6,6 @@ layout: section
 
 cascade:
   layout: item-single
-  answerType: likert
   options:
     - 0: mai
     - 1: di rado

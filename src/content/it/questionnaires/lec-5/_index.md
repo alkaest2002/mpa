@@ -6,7 +6,6 @@ layout: section
 
 cascade:
   layout: item-multiple
-  answerType: likert
   options:
     - 0: non si applica al mio caso
     - 1: non ne sono sicuro si applichi al mio caso
