@@ -90,7 +90,12 @@ export default (Alpine) => ({
 
   setAnswer(answerData) {
     this.data.questionnaires[this.questionnaireId] ??= {};
-    this.data.questionnaires[this.questionnaireId][this.itemId] = answerData;
+    this.data.questionnaires[this.questionnaireId][this.itemId] 
+      ??= { itemOrder: Object.values(this.data.questionnaires[this.questionnaireId]).length };
+    this.data.questionnaires[this.questionnaireId][this.itemId] = {
+      ...this.data.questionnaires[this.questionnaireId][this.itemId],
+      ...answerData
+    };
   },
 
   deleteAnswer(itemId) {

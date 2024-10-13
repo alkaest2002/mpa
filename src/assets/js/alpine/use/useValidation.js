@@ -34,6 +34,7 @@ const validateQuestionnaire = object({
 
 const validateItem = object({
   itemId: string(),
+  itemOrder: number(),
   answerValue: array(number().or(string())),
   answerLatency: number(),
   deltaAnswerLatency: number().or(optional()),

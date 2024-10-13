@@ -11,7 +11,7 @@
     {{- with $questionnaire.Params.questionnaireLength }}
         {{- $questionnaireLength = . }}
     {{- end }}
-    {{- $urlQuestionnaires = $urlQuestionnaires | merge  (dict $questionnaireId (dict "questionnaireId" $questionnaireId "questionnaireUrl" $questionnaire.RelPermalink "questionnaireOrder" (add $order 1) )) }}
-    {{- $questionnairesData = $questionnairesData | merge (dict $questionnaireId (dict "questionnaireId" $questionnaireId "questionnaireName" $questionnaire.Title "questionnaireLength" $questionnaireLength "questionnaireOrder" (add $order 1) ))}}
+    {{- $urlQuestionnaires = $urlQuestionnaires | merge  (dict $questionnaireId (dict "questionnaireId" $questionnaireId "questionnaireUrl" $questionnaire.RelPermalink "questionnaireOrder" $order )) }}
+    {{- $questionnairesData = $questionnairesData | merge (dict $questionnaireId (dict "questionnaireId" $questionnaireId "questionnaireName" $questionnaire.Title "questionnaireLength" $questionnaireLength "questionnaireOrder" $order ))}}
 {{- end }}
 {{- dict "batteryId" .Params.id "batteryName" .Title "questionnaires" $questionnairesData "answerTypes" ($anwerType | uniq) "urlQuestionnaires" $urlQuestionnaires | jsonify }}
