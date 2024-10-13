@@ -20,6 +20,7 @@ const validateTestee = object({
 
 const validateBattery = object({
   batteryId: string(),
+  batteryOrder: number().or(optional()),
   batteryName: string(),
   questionnaires: objectLoose(),
   answerTypes: array(string()),
@@ -38,6 +39,17 @@ const validateItem = object({
   answerValue: array(number().or(string())),
   answerLatency: number(),
   deltaAnswerLatency: number().or(optional()),
+});
+
+const validateScore = object({
+  scaleId: string(),
+  name: string(),
+  omissions: number(),
+  rawScore: number(),
+  meanScore: number(),
+  minScore: number(),
+  maxScore: number(),
+  standardScore: number().or(string())
 });
 
 const validateJSON = object({
@@ -107,6 +119,19 @@ const parseDataToValidate = (JSONToValidate) => {
           );
         }
       });
+    }
+    for (const [questionnaireId, scores] of Object.entries(
+      JSONToValidate.session.data.scores
+    )) {
+      for (const [scoreId, score] of Object.entries(scores)) {
+        try {
+          validateScore(score);
+        } catch (err) {
+          throw new Error(
+            `Validation error for score: ${questionnaireId}, ${scoreId}`
+          );
+        }
+      }
     }
     return JSONToValidate;
   } catch (err) {
