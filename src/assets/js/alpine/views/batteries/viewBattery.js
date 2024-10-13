@@ -7,10 +7,10 @@ export default () => ({
 
   initBattery() {
     this.$store.app.currentView = "battery";
-    this.$store.session.data.batteries[this.$store.session.batteryId] = this.$store.session.battery;
+    this.$store.session.data.batteries[this.$store.session.batteryId] = 
+      { ...this.$store.session.battery, batteryOrder: this.$store.session.completedBatteries.length };
     this.$store.session.questionnaireId = 
       Object.values(this.$store.session.questionnaires)
-        .map((el, order) => ({ order, ...el }))
         .sort((a,b) => Number(a.questionnaireOrder) - Number(b.questionnaireOrder))
         .filter(({ questionnaireId }) => !this.$store.session.completedQuestionnaires.includes(questionnaireId))
         [0]?.questionnaireId;

@@ -18,8 +18,7 @@ export default () => ({
           batteryId, 
           batteryName, 
           questionnaires,
-          answerTypes,
-          order: this.$store.session.completedBatteries.length,
+          answerTypes
         };
         this.$store.session.questionnaires = questionnaires;
       },

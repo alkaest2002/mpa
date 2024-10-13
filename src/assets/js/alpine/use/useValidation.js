@@ -52,7 +52,9 @@ const validateJSON = object({
     completedBatteries: array(string()),
     completedQuestionnaires: array(string()),
     data: object({ 
-      batteries: objectLoose(), questionnaires: objectLoose(), scores: objectLoose() 
+      batteries: objectLoose(), 
+      questionnaires: objectLoose(), 
+      scores: objectLoose() 
     }),
   }),
   urls: object({
