@@ -1,4 +1,4 @@
-import { initState, wipeState } from "../use/useAlpine";
+import { initState, wipeState } from "../use/useAlpineStore";
 
 const stateFn = () => [
   [ "currentView", "" ],

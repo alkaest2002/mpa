@@ -1,4 +1,4 @@
-import { initState, exportState, importState, wipeState } from "../use/useAlpine";
+import { initState, exportState, importState, wipeState } from "../use/useAlpineStore";
 
 const stateFn = () => [
   [ "languageId", "it" ], 
