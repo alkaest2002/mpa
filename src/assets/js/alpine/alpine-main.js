@@ -12,7 +12,7 @@ import useKeyboardActions from "./use/useKeyboardActions";
 import viewBase from "./views/base/viewBase";
 import viewHome from "./views/home/viewHome";
 
-import viewTutorialItemBase from "./views/tutorial/viewTutorialItemBase";
+import viewTutorial from "./views/tutorial/viewTutorial";
 import viewTutorialItemSingle from "./views/tutorial/viewTutorialItemSingle";
 import viewTutorialItemMultiple from "./views/tutorial/viewTutorialItemMultiple";
 
@@ -44,7 +44,7 @@ Alpine.store("urls", storeUrls(Alpine));
 Alpine.data("useKeyboardActions", useKeyboardActions)
 Alpine.data("viewBase", viewBase);
 Alpine.data("viewHome", viewHome);
-Alpine.data("viewTutorialItemBase", viewTutorialItemBase);
+Alpine.data("viewTutorial", viewTutorial);
 Alpine.data("viewTutorialItemSingle", viewTutorialItemSingle);
 Alpine.data("viewTutorialItemMultiple", viewTutorialItemMultiple);
 Alpine.data("viewSessionSet", viewSessionSet);

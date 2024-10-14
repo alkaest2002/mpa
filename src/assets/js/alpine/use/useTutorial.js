@@ -1,5 +1,5 @@
-import css from "../../cssClasses.json";
-import useNavigation from "../../use/useNavigation";
+import css from "../cssClasses.json";
+import useNavigation from "./useNavigation";
 
 const { goToUrlRaw } = useNavigation();
 
@@ -7,9 +7,10 @@ export default () => ({
   
   answer: null,
   
-  goToNextTutorialButton(url) {
+  goNextButton(url) {
     return {
       ["@click.prevent"]() {
+        console.log(url)
         this.getShouldGoNext() && goToUrlRaw.call(this, url);
       },
       [":class"]() {

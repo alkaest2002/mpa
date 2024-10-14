@@ -1,9 +1,10 @@
 import css from "../../cssClasses.json";
-import viewTutorialItemBase from "./viewTutorialItemBase";
+import useTutorial from "../../use/useTutorial";
 
 export default () => ({
 
-  ...viewTutorialItemBase(),
+  ...useTutorial(),
+  
   currentAnswer: null,
   
   initTutorialItemMultiple() {
