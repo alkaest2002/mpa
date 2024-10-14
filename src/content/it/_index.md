@@ -5,5 +5,5 @@ outputs:
   - html
   - json
 ---
-Benventuo nel sistema automatizzato di misurazioni psicologiche MPA.
+Benvenuto nel sistema automatizzato di misurazioni psicologiche MPA.
 
