@@ -1,8 +1,8 @@
-import useQuestionnaireItemBase from "../../use/useQuestionnaireItemBase";
+import useQuestionnaireItem from "../../use/useQuestionnaireItem";
 
 export default () => ({
 
-  ...useQuestionnaireItemBase(),
+  ...useQuestionnaireItem(),
 
   currentAnswerValue: null,
 

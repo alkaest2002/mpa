@@ -1,9 +1,9 @@
 import css from "../../cssClasses.json";
-import useQuestionnaireItemBase from "../../use/useQuestionnaireItemBase";
+import useQuestionnaireItem from "../../use/useQuestionnaireItem";
 
 export default () => ({
 
-  ...useQuestionnaireItemBase(),
+  ...useQuestionnaireItem(),
   
   initQuestionnaireItemSingle({ itemId, itemUrl }) {
     this.$store.app.currentView = "questionnaire-item-single";
