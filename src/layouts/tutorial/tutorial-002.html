@@ -49,7 +49,7 @@
             {{- with .Parent.GetPage "tutorial-003" }}
                 <a 
                     x-ref="main-button" 
-                    x-bind="goToNextTutorialButton('{{ .RelPermalink }}')" 
+                    x-bind="goNextButton('{{ .RelPermalink }}')" 
                     class="inline-flex justify-center w-96 px-6 py-3 gap-2 text-white rounded-full"
                     href="#">{{ T "next" }}
                 </a>

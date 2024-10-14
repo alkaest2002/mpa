@@ -1,6 +1,6 @@
 {{- define "main" }}
 <div x-data="useKeyboardActions" class="h-full">
-    <div x-init="initKeyboardActions('tutorialId');"
+    <div x-data="viewTutorial" x-init="initKeyboardActions('tutorialId'); initTutorial();"
         x-bind="{ ...yArrowsActions, ...xArrowsActions, ...enterActions, ...alphabetActions }"
         class="h-full flex flex-col items-center justify-center p-9 relative">
         {{- partialCached "base/burger" (dict "currentPage" . "homePage" true) .Section }}
@@ -9,13 +9,24 @@
             <div class="mb-9">{{ .Content }}</div>
         </div>
         <div x-bind="opacity" class="w-full flex justify-center">
-            {{ with .GetPage "tutorial-001" }}
-                <a 
-                    x-ref="main-button" 
-                    class="inline-flex justify-center w-96 px-6 py-3 gap-2 bg-blue-500 hover:bg-blue-700 text-white rounded-full"
-                    href="{{ .RelPermalink }}">{{ T "next" }}
+            {{- $tutorialItemSingle := .GetPage "tutorial-001" }}
+            {{- $tutorialItemMultiple := .GetPage "tutorial-002" }}
+            <template x-if="$store.session.battery.answerTypes.includes('item-single')">
+                <a
+                    x-ref="main-button"
+                    x-bind="goNextButton('{{ $tutorialItemSingle.RelPermalink }}')"
+                    class="inline-flex justify-center w-96 px-6 py-3 gap-2 text-white rounded-full"
+                    href="#">{{ T "next" }}
                 </a>
-            {{ end }}
+            </template>
+            <template x-if="!$store.session.battery.answerTypes.includes('item-single')">
+                <a
+                    x-ref="main-button"
+                    x-bind="goNextButton('{{ $tutorialItemMultiple.RelPermalink }}')"
+                    class="inline-flex justify-center w-96 px-6 py-3 gap-2 text-white rounded-full"
+                    href="#">{{ T "next" }}
+                </a>
+            </template>
         </div>
     </div>
 </div>
